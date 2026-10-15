@@ -4,7 +4,7 @@ Propuesta académica de arquitectura de Componentes de lógica de negocio. Equip
 
 ## Empezar
 
-1. Leer `docs/FerreMax_U3_Informe_FIME.pdf`.
+1. Leer `docs/FerreMax_U3_Informe.pdf`, con el formato de la guía práctica del profesor. La versión editable está en `docs/FerreMax_U3_Informe.docx`.
 2. Ver `diagrams/` y sus archivos `.mmd`, `.svg`, PDF y PNG.
 3. Leer `docs/ADR_y_Trazabilidad.md` y `docs/Guia_Defensa.pdf`.
 4. Ejecutar el demo y las pruebas.
@@ -81,6 +81,7 @@ Las dependencias de generación están separadas de las del prototipo. En Linux 
 ```bash
 python -m pip install -r requirements-artifacts.txt
 python scripts/build_artifacts.py
+python scripts/build_report_from_guide.py
 ```
 
-El script conserva las fuentes Mermaid, genera vistas SVG/PDF/PNG y reconstruye los PDF a partir de `docs/current_sources.json`. `reference/` contiene los documentos originales de U2 y la guía de U3 sin modificaciones.
+El primer script genera diagramas y la guía de defensa. El segundo usa el Word original como plantilla para el informe de FerreMax, retirando las instrucciones al alumno, la rúbrica y los ejemplos de otras empresas. El informe editable puede exportarse a PDF desde Word o LibreOffice. `reference/` contiene los documentos originales de U2 y la guía de U3 sin modificaciones.

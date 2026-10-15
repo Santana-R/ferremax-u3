@@ -1,4 +1,4 @@
-"""Build the academic PDF deliverables from versioned sources.
+"""Build the diagram exports and defense guide from versioned sources.
 
 Requires reportlab and PyMuPDF (only for artifact generation, not the demo).
 """
@@ -251,37 +251,9 @@ def main():
         rows=[[plain(x).strip() for x in re.findall(r'<td[^>]*>(.*?)</td>',row,re.S)] for row in re.findall(r'<tr[^>]*>(.*?)</tr>',xml,re.S)]
         with (DOC/f'trazabilidad_{i:02}.csv').open('w',newline='') as f:csv.writer(f).writerows(rows)
     diagrams();sequences()
-    text=data['report'];a=text.index('## 4 ');b=text.index('## 5 ')
-    comp=text[a:b]; c=comp.index('### Evaluación de Transaction Script')
-    report=cover('Informe de arquitectura')+markdown(text[:a])+[PageBreak()]+markdown(comp[:c])+[PageBreak()]+markdown(comp[c:])+[PageBreak()]+markdown(text[b:])
-    report+=[PageBreak(),Paragraph('Anexo A · Diagramas de arquitectura',S['H1X']),Paragraph('Los cinco diagramas conservan fuentes .mmd y vistas .svg editables. Los PDF y PNG individuales permiten ampliarlos durante la revisión. Estas vistas se generaron a partir de las relaciones y los mensajes de las fuentes; no representan validación de una base PostgreSQL conectada.',S['Text'])]
-    # Landscape sequence exports are shown as two readable segments in the portrait report.
-    for id in ['D01','D02','D03','D04','D05']:
-        if id!='D01':report.append(PageBreak())
-        report.append(Paragraph(id+' · Vista del diseño',S['H1X']))
-        source=fitz.open(DG/(id+'.pdf'));page=source[0]
-        if id in ['D04','D05']:
-            boundaries=json.loads((DG/(id+'_segments.json')).read_text())
-            for n,(top,bot) in enumerate(zip(boundaries,boundaries[1:])):
-                if n:report.extend([PageBreak(),Paragraph(id+' · Continuación',S['H1X']),Paragraph('Participantes de izquierda a derecha: Caja, PedidoService, PostgresUnitOfWork, PgPedidos y PgInventarios.',S['SmallX'])])
-                crop=fitz.Rect(0,top,page.rect.width,bot);path=QA/(id+f'_{n}.png');page.get_pixmap(matrix=fitz.Matrix(1.7,1.7),clip=crop,alpha=False).save(path)
-                report.append(Image(str(path),width=WIDTH,height=WIDTH*crop.height/crop.width))
-        else:
-            hh=WIDTH*page.rect.height/page.rect.width
-            report.append(Image(str(DG/(id+'.png')),width=WIDTH,height=hh))
-    report+=[PageBreak(),Paragraph('Anexo B · Decisiones, trazabilidad y uso de IA',S['H1X'])]+markdown(data['decisions'])
-    report+=[PageBreak(),Paragraph('Anexo C · Evidencia de ejecución local',S['H1X']),Paragraph('Ejecución del núcleo y recorrido reproducible. El ensayo PostgreSQL se omite cuando no existe TEST_DATABASE_URL. No se declara validación de Supabase ni cumplimiento de tiempos de RNF01.',S['Text'])]
-    p=DOC/'evidence'/'pruebas_locales.txt'
-    if p.exists():
-        log=p.read_text();report+=markdown('### Pruebas locales\nLos nombres y la salida completa están en docs/evidence/pruebas_locales.txt. Resumen literal del resultado:\n```text\n'+'\n'.join(log.splitlines()[-6:])+'\n```')
-    p=DOC/'evidence'/'demo.txt'
-    if p.exists():
-        values=json.loads(p.read_text());lines=[json.dumps(v,ensure_ascii=False,separators=(',',':')) for v in values]
-        report+=markdown('### Recorrido del demo\nSalida JSON de la consulta, revalidación, conversión, confirmación y cancelación, compactada para su lectura. Los UUID son datos sintéticos de esta ejecución.\n```json\n'+'\n'.join(lines)+'\n```')
-    doc(OUT/'FerreMax_U3_Informe_FIME.pdf',report)
     defense=data['defense'].replace(' `.drawio`,','').replace(' `.drawio`','').replace('.drawio','.svg')
     doc(OUT/'FerreMax_U3_Guia_Defensa.pdf',cover('Guía de defensa y ejecución')+markdown(defense))
-    shutil.copy2(OUT/'FerreMax_U3_Informe_FIME.pdf',DOC/'FerreMax_U3_Informe_FIME.pdf');shutil.copy2(OUT/'FerreMax_U3_Guia_Defensa.pdf',DOC/'Guia_Defensa.pdf')
+    shutil.copy2(OUT/'FerreMax_U3_Guia_Defensa.pdf',DOC/'Guia_Defensa.pdf')
     for path in OUT.glob('*.pdf'):
         pdf=fitz.open(path);pdir=QA/path.stem;pdir.mkdir(exist_ok=True)
         for i,page in enumerate(pdf):page.get_pixmap(matrix=fitz.Matrix(1,1),alpha=False).save(pdir/f'{i+1:02}.png')

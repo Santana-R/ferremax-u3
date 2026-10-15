@@ -11,7 +11,8 @@ with zipfile.ZipFile(out/'FerreMax_U3_Paquete.zip','w',zipfile.ZIP_DEFLATED) as 
     for f in files:
         p=root/f;z.write(p,'FerreMax_U3/'+f);hashes.append(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+f)
     z.write(bundle,'FerreMax_U3/'+bundle.name)
-    z.writestr('FerreMax_U3/HISTORIAL_GIT.txt','Tres commits locales preparados por IA. Restaurar el historial en otra carpeta:\ngit clone FerreMax_U3_Historial.bundle ferremax-con-historial\n\nLa publicación en GitHub sigue pendiente. No se han creado revisiones humanas ni commits atribuidos a los integrantes.\n')
+    count=subprocess.check_output(['git','rev-list','--count','HEAD'],cwd=root).decode().strip()
+    z.writestr('FerreMax_U3/HISTORIAL_GIT.txt',count+' commits locales preparados con apoyo de IA. Restaurar el historial en otra carpeta:\ngit clone FerreMax_U3_Historial.bundle ferremax-con-historial\n\nEl estado de publicación remota se informa en README. No se han creado revisiones humanas ficticias.\n')
     z.writestr('FerreMax_U3/SHA256SUMS.txt','\n'.join(hashes)+'\n')
 with zipfile.ZipFile(out/'FerreMax_U3_Paquete.zip') as z:
     assert z.testzip() is None
