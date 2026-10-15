@@ -1,0 +1,7 @@
+[project]
+name = "ferremax-u3"
+version = "0.1.0"
+description = "Arquitectura academica de FerreMax basada en U2"
+requires-python = ">=3.10"
+[tool.setuptools.packages.find]
+where = ["src"]
