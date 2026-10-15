@@ -1,0 +1,26 @@
+test_cancelar_libera_reserva (test_architecture.ArquitecturaTest.test_cancelar_libera_reserva) ... ok
+test_confirmacion_reserva_auditoria_evento (test_architecture.ArquitecturaTest.test_confirmacion_reserva_auditoria_evento) ... ok
+test_conversion_requiere_aceptacion (test_architecture.ArquitecturaTest.test_conversion_requiere_aceptacion) ... ok
+test_credito_bloqueado_insuficiente_inactivo (test_architecture.ArquitecturaTest.test_credito_bloqueado_insuficiente_inactivo) ... ok
+test_dos_pedidos_ultima_unidad (test_architecture.ArquitecturaTest.test_dos_pedidos_ultima_unidad) ... ok
+test_fallo_despues_primera_reserva_revierte_todo (test_architecture.ArquitecturaTest.test_fallo_despues_primera_reserva_revierte_todo) ... ok
+test_no_cancelar_surtido (test_architecture.ArquitecturaTest.test_no_cancelar_surtido) ... ok
+test_no_confirmar_dos_veces (test_architecture.ArquitecturaTest.test_no_confirmar_dos_veces) ... ok
+test_no_reservar_pedido_pendiente (test_architecture.ArquitecturaTest.test_no_reservar_pedido_pendiente) ... ok
+test_pago_rechazado_revierte_estado (test_architecture.ArquitecturaTest.test_pago_rechazado_revierte_estado) ... ok
+test_partidas_mismo_sku_se_acumulan (test_architecture.ArquitecturaTest.test_partidas_mismo_sku_se_acumulan) ... ok
+test_query_no_modifica_y_sku_inexistente (test_architecture.ArquitecturaTest.test_query_no_modifica_y_sku_inexistente) ... ok
+test_resumen_pedido_dto (test_architecture.ArquitecturaTest.test_resumen_pedido_dto) ... ok
+test_revalidacion_audita_precio_y_condiciones (test_architecture.ArquitecturaTest.test_revalidacion_audita_precio_y_condiciones) ... ok
+test_revalidacion_conserva_version_y_no_reserva (test_architecture.ArquitecturaTest.test_revalidacion_conserva_version_y_no_reserva) ... ok
+test_rol_incorrecto_no_confirma (test_architecture.ArquitecturaTest.test_rol_incorrecto_no_confirma) ... ok
+test_transito_no_es_disponible (test_architecture.ArquitecturaTest.test_transito_no_es_disponible) ... ok
+test_valores_invalidos (test_architecture.ArquitecturaTest.test_valores_invalidos) ... ok
+test_vencida_no_crea_pedido (test_architecture.ArquitecturaTest.test_vencida_no_crea_pedido) ... ok
+test_vigencia_limite_excluido (test_architecture.ArquitecturaTest.test_vigencia_limite_excluido) ... ok
+test_dos_conexiones_ultima_unidad (test_postgres.PostgreSQLTest.test_dos_conexiones_ultima_unidad) ... skipped 'Integracion PostgreSQL pendiente: falta TEST_DATABASE_URL'
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.014s
+
+OK (skipped=1)

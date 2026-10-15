@@ -1,0 +1,21 @@
+sequenceDiagram
+    actor Caja
+    participant Servicio as PedidoService
+    participant UoW as PostgresUnitOfWork
+    participant Pedidos as PgPedidos
+    participant Inventarios as PgInventarios
+    Note over Caja,Servicio: Una consulta previa mostro stock; otro pedido ya reservo
+    Caja->>Servicio: confirmar(actor, pedido, pago, ubicacion)
+    Servicio->>UoW: __enter__()
+    Servicio->>Pedidos: obtener(pedido_id)
+    Pedidos-->>Servicio: Pedido Pendiente bloqueado
+    Servicio->>Inventarios: obtener_para_actualizar(SKU, ubicacion)
+    Note over Inventarios: FOR UPDATE espera al otro pedido si es necesario
+    Inventarios-->>Servicio: Disponible actual igual a cero
+    Note over Servicio: Pedido.confirmar cambia solo el objeto provisional
+    Note over Servicio: InventarioUbicacion.reservar lanza DisponibilidadInsuficiente
+    Servicio->>UoW: __exit__(error)
+    Note over UoW: conn.rollback y cerrar conexion
+    UoW-->>Servicio: Sin nuevos cambios persistidos
+    Servicio-->>Caja: Error de disponibilidad
+    Note over Caja,UoW: Pedido sigue Pendiente; sin reserva ni evento de confirmacion

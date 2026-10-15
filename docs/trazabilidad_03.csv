@@ -1,0 +1,6 @@
+Escenario,Entrada o situación,Resultado y comprobación
+AC-US04-01,Cotización fuera de vigencia,CotizacionVencida; no crea pedido.
+AC-US06-02,Pago rechazado,Pedido sigue Pendiente; sin reserva ni evento de confirmación.
+AC-US09-02,Dos pedidos intentan la última unidad,Uno confirma; otro recibe DisponibilidadInsuficiente. Memory probado; PostgreSQL pendiente.
+AC-US10-01,Cancelación autorizada antes del surtido,Estado Cancelado y stock disponible restituido.
+AC-US01-02 propuesto,SKU inexistente,encontrado falso y lista vacía; ID original repetido registrado en H01.

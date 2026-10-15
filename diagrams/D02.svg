@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="1000" viewBox="0 0 780 1000"><rect width="100%" height="100%" fill="white"/>
+<text x="28" y="35.6" font-family="DejaVu Sans" font-size="18" font-weight="700" fill="#123653">D02 · Clases del dominio</text>
+<rect x="25" y="85" width="225" height="180" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="35" y="107.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">RAÍZ</text>
+<text x="35" y="125.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">Cotizacion</text>
+<path d="M 26 140 L 249 140" fill="none" stroke="#007e86"/>
+<text x="35" y="155.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">id · folio · version</text>
+<text x="35" y="174.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">cliente_id</text>
+<text x="35" y="193.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">revalidar() · convertir()</text>
+<rect x="530" y="85" width="225" height="180" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="540" y="107.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">RAÍZ</text>
+<text x="540" y="125.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">Pedido</text>
+<path d="M 531 140 L 754 140" fill="none" stroke="#007e86"/>
+<text x="540" y="155.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">id · estado · cotizacion_version</text>
+<text x="540" y="174.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">confirmar() · cancelar()</text>
+<text x="540" y="193.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">cantidades_por_sku()</text>
+<rect x="25" y="355" width="225" height="125" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="35" y="377.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">VALUE OBJECT</text>
+<text x="35" y="395.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">Vigencia</text>
+<path d="M 26 410 L 249 410" fill="none" stroke="#007e86"/>
+<text x="35" y="425.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">emision · vencimiento</text>
+<text x="35" y="444.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">esta_vigente()</text>
+<rect x="280" y="355" width="220" height="140" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="290" y="377.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">VALUE OBJECT</text>
+<text x="290" y="395.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">Partida</text>
+<path d="M 281 410 L 499 410" fill="none" stroke="#007e86"/>
+<text x="290" y="425.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">numero · cantidad</text>
+<text x="290" y="444.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">sku · precio</text>
+<rect x="530" y="355" width="225" height="185" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="540" y="377.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">RAÍZ</text>
+<text x="540" y="395.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">InventarioUbicacion</text>
+<path d="M 531 410 L 754 410" fill="none" stroke="#007e86"/>
+<text x="540" y="425.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">sku · ubicacion_id</text>
+<text x="540" y="444.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">existencia_fisica · disponible</text>
+<text x="540" y="463.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">reservar() · liberar()</text>
+<rect x="25" y="640" width="225" height="100" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="35" y="662.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">VALUE OBJECT</text>
+<text x="35" y="680.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">Dinero</text>
+<path d="M 26 695 L 249 695" fill="none" stroke="#007e86"/>
+<text x="35" y="710.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">importe · moneda</text>
+<rect x="530" y="640" width="225" height="100" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="540" y="662.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">VALUE OBJECT</text>
+<text x="540" y="680.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">SKU</text>
+<path d="M 531 695 L 754 695" fill="none" stroke="#007e86"/>
+<text x="540" y="710.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">valor</text>
+<rect x="25" y="835" width="225" height="125" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="35" y="857.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">RAÍZ · POLÍTICA NORMAL</text>
+<text x="35" y="875.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">CuentaCredito</text>
+<path d="M 26 890 L 249 890" fill="none" stroke="#007e86"/>
+<text x="35" y="905.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">cliente_id · activo · bloqueado</text>
+<text x="35" y="924.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">evaluar()</text>
+<rect x="280" y="835" width="220" height="100" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="290" y="857.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">SERVICIO DE DOMINIO</text>
+<text x="290" y="875.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">PoliticaCredito</text>
+<path d="M 281 890 L 499 890" fill="none" stroke="#007e86"/>
+<text x="290" y="905.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">evaluar_normal()</text>
+<path d="M 137 265 L 137 355" fill="none" stroke="#516273"/>
+<polygon points="137,355 132.71639823460484,344.8683290659683 141.28360176539516,344.8683290659683" fill="#516273" stroke="#516273"/>
+<polygon points="137,265 133.0,273.0 137.0,281.0 141.0,273.0" fill="#123653" stroke="#516273"/>
+<text x="150" y="312.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">1 / 1</text>
+<path d="M 250 175 L 390 175" fill="none" stroke="#516273"/>
+<path d="M 390 175 L 390 355" fill="none" stroke="#516273"/>
+<polygon points="390,355 385.71639823460487,344.8683290659683 394.28360176539513,344.8683290659683" fill="#516273" stroke="#516273"/>
+<polygon points="250,175 258.0,179.0 266.0,175.0 258.0,171.0" fill="#123653" stroke="#516273"/>
+<text x="280" y="232.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">1 / 1..* contiene</text>
+<path d="M 530 230 L 450 230" fill="none" stroke="#516273"/>
+<path d="M 450 230 L 450 355" fill="none" stroke="#516273"/>
+<polygon points="450,355 445.71639823460487,344.8683290659683 454.28360176539513,344.8683290659683" fill="#516273" stroke="#516273"/>
+<polygon points="530,230 522.0,226.0 514.0,230.0 522.0,234.0" fill="#123653" stroke="#516273"/>
+<text x="465" y="304.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">snapshot 1..*</text>
+<path d="M 530 105 L 505 105" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 505 105 L 505 65" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 505 65 L 250 65" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 250 65 L 250 105" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="250,105 245.71639823460484,94.86832906596827 254.28360176539516,94.86832906596827" fill="#516273" stroke="#516273"/>
+<text x="290" y="60.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">referencia ID y versión</text>
+<path d="M 642 540 L 642 640" fill="none" stroke="#516273"/>
+<polygon points="642,640 637.7163982346049,629.8683290659683 646.2836017653951,629.8683290659683" fill="#516273" stroke="#516273"/>
+<text x="650" y="593.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">identifica</text>
+<path d="M 500 475 L 515 475" fill="none" stroke="#516273"/>
+<path d="M 515 475 L 515 610" fill="none" stroke="#516273"/>
+<path d="M 515 610 L 595 610" fill="none" stroke="#516273"/>
+<path d="M 595 610 L 595 640" fill="none" stroke="#516273"/>
+<polygon points="595,640 590.7163982346049,629.8683290659683 599.2836017653951,629.8683290659683" fill="#516273" stroke="#516273"/>
+<text x="525" y="577.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">SKU</text>
+<path d="M 305 495 L 305 590" fill="none" stroke="#516273"/>
+<path d="M 305 590 L 137 590" fill="none" stroke="#516273"/>
+<path d="M 137 590 L 137 640" fill="none" stroke="#516273"/>
+<polygon points="137,640 132.71639823460484,629.8683290659683 141.28360176539516,629.8683290659683" fill="#516273" stroke="#516273"/>
+<text x="165" y="581.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">precio</text>
+<path d="M 137 835 L 137 740" fill="none" stroke="#516273"/>
+<polygon points="137,740 141.28360176539516,750.1316709340317 132.71639823460484,750.1316709340317" fill="#516273" stroke="#516273"/>
+<text x="148" y="789.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">límite y saldo</text>
+<path d="M 280 893 L 250 893" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="250,893 260.1316709340317,888.7163982346049 260.1316709340317,897.2836017653951" fill="#516273" stroke="#516273"/>
+<text x="269" y="818.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">evalúa</text>
+<path d="M 754 355 L 772 355" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 772 355 L 772 280" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 772 280 L 754 280" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 754 280 L 754 240" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="754,240 758.2836017653951,250.13167093403175 749.7163982346049,250.13167093403175" fill="#516273" stroke="#516273"/>
+<text x="553" y="340.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">exige confirmado</text>
+<text x="280" y="692.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">Rombo: composición en la raíz. Trazo</text>
+<text x="280" y="707.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">discontinuo: dependencia. Flecha</text>
+<text x="280" y="722.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">simple: referencia. Cada Pedido</text>
+<text x="280" y="737.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">conserva su propio snapshot de</text>
+<text x="280" y="752.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">partidas.</text>
+</svg>

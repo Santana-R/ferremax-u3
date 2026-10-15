@@ -1,0 +1,64 @@
+[
+  {
+    "sku": "SKU-DEMO",
+    "encontrado": true,
+    "ubicaciones": [
+      {
+        "ubicacion_id": "AC",
+        "existencia_fisica": "4",
+        "comprometida": "0",
+        "en_transito": "0",
+        "disponible": "4"
+      },
+      {
+        "ubicacion_id": "S1",
+        "existencia_fisica": "1",
+        "comprometida": "0",
+        "en_transito": "0",
+        "disponible": "1"
+      },
+      {
+        "ubicacion_id": "S2",
+        "existencia_fisica": "3",
+        "comprometida": "0",
+        "en_transito": "0",
+        "disponible": "3"
+      },
+      {
+        "ubicacion_id": "S3",
+        "existencia_fisica": "0",
+        "comprometida": "0",
+        "en_transito": "0",
+        "disponible": "0"
+      }
+    ]
+  },
+  {
+    "folio": "DEMO-U3",
+    "version": 2,
+    "estado": "Vigente"
+  },
+  {
+    "pedido_id": "9d5fa208-9b8a-4bc8-bedf-88f9b9c43a74",
+    "estado": "Pendiente",
+    "cotizacion_folio": "DEMO-U3",
+    "cotizacion_version": 2,
+    "disponibilidad_consultada": [
+      {
+        "sku": "SKU-DEMO",
+        "solicitada": "1",
+        "disponible": "1"
+      }
+    ]
+  },
+  {
+    "pedido_id": "9d5fa208-9b8a-4bc8-bedf-88f9b9c43a74",
+    "estado": "Confirmado",
+    "referencia_pago": "PAGO-DEMO",
+    "ubicacion_id": "S1"
+  },
+  {
+    "pedido_id": "9d5fa208-9b8a-4bc8-bedf-88f9b9c43a74",
+    "estado": "Cancelado"
+  }
+]

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="780" viewBox="0 0 780 780"><rect width="100%" height="100%" fill="white"/>
+<text x="28" y="35.6" font-family="DejaVu Sans" font-size="18" font-weight="700" fill="#123653">D01 · Mapa general del dominio</text>
+<rect x="280" y="75" width="220" height="75" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="290" y="97.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">RAÍZ</text>
+<text x="290" y="115.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">Cotizacion</text>
+<rect x="25" y="220" width="210" height="75" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="35" y="242.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">RAÍZ · DISEÑO</text>
+<text x="35" y="260.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">CuentaCredito</text>
+<rect x="280" y="220" width="220" height="75" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="290" y="242.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">RAÍZ</text>
+<text x="290" y="260.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">Pedido</text>
+<rect x="545" y="220" width="210" height="75" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="555" y="242.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">RAÍZ · DISEÑO</text>
+<text x="555" y="260.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">Transferencia</text>
+<rect x="25" y="445" width="210" height="75" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="35" y="467.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">RAÍZ · DISEÑO</text>
+<text x="35" y="485.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">Entrega</text>
+<rect x="280" y="445" width="220" height="75" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="290" y="467.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">RAÍZ</text>
+<text x="290" y="485.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">InventarioUbicacion</text>
+<rect x="545" y="445" width="210" height="75" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="555" y="467.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">RAÍZ · DISEÑO</text>
+<text x="555" y="485.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">Devolucion</text>
+<rect x="280" y="650" width="220" height="75" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="290" y="672.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">MAESTROS</text>
+<text x="290" y="690.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">Producto y Ubicacion</text>
+<path d="M 390 150 L 390 220" fill="none" stroke="#516273"/>
+<polygon points="390,220 385.71639823460487,209.86832906596825 394.28360176539513,209.86832906596825" fill="#516273" stroke="#516273"/>
+<text x="405" y="182.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">folio y versión</text>
+<path d="M 235 255 L 280 255" fill="none" stroke="#516273"/>
+<polygon points="280,255 269.8683290659683,259.28360176539513 269.8683290659683,250.71639823460484" fill="#516273" stroke="#516273"/>
+<text x="26" y="327.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">autorización</text>
+<path d="M 390 295 L 390 445" fill="none" stroke="#516273"/>
+<polygon points="390,445 385.71639823460487,434.8683290659683 394.28360176539513,434.8683290659683" fill="#516273" stroke="#516273"/>
+<text x="405" y="357.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">confirmación y reserva</text>
+<path d="M 650 295 L 650 370" fill="none" stroke="#516273"/>
+<path d="M 650 370 L 500 370" fill="none" stroke="#516273"/>
+<path d="M 500 370 L 500 460" fill="none" stroke="#516273"/>
+<polygon points="500,460 495.71639823460487,449.8683290659683 504.28360176539513,449.8683290659683" fill="#516273" stroke="#516273"/>
+<text x="540" y="395.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">movimientos confirmados</text>
+<path d="M 280 280 L 130 280" fill="none" stroke="#516273"/>
+<path d="M 130 280 L 130 445" fill="none" stroke="#516273"/>
+<polygon points="130,445 125.71639823460484,434.8683290659683 134.28360176539516,434.8683290659683" fill="#516273" stroke="#516273"/>
+<text x="27" y="387.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">surtido y destino</text>
+<path d="M 500 280 L 740 280" fill="none" stroke="#516273"/>
+<path d="M 740 280 L 740 435" fill="none" stroke="#516273"/>
+<path d="M 740 435 L 650 435" fill="none" stroke="#516273"/>
+<path d="M 650 435 L 650 445" fill="none" stroke="#516273"/>
+<polygon points="650,445 645.7163982346049,434.8683290659683 654.2836017653951,434.8683290659683" fill="#516273" stroke="#516273"/>
+<text x="535" y="317.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">comprobante de venta</text>
+<path d="M 545 485 L 500 485" fill="none" stroke="#516273"/>
+<polygon points="500,485 510.1316709340317,480.71639823460487 510.1316709340317,489.28360176539513" fill="#516273" stroke="#516273"/>
+<text x="528" y="552.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">reintegro o aislamiento</text>
+<path d="M 390 650 L 390 520" fill="none" stroke="#516273"/>
+<polygon points="390,520 394.28360176539513,530.1316709340317 385.71639823460487,530.1316709340317" fill="#516273" stroke="#516273"/>
+<text x="404" y="598.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">identidad del inventario</text>
+<text x="28" y="756.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">Las flechas representan referencias o colaboración entre agregados; no composición.</text>
+</svg>

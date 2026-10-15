@@ -1,0 +1,9 @@
+flowchart TD
+    C["Cotizacion"] -->|"folio y version"| P["Pedido"]
+    CC["CuentaCredito"] -->|"autorizacion"| P
+    P -->|"confirmacion y reserva"| I["InventarioUbicacion"]
+    T["Transferencia"] -->|"movimientos confirmados"| I
+    P -->|"surtido y destino"| E["Entrega"]
+    P -->|"comprobante de venta"| D["Devolucion"]
+    D -->|"reintegro o aislamiento"| I
+    U["Producto y Ubicacion"] -->|"identidad del inventario"| I

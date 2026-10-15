@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="1185" viewBox="0 0 880 1185"><rect width="100%" height="100%" fill="white"/>
+<text x="28" y="35.6" font-family="DejaVu Sans" font-size="18" font-weight="700" fill="#123653">D04 · Confirmación y reserva - recorrido normal</text>
+<rect x="3" y="65" width="134" height="53" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="10" y="85.4" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#123653">Caja</text>
+<path d="M 70 120 L 70 1145" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<rect x="183" y="65" width="134" height="53" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="190" y="85.4" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#123653">PedidoService</text>
+<path d="M 250 120 L 250 1145" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<rect x="363" y="65" width="134" height="53" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="370" y="85.4" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#123653">PostgresUnitOfWork</text>
+<path d="M 430 120 L 430 1145" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<rect x="543" y="65" width="134" height="53" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="550" y="85.4" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#123653">PgPedidos</text>
+<path d="M 610 120 L 610 1145" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<rect x="733" y="65" width="134" height="53" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="740" y="85.4" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#123653">PgInventarios</text>
+<path d="M 800 120 L 800 1145" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<text x="78" y="165.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">confirmar(actor,</text>
+<text x="78" y="183.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">pedido, pago,</text>
+<text x="78" y="201.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">ubicacion)</text>
+<path d="M 70 221 L 250 221" fill="none" stroke="#516273"/>
+<polygon points="250,221 239.86832906596825,225.28360176539516 239.86832906596825,216.71639823460484" fill="#516273" stroke="#516273"/>
+<rect x="200" y="234" width="100" height="52" rx="6" fill="#fff4d6" stroke="#b3a05e"/>
+<text x="210" y="254.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">Comprobar</text>
+<text x="210" y="272.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">rol Caja</text>
+<text x="258" y="315.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">__enter__()</text>
+<path d="M 250 339 L 430 339" fill="none" stroke="#516273"/>
+<polygon points="430,339 419.8683290659683,343.28360176539513 419.8683290659683,334.71639823460487" fill="#516273" stroke="#516273"/>
+<rect x="380" y="352" width="100" height="52" rx="6" fill="#fff4d6" stroke="#b3a05e"/>
+<text x="390" y="372.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">Iniciar</text>
+<text x="390" y="390.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">transacción</text>
+<text x="258" y="433.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">obtener(pedido_id)</text>
+<path d="M 250 453 L 610 453" fill="none" stroke="#516273"/>
+<polygon points="610,453 599.8683290659683,457.28360176539513 599.8683290659683,448.71639823460487" fill="#516273" stroke="#516273"/>
+<text x="258" y="481.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">Pedido bloqueado para actualizar</text>
+<path d="M 610 515 L 250 515" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="250,515 260.1316709340317,510.71639823460487 260.1316709340317,519.2836017653951" fill="#516273" stroke="#516273"/>
+<rect x="200" y="528" width="650" height="34" rx="6" fill="#fff4d6" stroke="#b3a05e"/>
+<text x="210" y="548.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">Por cada SKU en orden uniforme:</text>
+<text x="258" y="591.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">obtener_para_actualizar(SKU, ubicacion)</text>
+<path d="M 250 613 L 800 613" fill="none" stroke="#516273"/>
+<polygon points="800,613 789.8683290659683,617.2836017653951 789.8683290659683,608.7163982346049" fill="#516273" stroke="#516273"/>
+<text x="258" y="641.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">Inventario y reservas actuales</text>
+<path d="M 800 665 L 250 665" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="250,665 260.1316709340317,660.7163982346049 260.1316709340317,669.2836017653951" fill="#516273" stroke="#516273"/>
+<rect x="200" y="678" width="650" height="72" rx="6" fill="#fff4d6" stroke="#b3a05e"/>
+<text x="210" y="698.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">Invocar Pedido.confirmar(pago); después InventarioUbicacion.reservar(pedido, cantidad).</text>
+<text x="210" y="716.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">Cambios aún provisionales.</text>
+<text x="258" y="779.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">guardar(cada inventario)</text>
+<path d="M 250 801 L 800 801" fill="none" stroke="#516273"/>
+<polygon points="800,801 789.8683290659683,805.2836017653951 789.8683290659683,796.7163982346049" fill="#516273" stroke="#516273"/>
+<text x="258" y="829.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">guardar(pedido confirmado)</text>
+<path d="M 250 851 L 610 851" fill="none" stroke="#516273"/>
+<polygon points="610,851 599.8683290659683,855.2836017653951 599.8683290659683,846.7163982346049" fill="#516273" stroke="#516273"/>
+<text x="258" y="879.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">registrar(auditoría,</text>
+<text x="258" y="897.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">PedidoConfirmado)</text>
+<path d="M 250 921 L 430 921" fill="none" stroke="#516273"/>
+<polygon points="430,921 419.8683290659683,925.2836017653951 419.8683290659683,916.7163982346049" fill="#516273" stroke="#516273"/>
+<text x="258" y="949.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">commit()</text>
+<path d="M 250 971 L 430 971" fill="none" stroke="#516273"/>
+<polygon points="430,971 419.8683290659683,975.2836017653951 419.8683290659683,966.7163982346049" fill="#516273" stroke="#516273"/>
+<text x="258" y="999.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">COMMIT exitoso</text>
+<path d="M 430 1021 L 250 1021" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="250,1021 260.1316709340317,1016.7163982346049 260.1316709340317,1025.2836017653951" fill="#516273" stroke="#516273"/>
+<text x="258" y="1049.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">__exit__()</text>
+<path d="M 250 1071 L 430 1071" fill="none" stroke="#516273"/>
+<polygon points="430,1071 419.8683290659683,1075.2836017653951 419.8683290659683,1066.7163982346049" fill="#516273" stroke="#516273"/>
+<text x="78" y="1099.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">DTO: estado</text>
+<text x="78" y="1117.8" font-family="DejaVu Sans" font-size="14" font-weight="400" fill="#123653">Confirmado</text>
+<path d="M 250 1137 L 70 1137" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="70,1137 80.13167093403173,1132.7163982346049 80.13167093403173,1141.2836017653951" fill="#516273" stroke="#516273"/>
+</svg>

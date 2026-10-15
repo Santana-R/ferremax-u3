@@ -1,0 +1,11 @@
+Necesidad,Reglas y RNF,Historias,Caso o alcance,Componentes,Decisiones,Cobertura
+BN01,BR04; RNF01,US01/US02,CU01,ConsultarDisponibilidadHandler; DisponibilidadReader,ADR004,Consulta implementada; objetivo temporal sin medir.
+BN02,BR04-06; RNF02,US09/US10,CU04/CU05,Pedido; InventarioUbicacion; UnitOfWork,ADR001/003,Reserva y liberación de contado en una ubicación.
+BN03,BR01-03; RNF08,US03-05,CU02/CU03,Cotizacion; CotizacionService; CotizacionRepository,ADR001,Revalidación y conversión implementadas; emisión inicial simulada.
+BN04,BR07/08,US05/US11/US14/US15,CU04 más diseño general,Pedido; PoliticaSurtidoMultiorigen; Transferencia,ADR001/003,Multiorigen y surtido diseñados; prototipo local.
+BN05,BR09-11,US07/US08,Diseño comercial,CuentaCredito; PoliticaCredito,ADR001,Evaluación normal probada; excepciones y persistencia pendientes.
+BN06,BR12/13,US11-13,Diseño logístico,Transferencia; InventarioUbicacion,ADR001/003,Mapeado; sin flujo ejecutable de transferencia.
+BN07,BR08,US14,Diseño comercial,Pedido; PartidaPedido; aceptación del cliente,ADR001,Mapeado; sin aplicación ejecutable de parciales.
+BN08,BR14; RNF07,US16/US17,Diseño logístico,Entrega; DireccionEntrega; EvidenciaEntrega,ADR001,Mapeado; sin programación de unidad ni captura operativa.
+BN09,BR15; RNF08,US18,Diseño de postventa,Devolucion; PoliticaDevolucion; Categoria,ADR001,Política exacta pendiente del negocio.
+BN10,BR16; RNF04,US19/US20,CU02-CU05 y diseño de panel,Auditoria; Outbox; DTO de reportes,ADR005,Auditoría local implementada; panel completo pendiente.

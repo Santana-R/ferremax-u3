@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="1060" viewBox="0 0 780 1060"><rect width="100%" height="100%" fill="white"/>
+<text x="28" y="35.6" font-family="DejaVu Sans" font-size="18" font-weight="700" fill="#123653">D03 · Aplicación y persistencia</text>
+<text x="26" y="74.8" font-family="DejaVu Sans" font-size="14" font-weight="700" fill="#007e86">APLICACIÓN · Contratos y coordinación</text>
+<rect x="25" y="100" width="225" height="110" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="35" y="122.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">SERVICIO</text>
+<text x="35" y="140.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">CotizacionService</text>
+<path d="M 26 155 L 249 155" fill="none" stroke="#007e86"/>
+<text x="35" y="170.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">revalidar() · convertir()</text>
+<rect x="530" y="100" width="225" height="110" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="540" y="122.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">SERVICIO</text>
+<text x="540" y="140.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">PedidoService</text>
+<path d="M 531 155 L 754 155" fill="none" stroke="#007e86"/>
+<text x="540" y="170.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">confirmar() · cancelar()</text>
+<rect x="280" y="245" width="220" height="175" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="290" y="267.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">INTERFACE / PROTOCOL</text>
+<text x="290" y="285.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">UnitOfWork</text>
+<path d="M 281 300 L 499 300" fill="none" stroke="#007e86"/>
+<text x="290" y="315.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">cotizaciones · pedidos</text>
+<text x="290" y="334.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">inventarios</text>
+<text x="290" y="353.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">registrar() · commit()</text>
+<rect x="25" y="500" width="225" height="125" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="35" y="522.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">INTERFACE / PROTOCOL</text>
+<text x="35" y="540.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">CotizacionRepository</text>
+<path d="M 26 555 L 249 555" fill="none" stroke="#007e86"/>
+<text x="35" y="570.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">obtener()</text>
+<text x="35" y="589.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">guardar_nueva_version()</text>
+<rect x="280" y="500" width="220" height="125" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="290" y="522.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">INTERFACE / PROTOCOL</text>
+<text x="290" y="540.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">PedidoRepository</text>
+<path d="M 281 555 L 499 555" fill="none" stroke="#007e86"/>
+<text x="290" y="570.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">obtener() · guardar()</text>
+<rect x="530" y="500" width="225" height="145" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="540" y="522.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">INTERFACE / PROTOCOL</text>
+<text x="540" y="540.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">InventarioRepository</text>
+<path d="M 531 555 L 754 555" fill="none" stroke="#007e86"/>
+<text x="540" y="570.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">obtener_para_actualizar()</text>
+<text x="540" y="589.4" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#123653">guardar() · ubicacion_reserva()</text>
+<path d="M 250 180 L 320 245" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="320,245 309.66079594972746,241.24488886891112 315.49035901075695,234.9668978801101" fill="#516273" stroke="#516273"/>
+<text x="255" y="216.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">fábrica</text>
+<path d="M 530 180 L 460 245" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="460,245 464.50964098924305,234.9668978801101 470.33920405027254,241.24488886891112" fill="#516273" stroke="#516273"/>
+<text x="480" y="216.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">fábrica</text>
+<path d="M 390 420 L 390 460" fill="none" stroke="#516273"/>
+<path d="M 390 460 L 137 460" fill="none" stroke="#516273"/>
+<path d="M 137 460 L 137 500" fill="none" stroke="#516273"/>
+<polygon points="137,500 132.71639823460484,489.8683290659683 141.28360176539516,489.8683290659683" fill="#516273" stroke="#516273"/>
+<path d="M 390 420 L 390 460" fill="none" stroke="#516273"/>
+<path d="M 390 460 L 390 460" fill="none" stroke="#516273"/>
+<path d="M 390 460 L 390 500" fill="none" stroke="#516273"/>
+<polygon points="390,500 385.71639823460487,489.8683290659683 394.28360176539513,489.8683290659683" fill="#516273" stroke="#516273"/>
+<path d="M 390 420 L 390 460" fill="none" stroke="#516273"/>
+<path d="M 390 460 L 642 460" fill="none" stroke="#516273"/>
+<path d="M 642 460 L 642 500" fill="none" stroke="#516273"/>
+<polygon points="642,500 637.7163982346049,489.8683290659683 646.2836017653951,489.8683290659683" fill="#516273" stroke="#516273"/>
+<text x="26" y="702.8" font-family="DejaVu Sans" font-size="14" font-weight="700" fill="#007e86">INFRAESTRUCTURA · Implementa contratos de aplicación</text>
+<rect x="25" y="735" width="225" height="70" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="35" y="757.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">ADAPTADOR</text>
+<text x="35" y="775.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">PgCotizaciones</text>
+<rect x="280" y="735" width="220" height="70" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="290" y="757.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">ADAPTADOR</text>
+<text x="290" y="775.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">PgPedidos</text>
+<rect x="530" y="735" width="225" height="70" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="540" y="757.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">ADAPTADOR</text>
+<text x="540" y="775.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">PgInventarios</text>
+<rect x="150" y="890" width="225" height="75" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="160" y="912.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">ADAPTADOR TRANSACCIONAL</text>
+<text x="160" y="930.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">PostgresUnitOfWork</text>
+<rect x="445" y="890" width="240" height="75" rx="6" fill="#edf5f6" stroke="#007e86"/>
+<text x="455" y="912.0" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#007e86">ADAPTADOR LOCAL</text>
+<text x="455" y="930.6" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#123653">MemoryUnitOfWork</text>
+<path d="M 137 735 L 137 625" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="137,625 141.28360176539516,635.1316709340317 132.71639823460484,635.1316709340317" fill="#ffffff" stroke="#516273"/>
+<path d="M 390 735 L 390 625" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="390,625 394.28360176539513,635.1316709340317 385.71639823460487,635.1316709340317" fill="#ffffff" stroke="#516273"/>
+<path d="M 642 735 L 642 645" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="642,645 646.2836017653951,655.1316709340317 637.7163982346049,655.1316709340317" fill="#ffffff" stroke="#516273"/>
+<path d="M 150 925 L 10 925" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 10 925 L 10 439" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 10 439 L 280 439" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 280 439 L 280 390" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="280,390 284.28360176539513,400.1316709340317 275.71639823460487,400.1316709340317" fill="#ffffff" stroke="#516273"/>
+<path d="M 685 925 L 770 925" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 770 925 L 770 439" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 770 439 L 500 439" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<path d="M 500 439 L 500 390" fill="none" stroke="#516273" stroke-dasharray="4 3"/>
+<polygon points="500,390 504.28360176539513,400.1316709340317 495.71639823460487,400.1316709340317" fill="#ffffff" stroke="#516273"/>
+<path d="M 265 890 L 265 850" fill="none" stroke="#516273"/>
+<path d="M 265 850 L 137 850" fill="none" stroke="#516273"/>
+<path d="M 137 850 L 137 805" fill="none" stroke="#516273"/>
+<polygon points="137,805 141.28360176539516,815.1316709340317 132.71639823460484,815.1316709340317" fill="#516273" stroke="#516273"/>
+<polygon points="265,890 269.0,882.0 265.0,874.0 261.0,882.0" fill="#123653" stroke="#516273"/>
+<path d="M 265 890 L 265 850" fill="none" stroke="#516273"/>
+<path d="M 265 850 L 390 850" fill="none" stroke="#516273"/>
+<path d="M 390 850 L 390 805" fill="none" stroke="#516273"/>
+<polygon points="390,805 394.28360176539513,815.1316709340317 385.71639823460487,815.1316709340317" fill="#516273" stroke="#516273"/>
+<polygon points="265,890 269.0,882.0 265.0,874.0 261.0,882.0" fill="#123653" stroke="#516273"/>
+<path d="M 265 890 L 265 850" fill="none" stroke="#516273"/>
+<path d="M 265 850 L 642 850" fill="none" stroke="#516273"/>
+<path d="M 642 850 L 642 805" fill="none" stroke="#516273"/>
+<polygon points="642,805 646.2836017653951,815.1316709340317 637.7163982346049,815.1316709340317" fill="#516273" stroke="#516273"/>
+<polygon points="265,890 269.0,882.0 265.0,874.0 261.0,882.0" fill="#123653" stroke="#516273"/>
+<text x="28" y="1010.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">Triángulo vacío y trazo discontinuo: implementación del contrato. Rombo: adaptadores contenidos por el UoW. El dominio se</text>
+<text x="28" y="1025.2" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#123653">detalla en D02.</text>
+</svg>

@@ -1,0 +1,17 @@
+Regla,Escenarios U2,Caso o alcance,Componente responsable,Evidencia o límite
+BR01,US03/US04/US05,CU02/CU03,CotizacionService,No llama reservar durante revalidación/conversión; prueba sin stock comprometido.
+BR02,US03/US04,CU02/CU03,Cotizacion; CotizacionRepository,"Folio, versión y vigencia conservados; estado vigente se deriva de Vigencia."
+BR03,AC-US04-01/02,CU02/CU03,Cotizacion.convertir/revalidar,Vencida rechazada; versión anterior conservada.
+BR04,US02; AC-US09-01,CU01/CU04,InventarioUbicacion.disponible,Física menos reservas; tránsito informado por separado.
+BR05,US06; AC-US09-01,CU04,Pedido.confirmar; InventarioUbicacion.reservar,Dominio exige confirmado; UoW guarda estado y reserva juntos.
+BR06,AC-US10-01,CU05,Pedido.cancelar; InventarioUbicacion.liberar,Cancelación antes de surtido libera; reducción es variante futura.
+BR07,US01/US11,Diseño general,PoliticaSurtidoMultiorigen,"Prioridad local, almacén, otras sucursales; prototipo no implementa esta selección."
+BR08,AC-US14-01/02,Diseño general,Pedido y PartidaPedido,Aceptación explícita para parciales; no usar excepción de stock como consentimiento.
+BR09,AC-US07-01,Diseño general,CuentaCredito.evaluar,Activo es condición de autorización normal.
+BR10,AC-US07-01/02,Diseño general,PoliticaCredito,Bloqueo o insuficiencia devuelven EnRevision.
+BR11,AC-US08-01/02,Diseño general,CuentaCredito y decisión excepcional,"Motivo, responsable, fecha y condición requeridos; no inventar umbrales de excepción."
+BR12,AC-US11-01; US12,Diseño logístico,Transferencia,"Origen, destino, partidas, responsable y estado."
+BR13,AC-US13-01/02,Diseño logístico,Transferencia e InventarioUbicacion,Recepción actualiza tránsito/destino; diferencia se conserva como incidencia.
+BR14,AC-US17-01/02,Diseño logístico,Entrega,Evidencia de receptor y resultado; incidencia no cierra como entregado.
+BR15,CA-US18-01,Diseño postventa,Devolucion y PoliticaDevolucion,Evaluación por categoría/condición y política pendiente.
+BR16,CA-US20-01,CU02-CU05,UnitOfWork.registrar; auditoria,"Valores anteriores/nuevos, actor, fecha y motivo dentro de la transacción."
