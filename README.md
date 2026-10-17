@@ -23,7 +23,7 @@ Cinco casos detallados: consultar disponibilidad, revalidar cotización, convert
 1. Informe de arquitectura: **[U3FerreMax_Informe](docs/U3Ferremax_Informe.pdf)**
 2. Diagrama de dominio y clases: **[Diagrama de dominio](diagrams/D01_MapaDominio.pdf)** y **[Diagrama de Clases](diagrams/D02_DiagramaClases.pdf)**
 3. Diagramas de secuencia: **[Diagrama de Secuencia completa](diagrams/D04_Diagrama_Seuencia_Completa.pdf)** y **[Diagrama de Secuencia Interrumpida](diagrams/D05_Diagrama_Secuencia_Interrumpida.pdf)**
-4. Matriz de trazabilidad:
-5. Bitácora de IA:
+4. Matriz de trazabilidad: **[Incluida con ADR y Bitácora de IA](docs/ADR_Trazabilidad_BitacoraIA.pdf)**
+5. Bitácora de IA:**[Incluida con ADR y matriz de trazabilidad](docs/ADR_Trazabilidad_BitacoraIA.pdf)**
 6. Código Base: **[Tests](tests/)** 
 
