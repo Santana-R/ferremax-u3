@@ -2,103 +2,28 @@
 
 Propuesta académica de arquitectura de Componentes de lógica de negocio. Equipo 17: Roberto Santana Trujillo e Isaías Leonardo Salazar Torres. Profesor Miguel Ángel Gómez Marroquín.
 
-## Empezar
+## Empresa: FerreMax
+La empresa FerreMax opera tres sucursales y un almacén central dedicados a la venta de herramientas y materiales de construcción. El análisis previo evidenció serias inconsistencias, como el riesgo de confirmar ventas contra mercancía ya comprometida, el uso de cotizaciones vencidas (gestionadas en hojas de cálculo) y una visibilidad limitada de inventario, lo que derivaba en promesas de mercancía sin sustento.
+FerreMax requiere coordinar cotizaciones, pedidos e inventario sin comprometer mercancía inexistente. La arquitectura propuesta organiza las reglas del negocio con Domain Model, una Service Layer y adaptadores de persistencia. El recorrido detallado cubre la consulta de disponibilidad, la revalidación de cotizaciones, la conversión a pedido, la confirmación con reserva y la cancelación antes del surtido.
 
-1. Leer el **[informe final del equipo](docs/U3Ferremax_Informe.pdf)**, de 29 páginas. Es el PDF integrado por Isaías y enviado por Roberto. `docs/FerreMax_U3_Informe.pdf` conserva el mismo PDF como alias para enlaces anteriores.
+### Alcances
+El proceso detallado va desde la disponibilidad y la cotización hasta la confirmación del pedido y la liberación de su reserva. Todos los casos aparecen en User Stories de la unidad 2. Los demás procesos se representan para conservar el panorama de FerreMax y sus vínculos.
+La confirmación ejecutable es de contado y usa una ubicación por pedido. Esto delimita el prototipo, no cambia las reglas del negocio sobre surtido multiorigen, crédito o parciales. Las consultas sí devuelven las cuatro ubicaciones de demostración. Los datos, referencias de pago y actores del demo son simulados.
+La vigencia de siete días proviene de un acuerdo simulado del BRD y se pasa como parámetro. 
+
+## Instrucciones
+
+1. Leer el **[informe final del equipo](docs/U3Ferremax_Informe.pdf)**. Es el PDF integrado por el equipo. `docs/FerreMax_U3_Informe.pdf` conserva el mismo PDF como alias para enlaces anteriores.
 2. Ver los **[diagramas UML del informe final](docs/Diagramas.md)**: cinco vistas con fuente PlantUML (`.puml`), SVG, PDF y PNG.
-3. Leer `docs/ADR_y_Trazabilidad.md` y `docs/Guia_Defensa.pdf`.
-4. Ejecutar el demo y las pruebas.
+3. Leer `docs/ADR_Trazabilidad_BitacoraIA.md`.
 
-## Demostración reproducible
+Cinco casos detallados: consultar disponibilidad, revalidar cotización, convertirla en pedido, confirmar contado con reserva y cancelar antes del surtido. 
 
-Python 3.10 o posterior. Memory usa biblioteca estándar y datos simulados; permite revisar el proyecto sin credenciales.
-
-macOS/Linux:
-
-```bash
-PYTHONPATH=src python -m ferremax.demo
-PYTHONPATH=src python -m unittest discover -s tests -v
-```
-
-PowerShell:
-
-```powershell
-$env:PYTHONPATH = "src"
-python -m ferremax.demo
-python -m unittest discover -s tests -v
-```
-
-Resultado verificado: 20 pruebas correctas y una integración PostgreSQL omitida por falta de `TEST_DATABASE_URL`. Los registros están en `docs/evidence/`. Esta ejecución no certifica una conexión real con Supabase.
-
-Cinco casos detallados: consultar disponibilidad, revalidar cotización, convertirla en pedido, confirmar contado con reserva y cancelar antes del surtido. El código usa una ubicación por pedido. Crédito normal se evalúa en dominio; crédito excepcional, multiorigen, parciales, transferencias, entregas y devoluciones están diseñados y tienen límites explícitos en el informe.
-
-## PostgreSQL en Supabase
-
-Proyecto nuevo previsto en Santana’s Org. La creación y la prueba conectada permanecen pendientes; no se afirma que Supabase esté configurado ni que la integración haya pasado.
-
-1. Crear un proyecto académico después de verificar su costo.
-2. Ejecutar `database/001_schema.sql` mediante administración de ese proyecto.
-3. Crear un usuario LOGIN de aplicación y asignarle el rol `ferremax_u3_backend`; usar ese usuario en la conexión de la aplicación. Su contraseña se define fuera del repositorio.
-4. Obtener la conexión desde **Connect**. Usar pooler en modo sesión si la red solo ofrece IPv4. Mantener `sslmode=require`.
-5. Instalar la dependencia fijada y exportar `DATABASE_URL` en el entorno. `.env.example` es una guía; el código no carga automáticamente archivos `.env`.
-
-```bash
-python -m pip install -r requirements.txt
-PYTHONPATH=src python scripts/seed_postgres.py
-```
-
-Para el ensayo real, definir `TEST_DATABASE_URL` con el usuario de aplicación del proyecto dedicado y ejecutar `tests.test_postgres`. Crea datos sintéticos con IDs únicos y los conserva como evidencia.
-
-```bash
-PYTHONPATH=src python -m unittest tests.test_postgres -v
-```
-
-El esquema es privado, con RLS y privilegios limitados del backend. No exponerlo a la Data API ni incorporar conexiones reales o claves al Git. La autenticación de personas es una integración posterior; `Actor` en el demo es un contexto confiable simulado.
-
-## Responsabilidades
-
-- `domain/`: reglas, estados y Value Objects.
-- `application/`: servicios, contratos, commands, queries y DTO.
-- `infrastructure/`: adaptadores Memory y PostgreSQL.
-- `database/`: esquema, relaciones y permisos.
-- `tests/`: comportamiento, rechazos, rollback y ensayo real separado.
-- `docs/`: informe, decisiones, trazabilidad, bitácora y defensa.
-
-Las pruebas Memory no certifican bloqueos ni rendimiento de PostgreSQL. Los eventos se guardan en outbox; el consumidor externo no está implementado. El pago es una autorización registrada de demostración, no un cobro real. El tratamiento financiero de un pago autorizado cuya reserva falle es política pendiente.
-
-## Hallazgo importante en U2
-
-El BPMN dibuja «Reservar para pedido confirmado» antes de procesar el pago/validar crédito. U3 sigue BR05 y US06/US09: primero autorización, después confirmación y reserva atómicas. Los originales de U2 se incluyen sin cambios y el hallazgo se documenta en el informe.
-
-## Entrega
-
-Revisión el 16 de octubre de 2026; NetAcad señala 17 de octubre a las 23:59. Subir el reporte después de revisión del profesor. Todos los integrantes deben revisar y poder defender las decisiones. Los ADR propuestos no simulan una revisión humana ya realizada.
-
-## Versiones de los documentos
-
-El PDF vigente es `docs/U3Ferremax_Informe.pdf`. Los archivos `docs/FerreMax_U3_Informe.docx`, `docs/Informe_Arquitectura.md` y `docs/current_sources.json` pertenecen al borrador anterior; no son una transcripción editable del informe final del equipo. Los ADR en tabla actualizados por Isaías se conservan en `docs/ADR_y_Trazabilidad.md`.
-
-## Exportar los diagramas del informe final
-
-```bash
-python -m pip install -r requirements-artifacts.txt
-python scripts/export_diagrams_from_report.py
-```
-
-Este script extrae las cinco imágenes del PDF y exporta cada recorte a PDF. Para regenerar los SVG desde las fuentes reconstruidas de PlantUML, consultar `diagrams/README.md`.
-
-## Generadores del borrador anterior
-
-Los siguientes comandos corresponden al borrador anterior. No regeneran el informe final del equipo ni sus fuentes PlantUML; el primer script sobrescribe los archivos D01–D05 con las vistas anteriores. Para las vistas vigentes, usar el procedimiento anterior.
-
-
-Las dependencias de generación están separadas de las del prototipo. En Linux con las fuentes DejaVu instaladas:
-
-```bash
-python -m pip install -r requirements-artifacts.txt
-python scripts/build_artifacts.py
-python scripts/build_report_from_guide.py
-```
-
-El primer script genera diagramas y la guía de defensa. El segundo usa el Word original como plantilla para el informe de FerreMax, retirando las instrucciones al alumno, la rúbrica y los ejemplos de otras empresas. El informe editable puede exportarse a PDF desde Word o LibreOffice. `reference/` contiene los documentos originales de U2 y la guía de U3 sin modificaciones.
+### Enlaces a entregables
+1. Informe de arquitectura: **[U3FerreMax_Informe](docs/U3Ferremax_Informe.pdf)**
+2. Diagrama de dominio y clases: **[Diagrama de dominio](diagrams/D01_MapaDominio.pdf)** y **[Diagrama de Clases](diagrams/D02_DiagramaClases.pdf)**
+3. Diagramas de secuencia: **[Diagrama de Secuencia completa](diagrams/D04_Diagrama_Seuencia_Completa.pdf)** y **[Diagrama de Secuencia Interrumpida](diagrams/D05_Diagrama_Secuencia_Interrumpida.pdf)**
+4. Matriz de trazabilidad:
+5. Bitácora de IA:
+6. Código Base: **[Tests](tests/)** 
 
