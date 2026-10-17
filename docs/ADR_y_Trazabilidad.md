@@ -1,65 +1,60 @@
 ## Estado y autoría
-Los ADR distinguen decisiones confirmadas por Roberto, propuestas de diseño y partes pendientes. Isaías y Roberto deben revisarlos para la defensa. La bitácora registra interacciones reales y revisiones técnicas internas; no inventa una revisión humana ni sesiones anteriores.
-## ADR001 Domain Model como patrón principal
-**Estado:** Propuesta para revisión del equipo.
-### Contexto
-Las cotizaciones conservan versiones y vigencia; el pedido cambia de estado; inventario y reservas deben mantenerse consistentes. Esas reglas reaparecen en varios casos de uso.
-### Alternativas
-Transaction Script ofrece menor estructura inicial, con riesgo de duplicar reglas. Table Module organiza conjuntos de datos, pero coloca el ciclo de vida del pedido fuera de los objetos que representan el negocio. Domain Model encapsula reglas y conserva identidad y comportamiento.
-### Decisión
-Proponer Domain Model en la escritura y consultas SQL con DTO propios en la lectura. No clasificar cualquier SELECT como Table Module ni introducir una combinación de patrones sin delimitarla.
-### Consecuencias
-Beneficio: responsabilidades visibles y reglas reutilizables. Costo: más objetos, contratos y validación de límites. Riesgo: clases anémicas o servicios que absorban el dominio. Control: métodos de negocio y cinco hallazgos SOLID.
-### Trazabilidad
-BN02/BN03; BR01–06; RNF02; US04/US05/US09/US10; CU02–CU05.
+Los ADR distinguen decisiones confirmadas por el equipo, propuestas de diseño y partes pendientes. El equipo debe revisarlos para la defensa. La bitácora registra interacciones reales y revisiones técnicas internas; no inventa una revisión humana ni sesiones anteriores.
+
+## ADR-001: Domain Model como patrón principal
+| Campo | Contenido |
+|---|---|
+| **Estado** | Propuesta para revisión del equipo. |
+| **Contexto** | Las cotizaciones conservan versiones y vigencia; el pedido cambia de estado; inventario y reservas deben mantenerse consistentes. Esas reglas reaparecen en varios casos de uso. |
+| **Alternativas** | Transaction Script ofrece menor estructura inicial, con riesgo de duplicar reglas. Table Module organiza conjuntos de datos, pero coloca el ciclo de vida del pedido fuera de los objetos que representan el negocio. Domain Model encapsula reglas y conserva identidad y comportamiento. |
+| **Decisión** | Proponer Domain Model en la escritura y consultas SQL con DTO propios en la lectura. No clasificar cualquier SELECT como Table Module ni introducir una combinación de patrones sin delimitarla. |
+| **Consecuencias** | Beneficio: responsabilidades visibles y reglas reutilizables. Costo: más objetos, contratos y validación de límites. Riesgo: clases anémicas o servicios que absorban el dominio. Control: métodos de negocio y cinco hallazgos SOLID. |
+| **Trazabilidad** | BN02/BN03; BR01–06; RNF02; US04/US05/US09/US10; CU02–CU05. |
+
 ## ADR002 Python y PostgreSQL alojado en Supabase
-**Estado:** Tecnología y organización confirmadas por Roberto; proyecto aún no creado.
-### Contexto
-El profesor permite elegir tecnología. Roberto propuso PostgreSQL en Supabase y autorizó continuar con esa opción; eligió Santana’s Org para un proyecto nuevo.
-### Alternativas
-SQLite simplifica una demostración local. PostgreSQL local conserva las funciones del motor pero requiere instalación/operación. Supabase aloja PostgreSQL y permite administración y persistencia compartida.
-### Decisión
-Python organiza el dominio y la aplicación. Un adaptador PostgreSQL conserva transacciones y repositorios. Supabase se utiliza inicialmente para alojar la base; se conserva una única base de lectura y escritura.
-### Consecuencias
-Beneficio: práctica con persistencia compartida y transacciones de PostgreSQL. Costo: conexión, permisos, dependencias y aprovisionamiento. El costo de creación debe verificarse antes de activar un proyecto; no se asume que una organización sea gratuita. No hay proyecto activo de FerreMax ni pruebas conectadas reportadas.
-### Trazabilidad
-RNF02/03/04/08; BR04/05/16; CU04/CU05; conversación de decisión tecnológica y Release.
+
+| Campo | Contenido |
+|---|---|
+| **Estado** | Tecnología y organización confirmadas por el equipo; proyecto aún no creado. |
+| **Contexto** | Se propuso PostgreSQL en Supabase y se autorizó continuar con esa opción; se eligió Santana’s Org como repositorio en Github para un proyecto nuevo. |
+| **Alternativas** | SQLite simplifica una demostración local. PostgreSQL local conserva las funciones del motor pero requiere instalación/operación. Supabase aloja PostgreSQL y permite administración y persistencia compartida. |
+| **Decisión** | Python organiza el dominio y la aplicación. Un adaptador PostgreSQL conserva transacciones y repositorios. Supabase se utiliza inicialmente para alojar la base; se conserva una única base de lectura y escritura.| 
+| **Consecuencias** | Beneficio: práctica con persistencia compartida y transacciones de PostgreSQL. Costo: conexión, permisos, dependencias y aprovisionamiento. El costo de creación debe verificarse antes de activar un proyecto; no se asume que una organización sea gratuita. No hay proyecto activo de FerreMax ni pruebas conectadas reportadas.|
+| **Trazabilidad** | RNF02/03/04/08; BR04/05/16; CU04/CU05; conversación de decisión tecnológica y Release. |
+
 ## ADR003 Unit of Work para confirmación y reserva
-**Estado:** Propuesta implementada y revisada con Memory; validación PostgreSQL pendiente.
-### Contexto
-AC-US09-01 exige reserva atómica y AC-US09-02 impide asignar la última unidad a dos pedidos. Guardar el estado del pedido separado de la reserva puede producir confirmaciones incoherentes.
-### Alternativas
-Guardar por separado introduce cambios parciales. Coordinar con consistencia eventual añade recuperación y estados de compensación aún no definidos. Una transacción local puede proteger los cambios requeridos en una misma base.
-### Decisión
-El servicio abre UoW, bloquea pedido e inventarios en orden, invoca al dominio, guarda pedido/reservas/auditoría/outbox y confirma una sola transacción. Ante error, revierte la operación completa.
-### Consecuencias
-Beneficio: confirmación y compromiso de inventario quedan juntos. Costo: retención breve de bloqueos y manejo de contención. La transacción abarca más de un agregado sin convertirlos en una sola raíz. Las conexiones y los bloqueos reales necesitan ensayo PostgreSQL; RNF01 no se declara cumplido sin medirlo.
-### Trazabilidad
-BN02; BR04–06/BR16; RNF02/RNF04; AC-US06-01/02; AC-US09-01/02; CU04/CU05.
+
+| Campo | Contenido |
+|---|---|
+| **Estado** | Propuesta implementada y revisada con Memory; validación PostgreSQL pendiente. |
+| **Contexto** | AC-US09-01 exige reserva atómica y AC-US09-02 impide asignar la última unidad a dos pedidos. Guardar el estado del pedido separado de la reserva puede producir confirmaciones incoherentes.|
+| **Alternativas** | Guardar por separado introduce cambios parciales. Coordinar con consistencia eventual añade recuperación y estados de compensación aún no definidos. Una transacción local puede proteger los cambios requeridos en una misma base.|
+| **Decisión** | El servicio abre UoW, bloquea pedido e inventarios en orden, invoca al dominio, guarda pedido/reservas/auditoría/outbox y confirma una sola transacción. Ante error, revierte la operación completa.|
+| **Consecuencias** | Beneficio: confirmación y compromiso de inventario quedan juntos. Costo: retención breve de bloqueos y manejo de contención. La transacción abarca más de un agregado sin convertirlos en una sola raíz. Las conexiones y los bloqueos reales necesitan ensayo PostgreSQL; RNF01 no se declara cumplido sin medirlo.|
+| **Trazabilidad** | BN02; BR04-06/BR16; RNF02/RNF04; AC-US06-01/02; AC-US09-01/02; CU04/CU05. |
+
 ## ADR004 CQRS básico sobre una sola base
-**Estado:** Propuesta implementada en comandos y consultas seleccionados.
-### Contexto
-La consulta global debe distinguir física, comprometida, tránsito y disponible. Confirmar y cancelar cambian estado y exigen validaciones diferentes a una consulta.
-### Alternativas
-Un modelo único para pantallas y escritura simplifica estructuras pero puede permitir modificaciones involuntarias. Bases separadas exigirían sincronización y operación adicional. Separar handlers y modelos conservando PostgreSQL resuelve la necesidad actual.
-### Decisión
-ConfirmarPedido y CancelarPedido son Commands. ConsultarDisponibilidad y ConsultarPedido son Queries con contratos de lectura y DTO propios. Los commands delegan a la Service Layer; una consulta no recibe métodos para guardar.
-### Consecuencias
-Beneficio: intención explícita y lectores pequeños. Costo: DTO y handlers adicionales. No implica Event Sourcing, réplicas ni dos bases. La separación se aplica donde aporta claridad y no obliga a crear un handler decorativo por cada método.
-### Trazabilidad
-BN01/BN02; BR04–06; RNF01/RNF06; US01/US02/US09/US10; CU01/CU04/CU05.
+
+| Campo | Contenido |
+|---|---|
+| **Estado** | Propuesta implementada en comandos y consultas seleccionados. |
+| **Contexto** | La consulta global debe distinguir física, comprometida, tránsito y disponible. Confirmar y cancelar cambian estado y exigen validaciones diferentes a una consulta.|
+| **Alternativas** | Un modelo único para pantallas y escritura simplifica estructuras, pero puede permitir modificaciones involuntarias. Bases separadas exigirían sincronización y operación adicional. Separar handlers y modelos conservando PostgreSQL resuelve la necesidad actual.|
+| **Decisión** | ConfirmarPedido y CancelarPedido son Commands. ConsultarDisponibilidad y ConsultarPedido son Queries con contratos de lectura y DTO propios. Los commands delegan a la Service Layer; una consulta no recibe métodos para guardar.|
+| **Consecuencias** | Beneficio: intención explícita y lectores pequeños. Costo: DTO y handlers adicionales. No implica Event Sourcing, réplicas ni dos bases. La separación se aplica donde aporta claridad y no obliga a crear un handler decorativo por cada método.|
+| **Trazabilidad** | BN01/BN02; BR04-06; RNF01/RNF06; US01/US02/US09/US10; CU01/CU04/CU05. |
+
 ## ADR005 Auditoría y outbox junto con el cambio de negocio
-**Estado:** Propuesta implementada como registro; consumidor externo pendiente.
-### Contexto
-BR16 y RNF04 exigen quién, cuándo, qué cambió y por qué. Publicar un evento antes del COMMIT puede comunicar una confirmación que posteriormente falla.
-### Alternativas
-Auditar/publicar por separado puede perder registros o emitir hechos no confirmados. Añadir un intermediario de mensajes externo aumenta trabajo sin un consumidor definido. Guardar auditoría y evento junto con el cambio permite conservar evidencia coherente.
-### Decisión
-Registrar auditoría y evento en la misma transacción. El backend operativo tiene permiso de insertar y leer auditoría, sin actualizarla ni borrarla. Una outbox técnica conserva eventos pendientes para un consumidor posterior.
-### Consecuencias
-Beneficio: coherencia entre cambio y evidencia. Costo: tabla adicional y necesidad futura de publicación/idempotencia. El prototipo registra eventos, pero no afirma entregar notificaciones ni garantizar exactamente una entrega externa.
-### Trazabilidad
-BN10; BR16; RNF04; CA-US20-01; CU02–CU05.
+
+| Campo | Contenido |
+|---|---|
+| **Estado** | Propuesta implementada como registro; consumidor externo pendiente. |
+| **Contexto** | BR16 y RNF04 exigen quién, cuándo, qué cambió y por qué. Publicar un evento antes del COMMIT puede comunicar una confirmación que posteriormente falla.|
+| **Alternativas** | Auditar/publicar por separado puede perder registros o emitir hechos no confirmados. Añadir un intermediario de mensajes externo aumenta trabajo sin un consumidor definido. Guardar auditoría y evento junto con el cambio permite conservar evidencia coherente.|
+| **Decisión** | Registrar auditoría y evento en la misma transacción. El backend operativo tiene permiso de insertar y leer auditoría, sin actualizarla ni borrarla. Una outbox técnica conserva eventos pendientes para un consumidor posterior.|
+| **Consecuencias** | Beneficio: coherencia entre cambio y evidencia. Costo: tabla adicional y necesidad futura de publicación/idempotencia. El prototipo registra eventos, pero no afirma entregar notificaciones ni garantizar exactamente una entrega externa.|
+| **Trazabilidad** | BN10; BR16; RNF04; CA-US20-01; CU02-CU05. |
+
 ## Matriz de trazabilidad por necesidad
 <table fit-page-width="true" header-row="true">
 <tr>
@@ -317,73 +312,17 @@ BN10; BR16; RNF04; CA-US20-01; CU02–CU05.
 <td>encontrado falso y lista vacía; ID original repetido registrado en H01.</td>
 </tr>
 </table>
-## Bitácora de IA
-<table fit-page-width="true" header-row="true">
-<tr>
-<td>Iteración</td>
-<td>Objetivo</td>
-<td>Prompt o interacción real</td>
-<td>Respuesta útil</td>
-<td>Error o supuesto detectado</td>
-<td>Decisión y autor</td>
-</tr>
-<tr>
-<td>IA01</td>
-<td>Entender la guía</td>
-<td>Solicitud real de Roberto: revisar Word, captura y cuatro PDFs; comunicar dudas antes de resolver.</td>
-<td>Resumen de nueve etapas y mínimos; propuesta de proceso.</td>
-<td>BPMN visual no disponible; ID repetido y OB01/CE01 incongruentes.</td>
-<td>Roberto informó que no hay repo, hay libertad tecnológica y revisión el viernes. No implica aprobación de cada clase.</td>
-</tr>
-<tr>
-<td>IA02</td>
-<td>Elegir persistencia</td>
-<td>Propuesta inicial Python/SQLite; pregunta real de Roberto sobre Supabase PostgreSQL.</td>
-<td>Comparación de preparación, trabajo compartido y concurrencia; propuesta Python/PostgreSQL.</td>
-<td>SQLite se había propuesto por simplicidad; no se había provisionado una base.</td>
-<td>Roberto dio Release tras la propuesta Supabase y después eligió Santana’s Org.</td>
-</tr>
-<tr>
-<td>IA03</td>
-<td>Revisar límites del código</td>
-<td>Revisión técnica interna de la implementación por IA; no se atribuye al equipo un prompt que no escribió.</td>
-<td>Interfaces pequeñas, entidades con reglas y adaptadores.</td>
-<td>ubicacion_reserva estaba en el UoW y debía estar en InventarioRepository.</td>
-<td>IA corrigió contrato, adaptador Memory y llamada del servicio; revisión humana pendiente.</td>
-</tr>
-<tr>
-<td>IA04</td>
-<td>Revisar concurrencia y consistencia</td>
-<td>Revisión técnica interna de revalidación y confirmación.</td>
-<td>Orden uniforme por SKU y agregación de partidas del mismo producto.</td>
-<td>Revalidación podía obtener bloqueos según orden de entrada, diferente al de confirmar.</td>
-<td>IA ordenó lecturas y probó duplicados de SKU y competencia por última unidad.</td>
-</tr>
-<tr>
-<td>IA05</td>
-<td>Comprobar comportamiento</td>
-<td>Ejecución real: PYTHONPATH=src python3 -m unittest discover -s tests -v.</td>
-<td>15 pruebas locales correctas, incluyendo rollback y liberación.</td>
-<td>La prueba Memory serializa con RLock; no certifica los bloqueos PostgreSQL.</td>
-<td>Resultado conservado; integración PostgreSQL identificada por separado como pendiente.</td>
-</tr>
-<tr>
-<td>IA06</td>
-<td>Conservar evidencia ante interrupción</td>
-<td>Continuación autorizada por Release; comprobación de acceso tras cierre de conexión local.</td>
-<td>Documentación, diagramas y decisiones conservados en borrador privado de Notion.</td>
-<td>Conexión Mac cerrada; get_cost no disponible; no se completaron PDF, GitHub ni Supabase.</td>
-<td>IA continuó la documentación; no declaró creados recursos ni aprobada la arquitectura por ambos integrantes.</td>
-</tr>
-</table>
-## Registro de revisión humana pendiente
-Confirmar o corregir ADR001 y los límites de agregados; aclarar H02 y H05 sin añadir políticas no documentadas; cotejar los diagramas con el BPMN visible; registrar una revisión real de Isaías y Roberto antes de la entrega. Cuando ocurra, añadir fecha, decisión concreta y versión resultante. No rellenar ese registro retrospectivamente como si ya se hubiera realizado.
-## Iteraciones posteriores verificadas
-**IA07:** se fortaleció la prueba de dos partidas: faltante ZZ-SIN-STOCK y observación del guardado provisional de SKU-DEMO. El ensayo de rollback pasó.
-**IA08:** se revisó visualmente BPMN y se registró H07 sobre reserva previa a autorización.
-**IA09:** se reconstruyó el código en cloud, se agregó estado calculado de cotización y auditoría detallada. Pasaron 20 pruebas locales; se omitió una integración PostgreSQL por falta de conexión. El entorno se desconectó antes de confirmar generación de PDFs y empaquetado.
-## Cierre de generación y revisión
-**IA10:** Tras recuperar el entorno se ejecutaron 21 pruebas: 20 correctas y una PostgreSQL omitida por falta de TEST_DATABASE_URL. Se generaron el informe FIME, la guía y cinco diagramas con fuentes y exportaciones; se revisaron visualmente y se preparó el paquete. La creación del proyecto Supabase sigue bloqueada porque get_cost no está disponible. GitHub requiere una sesión de navegador para crear el repositorio; no se registra publicación ni defensa humana como realizadas.
 
-## Adaptación del informe al formato de la guía
-**IA11:** Roberto pidió conservar el formato de la guía práctica y retirar las instrucciones del profesor. Se usó el Word original como plantilla y se generó el informe de FerreMax con su portada, tipografía, encabezados y tablas. Se eliminaron las instrucciones al alumno, la rúbrica, los ejemplos de otras empresas y la etiqueta Cisco Confidential. Los documentos originales permanecen sin cambios. Se solicitó publicar el proyecto en GitHub; la publicación se verifica por separado.
+## Bitácora de IA
+
+| Itera | Objetivo | Prompt | Respuesta útil | Error o supuesto detectado | Decisión del equipo |
+|-------|----------|--------|----------------|----------------------------|---------------------|
+| IA01 | Decidir el patrón de lógica de negocio a partir de las reglas de negocio y los cinco casos de uso. | "Analiza la siguiente información. Se trata de reglas de negocio, y cinco casos de uso para el diseño arquitectural de un sistema. Compara Transaction Script, Table Module y Domain Model, indica las ventajas y desventajas y en base a eso y posibles consecuencias, indica cuál consideras el patrón ideal para utilizar." | Resumen de los tres patrones de lógica de negocio, detalles de ventajas, desventajas y consecuencias de cada patrón, y un análisis profundo del negocio en cada patrón. Al final, IA consideró Domain Model como patrón ideal. | Se encontraron OB01/CE01 incongruentes, además de pequeños errores en las descripciones de los patrones, pero en términos generales se desarrolló correctamente. | Se analizó el resumen de IA y se comparó con la idea de lo visto en clase, se corroboró la idea del equipo y se decidió por Domain Model como patrón a usar. |
+| IA02 | Construir el dominio del sistema. | "Según el patrón de lógica escogido, analiza este glosario técnico (glosario corregido de la unidad 3) y las reglas de negocio, propón candidatos a entidades, value objects, aggregates y domain events. Incluye la evidencia para cada candidato y las dudas o incongruencias que encuentres para validación humana" | Lista de varios candidatos para cada elemento del dominio con sus respectivas evidencias de reglas y necesidades, así como dudas que necesitan validación del equipo. | Algunos candidatos se escapaban de las reglas y el glosario de negocio, por lo que se descartaron. También hubo ideas que eran redundantes e ilógicas. | Se seleccionaron candidatos que no se escapaban de las reglas y el glosario del negocio y que concordaban con el flujo establecido en la iteración 2. Se seleccionaron solo las dudas que fueran realmente relevantes. |
+| IA03 | Construir la Service Layer | "Se eligieron los siguientes candidatos para los elementos del dominio (elementos elegidos de la interacción anterior). A partir de estos y de las reglas anteriores, propón Application Services." | Entregó una tabla con varios servicios, enlazados con sus reglas, entradas, salidas y colaboradores. | Algunos servicios no estaban respaldados por reglas y otros no tenían congruencia con las mismas. | Hubo servicios suficientes para elegirlos para la tabla de service layer, y se corroboraron los enlaces con sus elementos. |
+| IA04 | Encontrar incongruencias SOLID y validar la arquitectura diseñada. | "Analiza el siguiente diseño arquitectural (dominio, service layer y reglas de negocio, UoW, etc.) y busca violaciones a SOLID. No reescribas información ni modifiques lo adjunto, sólo señala las violaciones, identifica el riesgo con evidencia y propón alternativas para solucionarlas" | Encontró una cantidad de violaciones SOLID e identificó a cuáles elementos hacía referencia. Dio evidencia y propuso alternativas para solucionarlo. | Una violación era incongruente por lo que se descartó. El resto era correcta y solucionables de manera sencilla. | Se seleccionaron aquellas violaciones que requerían cambios mayores para incluirlas. Aquellas que no, se solucionaron fácilmente y se omitieron. |
+| IA05 | Diseñar diagramas con IA para revisarlos y pasarlos a PlantUML. | "En base al dominio del negocio (Se adjunta información del dominio) construye un diagrama de clases. No agregues ninguna clase adicional ni ningún elemento que no esté en esta información, y mantén la cardinalidad tal como está." | Un diseño inicial de diagrama de clase del dominio utilizado en el negocio. | Agregó una relación adicional entre dos clases no relacionadas. El resto fue un diagrama construido correctamente. | Se indicó a la IA que eliminara la relación sobrante y se construyó otro diagrama correctamente. |
+| IA06 | Realizar diagramas de secuencia iniciales para el flujo completo y flujo interrumpido. | "A partir del siguiente BPMN del negocio, [BPMN de la unidad 2] y las reglas del dominio construido, además del dominio construido, construye un diagrama de secuencia de un proceso completo y un proceso interrumpido por falta de disponibilidad. No incluyas actores ni procesos no incluidos en el dominio" | Un diagrama de secuencia de un flujo completo de inicio a fin, y diagrama de secuencia interrumpido por falta de disponibilidad. | Los diagramas eran simples pero correctos, sólo que no indicaban explícitamente los actores. | Se indicó a la IA agregar los actores sin modificar lo demás, y se entregaron diagramas correctos. |
+| IA07 | Cambiar los diagramas de IA a código para PlantUML. | "Utiliza este diagrama (diagrama realizado y corregido por IA) y conviértelo a código para realizarlo en PlantUML. No cambies ninguna información que aparezca en el diagrama" (Se usó este prompt para los diagramas realizados por IA) | Código para realizar los mismos diagramas en PlantUML. | El código era correcto para realizarlo en PlantUML. | Se utilizó el código en PlantUML y se verificó que no se perdiera información. |
+
+
