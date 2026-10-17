@@ -1,0 +1,56 @@
+@startuml
+' Fuente reconstruida de U3Ferremax_Informe.pdf, página 18.
+!pragma layout smetana
+title D03 · Aplicación y persistencia
+package "APLICACIÓN · Contratos y coordinación" {
+  class CotizacionService <<Servicio>> {
+    revalidar()
+    convertir()
+  }
+  class PedidoService <<Servicio>> {
+    confirmar()
+    cancelar()
+  }
+  interface UnitOfWork <<Protocol>> {
+    cotizaciones
+    pedidos
+    inventarios
+    --
+    registrar()
+    commit()
+  }
+  interface CotizacionRepository <<Protocol>> {
+    obtener()
+    guardar_nueva_version()
+  }
+  interface PedidoRepository <<Protocol>> {
+    obtener()
+    guardar()
+  }
+  interface InventarioRepository <<Protocol>> {
+    obtener_para_actualizar()
+    guardar()
+    ubicacion_reserva()
+  }
+}
+package "INFRAESTRUCTURA · Implementa contratos de aplicación" {
+  class PostgresUnitOfWork <<Adaptador transaccional>>
+  class MemoryUnitOfWork <<Adaptador local>>
+  class PgCotizaciones <<Adaptador>>
+  class PgPedidos <<Adaptador>>
+  class PgInventarios <<Adaptador>>
+}
+CotizacionService ..> UnitOfWork : fábrica
+PedidoService ..> UnitOfWork : fábrica
+UnitOfWork --> CotizacionRepository
+UnitOfWork --> PedidoRepository
+UnitOfWork --> InventarioRepository
+PostgresUnitOfWork ..|> UnitOfWork
+MemoryUnitOfWork ..|> UnitOfWork
+PgCotizaciones ..|> CotizacionRepository
+PgPedidos ..|> PedidoRepository
+PgInventarios ..|> InventarioRepository
+PostgresUnitOfWork *-- PgCotizaciones
+PostgresUnitOfWork *-- PgPedidos
+PostgresUnitOfWork *-- PgInventarios
+@enduml

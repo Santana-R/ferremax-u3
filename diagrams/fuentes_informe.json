@@ -1,0 +1,61 @@
+{
+  "report": "docs/U3Ferremax_Informe.pdf",
+  "report_sha256": "dd2398f256c533fd3e05666a3034aa35a554186297ff38330ac5f5c347b4359d",
+  "diagrams": [
+    {
+      "id": "D01",
+      "page": 12,
+      "png": "D01.png",
+      "png_sha256": "4be9b656a4e9a0478c259a1cce0da6f2075e818bb646cce4435e4c23645a6e52",
+      "pdf": "D01.pdf",
+      "pdf_sha256": "6032003d807cbd791c018fe4520df85d4e8c2c8656164f20e5e832f18ff64b1b",
+      "plantuml": "D01.puml",
+      "source_provenance": "Reconstruida visualmente del diagrama del informe; no es el archivo original de Isaías.",
+      "svg": "D01.svg"
+    },
+    {
+      "id": "D02",
+      "page": 17,
+      "png": "D02.png",
+      "png_sha256": "669e743929b90434d918475c5d6649f8945f7d5bc57e87b34c1e9692bf5c496a",
+      "pdf": "D02.pdf",
+      "pdf_sha256": "ea3bd68ca80194295edb76c0d81bb02d68510421a343634232e221f038438e56",
+      "plantuml": "D02.puml",
+      "source_provenance": "Reconstruida visualmente del diagrama del informe; no es el archivo original de Isaías.",
+      "svg": "D02.svg"
+    },
+    {
+      "id": "D03",
+      "page": 18,
+      "png": "D03.png",
+      "png_sha256": "8b60eeaf621c2878d1472e8be51c0ae643eb5358a917a2c8ff86b0e246167be4",
+      "pdf": "D03.pdf",
+      "pdf_sha256": "c5b1b9435904f753254d5723a7242f694266a1f7691ec5486d11a6d6e3a0b06b",
+      "plantuml": "D03.puml",
+      "source_provenance": "Reconstruida visualmente del diagrama del informe; no es el archivo original de Isaías.",
+      "svg": "D03.svg"
+    },
+    {
+      "id": "D04",
+      "page": 19,
+      "png": "D04.png",
+      "png_sha256": "9d99f52a285d36fd9b0509ac1d1fe2c02e19f9fbb194f8d9c50105ec8a3cbd56",
+      "pdf": "D04.pdf",
+      "pdf_sha256": "d31694b7c7ba01d05b5170b2096299fe1b8cab18a84721d8a8b42620d5fec096",
+      "plantuml": "D04.puml",
+      "source_provenance": "Reconstruida visualmente del diagrama del informe; no es el archivo original de Isaías.",
+      "svg": "D04.svg"
+    },
+    {
+      "id": "D05",
+      "page": 20,
+      "png": "D05.png",
+      "png_sha256": "6150c234288168bc645d18dffbb12ad460470503b9e43c07a14ca3c319d2f789",
+      "pdf": "D05.pdf",
+      "pdf_sha256": "413f53f93576df827d2482fc74e7f2be1b19dac0120800dce787c620a21d8aff",
+      "plantuml": "D05.puml",
+      "source_provenance": "Reconstruida visualmente del diagrama del informe; no es el archivo original de Isaías.",
+      "svg": "D05.svg"
+    }
+  ]
+}

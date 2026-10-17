@@ -1,0 +1,22 @@
+@startuml
+' Fuente reconstruida de U3Ferremax_Informe.pdf, página 12.
+!pragma layout smetana
+title D01 · Mapa general del dominio
+class Cotizacion <<Raíz>>
+class Pedido <<Raíz>>
+class CuentaCredito <<Raíz, Diseño>>
+class InventarioUbicacion <<Raíz>>
+class Transferencia <<Raíz, Diseño>>
+class Entrega <<Raíz, Diseño>>
+class Devolucion <<Raíz, Diseño>>
+class "Producto y Ubicacion" as Maestros <<Maestros>>
+note "Las flechas representan referencias o colaboración\nentre agregados; no composición." as Nota
+Cotizacion --> Pedido : folio y versión
+CuentaCredito --> Pedido : autorización
+Pedido --> InventarioUbicacion : confirmación y reserva
+Transferencia --> InventarioUbicacion : movimientos confirmados
+Pedido --> Entrega : surtido y destino
+Pedido --> Devolucion : comprobante de venta
+Devolucion --> InventarioUbicacion : reintegro o aislamiento
+Maestros --> InventarioUbicacion : identidad del inventario
+@enduml

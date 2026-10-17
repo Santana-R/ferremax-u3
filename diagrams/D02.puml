@@ -1,0 +1,72 @@
+@startuml
+' Fuente reconstruida de U3Ferremax_Informe.pdf, página 17.
+!pragma layout smetana
+title D02 · Clases del dominio
+class Cotizacion <<Raíz>> {
+  id
+  folio
+  version
+  cliente_id
+  --
+  revalidar()
+  convertir()
+}
+class Pedido <<Raíz>> {
+  id
+  estado
+  cotizacion_version
+  --
+  confirmar()
+  cancelar()
+  cantidades_por_sku()
+}
+class InventarioUbicacion <<Raíz>> {
+  sku
+  ubicacion_id
+  existencia_fisica
+  disponible
+  --
+  reservar()
+  liberar()
+}
+class Partida <<Value Object>> {
+  numero
+  cantidad
+  sku
+  precio
+}
+class Vigencia <<Value Object>> {
+  emision
+  vencimiento
+  --
+  esta_vigente()
+}
+class Dinero <<Value Object>> {
+  importe
+  moneda
+}
+class SKU <<Value Object>> {
+  valor
+}
+class CuentaCredito <<Raíz, Política normal>> {
+  cliente_id
+  activo
+  bloqueado
+  --
+  evaluar()
+}
+class PoliticaCredito <<Servicio de dominio>> {
+  evaluar_normal()
+}
+note "Rombo: composición en la raíz. Trazo\ndiscontinuo: dependencia. Flecha\nsimple: referencia. Cada Pedido\nconserva su propio snapshot de\npartidas." as Leyenda
+Cotizacion "1" *-- "1..*" Partida : contiene
+Cotizacion "1" *-- "1" Vigencia
+Pedido "1" *-- "1..*" Partida : snapshot
+Pedido ..> Cotizacion : referencia ID y versión
+InventarioUbicacion --> SKU : identifica
+Partida --> SKU : SKU
+Partida --> Dinero : precio
+CuentaCredito --> Dinero : límite y saldo
+PoliticaCredito ..> CuentaCredito : evalúa
+InventarioUbicacion ..> Pedido : exige confirmado
+@enduml

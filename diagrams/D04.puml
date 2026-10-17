@@ -1,0 +1,29 @@
+@startuml
+' Fuente reconstruida de U3Ferremax_Informe.pdf, página 19.
+actor Caja
+participant PedidoService as Servicio
+participant PostgresUnitOfWork as UoW
+participant PgPedidos as Pedidos
+participant PgInventarios as Inventarios
+Caja -> Servicio : confirmar(actor, pedido, pago, ubicacion)
+note over Servicio : Comprobar rol Caja
+Servicio -> UoW : __enter__()
+note over UoW : Iniciar transacción
+Servicio -> Pedidos : obtener(pedido_id)
+Pedidos --> Servicio : Pedido bloqueado para actualizar
+loop SKU en orden uniforme
+  Servicio -> Inventarios : obtener_para_actualizar(SKU, ubicacion)
+  Inventarios --> Servicio : Inventario y reservas actuales
+end
+note over Servicio : Invocar Pedido.confirmar(pago)
+note over Servicio : Invocar InventarioUbicacion.reservar(pedido, cantidad)
+loop Cada inventario involucrado
+  Servicio -> Inventarios : guardar(inventario)
+end
+Servicio -> Pedidos : guardar(pedido confirmado)
+Servicio -> UoW : registrar(auditoria, PedidoConfirmado)
+Servicio -> UoW : commit()
+UoW --> Servicio : COMMIT exitoso
+Servicio -> UoW : __exit__()
+Servicio --> Caja : DTO con estado Confirmado
+@enduml

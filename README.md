@@ -4,8 +4,8 @@ Propuesta académica de arquitectura de Componentes de lógica de negocio. Equip
 
 ## Empezar
 
-1. Leer `docs/FerreMax_U3_Informe.pdf`, con el formato de la guía práctica del profesor. La versión editable está en `docs/FerreMax_U3_Informe.docx`.
-2. Ver `diagrams/` y sus archivos `.mmd`, `.svg`, PDF y PNG.
+1. Leer el **[informe final del equipo](docs/U3Ferremax_Informe.pdf)**, de 29 páginas. Es el PDF integrado por Isaías y enviado por Roberto. `docs/FerreMax_U3_Informe.pdf` conserva el mismo PDF como alias para enlaces anteriores.
+2. Ver los **[diagramas UML del informe final](docs/Diagramas.md)**: cinco vistas con fuente PlantUML (`.puml`), SVG, PDF y PNG.
 3. Leer `docs/ADR_y_Trazabilidad.md` y `docs/Guia_Defensa.pdf`.
 4. Ejecutar el demo y las pruebas.
 
@@ -74,7 +74,23 @@ El BPMN dibuja «Reservar para pedido confirmado» antes de procesar el pago/val
 
 Revisión el 16 de octubre de 2026; NetAcad señala 17 de octubre a las 23:59. Subir el reporte después de revisión del profesor. Todos los integrantes deben revisar y poder defender las decisiones. Los ADR propuestos no simulan una revisión humana ya realizada.
 
-## Regenerar los documentos
+## Versiones de los documentos
+
+El PDF vigente es `docs/U3Ferremax_Informe.pdf`. Los archivos `docs/FerreMax_U3_Informe.docx`, `docs/Informe_Arquitectura.md` y `docs/current_sources.json` pertenecen al borrador anterior; no son una transcripción editable del informe final del equipo. Los ADR en tabla actualizados por Isaías se conservan en `docs/ADR_y_Trazabilidad.md`.
+
+## Exportar los diagramas del informe final
+
+```bash
+python -m pip install -r requirements-artifacts.txt
+python scripts/export_diagrams_from_report.py
+```
+
+Este script extrae las cinco imágenes del PDF y exporta cada recorte a PDF. Para regenerar los SVG desde las fuentes reconstruidas de PlantUML, consultar `diagrams/README.md`.
+
+## Generadores del borrador anterior
+
+Los siguientes comandos corresponden al borrador anterior. No regeneran el informe final del equipo ni sus fuentes PlantUML; el primer script sobrescribe los archivos D01–D05 con las vistas anteriores. Para las vistas vigentes, usar el procedimiento anterior.
+
 
 Las dependencias de generación están separadas de las del prototipo. En Linux con las fuentes DejaVu instaladas:
 
@@ -85,3 +101,4 @@ python scripts/build_report_from_guide.py
 ```
 
 El primer script genera diagramas y la guía de defensa. El segundo usa el Word original como plantilla para el informe de FerreMax, retirando las instrucciones al alumno, la rúbrica y los ejemplos de otras empresas. El informe editable puede exportarse a PDF desde Word o LibreOffice. `reference/` contiene los documentos originales de U2 y la guía de U3 sin modificaciones.
+

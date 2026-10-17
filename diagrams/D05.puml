@@ -1,0 +1,23 @@
+@startuml
+' Fuente reconstruida de U3Ferremax_Informe.pdf, página 20.
+actor Caja
+participant PedidoService as Servicio
+participant PostgresUnitOfWork as UoW
+participant PgPedidos as Pedidos
+participant PgInventarios as Inventarios
+note over Caja,Servicio : Una consulta previa mostró stock; otro pedido ya reservó
+Caja -> Servicio : confirmar(actor, pedido, pago, ubicacion)
+Servicio -> UoW : __enter__()
+Servicio -> Pedidos : obtener(pedido_id)
+Pedidos --> Servicio : Pedido Pendiente bloqueado
+Servicio -> Inventarios : obtener_para_actualizar(SKU, ubicacion)
+note over Inventarios : FOR UPDATE espera al otro pedido si es necesario
+Inventarios --> Servicio : Disponible actual igual a cero
+note over Servicio : Pedido.confirmar cambia solo el objeto provisional
+note over Servicio : InventarioUbicacion.reservar lanza DisponibilidadInsuficiente
+Servicio -> UoW : __exit__(error)
+note over UoW : conn.rollback y cerrar conexión
+UoW --> Servicio : Sin nuevos cambios persistidos
+Servicio --> Caja : Error de disponibilidad
+note over Caja,UoW : Pedido sigue Pendiente; sin reserva ni evento de confirmación
+@enduml
