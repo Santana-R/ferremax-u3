@@ -1,0 +1,188 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FerreMax - API",
+    "description": "Consulta de disponibilidad de productos por sucursal o almacen.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/inventario/{sku}": {
+      "get": {
+        "tags": [
+          "Inventario"
+        ],
+        "summary": "Consultar disponibilidad de un producto",
+        "operationId": "consultar_inventario_inventario__sku__get",
+        "parameters": [
+          {
+            "name": "sku",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Codigo del producto",
+              "examples": [
+                "FER-API-DEMO"
+              ],
+              "title": "Sku"
+            },
+            "description": "Codigo del producto"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventarioRespuesta"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Codigo de producto vacio",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Producto no encontrado en el inventario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar el codigo del producto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Consulta temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "InventarioRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Disponibilidad del producto consultada."
+          },
+          "sku": {
+            "type": "string",
+            "title": "Sku"
+          },
+          "encontrado": {
+            "type": "boolean",
+            "title": "Encontrado"
+          },
+          "ubicaciones": {
+            "items": {
+              "$ref": "#/components/schemas/InventarioUbicacionRespuesta"
+            },
+            "type": "array",
+            "title": "Ubicaciones"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sku",
+          "encontrado",
+          "ubicaciones"
+        ],
+        "title": "InventarioRespuesta"
+      },
+      "InventarioUbicacionRespuesta": {
+        "properties": {
+          "ubicacion_id": {
+            "type": "string",
+            "title": "Ubicacion Id",
+            "description": "Codigo de la sucursal o almacen"
+          },
+          "existencia_fisica": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Existencia Fisica",
+            "description": "Unidades fisicas"
+          },
+          "comprometida": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Comprometida",
+            "description": "Unidades reservadas"
+          },
+          "en_transito": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "En Transito",
+            "description": "Unidades en traslado; no son disponibles"
+          },
+          "disponible": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Disponible",
+            "description": "Existencia fisica menos comprometida"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ubicacion_id",
+          "existencia_fisica",
+          "comprometida",
+          "en_transito",
+          "disponible"
+        ],
+        "title": "InventarioUbicacionRespuesta"
+      },
+      "MensajeError": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje"
+          },
+          "sku": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sku"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mensaje"
+        ],
+        "title": "MensajeError"
+      }
+    }
+  }
+}

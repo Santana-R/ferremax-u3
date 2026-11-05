@@ -199,3 +199,28 @@ los límites de disponibilidad y la reversión transaccional.
 python -m pytest tests/test_state_machine.py tests/test_e9_inventario.py tests/test_e9_cancelacion.py -v
 ```
 
+## PIA: API REST y Swagger — primera consulta
+
+La API ofrece `GET /inventario/{sku}` y reutiliza el handler CQRS y el lector
+PostgreSQL existentes. Consulta por ubicación sin modificar inventario. Una
+respuesta 200 incluye un mensaje y las cantidades; un producto inexistente
+devuelve 404 y un mensaje comprensible. La falta de conexión devuelve 503.
+
+Con `.env` preparado y PostgreSQL en Docker, desde la raíz del proyecto:
+
+```bash
+.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python scripts/cargar_inventario_demo.py
+.venv/bin/python -m uvicorn ferremax.api.main:app --app-dir src --env-file .env --host 127.0.0.1 --port 8000
+```
+
+Abrir [Swagger](http://127.0.0.1:8000/docs) y consultar `FER-API-DEMO` o un código
+inexistente. La carga es manual, ficticia e idempotente. La API permanece en la
+terminal; Ctrl+C la detiene. PostgreSQL permanece en Docker.
+
+Ver [contrato, ejemplos y pruebas](docs/api/INVENTARIO.md) y
+[OpenAPI versionado](docs/api/openapi.json). Este bloque usa un actor Vendedor
+simulado del lado del servidor. La autenticación y las operaciones de escritura
+no forman parte de esta primera consulta. App y Tests se añadirán a Compose
+en sus respectivos bloques.
+
