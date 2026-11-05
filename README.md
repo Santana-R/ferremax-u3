@@ -71,7 +71,19 @@ de ubicación. La prueba de éxito comprueba ambos estados de la auditoría.
 
 Las pruebas coordinan dominio y servicio con el adaptador en memoria. No conectan
 PostgreSQL ni realizan cobros reales. Estos bloques no constituyen E9 completo:
-faltan la matriz CSV de resultados, cobertura e integración con base de datos.
+siguen pendientes la persistencia real y el ejercicio separado con adaptador
+simulado. La matriz y los reportes de cobertura se generan con:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python scripts/generar_e9.py
+```
+
+Consultar [las instrucciones de integración en U5](docs/E9_INTEGRACION_U5.md).
+El resultado se escribe en `evidencias/e9/` y se empaqueta en
+`evidencias/e9_avance_para_U5.zip`. El HTML principal declara el alcance de E9
+(dominio, servicios y Memory); se publica además el HTML de todo src con la
+suite completa. El porcentaje de E9 no acredita la cobertura global del PIA.
 
 Desde la raíz del repositorio, en macOS/Linux:
 

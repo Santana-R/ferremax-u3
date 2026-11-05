@@ -115,8 +115,11 @@ class InventarioE9Test(unittest.TestCase):
 
         with self.assertRaisesRegex(
             DisponibilidadInsuficiente, "Disponibilidad insuficiente"
-        ):
+        ) as rechazo:
             self._confirmar()
+        self.rechazo_observado = {
+            "tipo": type(rechazo.exception).__name__, "mensaje": str(rechazo.exception)
+        }
 
         pedido = self.store.datos["pedidos"][self.pedido_id]
         inventario = self._inventario_guardado()

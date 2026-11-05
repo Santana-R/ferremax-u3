@@ -110,8 +110,11 @@ class CancelacionE9Test(unittest.TestCase):
         self.store.datos["pedidos"][self.pedido_id].surtido = True
         antes = deepcopy(self.store.datos)
 
-        with self.assertRaisesRegex(ErrorNegocio, "Solo puede cancelarse"):
+        with self.assertRaisesRegex(ErrorNegocio, "Solo puede cancelarse") as rechazo:
             self._cancelar()
+        self.rechazo_observado = {
+            "tipo": type(rechazo.exception).__name__, "mensaje": str(rechazo.exception)
+        }
 
         self.assertEqual(self.store.datos["pedidos"][self.pedido_id].estado,
                          EstadoPedido.CONFIRMADO)
@@ -124,8 +127,11 @@ class CancelacionE9Test(unittest.TestCase):
         despues_de_cancelar = deepcopy(self.store.datos)
 
         # Debe rechazar por la regla del pedido, no por una reserva inexistente.
-        with self.assertRaisesRegex(ErrorNegocio, "Solo puede cancelarse"):
+        with self.assertRaisesRegex(ErrorNegocio, "Solo puede cancelarse") as rechazo:
             self._cancelar()
+        self.rechazo_observado = {
+            "tipo": type(rechazo.exception).__name__, "mensaje": str(rechazo.exception)
+        }
 
         self.assertEqual(self._inventario().disponible, Decimal("3"))
         self.assertEqual(self._inventario().reservas, {self.otro_id: Decimal("7")})

@@ -99,8 +99,11 @@ class CotizacionesE9Test(unittest.TestCase):
         # El reloj marca las 12:01, un minuto despues del vencimiento.
         antes = deepcopy(self.store.datos)
 
-        with self.assertRaises(CotizacionVencida):
+        with self.assertRaises(CotizacionVencida) as rechazo:
             self.servicio.convertir(self.vendedor, self.cotizacion.id, 1, True)
+        self.rechazo_observado = {
+            "tipo": type(rechazo.exception).__name__, "mensaje": str(rechazo.exception)
+        }
 
         self.assertEqual(self.store.datos["pedidos"], {})
         self.assertEqual(self.store.datos["outbox"], [])
@@ -112,8 +115,11 @@ class CotizacionesE9Test(unittest.TestCase):
         self.ahora = self.vencimiento
         antes = deepcopy(self.store.datos)
 
-        with self.assertRaises(CotizacionVencida):
+        with self.assertRaises(CotizacionVencida) as rechazo:
             self.servicio.convertir(self.vendedor, self.cotizacion.id, 1, True)
+        self.rechazo_observado = {
+            "tipo": type(rechazo.exception).__name__, "mensaje": str(rechazo.exception)
+        }
 
         self.assertEqual(self.store.datos["pedidos"], {})
         self.assertEqual(self.store.datos["outbox"], [])
