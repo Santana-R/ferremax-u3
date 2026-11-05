@@ -77,10 +77,11 @@ class PedidoService:
         actor.exigir('VendedorAutorizadoCancelacion')
         with self.uow_factory() as uow:
             p=uow.pedidos.obtener(pedido_id)
+            estado_anterior=p.estado.value
+            p.cancelar(motivo)
             ubicacion=uow.inventarios.ubicacion_reserva(pedido_id)
             inventarios=[uow.inventarios.obtener_para_actualizar(sku,ubicacion) for sku in sorted(p.cantidades_por_sku())]
-            antes={'estado':p.estado.value,'inventarios':[foto_inventario(i) for i in inventarios]}
-            p.cancelar(motivo)
+            antes={'estado':estado_anterior,'inventarios':[foto_inventario(i) for i in inventarios]}
             for inv in inventarios:
                 inv.liberar(p.id)
                 uow.inventarios.guardar(inv)

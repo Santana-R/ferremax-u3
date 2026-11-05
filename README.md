@@ -27,7 +27,7 @@ Cinco casos detallados: consultar disponibilidad, revalidar cotización, convert
 5. Bitácora de IA:**[Incluida con ADR y matriz de trazabilidad](docs/ADR_Trazabilidad_BitacoraIA.pdf)**
 6. Código Base: **[Tests](tests/)** 
 
-## Avance PIA: E9 de inventario y cotizaciones
+## Avance PIA: E9 de inventario, cotizaciones y cancelación
 
 La rama `e9-ferremax` incorpora el primer bloque de E9: tres pruebas de BR04/BR05
 y US09 en [tests/test_e9_inventario.py](tests/test_e9_inventario.py).
@@ -52,10 +52,26 @@ es fijo, con zona UTC; cada caso inicia con datos nuevos.
 Revalidar o convertir una cotización no reserva inventario. La reserva corresponde
 a la confirmación del pedido, probada en el primer bloque.
 
+El tercer bloque verifica BR06 y US10 en
+[tests/test_e9_cancelacion.py](tests/test_e9_cancelacion.py). Cada prueba confirma
+un pedido de dos unidades sobre un inventario de 10 físicas, siete reservadas
+para otro pedido y cinco en tránsito: antes de cancelar queda una disponible.
+
+| Caso | Situación | Resultado esperado |
+| --- | --- | --- |
+| E9-CAN-01: éxito | Cancelar con autorización y motivo, antes del surtido. | Pedido cancelado; libera sus dos unidades, conserva las siete ajenas y deja tres disponibles. Registra motivo, actor, cambio de estado y evento. |
+| E9-CAN-02: error | Intentar cancelar cuando el pedido ya fue surtido. | Rechaza por la regla de cancelación; conserva estado, reservas, auditoría y eventos. |
+| E9-CAN-03: límite | Intentar cancelar de nuevo después de una cancelación exitosa. | Rechaza por el estado del pedido; mantiene tres disponibles y un solo evento de cancelación. |
+
+La prueba de cancelación repetida detectó que se buscaba la reserva antes de
+validar el estado del pedido. El servicio ahora aplica primero la regla del
+dominio dentro del Unit of Work y conserva el estado anterior para la auditoría.
+Así, el rechazo expresa la regla de cancelación en lugar de un error técnico
+de ubicación. La prueba de éxito comprueba ambos estados de la auditoría.
+
 Las pruebas coordinan dominio y servicio con el adaptador en memoria. No conectan
 PostgreSQL ni realizan cobros reales. Estos bloques no constituyen E9 completo:
-faltan la regla de cancelación, la matriz CSV de resultados, cobertura e integración
-con base de datos.
+faltan la matriz CSV de resultados, cobertura e integración con base de datos.
 
 Desde la raíz del repositorio, en macOS/Linux:
 
@@ -63,14 +79,14 @@ Desde la raíz del repositorio, en macOS/Linux:
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements-dev.txt
-python -m pytest tests/test_e9_inventario.py tests/test_e9_cotizaciones.py -v
+python -m pytest tests/test_e9_inventario.py tests/test_e9_cotizaciones.py tests/test_e9_cancelacion.py -v
 python -m pytest -v
 ```
 
-Las seis pruebas también se pueden ejecutar sin dependencias externas:
+Las nueve pruebas también se pueden ejecutar sin dependencias externas:
 
 ```bash
-PYTHONPATH=src python3 -m unittest tests.test_e9_inventario tests.test_e9_cotizaciones -v
+PYTHONPATH=src python3 -m unittest tests.test_e9_inventario tests.test_e9_cotizaciones tests.test_e9_cancelacion -v
 ```
 
 La prueba existente de PostgreSQL se omite mientras no se configure
