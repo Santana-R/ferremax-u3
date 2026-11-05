@@ -33,4 +33,9 @@ class PostgreSQLTest(unittest.TestCase):
         lector=PostgresReader(url)
         self.assertEqual(Decimal(lector.consultar_disponibilidad(sku)[0]['disponible']),0)
         self.assertCountEqual([lector.consultar_pedido(p.id)['estado'] for p in pedidos],['Confirmado','Pendiente'])
+        self.evidencia = {
+            'motor': 'PostgreSQL real', 'resultados': resultados,
+            'disponible': lector.consultar_disponibilidad(sku)[0]['disponible'],
+            'estados': [lector.consultar_pedido(p.id)['estado'] for p in pedidos],
+        }
         # Registros sinteticos con SKU unico conservados como evidencia; solo proyecto academico.

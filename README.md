@@ -69,21 +69,23 @@ dominio dentro del Unit of Work y conserva el estado anterior para la auditoría
 Así, el rechazo expresa la regla de cancelación en lugar de un error técnico
 de ubicación. La prueba de éxito comprueba ambos estados de la auditoría.
 
-Las pruebas coordinan dominio y servicio con el adaptador en memoria. No conectan
-PostgreSQL ni realizan cobros reales. Estos bloques no constituyen E9 completo:
-siguen pendientes la persistencia real y el ejercicio separado con adaptador
-simulado. La matriz y los reportes de cobertura se generan con:
+Los nueve casos de negocio usan Memory. Se añadieron cinco casos de persistencia
+PostgreSQL y el caso existente de concurrencia, además de tres casos de un
+ejercicio separado con proveedor de pago simulado. Las omisiones no acreditan
+persistencia. El estado comprobable se conserva en `evidencias/e9/resumen_e9.json`.
+Para ejecutar el bloque completo y generar evidencia con un PostgreSQL temporal:
 
 ```bash
-python -m pip install -r requirements-dev.txt
-python scripts/generar_e9.py
+python -m pip install -r requirements-e9.txt
+python scripts/generar_e9.py --postgres-temporal
 ```
 
 Consultar [las instrucciones de integración en U5](docs/E9_INTEGRACION_U5.md).
-El resultado se escribe en `evidencias/e9/` y se empaqueta en
-`evidencias/e9_avance_para_U5.zip`. El HTML principal declara el alcance de E9
-(dominio, servicios y Memory); se publica además el HTML de todo src con la
-suite completa. El porcentaje de E9 no acredita la cobertura global del PIA.
+El resultado se escribe en `evidencias/e9/`. Solo se crea `evidencias/e9_para_U5.zip`
+cuando se verifican todos los requisitos del bloque; si falta persistencia u otra
+verificación se conserva el paquete de avance, con los pendientes explícitos.
+El HTML E9 declara cuatro componentes completos: dominio, servicios, Memory y
+PostgreSQL. Se publica además el HTML de todo src con la suite completa.
 
 Desde la raíz del repositorio, en macOS/Linux:
 
