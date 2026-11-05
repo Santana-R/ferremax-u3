@@ -69,7 +69,8 @@ def test_codigo_en_blanco_devuelve_indicacion_clara(consulta):
     assert response.json() == {"mensaje": "Escribe el código del producto."}
 
 
-def test_fallo_postgres_no_expone_detalles_internos(consulta):
+@pytest.mark.parametrize("sku", ["API-TEST", "convertir"])
+def test_fallo_postgres_no_expone_detalles_internos(consulta, sku):
     client, _, api = consulta
 
     class LectorNoDisponible:
@@ -77,7 +78,7 @@ def test_fallo_postgres_no_expone_detalles_internos(consulta):
             raise psycopg.OperationalError("credencial privada y detalle de SQL")
 
     api.dependency_overrides[obtener_lector] = lambda: LectorNoDisponible()
-    response = client.get("/inventario/API-TEST")
+    response = client.get("/inventario/" + sku)
     assert response.status_code == 503
     assert response.json() == {
         "mensaje": "Por el momento no podemos consultar el inventario. Inténtalo de nuevo más tarde.",

@@ -244,3 +244,17 @@ existentes. Ver [cuerpo de la solicitud, respuestas y comprobación del historia
 Este bloque conserva el actor Vendedor simulado del servidor; la autenticación
 permanece fuera de estas operaciones de demostración local.
 
+## PIA: convertir una versión aceptada en pedido
+
+`POST /cotizaciones/{cotizacion_id}/versiones/{version}/convertir` recibe solo
+`{"aceptada": true}`. El servicio existente verifica vigencia y aceptación,
+crea un pedido Pendiente con las partidas y precios guardados y consulta
+disponibilidad. El total proviene del dominio y se devuelve con el identificador
+del pedido. No reserva inventario; esa operación corresponde a confirmar.
+
+Usar la versión 2 de la práctica anterior, detener la API con Ctrl+C y reiniciar
+el mismo comando Uvicorn después de actualizar la rama. Ver la
+[guía de conversión y sus casos de Swagger](docs/api/CONVERSION.md).
+Cada solicitud válida crea un pedido nuevo; conservar su identificador para las
+siguientes operaciones. La consulta y la confirmación se expondrán en sus bloques.
+

@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "FerreMax - API",
-    "description": "Disponibilidad de productos y revalidacion de cotizaciones.",
-    "version": "0.2.0"
+    "description": "Disponibilidad, revalidacion de cotizaciones y creacion de pedidos.",
+    "version": "0.3.0"
   },
   "paths": {
     "/cotizaciones/{cotizacion_id}/versiones/{version}/revalidar": {
@@ -105,6 +105,105 @@
         }
       }
     },
+    "/cotizaciones/{cotizacion_id}/versiones/{version}/convertir": {
+      "post": {
+        "tags": [
+          "Cotizaciones"
+        ],
+        "summary": "Crear un pedido desde una version vigente y aceptada",
+        "operationId": "convertir_cotizacion_cotizaciones__cotizacion_id__versiones__version__convertir_post",
+        "parameters": [
+          {
+            "name": "cotizacion_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "examples": [
+                "11111111-1111-4111-8111-111111111111"
+              ],
+              "title": "Cotizacion Id"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "examples": [
+                2
+              ],
+              "title": "Version"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConversionSolicitud"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoCreadoRespuesta"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cotizacion o version no encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Cotizacion no vigente o sin aceptacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar la solicitud o los productos de la cotizacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Creacion del pedido temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/inventario/{sku}": {
       "get": {
         "tags": [
@@ -185,6 +284,26 @@
   },
   "components": {
     "schemas": {
+      "ConversionSolicitud": {
+        "properties": {
+          "aceptada": {
+            "type": "boolean",
+            "title": "Aceptada",
+            "description": "El cliente acepto esta version de la cotizacion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "aceptada"
+        ],
+        "title": "ConversionSolicitud",
+        "examples": [
+          {
+            "aceptada": true
+          }
+        ]
+      },
       "CotizacionRevalidadaRespuesta": {
         "properties": {
           "mensaje": {
@@ -223,6 +342,31 @@
           "estado"
         ],
         "title": "CotizacionRevalidadaRespuesta"
+      },
+      "DisponibilidadConsultadaRespuesta": {
+        "properties": {
+          "sku": {
+            "type": "string",
+            "title": "Sku"
+          },
+          "solicitada": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Solicitada"
+          },
+          "disponible": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Disponible"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sku",
+          "solicitada",
+          "disponible"
+        ],
+        "title": "DisponibilidadConsultadaRespuesta"
       },
       "InventarioRespuesta": {
         "properties": {
@@ -388,6 +532,67 @@
           "precio_unitario"
         ],
         "title": "PartidaRevalidacion"
+      },
+      "PedidoCreadoRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Pedido creado y pendiente de confirmación."
+          },
+          "pedido_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Pedido Id"
+          },
+          "estado": {
+            "type": "string",
+            "const": "Pendiente",
+            "title": "Estado"
+          },
+          "cotizacion_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Cotizacion Id"
+          },
+          "cotizacion_folio": {
+            "type": "string",
+            "title": "Cotizacion Folio"
+          },
+          "cotizacion_version": {
+            "type": "integer",
+            "title": "Cotizacion Version"
+          },
+          "total": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Total"
+          },
+          "moneda": {
+            "type": "string",
+            "title": "Moneda"
+          },
+          "disponibilidad_consultada": {
+            "items": {
+              "$ref": "#/components/schemas/DisponibilidadConsultadaRespuesta"
+            },
+            "type": "array",
+            "title": "Disponibilidad Consultada",
+            "description": "Disponibilidad consultada en S1; no representa una reserva"
+          }
+        },
+        "type": "object",
+        "required": [
+          "pedido_id",
+          "estado",
+          "cotizacion_id",
+          "cotizacion_folio",
+          "cotizacion_version",
+          "total",
+          "moneda",
+          "disponibilidad_consultada"
+        ],
+        "title": "PedidoCreadoRespuesta"
       },
       "RevalidacionSolicitud": {
         "properties": {

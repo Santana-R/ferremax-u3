@@ -1,4 +1,4 @@
-"""API REST de FerreMax: inventario y revalidacion de cotizaciones."""
+"""API REST de FerreMax: inventario y operaciones de cotizaciones."""
 
 from datetime import datetime, timezone
 from typing import Callable, Optional
@@ -25,8 +25,8 @@ def obtener_lector(request: Request) -> DisponibilidadReader:
 def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], datetime]] = None) -> FastAPI:
     api = FastAPI(
         title="FerreMax - API",
-        version="0.2.0",
-        description="Disponibilidad de productos y revalidacion de cotizaciones.",
+        version="0.3.0",
+        description="Disponibilidad, revalidacion de cotizaciones y creacion de pedidos.",
         redoc_url=None,
     )
     # La configuracion se resuelve al consultar, no al abrir Swagger.
@@ -37,6 +37,8 @@ def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], 
     @api.exception_handler(ErrorPostgres)
     @api.exception_handler(ConfiguracionBaseNoDisponible)
     async def base_no_disponible(request, exc):
+        if request.url.path.startswith("/cotizaciones/") and request.url.path.endswith("/convertir"):
+            return error_cliente("Por el momento no podemos crear el pedido. Inténtalo de nuevo más tarde.", 503)
         if request.url.path.startswith("/cotizaciones/"):
             return error_cliente("Por el momento no podemos revalidar la cotización. Inténtalo de nuevo más tarde.", 503)
         return error_cliente(
@@ -46,7 +48,9 @@ def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], 
     @api.exception_handler(RequestValidationError)
     async def solicitud_invalida(request, exc):
         if request.url.path.startswith("/cotizaciones/"):
-            return error_cliente(mensaje_solicitud_invalida(exc.errors()), 422)
+            return error_cliente(mensaje_solicitud_invalida(
+                exc.errors(), conversion=request.url.path.endswith("/convertir"),
+            ), 422)
         return error_cliente("Revisa el código del producto e inténtalo de nuevo.", 422)
 
     @api.get(

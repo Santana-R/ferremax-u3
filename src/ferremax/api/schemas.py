@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import Annotated, List, Optional
+from typing import Annotated, List, Literal, Optional
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints
@@ -59,3 +59,28 @@ class CotizacionRevalidadaRespuesta(BaseModel):
     folio: str
     version: int
     estado: str
+
+
+class ConversionSolicitud(BaseModel):
+    aceptada: bool = Field(strict=True, description="El cliente acepto esta version de la cotizacion")
+    model_config = ConfigDict(extra="forbid", json_schema_extra={"examples": [{"aceptada": True}]})
+
+
+class DisponibilidadConsultadaRespuesta(BaseModel):
+    sku: str
+    solicitada: Decimal = Field(gt=0)
+    disponible: Decimal = Field(ge=0)
+
+
+class PedidoCreadoRespuesta(BaseModel):
+    mensaje: str = "Pedido creado y pendiente de confirmación."
+    pedido_id: UUID
+    estado: Literal["Pendiente"]
+    cotizacion_id: UUID
+    cotizacion_folio: str
+    cotizacion_version: int
+    total: Decimal = Field(ge=0)
+    moneda: str
+    disponibilidad_consultada: List[DisponibilidadConsultadaRespuesta] = Field(
+        description="Disponibilidad consultada en S1; no representa una reserva",
+    )

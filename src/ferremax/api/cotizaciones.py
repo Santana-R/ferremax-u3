@@ -1,14 +1,17 @@
-"""Adaptador HTTP para la revalidacion de cotizaciones de BR02/BR03."""
+"""Adaptador HTTP de revalidacion y conversion de cotizaciones de FerreMax."""
 
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Path, Request
 
 from ferremax.application.services import Actor, CotizacionService
-from ferremax.domain.model import Dinero, ErrorNegocio, Partida, SKU
+from ferremax.domain.model import CotizacionVencida, Dinero, ErrorNegocio, Partida, SKU
 from ferremax.infrastructure.postgres import PostgresUnitOfWork
 from .responses import error_cliente
-from .schemas import CotizacionRevalidadaRespuesta, MensajeError, RevalidacionSolicitud
+from .schemas import (
+    ConversionSolicitud, CotizacionRevalidadaRespuesta, MensajeError,
+    PedidoCreadoRespuesta, RevalidacionSolicitud,
+)
 from .settings import conexion_desde_entorno
 
 
@@ -22,7 +25,7 @@ def obtener_servicio_cotizaciones(request: Request) -> CotizacionService:
     return CotizacionService(lambda: PostgresUnitOfWork(conexion), request.app.state.reloj)
 
 
-def mensaje_solicitud_invalida(errores):
+def mensaje_solicitud_invalida(errores, conversion=False):
     if errores and errores[0].get("type") == "extra_forbidden":
         return "La solicitud incluye campos no reconocidos. Usa los campos del ejemplo."
     ubicacion = errores[0].get("loc", ()) if errores else ()
@@ -40,11 +43,12 @@ def mensaje_solicitud_invalida(errores):
         "moneda": "Indica la moneda de cada partida.",
         "condiciones": "Indica las condiciones de la nueva cotización.",
         "motivo": "Indica el motivo de la revalidación.",
+        "aceptada": "Indica si el cliente aceptó esta versión de la cotización.",
     }
     for campo in reversed(ubicacion):
         if campo in campos:
             return campos[campo]
-    return "Revisa los datos de la revalidación."
+    return "Revisa los datos de la conversión." if conversion else "Revisa los datos de la revalidación."
 
 
 RECHAZOS = {
@@ -93,3 +97,41 @@ def revalidar_cotizacion(
     return CotizacionRevalidadaRespuesta(
         cotizacion_id=cotizacion_id, version_anterior=version, **resultado,
     )
+
+
+@router.post(
+    "/{cotizacion_id}/versiones/{version}/convertir",
+    status_code=201,
+    response_model=PedidoCreadoRespuesta,
+    summary="Crear un pedido desde una version vigente y aceptada",
+    responses={
+        404: {"model": MensajeError, "description": "Cotizacion o version no encontrada"},
+        409: {"model": MensajeError, "description": "Cotizacion no vigente o sin aceptacion"},
+        422: {"model": MensajeError, "description": "Revisar la solicitud o los productos de la cotizacion"},
+        503: {"model": MensajeError, "description": "Creacion del pedido temporalmente no disponible"},
+    },
+)
+def convertir_cotizacion(
+    entrada: ConversionSolicitud,
+    cotizacion_id: UUID = Path(..., examples=["11111111-1111-4111-8111-111111111111"]),
+    version: int = Path(..., gt=0, examples=[2]),
+    servicio: CotizacionService = Depends(obtener_servicio_cotizaciones),
+):
+    try:
+        resultado = servicio.convertir(
+            Actor("vendedor-api-demo", "Vendedor"), str(cotizacion_id), version, entrada.aceptada,
+        )
+    except CotizacionVencida:
+        return error_cliente(
+            "Esta versión de la cotización no está vigente. Usa una versión vigente para crear el pedido.",
+            409, cotizacion_id=cotizacion_id,
+        )
+    except ErrorNegocio as exc:
+        rechazos = {
+            "Cotizacion o version inexistente": (404, "Cotización o versión no encontrada."),
+            "Se requiere aceptacion del cliente": (409, "El cliente debe aceptar esta versión de la cotización antes de crear el pedido."),
+            "SKU o ubicacion inexistente": (422, "Uno de los productos de la cotización no está registrado en la sucursal de consulta."),
+        }
+        estado, mensaje = rechazos.get(str(exc), (422, "No se pudo crear el pedido con los datos proporcionados."))
+        return error_cliente(mensaje, estado, cotizacion_id=cotizacion_id)
+    return PedidoCreadoRespuesta(cotizacion_id=cotizacion_id, **resultado)
