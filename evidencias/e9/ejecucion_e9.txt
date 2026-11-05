@@ -1,0 +1,38 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0 -- /Users/robertosantana/Documents/ChatGPT/CLNEG/ferremax-u3/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/robertosantana/Documents/ChatGPT/CLNEG/ferremax-u3
+configfile: pytest.ini
+plugins: cov-5.0.0
+collecting ... collected 9 items
+
+tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_01_exito_reservar_dos_deja_una_disponible PASSED [ 11%]
+tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_02_error_pedir_cuatro_conserva_pedido_e_inventario PASSED [ 22%]
+tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_03_limite_reservar_tres_agota_el_disponible PASSED [ 33%]
+tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_01_exito_revalidar_conserva_historial_y_pedido_usa_version_nueva PASSED [ 44%]
+tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_02_error_version_vencida_no_crea_pedido_ni_modifica_datos PASSED [ 55%]
+tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_03_limite_instante_del_vencimiento_no_permite_conversion PASSED [ 66%]
+tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_01_exito_libera_dos_y_conserva_las_siete_de_otro_pedido PASSED [ 77%]
+tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_02_error_pedido_surtido_conserva_estado_reservas_y_eventos PASSED [ 88%]
+tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_03_limite_segunda_cancelacion_no_libera_ni_registra_otro_evento PASSED [100%]
+
+---------- coverage: platform darwin, python 3.9.6-final-0 -----------
+Name                                      Stmts   Miss   Cover   Missing
+------------------------------------------------------------------------
+src/ferremax/__init__.py                      0      0 100.00%
+src/ferremax/application/__init__.py          0      0 100.00%
+src/ferremax/application/cqrs.py             36     36   0.00%   1-38
+src/ferremax/application/ports.py            11     11   0.00%   1-24
+src/ferremax/application/services.py         79      0 100.00%
+src/ferremax/demo.py                         29     29   0.00%   1-32
+src/ferremax/domain/__init__.py               0      0 100.00%
+src/ferremax/domain/model.py                159     12  92.45%   27, 35, 48, 52, 54, 76, 82, 151, 170-172, 176
+src/ferremax/infrastructure/__init__.py       0      0 100.00%
+src/ferremax/infrastructure/memory.py        55      5  90.91%   52-53, 57-59
+src/ferremax/infrastructure/postgres.py      96     96   0.00%   1-105
+------------------------------------------------------------------------
+TOTAL                                       465    189  59.35%
+Coverage JSON written to file /Users/robertosantana/Documents/ChatGPT/CLNEG/ferremax-u3/evidencias/e9/cobertura_e9_todo_src.json
+
+
+============================== 9 passed in 0.15s ===============================

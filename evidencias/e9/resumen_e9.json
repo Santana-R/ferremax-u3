@@ -1,0 +1,74 @@
+{
+  "fecha_utc": "2026-11-05T06:40:12.676057+00:00",
+  "commit_codigo": "07d7ac04aab6372526269c7800e2bb22a547a297",
+  "url_codigo": "https://github.com/Santana-R/ferremax-u3/tree/07d7ac04aab6372526269c7800e2bb22a547a297",
+  "sha256_archivos_medidos": {
+    ".coveragerc": "54f676581e71f99917ad6a37b02c6345e41198ea217bf8bb620209d05c9e027e",
+    "pytest.ini": "d6e3e89cc6aab7944c11e4a14fb0a4db51c9ae36606bf263f47b7a9378f6de65",
+    "requirements-dev.txt": "b902f79158b29a081a7fae9c7d466c6df9d2811e9896292852e874916a943177",
+    "scripts/generar_e9.py": "06cbb310239dd867eec006d35e2b8aa91e0ba41a6a1ce9276961722258d0f1ee",
+    "src/ferremax/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/ferremax/application/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/ferremax/application/cqrs.py": "f512e5c7e24b4036986031f7132f261cca0605d7954b2ab34acf9fae980d80b1",
+    "src/ferremax/application/ports.py": "fd451ae621e21aca9866baab46aa094e585fc2b14a3b565982b1325b6752f0b9",
+    "src/ferremax/application/services.py": "13e8833a54035e3e3459123b29d100ff75ad0ea7d3c2d83021218eb9d413040b",
+    "src/ferremax/demo.py": "0ab3673d59535fbec58ca504b31f4b7ebfab2fae12285391ae6626951e5c501a",
+    "src/ferremax/domain/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/ferremax/domain/model.py": "3e394e109cad903493f8fd98c1c1a5f0151ba24bc118c224e81d7437236c45a0",
+    "src/ferremax/infrastructure/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/ferremax/infrastructure/memory.py": "8d521c701f6ae999c6a783b1b1d07d978cddb76fd736f78a051ee0ccc9248d50",
+    "src/ferremax/infrastructure/postgres.py": "b82cdc1bb94f76c1b1eca38c2994a53d1e69e62e5c31d339c396232836bfd7a9",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/test_architecture.py": "b581c7f5f235a800821391652bda002e2aa79f01d782395c2439d82fc32925c6",
+    "tests/test_e9_cancelacion.py": "cce78d1591b3f882252270498f0ca9742088c6d31eebb33c4c138e17c529b374",
+    "tests/test_e9_cotizaciones.py": "c6d0c39c6134e2c2a1808ad27cbfe7c8391b5e85c257e1d64dec039d84bf854b",
+    "tests/test_e9_inventario.py": "bbd9166e1b9111667d2e3a36a5779c5dda83693ca3d160ed07420b92963dc283",
+    "tests/test_postgres.py": "6cd1b234a3417613ae279af2dbf81fb1be0d7d04081cb208808bfe630b78faf9"
+  },
+  "e9": {
+    "casos": 9,
+    "aprobados": 9,
+    "archivos_alcance": [
+      "src/ferremax/domain/model.py",
+      "src/ferremax/application/services.py",
+      "src/ferremax/infrastructure/memory.py"
+    ],
+    "cobertura": {
+      "covered_lines": 276,
+      "num_statements": 293,
+      "percent_covered": 94.19795221843003,
+      "percent_covered_display": "94.20",
+      "missing_lines": 17,
+      "excluded_lines": 0
+    },
+    "umbral_lineas": 80,
+    "cumple_umbral": true,
+    "todo_src_solo_nueve_pruebas": {
+      "covered_lines": 276,
+      "num_statements": 465,
+      "percent_covered": 59.354838709677416,
+      "percent_covered_display": "59.35",
+      "missing_lines": 189,
+      "excluded_lines": 14
+    }
+  },
+  "regresion": {
+    "tests": 30,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 29,
+    "cobertura_todo_src": {
+      "covered_lines": 338,
+      "num_statements": 465,
+      "percent_covered": 72.68817204301075,
+      "percent_covered_display": "72.69",
+      "missing_lines": 127,
+      "excluded_lines": 14
+    }
+  },
+  "pendientes": [
+    "Prueba de persistencia real",
+    "Justificacion de ausencia de servicio externo y ejercicio separado con adaptador simulado"
+  ]
+}
