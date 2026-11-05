@@ -84,6 +84,8 @@ Consultar [las instrucciones de integración en U5](docs/E9_INTEGRACION_U5.md).
 El resultado se escribe en `evidencias/e9/`. Solo se crea `evidencias/e9_para_U5.zip`
 cuando se verifican todos los requisitos del bloque; si falta persistencia u otra
 verificación se conserva el paquete de avance, con los pendientes explícitos.
+Ambos ZIP son paquetes locales excluidos de Git; las evidencias se conservan
+descomprimidas en el repositorio.
 El HTML E9 declara cuatro componentes completos: dominio, servicios, Memory y
 PostgreSQL. Se publica además el HTML de todo src con la suite completa.
 

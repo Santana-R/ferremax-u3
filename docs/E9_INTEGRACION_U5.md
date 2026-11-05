@@ -36,8 +36,10 @@ revisar su resultado. El diagnóstico queda en `arranque_postgres_pendiente.txt`
 | ejecucion_e9.txt, ejecucion_regresion.txt, regresion.xml | Salidas reales de las ejecuciones. |
 | cobertura_e9.json, cobertura_e9_todo_src.json, cobertura_global.json | Datos que respaldan los porcentajes. |
 
-El ZIP reúne las evidencias y estas instrucciones, sin el código completo del
-PIA. Cuando esté disponible el repo U5, Roberto incorporará una carpeta E9 y el
+El ZIP es un paquete local de transporte: reúne las evidencias y estas
+instrucciones y queda excluido de Git mediante `.gitignore`. En FerreMax se
+versionan las evidencias descomprimidas. Cuando esté disponible el repo U5,
+Roberto incorporará una carpeta E9 con esas evidencias descomprimidas y el
 enlace permanente en su README/reporte. Las capturas acompañan esos archivos,
 no los sustituyen. La incorporación queda pendiente hasta que Roberto lo avise.
 

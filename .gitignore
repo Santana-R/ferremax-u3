@@ -13,3 +13,6 @@ build/
 *.log
 assets/
 
+# Paquetes locales de transporte; las evidencias se versionan descomprimidas.
+/evidencias/*_para_U5.zip
+

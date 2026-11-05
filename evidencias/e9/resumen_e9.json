@@ -1,7 +1,7 @@
 {
-  "fecha_utc": "2026-11-05T07:27:30.643744+00:00",
-  "commit_codigo": "60a218a6d67559156fd9b339ca0253a13db6518d",
-  "url_codigo": "https://github.com/Santana-R/ferremax-u3/tree/60a218a6d67559156fd9b339ca0253a13db6518d",
+  "fecha_utc": "2026-11-05T07:36:03.923267+00:00",
+  "commit_codigo": "cda5b32905c63567767b426a3c9777ef9d2cb027",
+  "url_codigo": "https://github.com/Santana-R/ferremax-u3/tree/cda5b32905c63567767b426a3c9777ef9d2cb027",
   "sha256_archivos_medidos": {
     ".coveragerc": "54f676581e71f99917ad6a37b02c6345e41198ea217bf8bb620209d05c9e027e",
     "examples/__init__.py": "ff4d71c0cdc305bb414bdc0fdd724c39c43e207f1c08a82b94f0aee5fbecbfd5",
@@ -42,21 +42,21 @@
       "src/ferremax/infrastructure/postgres.py"
     ],
     "cobertura": {
-      "covered_lines": 312,
+      "covered_lines": 366,
       "num_statements": 389,
-      "percent_covered": 80.20565552699229,
-      "percent_covered_display": "80.21",
-      "missing_lines": 77,
+      "percent_covered": 94.08740359897172,
+      "percent_covered_display": "94.09",
+      "missing_lines": 23,
       "excluded_lines": 0
     },
     "umbral_lineas": 80,
     "cumple_umbral": true,
     "todo_src_bloque_e9": {
-      "covered_lines": 353,
+      "covered_lines": 414,
       "num_statements": 465,
-      "percent_covered": 75.91397849462365,
-      "percent_covered_display": "75.91",
-      "missing_lines": 112,
+      "percent_covered": 89.03225806451613,
+      "percent_covered_display": "89.03",
+      "missing_lines": 51,
       "excluded_lines": 14
     }
   },
@@ -64,22 +64,27 @@
     "tests": 38,
     "failures": 0,
     "errors": 0,
-    "skipped": 6,
-    "passed": 32,
+    "skipped": 0,
+    "passed": 38,
     "cobertura_todo_src": {
-      "covered_lines": 374,
+      "covered_lines": 428,
       "num_statements": 465,
-      "percent_covered": 80.43010752688173,
-      "percent_covered_display": "80.43",
-      "missing_lines": 91,
+      "percent_covered": 92.04301075268818,
+      "percent_covered_display": "92.04",
+      "missing_lines": 37,
       "excluded_lines": 14
     }
   },
   "persistencia": {
-    "aprobadas": 0,
+    "aprobadas": 6,
     "esperadas": 6,
-    "completa": false,
-    "servidor": null
+    "completa": true,
+    "servidor": {
+      "motor": "PostgreSQL",
+      "version": "PostgreSQL 16.2 on aarch64-apple-darwin23.5.0, compiled by Apple clang version 15.0.0 (clang-1500.0.40.1), 64-bit",
+      "temporal": true,
+      "transporte": "Socket Unix privado; TCP desactivado"
+    }
   },
   "ejercicio_simulado": {
     "aprobadas": 3,
@@ -87,8 +92,6 @@
     "completo": true,
     "alcance": "Ejercicio separado con Mock; no existe integracion externa operativa"
   },
-  "e9_completa": false,
-  "pendientes": [
-    "Ejecutar las seis pruebas reales PostgreSQL: cinco de persistencia y una de concurrencia"
-  ]
+  "e9_completa": true,
+  "pendientes": []
 }
