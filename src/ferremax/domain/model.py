@@ -5,6 +5,9 @@ from decimal import Decimal
 from enum import Enum
 from typing import Dict, List, Optional
 from uuid import uuid4
+from .specifications import (
+    ContextoConversion, COTIZACION_CONVERTIBLE, COTIZACION_VIGENTE,
+)
 
 class ErrorNegocio(ValueError): pass
 class CotizacionVencida(ErrorNegocio): pass
@@ -85,9 +88,12 @@ class Cotizacion:
                        vigencia=Vigencia(ahora, ahora+timedelta(days=dias)),
                        partidas=list(partidas), condiciones=condiciones)
     def convertir(self, ahora, aceptada):
-        if not self.vigencia.esta_vigente(ahora):
-            raise CotizacionVencida('Revalide precio, disponibilidad y condiciones')
-        if not aceptada: raise ErrorNegocio('Se requiere aceptacion del cliente')
+        contexto = ContextoConversion(self, ahora, aceptada)
+        if not COTIZACION_CONVERTIBLE.is_satisfied_by(contexto):
+            # Conservar el motivo y la prioridad de rechazo existentes en E9.
+            if not COTIZACION_VIGENTE.is_satisfied_by(contexto):
+                raise CotizacionVencida('Revalide precio, disponibilidad y condiciones')
+            raise ErrorNegocio('Se requiere aceptacion del cliente')
         return Pedido(str(uuid4()), self.cliente_id, self.id, self.folio,
                       self.version, list(self.partidas))
 

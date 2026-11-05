@@ -155,3 +155,31 @@ la contraseña en `.env` después de inicializar el volumen no cambia la del usu
 ya creado. `docker compose down` conserva el volumen; añadir `--volumes` lo borra
 junto con sus datos. Si falla el arranque, revisar `docker compose logs db`.
 
+## PIA: Specification para convertir cotizaciones
+
+`domain/specifications.py` expresa las condiciones de vigencia y aceptación de
+BR02/BR03 y US04/US05. `ContextoConversion` reúne la cotización, el instante
+actual y la aceptación de esa versión. Las Specifications son evaluaciones
+puras: devuelven un booleano sin crear pedidos ni modificar la cotización.
+
+```python
+COTIZACION_CONVERTIBLE = COTIZACION_VIGENTE & ACEPTACION_DEL_CLIENTE
+```
+
+La combinación AND se usa en `Cotizacion.convertir()`. El dominio conserva la
+responsabilidad de crear el pedido y expresar el motivo del rechazo: primero
+vigencia y luego aceptación. La emisión está incluida y el vencimiento excluido.
+El contrato también permite OR y NOT, probados como operadores generales;
+la regla de conversión de FerreMax utiliza AND.
+
+`tests/test_specifications.py` comprueba límites temporales, aceptación,
+composición, ausencia de modificaciones y prioridad del rechazo. Las pruebas
+anteriores de E9 siguen verificando el flujo completo. Para ejecutar este bloque:
+
+```bash
+python -m pytest tests/test_specifications.py tests/test_e9_cotizaciones.py -v
+```
+
+Las evidencias E9 guardadas identifican su ejecución anterior mediante commit y
+hashes; los resultados de una nueva ejecución deben distinguirse de esa entrega.
+
