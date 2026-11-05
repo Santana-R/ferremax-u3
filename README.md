@@ -27,7 +27,7 @@ Cinco casos detallados: consultar disponibilidad, revalidar cotización, convert
 5. Bitácora de IA:**[Incluida con ADR y matriz de trazabilidad](docs/ADR_Trazabilidad_BitacoraIA.pdf)**
 6. Código Base: **[Tests](tests/)** 
 
-## Avance PIA: E9 de inventario
+## Avance PIA: E9 de inventario y cotizaciones
 
 La rama `e9-ferremax` incorpora el primer bloque de E9: tres pruebas de BR04/BR05
 y US09 en [tests/test_e9_inventario.py](tests/test_e9_inventario.py).
@@ -39,9 +39,22 @@ Cada caso inicia con 10 unidades físicas, 7 comprometidas y 5 en tránsito:
 | E9-INV-02: error | 4 unidades | Pedido pendiente y datos sin cambios; sin reserva ni evento de confirmación nuevos. |
 | E9-INV-03: límite | 3 unidades | Pedido confirmado, comprometida 10 y disponible 0. |
 
+El segundo bloque verifica BR02/BR03 y US04/US05 en
+[tests/test_e9_cotizaciones.py](tests/test_e9_cotizaciones.py). El reloj de prueba
+es fijo, con zona UTC; cada caso inicia con datos nuevos.
+
+| Caso | Situación | Resultado esperado |
+| --- | --- | --- |
+| E9-COT-01: éxito | Revalidar versión 1 vencida y convertir versión 2 aceptada. | Conserva versión 1 intacta; versión 2 mantiene folio y actualiza vigencia, precio y condiciones; el pedido usa versión 2 y total 240.00 MXN. |
+| E9-COT-02: error | Convertir versión 1 a las 12:01, habiendo vencido a las 12:00. | Rechaza sin crear pedido, evento ni auditoría de éxito; conserva los datos. |
+| E9-COT-03: límite | Convertir exactamente a las 12:00 de vencimiento. | Rechaza sin crear pedido ni modificar los datos. |
+
+Revalidar o convertir una cotización no reserva inventario. La reserva corresponde
+a la confirmación del pedido, probada en el primer bloque.
+
 Las pruebas coordinan dominio y servicio con el adaptador en memoria. No conectan
-PostgreSQL ni realizan cobros reales. Este bloque no constituye E9 completo:
-faltan las otras dos reglas, la matriz CSV de resultados, cobertura e integración
+PostgreSQL ni realizan cobros reales. Estos bloques no constituyen E9 completo:
+faltan la regla de cancelación, la matriz CSV de resultados, cobertura e integración
 con base de datos.
 
 Desde la raíz del repositorio, en macOS/Linux:
@@ -50,14 +63,14 @@ Desde la raíz del repositorio, en macOS/Linux:
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements-dev.txt
-python -m pytest tests/test_e9_inventario.py -v
+python -m pytest tests/test_e9_inventario.py tests/test_e9_cotizaciones.py -v
 python -m pytest -v
 ```
 
-Las tres pruebas también se pueden ejecutar sin dependencias externas:
+Las seis pruebas también se pueden ejecutar sin dependencias externas:
 
 ```bash
-PYTHONPATH=src python3 -m unittest tests.test_e9_inventario -v
+PYTHONPATH=src python3 -m unittest tests.test_e9_inventario tests.test_e9_cotizaciones -v
 ```
 
 La prueba existente de PostgreSQL se omite mientras no se configure
