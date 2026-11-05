@@ -183,3 +183,19 @@ python -m pytest tests/test_specifications.py tests/test_e9_cotizaciones.py -v
 Las evidencias E9 guardadas identifican su ejecución anterior mediante commit y
 hashes; los resultados de una nueva ejecución deben distinguirse de esa entrega.
 
+## PIA: máquina de estados del pedido
+
+El modelo actual controla `Pendiente → Confirmado → Cancelado` mediante
+`EstadoPedido` y las guardas de `Pedido.confirmar()` / `Pedido.cancelar()`.
+El servicio coordina el cambio de estado y la reserva en la misma transacción.
+Un fallo de inventario conserva el pedido Pendiente mediante rollback.
+
+El documento de [máquina de estados](docs/architecture/STATE_MACHINE.md) contiene
+el diagrama, la matriz de transiciones y su trazabilidad. `tests/test_state_machine.py` comprueba las seis
+combinaciones de estado y acción, las guardas y los roles; E9 verifica además
+los límites de disponibilidad y la reversión transaccional.
+
+```bash
+python -m pytest tests/test_state_machine.py tests/test_e9_inventario.py tests/test_e9_cancelacion.py -v
+```
+
