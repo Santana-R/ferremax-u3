@@ -5,37 +5,45 @@ rootdir: /Users/robertosantana/Documents/ChatGPT/CLNEG/ferremax-u3
 configfile: pytest.ini
 testpaths: tests
 plugins: cov-5.0.0
-collecting ... collected 30 items
+collecting ... collected 38 items
 
-tests/test_architecture.py::ArquitecturaTest::test_cancelar_libera_reserva PASSED [  3%]
-tests/test_architecture.py::ArquitecturaTest::test_confirmacion_reserva_auditoria_evento PASSED [  6%]
-tests/test_architecture.py::ArquitecturaTest::test_conversion_requiere_aceptacion PASSED [ 10%]
-tests/test_architecture.py::ArquitecturaTest::test_credito_bloqueado_insuficiente_inactivo PASSED [ 13%]
-tests/test_architecture.py::ArquitecturaTest::test_dos_pedidos_ultima_unidad PASSED [ 16%]
-tests/test_architecture.py::ArquitecturaTest::test_fallo_despues_primera_reserva_revierte_todo PASSED [ 20%]
-tests/test_architecture.py::ArquitecturaTest::test_no_cancelar_surtido PASSED [ 23%]
-tests/test_architecture.py::ArquitecturaTest::test_no_confirmar_dos_veces PASSED [ 26%]
-tests/test_architecture.py::ArquitecturaTest::test_no_reservar_pedido_pendiente PASSED [ 30%]
-tests/test_architecture.py::ArquitecturaTest::test_pago_rechazado_revierte_estado PASSED [ 33%]
-tests/test_architecture.py::ArquitecturaTest::test_partidas_mismo_sku_se_acumulan PASSED [ 36%]
-tests/test_architecture.py::ArquitecturaTest::test_query_no_modifica_y_sku_inexistente PASSED [ 40%]
-tests/test_architecture.py::ArquitecturaTest::test_resumen_pedido_dto PASSED [ 43%]
-tests/test_architecture.py::ArquitecturaTest::test_revalidacion_audita_precio_y_condiciones PASSED [ 46%]
-tests/test_architecture.py::ArquitecturaTest::test_revalidacion_conserva_version_y_no_reserva PASSED [ 50%]
-tests/test_architecture.py::ArquitecturaTest::test_rol_incorrecto_no_confirma PASSED [ 53%]
-tests/test_architecture.py::ArquitecturaTest::test_transito_no_es_disponible PASSED [ 56%]
-tests/test_architecture.py::ArquitecturaTest::test_valores_invalidos PASSED [ 60%]
-tests/test_architecture.py::ArquitecturaTest::test_vencida_no_crea_pedido PASSED [ 63%]
-tests/test_architecture.py::ArquitecturaTest::test_vigencia_limite_excluido PASSED [ 66%]
-tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_01_exito_libera_dos_y_conserva_las_siete_de_otro_pedido PASSED [ 70%]
-tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_02_error_pedido_surtido_conserva_estado_reservas_y_eventos PASSED [ 73%]
-tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_03_limite_segunda_cancelacion_no_libera_ni_registra_otro_evento PASSED [ 76%]
-tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_01_exito_revalidar_conserva_historial_y_pedido_usa_version_nueva PASSED [ 80%]
-tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_02_error_version_vencida_no_crea_pedido_ni_modifica_datos PASSED [ 83%]
-tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_03_limite_instante_del_vencimiento_no_permite_conversion PASSED [ 86%]
-tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_01_exito_reservar_dos_deja_una_disponible PASSED [ 90%]
-tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_02_error_pedir_cuatro_conserva_pedido_e_inventario PASSED [ 93%]
-tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_03_limite_reservar_tres_agota_el_disponible PASSED [ 96%]
+tests/test_architecture.py::ArquitecturaTest::test_cancelar_libera_reserva PASSED [  2%]
+tests/test_architecture.py::ArquitecturaTest::test_confirmacion_reserva_auditoria_evento PASSED [  5%]
+tests/test_architecture.py::ArquitecturaTest::test_conversion_requiere_aceptacion PASSED [  7%]
+tests/test_architecture.py::ArquitecturaTest::test_credito_bloqueado_insuficiente_inactivo PASSED [ 10%]
+tests/test_architecture.py::ArquitecturaTest::test_dos_pedidos_ultima_unidad PASSED [ 13%]
+tests/test_architecture.py::ArquitecturaTest::test_fallo_despues_primera_reserva_revierte_todo PASSED [ 15%]
+tests/test_architecture.py::ArquitecturaTest::test_no_cancelar_surtido PASSED [ 18%]
+tests/test_architecture.py::ArquitecturaTest::test_no_confirmar_dos_veces PASSED [ 21%]
+tests/test_architecture.py::ArquitecturaTest::test_no_reservar_pedido_pendiente PASSED [ 23%]
+tests/test_architecture.py::ArquitecturaTest::test_pago_rechazado_revierte_estado PASSED [ 26%]
+tests/test_architecture.py::ArquitecturaTest::test_partidas_mismo_sku_se_acumulan PASSED [ 28%]
+tests/test_architecture.py::ArquitecturaTest::test_query_no_modifica_y_sku_inexistente PASSED [ 31%]
+tests/test_architecture.py::ArquitecturaTest::test_resumen_pedido_dto PASSED [ 34%]
+tests/test_architecture.py::ArquitecturaTest::test_revalidacion_audita_precio_y_condiciones PASSED [ 36%]
+tests/test_architecture.py::ArquitecturaTest::test_revalidacion_conserva_version_y_no_reserva PASSED [ 39%]
+tests/test_architecture.py::ArquitecturaTest::test_rol_incorrecto_no_confirma PASSED [ 42%]
+tests/test_architecture.py::ArquitecturaTest::test_transito_no_es_disponible PASSED [ 44%]
+tests/test_architecture.py::ArquitecturaTest::test_valores_invalidos PASSED [ 47%]
+tests/test_architecture.py::ArquitecturaTest::test_vencida_no_crea_pedido PASSED [ 50%]
+tests/test_architecture.py::ArquitecturaTest::test_vigencia_limite_excluido PASSED [ 52%]
+tests/test_e9_adaptador_simulado.py::test_e9_mock_01_pago_aprobado_confirma_y_reserva PASSED [ 55%]
+tests/test_e9_adaptador_simulado.py::test_e9_mock_02_pago_rechazado_no_confirma_ni_reserva PASSED [ 57%]
+tests/test_e9_adaptador_simulado.py::test_e9_mock_03_timeout_no_confirma_ni_reserva PASSED [ 60%]
+tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_01_exito_libera_dos_y_conserva_las_siete_de_otro_pedido PASSED [ 63%]
+tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_02_error_pedido_surtido_conserva_estado_reservas_y_eventos PASSED [ 65%]
+tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_03_limite_segunda_cancelacion_no_libera_ni_registra_otro_evento PASSED [ 68%]
+tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_01_exito_revalidar_conserva_historial_y_pedido_usa_version_nueva PASSED [ 71%]
+tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_02_error_version_vencida_no_crea_pedido_ni_modifica_datos PASSED [ 73%]
+tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_03_limite_instante_del_vencimiento_no_permite_conversion PASSED [ 76%]
+tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_01_exito_reservar_dos_deja_una_disponible PASSED [ 78%]
+tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_02_error_pedir_cuatro_conserva_pedido_e_inventario PASSED [ 81%]
+tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_03_limite_reservar_tres_agota_el_disponible PASSED [ 84%]
+tests/test_e9_persistencia.py::test_e9_pg_01_commit_recuperable_desde_otra_conexion SKIPPED [ 86%]
+tests/test_e9_persistencia.py::test_e9_pg_02_sin_commit_rollback_no_conserva_cotizacion SKIPPED [ 89%]
+tests/test_e9_persistencia.py::test_e9_pg_03_fallo_en_segundo_sku_revierte_estado_y_primera_reserva SKIPPED [ 92%]
+tests/test_e9_persistencia.py::test_e9_pg_04_confirmar_y_cancelar_persisten_reservas_y_auditoria SKIPPED [ 94%]
+tests/test_e9_persistencia.py::test_e9_pg_05_revalidacion_conserva_versiones_y_pedido_vinculado SKIPPED [ 97%]
 tests/test_postgres.py::PostgreSQLTest::test_dos_conexiones_ultima_unidad SKIPPED [100%]
 
 - generated xml file: /Users/robertosantana/Documents/ChatGPT/CLNEG/ferremax-u3/evidencias/e9/regresion.xml -
@@ -53,10 +61,10 @@ src/ferremax/domain/__init__.py               0      0 100.00%
 src/ferremax/domain/model.py                159      8  94.97%   35, 48, 52, 54, 76, 82, 151, 171
 src/ferremax/infrastructure/__init__.py       0      0 100.00%
 src/ferremax/infrastructure/memory.py        55      0 100.00%
-src/ferremax/infrastructure/postgres.py      96     96   0.00%   1-105
+src/ferremax/infrastructure/postgres.py      96     60  37.50%   10-13, 17, 21, 27-29, 31-34, 38-40, 42-43, 48-51, 53-58, 60-62, 66-76, 78-80, 82-85, 88-89, 93-96, 98-100, 102-105
 ------------------------------------------------------------------------
-TOTAL                                       465    127  72.69%
+TOTAL                                       465     91  80.43%
 Coverage HTML written to dir /Users/robertosantana/Documents/ChatGPT/CLNEG/ferremax-u3/evidencias/e9/htmlcov_global
 Coverage JSON written to file /Users/robertosantana/Documents/ChatGPT/CLNEG/ferremax-u3/evidencias/e9/cobertura_global.json
 
-======================== 29 passed, 1 skipped in 0.27s =========================
+======================== 32 passed, 6 skipped in 0.33s =========================

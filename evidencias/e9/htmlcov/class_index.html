@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>FerreMax E9: dominio, servicios y adaptador Memory (9 pruebas)</title>
+    <title>FerreMax E9: dominio, servicios, Memory y PostgreSQL</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_58284776.png">
     <link rel="stylesheet" href="style_cb_6b508a39.css" type="text/css">
     <script src="coverage_html_cb_6fb7b396.js" defer></script>
@@ -10,8 +10,8 @@
 <body class="indexfile">
 <header>
     <div class="content">
-        <h1>FerreMax E9: dominio, servicios y adaptador Memory (9 pruebas):
-            <span class="pc_cov">94.20%</span>
+        <h1>FerreMax E9: dominio, servicios, Memory y PostgreSQL:
+            <span class="pc_cov">80.21%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -55,7 +55,7 @@
         </h2>
         <p class="text">
             <a class="nav" href="https://coverage.readthedocs.io/en/7.10.7">coverage.py v7.10.7</a>,
-            created at 2026-11-05 00:40 -0600
+            created at 2026-11-05 01:27 -0600
         </p>
     </div>
 </header>
@@ -296,15 +296,63 @@
                 <td>0</td>
                 <td class="right" data-ratio="22 22">100.00%</td>
             </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html#t24">src/ferremax/infrastructure/postgres.py</a></td>
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html#t24"><data value='PgCotizaciones'>PgCotizaciones</data></a></td>
+                <td>8</td>
+                <td>7</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 8">12.50%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html#t35">src/ferremax/infrastructure/postgres.py</a></td>
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html#t35"><data value='PgPedidos'>PgPedidos</data></a></td>
+                <td>6</td>
+                <td>5</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 6">16.67%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html#t45">src/ferremax/infrastructure/postgres.py</a></td>
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html#t45"><data value='PgInventarios'>PgInventarios</data></a></td>
+                <td>13</td>
+                <td>12</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 13">7.69%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html#t63">src/ferremax/infrastructure/postgres.py</a></td>
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html#t63"><data value='PostgresUnitOfWork'>PostgresUnitOfWork</data></a></td>
+                <td>20</td>
+                <td>19</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 20">5.00%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html#t90">src/ferremax/infrastructure/postgres.py</a></td>
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html#t90"><data value='PostgresReader'>PostgresReader</data></a></td>
+                <td>12</td>
+                <td>11</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 12">8.33%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html">src/ferremax/infrastructure/postgres.py</a></td>
+                <td class="name left"><a href="z_37c4c7aeff603438_postgres_py.html"><data value=''><span class='no-noun'>(no class)</span></data></a></td>
+                <td>37</td>
+                <td>6</td>
+                <td>0</td>
+                <td class="right" data-ratio="31 37">83.78%</td>
+            </tr>
         </tbody>
         <tfoot>
             <tr class="total">
                 <td class="name left">Total</td>
                 <td class="name left">&nbsp;</td>
-                <td>293</td>
-                <td>17</td>
+                <td>389</td>
+                <td>77</td>
                 <td>0</td>
-                <td class="right" data-ratio="276 293">94.20%</td>
+                <td class="right" data-ratio="312 389">80.21%</td>
             </tr>
         </tfoot>
     </table>
@@ -316,7 +364,7 @@
     <div class="content">
         <p>
             <a class="nav" href="https://coverage.readthedocs.io/en/7.10.7">coverage.py v7.10.7</a>,
-            created at 2026-11-05 00:40 -0600
+            created at 2026-11-05 01:27 -0600
         </p>
     </div>
     <aside class="hidden">

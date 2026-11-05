@@ -1,12 +1,16 @@
 {
-  "fecha_utc": "2026-11-05T06:40:12.676057+00:00",
-  "commit_codigo": "07d7ac04aab6372526269c7800e2bb22a547a297",
-  "url_codigo": "https://github.com/Santana-R/ferremax-u3/tree/07d7ac04aab6372526269c7800e2bb22a547a297",
+  "fecha_utc": "2026-11-05T07:27:30.643744+00:00",
+  "commit_codigo": "60a218a6d67559156fd9b339ca0253a13db6518d",
+  "url_codigo": "https://github.com/Santana-R/ferremax-u3/tree/60a218a6d67559156fd9b339ca0253a13db6518d",
   "sha256_archivos_medidos": {
     ".coveragerc": "54f676581e71f99917ad6a37b02c6345e41198ea217bf8bb620209d05c9e027e",
+    "examples/__init__.py": "ff4d71c0cdc305bb414bdc0fdd724c39c43e207f1c08a82b94f0aee5fbecbfd5",
+    "examples/e9_pago_simulado.py": "56b762be8636adaf8de222fc818f86e3f2d4c00cfd445c642bd8ea1cba3791ff",
     "pytest.ini": "d6e3e89cc6aab7944c11e4a14fb0a4db51c9ae36606bf263f47b7a9378f6de65",
     "requirements-dev.txt": "b902f79158b29a081a7fae9c7d466c6df9d2811e9896292852e874916a943177",
-    "scripts/generar_e9.py": "06cbb310239dd867eec006d35e2b8aa91e0ba41a6a1ce9276961722258d0f1ee",
+    "requirements-e9.txt": "1d72f9ad891540222c1b51ca51bcdea3e141da56eea0d66f76e4ff5ab27326e1",
+    "scripts/generar_e9.py": "d9807480b1a16fc4c2d9ebeefda03727d6f36ecbfa9f44a771580c6a82264561",
+    "scripts/postgres_temporal.py": "9eef90a218b1e058ced560ee762099c4e33c2bb291f556f0c63ba5263bdda12d",
     "src/ferremax/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/ferremax/application/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/ferremax/application/cqrs.py": "f512e5c7e24b4036986031f7132f261cca0605d7954b2ab34acf9fae980d80b1",
@@ -19,11 +23,14 @@
     "src/ferremax/infrastructure/memory.py": "8d521c701f6ae999c6a783b1b1d07d978cddb76fd736f78a051ee0ccc9248d50",
     "src/ferremax/infrastructure/postgres.py": "b82cdc1bb94f76c1b1eca38c2994a53d1e69e62e5c31d339c396232836bfd7a9",
     "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/sql/ferremax_pruebas.sql": "e265cd9e7d2ce25c36f1503c6a06c8475c64adbc2249d898c4d43bf109b9d85a",
     "tests/test_architecture.py": "b581c7f5f235a800821391652bda002e2aa79f01d782395c2439d82fc32925c6",
+    "tests/test_e9_adaptador_simulado.py": "5cb5b217a15a166cd61fa57ee5e5d0268b998e037316cbffd55aa7bc85748798",
     "tests/test_e9_cancelacion.py": "cce78d1591b3f882252270498f0ca9742088c6d31eebb33c4c138e17c529b374",
     "tests/test_e9_cotizaciones.py": "c6d0c39c6134e2c2a1808ad27cbfe7c8391b5e85c257e1d64dec039d84bf854b",
     "tests/test_e9_inventario.py": "bbd9166e1b9111667d2e3a36a5779c5dda83693ca3d160ed07420b92963dc283",
-    "tests/test_postgres.py": "6cd1b234a3417613ae279af2dbf81fb1be0d7d04081cb208808bfe630b78faf9"
+    "tests/test_e9_persistencia.py": "726d745651237af586aed3b8d9a055d757a26f5ea22628d153dec4c60ac648ba",
+    "tests/test_postgres.py": "d2e334ef716decd0a9dc1315e194eaadf51d13a7ca977680c058c9d3ce01b4b8"
   },
   "e9": {
     "casos": 9,
@@ -31,44 +38,57 @@
     "archivos_alcance": [
       "src/ferremax/domain/model.py",
       "src/ferremax/application/services.py",
-      "src/ferremax/infrastructure/memory.py"
+      "src/ferremax/infrastructure/memory.py",
+      "src/ferremax/infrastructure/postgres.py"
     ],
     "cobertura": {
-      "covered_lines": 276,
-      "num_statements": 293,
-      "percent_covered": 94.19795221843003,
-      "percent_covered_display": "94.20",
-      "missing_lines": 17,
+      "covered_lines": 312,
+      "num_statements": 389,
+      "percent_covered": 80.20565552699229,
+      "percent_covered_display": "80.21",
+      "missing_lines": 77,
       "excluded_lines": 0
     },
     "umbral_lineas": 80,
     "cumple_umbral": true,
-    "todo_src_solo_nueve_pruebas": {
-      "covered_lines": 276,
+    "todo_src_bloque_e9": {
+      "covered_lines": 353,
       "num_statements": 465,
-      "percent_covered": 59.354838709677416,
-      "percent_covered_display": "59.35",
-      "missing_lines": 189,
+      "percent_covered": 75.91397849462365,
+      "percent_covered_display": "75.91",
+      "missing_lines": 112,
       "excluded_lines": 14
     }
   },
   "regresion": {
-    "tests": 30,
+    "tests": 38,
     "failures": 0,
     "errors": 0,
-    "skipped": 1,
-    "passed": 29,
+    "skipped": 6,
+    "passed": 32,
     "cobertura_todo_src": {
-      "covered_lines": 338,
+      "covered_lines": 374,
       "num_statements": 465,
-      "percent_covered": 72.68817204301075,
-      "percent_covered_display": "72.69",
-      "missing_lines": 127,
+      "percent_covered": 80.43010752688173,
+      "percent_covered_display": "80.43",
+      "missing_lines": 91,
       "excluded_lines": 14
     }
   },
+  "persistencia": {
+    "aprobadas": 0,
+    "esperadas": 6,
+    "completa": false,
+    "servidor": null
+  },
+  "ejercicio_simulado": {
+    "aprobadas": 3,
+    "esperadas": 3,
+    "completo": true,
+    "alcance": "Ejercicio separado con Mock; no existe integracion externa operativa"
+  },
+  "e9_completa": false,
   "pendientes": [
-    "Prueba de persistencia real",
-    "Justificacion de ausencia de servicio externo y ejercicio separado con adaptador simulado"
+    "Ejecutar las seis pruebas reales PostgreSQL: cinco de persistencia y una de concurrencia"
   ]
 }
