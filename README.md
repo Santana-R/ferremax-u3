@@ -256,5 +256,19 @@ Usar la versión 2 de la práctica anterior, detener la API con Ctrl+C y reinici
 el mismo comando Uvicorn después de actualizar la rama. Ver la
 [guía de conversión y sus casos de Swagger](docs/api/CONVERSION.md).
 Cada solicitud válida crea un pedido nuevo; conservar su identificador para las
-siguientes operaciones. La consulta y la confirmación se expondrán en sus bloques.
+siguientes operaciones. La confirmación se describe en el bloque siguiente.
+
+## PIA: confirmar el pedido y reservar inventario
+
+`POST /pedidos/{pedido_id}/confirmar` reutiliza el comando CQRS y el servicio
+de confirmación existentes. Recibe referencia de pago, autorización booleana y
+ubicación; verifica el pedido Pendiente, el pago y la disponibilidad. Confirma
+estado, referencia, reservas, auditoría y evento en una transacción. Ante falta
+de stock conserva el pedido Pendiente, sin reserva parcial.
+
+En Swagger, usar el identificador del pedido creado en la conversión. La
+confirmación válida responde 200; repetirla responde 409 sin duplicar reservas.
+Ver [cuerpo, respuestas y comprobación del inventario](docs/api/CONFIRMACION.md).
+El actor Caja y la autorización son simulados, sin cobros ni pasarela real.
+El esquema de PostgreSQL y las dependencias son los mismos del bloque anterior.
 

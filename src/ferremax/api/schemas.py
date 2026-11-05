@@ -24,6 +24,7 @@ class MensajeError(BaseModel):
     mensaje: str
     sku: Optional[str] = None
     cotizacion_id: Optional[UUID] = None
+    pedido_id: Optional[UUID] = None
 
 
 TextoNoVacio = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
@@ -84,3 +85,20 @@ class PedidoCreadoRespuesta(BaseModel):
     disponibilidad_consultada: List[DisponibilidadConsultadaRespuesta] = Field(
         description="Disponibilidad consultada en S1; no representa una reserva",
     )
+
+
+class ConfirmacionSolicitud(BaseModel):
+    referencia_pago: TextoNoVacio
+    pago_autorizado: bool = Field(strict=True, description="Autorizacion de pago simulada del prototipo")
+    ubicacion_id: TextoNoVacio
+    model_config = ConfigDict(extra="forbid", json_schema_extra={"examples": [{
+        "referencia_pago": "PAGO-DEMO-001", "pago_autorizado": True, "ubicacion_id": "S1",
+    }]})
+
+
+class PedidoConfirmadoRespuesta(BaseModel):
+    mensaje: str = "Pedido confirmado e inventario reservado."
+    pedido_id: UUID
+    estado: Literal["Confirmado"]
+    referencia_pago: str
+    ubicacion_id: str

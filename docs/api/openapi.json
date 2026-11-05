@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "FerreMax - API",
-    "description": "Disponibilidad, revalidacion de cotizaciones y creacion de pedidos.",
-    "version": "0.3.0"
+    "description": "Inventario, cotizaciones y confirmacion de pedidos con reserva.",
+    "version": "0.4.0"
   },
   "paths": {
     "/cotizaciones/{cotizacion_id}/versiones/{version}/revalidar": {
@@ -204,6 +204,92 @@
         }
       }
     },
+    "/pedidos/{pedido_id}/confirmar": {
+      "post": {
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Confirmar un pedido pendiente y reservar inventario",
+        "operationId": "confirmar_pedido_pedidos__pedido_id__confirmar_post",
+        "parameters": [
+          {
+            "name": "pedido_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "examples": [
+                "22222222-2222-4222-8222-222222222222"
+              ],
+              "title": "Pedido Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmacionSolicitud"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoConfirmadoRespuesta"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pedido no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Estado, pago o disponibilidad impiden confirmar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar los datos o la ubicacion de inventario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Confirmacion temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/inventario/{sku}": {
       "get": {
         "tags": [
@@ -284,6 +370,40 @@
   },
   "components": {
     "schemas": {
+      "ConfirmacionSolicitud": {
+        "properties": {
+          "referencia_pago": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Referencia Pago"
+          },
+          "pago_autorizado": {
+            "type": "boolean",
+            "title": "Pago Autorizado",
+            "description": "Autorizacion de pago simulada del prototipo"
+          },
+          "ubicacion_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Ubicacion Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "referencia_pago",
+          "pago_autorizado",
+          "ubicacion_id"
+        ],
+        "title": "ConfirmacionSolicitud",
+        "examples": [
+          {
+            "pago_autorizado": true,
+            "referencia_pago": "PAGO-DEMO-001",
+            "ubicacion_id": "S1"
+          }
+        ]
+      },
       "ConversionSolicitud": {
         "properties": {
           "aceptada": {
@@ -469,6 +589,18 @@
               }
             ],
             "title": "Cotizacion Id"
+          },
+          "pedido_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pedido Id"
           }
         },
         "type": "object",
@@ -532,6 +664,41 @@
           "precio_unitario"
         ],
         "title": "PartidaRevalidacion"
+      },
+      "PedidoConfirmadoRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Pedido confirmado e inventario reservado."
+          },
+          "pedido_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Pedido Id"
+          },
+          "estado": {
+            "type": "string",
+            "const": "Confirmado",
+            "title": "Estado"
+          },
+          "referencia_pago": {
+            "type": "string",
+            "title": "Referencia Pago"
+          },
+          "ubicacion_id": {
+            "type": "string",
+            "title": "Ubicacion Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "pedido_id",
+          "estado",
+          "referencia_pago",
+          "ubicacion_id"
+        ],
+        "title": "PedidoConfirmadoRespuesta"
       },
       "PedidoCreadoRespuesta": {
         "properties": {
