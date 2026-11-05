@@ -108,3 +108,50 @@ PYTHONPATH=src python3 -m unittest tests.test_e9_inventario tests.test_e9_cotiza
 La prueba existente de PostgreSQL se omite mientras no se configure
 `TEST_DATABASE_URL`; una omisión no acredita persistencia ni concurrencia reales.
 
+## PIA: PostgreSQL con Docker Compose — primer bloque
+
+Este bloque prepara únicamente la base de datos. La aplicación y el contenedor
+de pruebas se incorporarán después para completar DB + App + Tests del PIA.
+El arranque y la conservación de datos deben comprobarse en Docker Desktop;
+validar el archivo Compose no acredita esas verificaciones.
+
+Archivos:
+
+- `docker-compose.yml`: servicio `db`, PostgreSQL 16.15, comprobación de salud y volumen.
+- `.env.example`: plantilla de configuración. La copia `.env` queda excluida de Git.
+- `tests/sql/ferremax_pruebas.sql`: se reutiliza el esquema que ya verificó E9.
+
+Con Docker Desktop abierto, desde la raíz del repositorio:
+
+1. Copiar `.env.example` como `.env` y cambiar `POSTGRES_PASSWORD` por una clave local.
+   Conservar los otros valores para seguir estos ejemplos.
+2. Validar la configuración y arrancar la base:
+
+   ```bash
+   docker compose config --quiet
+   docker compose up -d --wait db
+   docker compose ps
+   ```
+
+   `db` debe aparecer como `healthy`. La primera ejecución descarga la imagen.
+3. Comprobar que existen las seis tablas:
+
+   ```bash
+   docker compose exec db psql -U ferremax -d ferremax -c "\dt ferremax_u3.*"
+   ```
+
+El puerto `5433` de tu equipo se conecta al `5432` del contenedor; se publica
+solo en `127.0.0.1`. Dentro de Compose, los futuros servicios usarán `db:5432`.
+La plantilla separa la configuración de Compose; la conexión de la aplicación
+y de las pruebas se preparará en sus respectivos bloques.
+
+`postgres_data` conserva los datos al detener o recrear el contenedor. Para parar
+la base sin borrar el volumen, usar `docker compose stop db`; para volver a
+arrancarla, `docker compose up -d --wait db`. La persistencia se comprueba guardando
+datos, deteniendo y arrancando la base y consultándolos de nuevo.
+
+El SQL de inicialización se ejecuta solo cuando el volumen está vacío. Cambiar
+la contraseña en `.env` después de inicializar el volumen no cambia la del usuario
+ya creado. `docker compose down` conserva el volumen; añadir `--volumes` lo borra
+junto con sus datos. Si falla el arranque, revisar `docker compose logs db`.
+
