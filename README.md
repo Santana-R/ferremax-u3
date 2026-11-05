@@ -224,3 +224,23 @@ simulado del lado del servidor. La autenticación y las operaciones de escritura
 no forman parte de esta primera consulta. App y Tests se añadirán a Compose
 en sus respectivos bloques.
 
+## PIA: revalidación de cotizaciones desde Swagger
+
+`POST /cotizaciones/{cotizacion_id}/versiones/{version}/revalidar` conecta el
+servicio existente con PostgreSQL. Crea una nueva versión con HTTP 201,
+conservando la anterior, el folio y el identificador. Audita y registra el evento;
+no crea pedidos ni reservas. La API devuelve mensajes claros para rechazos por
+datos, versión inexistente, versión vigente o revalidación repetida.
+
+Con PostgreSQL encendido, detener la API anterior con Ctrl+C y ejecutar:
+
+```bash
+.venv/bin/python scripts/cargar_cotizacion_demo.py
+.venv/bin/python -m uvicorn ferremax.api.main:app --app-dir src --env-file .env --host 127.0.0.1 --port 8000
+```
+
+La carga crea una cotización ficticia vencida sin sobrescribir versiones
+existentes. Ver [cuerpo de la solicitud, respuestas y comprobación del historial](docs/api/REVALIDACION.md).
+Este bloque conserva el actor Vendedor simulado del servidor; la autenticación
+permanece fuera de estas operaciones de demostración local.
+

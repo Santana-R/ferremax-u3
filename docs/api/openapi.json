@@ -2,10 +2,109 @@
   "openapi": "3.1.0",
   "info": {
     "title": "FerreMax - API",
-    "description": "Consulta de disponibilidad de productos por sucursal o almacen.",
-    "version": "0.1.0"
+    "description": "Disponibilidad de productos y revalidacion de cotizaciones.",
+    "version": "0.2.0"
   },
   "paths": {
+    "/cotizaciones/{cotizacion_id}/versiones/{version}/revalidar": {
+      "post": {
+        "tags": [
+          "Cotizaciones"
+        ],
+        "summary": "Revalidar una cotizacion vencida conservando su historial",
+        "operationId": "revalidar_cotizacion_cotizaciones__cotizacion_id__versiones__version__revalidar_post",
+        "parameters": [
+          {
+            "name": "cotizacion_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "examples": [
+                "11111111-1111-4111-8111-111111111111"
+              ],
+              "title": "Cotizacion Id"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "examples": [
+                1
+              ],
+              "title": "Version"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevalidacionSolicitud"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CotizacionRevalidadaRespuesta"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cotizacion o version no encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "La version no admite esta revalidacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar los datos de la revalidacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Revalidacion temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/inventario/{sku}": {
       "get": {
         "tags": [
@@ -86,6 +185,45 @@
   },
   "components": {
     "schemas": {
+      "CotizacionRevalidadaRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Se creó una nueva versión de la cotización y se conservó la anterior."
+          },
+          "cotizacion_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Cotizacion Id"
+          },
+          "version_anterior": {
+            "type": "integer",
+            "title": "Version Anterior"
+          },
+          "folio": {
+            "type": "string",
+            "title": "Folio"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "estado": {
+            "type": "string",
+            "title": "Estado"
+          }
+        },
+        "type": "object",
+        "required": [
+          "cotizacion_id",
+          "version_anterior",
+          "folio",
+          "version",
+          "estado"
+        ],
+        "title": "CotizacionRevalidadaRespuesta"
+      },
       "InventarioRespuesta": {
         "properties": {
           "mensaje": {
@@ -175,6 +313,18 @@
               }
             ],
             "title": "Sku"
+          },
+          "cotizacion_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cotizacion Id"
           }
         },
         "type": "object",
@@ -182,6 +332,115 @@
           "mensaje"
         ],
         "title": "MensajeError"
+      },
+      "PartidaRevalidacion": {
+        "properties": {
+          "numero": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Numero",
+            "description": "Numero de renglon de la cotizacion"
+          },
+          "sku": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Sku"
+          },
+          "cantidad": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+              }
+            ],
+            "title": "Cantidad"
+          },
+          "precio_unitario": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+              }
+            ],
+            "title": "Precio Unitario"
+          },
+          "moneda": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Moneda",
+            "default": "MXN"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "numero",
+          "sku",
+          "cantidad",
+          "precio_unitario"
+        ],
+        "title": "PartidaRevalidacion"
+      },
+      "RevalidacionSolicitud": {
+        "properties": {
+          "dias_vigencia": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Dias Vigencia",
+            "description": "Dias de vigencia de la nueva version"
+          },
+          "partidas": {
+            "items": {
+              "$ref": "#/components/schemas/PartidaRevalidacion"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Partidas"
+          },
+          "condiciones": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Condiciones"
+          },
+          "motivo": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Motivo"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dias_vigencia",
+          "partidas",
+          "condiciones",
+          "motivo"
+        ],
+        "title": "RevalidacionSolicitud",
+        "examples": [
+          {
+            "condiciones": "Precios y condiciones revalidados con el cliente",
+            "dias_vigencia": 7,
+            "motivo": "Cliente solicita revalidar la cotizacion vencida",
+            "partidas": [
+              {
+                "cantidad": "2",
+                "moneda": "MXN",
+                "numero": 1,
+                "precio_unitario": "120.00",
+                "sku": "FER-API-DEMO"
+              }
+            ]
+          }
+        ]
       }
     }
   }

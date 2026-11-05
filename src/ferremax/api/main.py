@@ -1,10 +1,10 @@
-"""Primera operacion REST: consulta de inventario sobre PostgreSQL."""
+"""API REST de FerreMax: inventario y revalidacion de cotizaciones."""
 
-from typing import Optional
+from datetime import datetime, timezone
+from typing import Callable, Optional
 
 from fastapi import Depends, FastAPI, Path, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
 from psycopg import Error as ErrorPostgres
 
 from ferremax.application.cqrs import ConsultarDisponibilidad, ConsultarDisponibilidadHandler
@@ -13,6 +13,8 @@ from ferremax.application.services import Actor
 from ferremax.infrastructure.postgres import PostgresReader
 from .schemas import InventarioRespuesta, MensajeError
 from .settings import ConfiguracionBaseNoDisponible, conexion_desde_entorno
+from .cotizaciones import router as cotizaciones_router, mensaje_solicitud_invalida
+from .responses import error_cliente
 
 
 def obtener_lector(request: Request) -> DisponibilidadReader:
@@ -20,32 +22,31 @@ def obtener_lector(request: Request) -> DisponibilidadReader:
     return PostgresReader(conexion if conexion is not None else conexion_desde_entorno())
 
 
-def error_cliente(mensaje, estado, sku=None):
-    contenido = {"mensaje": mensaje}
-    if sku is not None:
-        contenido["sku"] = sku
-    return JSONResponse(status_code=estado, content=contenido)
-
-
-def create_app(database_url: Optional[str] = None) -> FastAPI:
+def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], datetime]] = None) -> FastAPI:
     api = FastAPI(
         title="FerreMax - API",
-        version="0.1.0",
-        description="Consulta de disponibilidad de productos por sucursal o almacen.",
+        version="0.2.0",
+        description="Disponibilidad de productos y revalidacion de cotizaciones.",
         redoc_url=None,
     )
     # La configuracion se resuelve al consultar, no al abrir Swagger.
     api.state.database_url = database_url
+    api.state.reloj = reloj or (lambda: datetime.now(timezone.utc))
+    api.include_router(cotizaciones_router)
 
     @api.exception_handler(ErrorPostgres)
     @api.exception_handler(ConfiguracionBaseNoDisponible)
     async def base_no_disponible(request, exc):
+        if request.url.path.startswith("/cotizaciones/"):
+            return error_cliente("Por el momento no podemos revalidar la cotización. Inténtalo de nuevo más tarde.", 503)
         return error_cliente(
             "Por el momento no podemos consultar el inventario. Inténtalo de nuevo más tarde.", 503,
         )
 
     @api.exception_handler(RequestValidationError)
     async def solicitud_invalida(request, exc):
+        if request.url.path.startswith("/cotizaciones/"):
+            return error_cliente(mensaje_solicitud_invalida(exc.errors()), 422)
         return error_cliente("Revisa el código del producto e inténtalo de nuevo.", 422)
 
     @api.get(
