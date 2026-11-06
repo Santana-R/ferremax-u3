@@ -296,8 +296,8 @@ Después de actualizar la rama y reiniciar Uvicorn, usar el identificador del
 pedido anterior en Swagger. Ver [respuestas y pruebas de consulta](docs/api/CONSULTA_PEDIDO.md).
 El actor Vendedor es simulado. Con esta consulta se completan las seis operaciones
 del recorrido principal de la API. La configuración de Compose con App/Tests
-se describe a continuación; CI/CD, despliegue y documentos finales son bloques
-posteriores del PIA.
+se describe a continuación. La integración continua se documenta al final;
+despliegue y documentos finales son bloques posteriores del PIA.
 
 ## PIA: API y pruebas dentro de Docker
 
@@ -319,8 +319,20 @@ Después de verificar Swagger y el pedido guardado, ejecutar las pruebas:
 docker compose run --build --rm tests
 ```
 
-Ver [recorrido, reportes y estado de validación](docs/DOCKER.md). La configuración
-de Compose y el ejecutor con PostgreSQL real se comprobaron localmente; la
-construcción y ejecución de los contenedores requieren la comprobación de Docker
-Desktop indicada en la guía. El volumen y la base de demostración se conservan.
+Ver [recorrido, reportes y validación](docs/DOCKER.md). El 6 de noviembre se
+comprobaron en Docker Desktop la construcción de App y Tests, la consulta del
+pedido guardado y 235 pruebas aprobadas sin omisiones, con cobertura 97.24 %.
+El volumen y la base de demostración se conservan.
+
+## PIA: integración continua en GitHub Actions
+
+[FerreMax - CI](https://github.com/Santana-R/ferremax-u3/actions/workflows/ci.yml)
+se activa en pushes y pull requests. Construye App y Tests, levanta PostgreSQL,
+comprueba las seis operaciones por HTTP y ejecuta la suite con cobertura >=80 %
+y cero omisiones. Cada runner usa datos ficticios propios y conserva los
+reportes HTML/JUnit/JSON y logs como un artefacto de la ejecución, sin agregarlos
+al código. No utiliza las credenciales ni los datos de la Mac.
+
+Ver [funcionamiento, evidencia y revisión en GitHub](docs/CI.md).
+Este bloque verifica la integración; el despliegue se prepara por separado.
 

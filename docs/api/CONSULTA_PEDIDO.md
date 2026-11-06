@@ -73,5 +73,5 @@ no acreditan persistencia real.
 
 El [OpenAPI versionado](openapi.json) contiene las seis operaciones del recorrido
 principal. Esto completa ese bloque de la API. La [guía de Docker](../DOCKER.md)
-describe App y Tests en Compose y su validación pendiente en Docker Desktop;
+describe App y Tests en Compose y la validación realizada en Docker Desktop;
 CI/CD, despliegue y documentos finales del PIA son bloques posteriores.

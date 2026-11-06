@@ -135,11 +135,21 @@ aprobadas, cero omitidas y cobertura 97.24 %. Se comprobó que la base temporal 
 retira, incluidos fallos/omisiones simulados, y que las seis tablas de la base
 de demostración quedan intactas.
 
-La construcción de las imágenes Python 3.12, el arranque de App y la ejecución
-de Tests dentro de los contenedores quedan pendientes de comprobar en Docker
-Desktop. El entorno que preparó este bloque no tiene acceso al socket del motor;
-la validación local anterior no se presenta como una ejecución de contenedores.
-Las comprobaciones de los pasos 1 y 2 completan esa evidencia.
+El 6 de noviembre de 2026 Roberto comprobó el bloque en Docker Desktop con la
+rama `pia-compose-app-tests`, commit `3a95aec`. La imagen de App se construyó y
+los contenedores DB y App terminaron saludables. El GET del pedido de la práctica
+conservó estado Cancelado, versión 2 y total 240.00 MXN después de cambiar de la
+API local a la API del contenedor.
+
+`docker compose run --build --rm tests` aprobó 235 pruebas, con cero omitidas y
+cobertura 97.24 %, dentro del contenedor Python 3.12. La salida confirmó la
+eliminación de la base temporal y la conservación de la base de demostración.
+Los reportes de esa ejecución quedaron en
+`reports/docker/20261106T065125Z_6fc7da6d/`. Las capturas compartidas durante la
+verificación acreditan esos resultados; no se duplican en el repositorio.
+
+La [integración continua](CI.md) reproduce el recorrido en un runner de GitHub,
+con su propia base ficticia y sin acceder al Docker ni a los datos de la Mac.
 
 ## Referencias de Docker
 
