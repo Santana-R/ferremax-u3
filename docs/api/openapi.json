@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "FerreMax - API",
-    "description": "Inventario, cotizaciones y confirmacion de pedidos con reserva.",
-    "version": "0.4.0"
+    "description": "Inventario, cotizaciones, confirmacion y cancelacion de pedidos con sus reservas.",
+    "version": "0.5.0"
   },
   "paths": {
     "/cotizaciones/{cotizacion_id}/versiones/{version}/revalidar": {
@@ -290,6 +290,92 @@
         }
       }
     },
+    "/pedidos/{pedido_id}/cancelar": {
+      "post": {
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Cancelar un pedido confirmado antes del surtido y liberar su reserva",
+        "operationId": "cancelar_pedido_pedidos__pedido_id__cancelar_post",
+        "parameters": [
+          {
+            "name": "pedido_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "examples": [
+                "22222222-2222-4222-8222-222222222222"
+              ],
+              "title": "Pedido Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelacionSolicitud"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoCanceladoRespuesta"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pedido no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Estado, surtido o reserva impiden cancelar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar identificador y motivo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Cancelacion temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/inventario/{sku}": {
       "get": {
         "tags": [
@@ -370,6 +456,26 @@
   },
   "components": {
     "schemas": {
+      "CancelacionSolicitud": {
+        "properties": {
+          "motivo": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Motivo"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "motivo"
+        ],
+        "title": "CancelacionSolicitud",
+        "examples": [
+          {
+            "motivo": "El cliente solicita cancelar el pedido antes del surtido"
+          }
+        ]
+      },
       "ConfirmacionSolicitud": {
         "properties": {
           "referencia_pago": {
@@ -664,6 +770,31 @@
           "precio_unitario"
         ],
         "title": "PartidaRevalidacion"
+      },
+      "PedidoCanceladoRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Pedido cancelado y su inventario reservado liberado."
+          },
+          "pedido_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Pedido Id"
+          },
+          "estado": {
+            "type": "string",
+            "const": "Cancelado",
+            "title": "Estado"
+          }
+        },
+        "type": "object",
+        "required": [
+          "pedido_id",
+          "estado"
+        ],
+        "title": "PedidoCanceladoRespuesta"
       },
       "PedidoConfirmadoRespuesta": {
         "properties": {

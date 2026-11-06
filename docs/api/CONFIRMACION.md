@@ -94,5 +94,6 @@ el esquema del proyecto en una base de pruebas separada; sin conexión se omite
 visiblemente. La verificación de este bloque se realizó en una base temporal
 separada de la demostración.
 
-El [OpenAPI versionado](openapi.json) documenta las cuatro operaciones actuales.
-La consulta y la cancelación de pedidos se incorporarán en sus siguientes bloques.
+El [OpenAPI versionado](openapi.json) documenta las operaciones actuales.
+La [cancelación](CANCELACION.md) permite liberar la reserva antes del surtido.
+La consulta del pedido se incorporará en su siguiente bloque.

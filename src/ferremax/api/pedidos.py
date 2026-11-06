@@ -1,15 +1,20 @@
-"""Adaptador HTTP para confirmar pedidos y reservar inventario atomicamente."""
+"""Adaptador HTTP para confirmar y cancelar pedidos con sus reservas."""
 
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Path, Request
 
-from ferremax.application.cqrs import ConfirmarPedido, ConfirmarPedidoHandler
+from ferremax.application.cqrs import (
+    CancelarPedido, CancelarPedidoHandler, ConfirmarPedido, ConfirmarPedidoHandler,
+)
 from ferremax.application.services import Actor, PedidoService
 from ferremax.domain.model import DisponibilidadInsuficiente, ErrorNegocio
 from ferremax.infrastructure.postgres import PostgresUnitOfWork
 from .responses import error_cliente
-from .schemas import ConfirmacionSolicitud, MensajeError, PedidoConfirmadoRespuesta
+from .schemas import (
+    CancelacionSolicitud, ConfirmacionSolicitud, MensajeError,
+    PedidoCanceladoRespuesta, PedidoConfirmadoRespuesta,
+)
 from .settings import conexion_desde_entorno
 
 
@@ -37,6 +42,17 @@ def mensaje_confirmacion_invalida(errores):
         if campo in campos:
             return campos[campo]
     return "Revisa los datos de la confirmación del pedido."
+
+
+def mensaje_cancelacion_invalida(errores):
+    if errores and errores[0].get("type") == "extra_forbidden":
+        return "La solicitud incluye campos no reconocidos. Usa solo el motivo de cancelación."
+    ubicacion = errores[0].get("loc", ()) if errores else ()
+    if "pedido_id" in ubicacion:
+        return "Indica un identificador válido de pedido."
+    if "motivo" in ubicacion:
+        return "Indica el motivo de la cancelación."
+    return "Revisa los datos de la cancelación del pedido."
 
 
 @router.post(
@@ -76,3 +92,42 @@ def confirmar_pedido(
         estado, mensaje = rechazos.get(str(exc), (422, "No se pudo confirmar el pedido. Revisa sus datos y la ubicación."))
         return error_cliente(mensaje, estado, pedido_id=pedido_id)
     return PedidoConfirmadoRespuesta(**resultado)
+
+
+@router.post(
+    "/{pedido_id}/cancelar",
+    response_model=PedidoCanceladoRespuesta,
+    summary="Cancelar un pedido confirmado antes del surtido y liberar su reserva",
+    responses={
+        404: {"model": MensajeError, "description": "Pedido no encontrado"},
+        409: {"model": MensajeError, "description": "Estado, surtido o reserva impiden cancelar"},
+        422: {"model": MensajeError, "description": "Revisar identificador y motivo"},
+        503: {"model": MensajeError, "description": "Cancelacion temporalmente no disponible"},
+    },
+)
+def cancelar_pedido(
+    entrada: CancelacionSolicitud,
+    pedido_id: UUID = Path(..., examples=["22222222-2222-4222-8222-222222222222"]),
+    servicio: PedidoService = Depends(obtener_servicio_pedidos),
+):
+    try:
+        resultado = CancelarPedidoHandler(servicio).handle(
+            CancelarPedido(str(pedido_id), entrada.motivo),
+            Actor("cancelacion-api-demo", "VendedorAutorizadoCancelacion"),
+        )
+    except ErrorNegocio as exc:
+        rechazos = {
+            "Pedido inexistente": (404, "Pedido no encontrado."),
+            "Solo puede cancelarse un pedido confirmado aun no surtido": (
+                409, "Solo puedes cancelar un pedido confirmado que aún no se haya surtido. Si ya fue cancelado, no puede cancelarse de nuevo.",
+            ),
+            "Indique motivo de cancelacion": (422, "Indica el motivo de la cancelación."),
+            "Reserva inexistente": (409, "No se pudo liberar la reserva del pedido. Solicita una revisión antes de volver a intentarlo."),
+            "El prototipo requiere una ubicacion por pedido": (
+                409, "No se pudo identificar una reserva única para el pedido. Solicita una revisión antes de volver a intentarlo.",
+            ),
+            "SKU o ubicacion inexistente": (409, "No se encontró el inventario asociado a la reserva. Solicita una revisión antes de volver a intentarlo."),
+        }
+        estado, mensaje = rechazos.get(str(exc), (422, "No se pudo cancelar el pedido. Revisa sus datos."))
+        return error_cliente(mensaje, estado, pedido_id=pedido_id)
+    return PedidoCanceladoRespuesta(**resultado)

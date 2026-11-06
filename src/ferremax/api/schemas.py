@@ -102,3 +102,16 @@ class PedidoConfirmadoRespuesta(BaseModel):
     estado: Literal["Confirmado"]
     referencia_pago: str
     ubicacion_id: str
+
+
+class CancelacionSolicitud(BaseModel):
+    motivo: TextoNoVacio
+    model_config = ConfigDict(extra="forbid", json_schema_extra={"examples": [{
+        "motivo": "El cliente solicita cancelar el pedido antes del surtido",
+    }]})
+
+
+class PedidoCanceladoRespuesta(BaseModel):
+    mensaje: str = "Pedido cancelado y su inventario reservado liberado."
+    pedido_id: UUID
+    estado: Literal["Cancelado"]

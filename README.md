@@ -272,3 +272,16 @@ Ver [cuerpo, respuestas y comprobación del inventario](docs/api/CONFIRMACION.md
 El actor Caja y la autorización son simulados, sin cobros ni pasarela real.
 El esquema de PostgreSQL y las dependencias son los mismos del bloque anterior.
 
+## PIA: cancelar el pedido y liberar su reserva
+
+`POST /pedidos/{pedido_id}/cancelar` recibe solo el motivo y reutiliza el comando
+CQRS y `PedidoService.cancelar()`. Exige un pedido Confirmado aún no surtido;
+cancela, libera su reserva y registra auditoría y evento en una transacción.
+Conserva las reservas ajenas y rechaza una segunda cancelación sin aumentar
+el disponible. El actor autorizado está simulado en el servidor.
+
+Usar en Swagger el identificador del pedido confirmado, después de actualizar
+la rama y reiniciar Uvicorn. Ver [cuerpo, respuestas y pruebas de liberación](docs/api/CANCELACION.md).
+El esquema y las dependencias se conservan. Las pruebas incluyen PostgreSQL,
+cancelaciones concurrentes y rollback ante una falla durante la liberación.
+

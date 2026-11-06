@@ -15,7 +15,7 @@ from .schemas import InventarioRespuesta, MensajeError
 from .settings import ConfiguracionBaseNoDisponible, conexion_desde_entorno
 from .cotizaciones import router as cotizaciones_router, mensaje_solicitud_invalida
 from .responses import error_cliente
-from .pedidos import router as pedidos_router, mensaje_confirmacion_invalida
+from .pedidos import router as pedidos_router, mensaje_cancelacion_invalida, mensaje_confirmacion_invalida
 
 
 def obtener_lector(request: Request) -> DisponibilidadReader:
@@ -26,8 +26,8 @@ def obtener_lector(request: Request) -> DisponibilidadReader:
 def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], datetime]] = None) -> FastAPI:
     api = FastAPI(
         title="FerreMax - API",
-        version="0.4.0",
-        description="Inventario, cotizaciones y confirmacion de pedidos con reserva.",
+        version="0.5.0",
+        description="Inventario, cotizaciones, confirmacion y cancelacion de pedidos con sus reservas.",
         redoc_url=None,
     )
     # La configuracion se resuelve al consultar, no al abrir Swagger.
@@ -40,6 +40,8 @@ def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], 
     @api.exception_handler(ConfiguracionBaseNoDisponible)
     async def base_no_disponible(request, exc):
         if request.url.path.startswith("/pedidos/"):
+            if request.url.path.endswith("/cancelar"):
+                return error_cliente("Por el momento no podemos cancelar el pedido. Inténtalo de nuevo más tarde.", 503)
             return error_cliente("Por el momento no podemos confirmar el pedido. Inténtalo de nuevo más tarde.", 503)
         if request.url.path.startswith("/cotizaciones/") and request.url.path.endswith("/convertir"):
             return error_cliente("Por el momento no podemos crear el pedido. Inténtalo de nuevo más tarde.", 503)
@@ -52,6 +54,8 @@ def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], 
     @api.exception_handler(RequestValidationError)
     async def solicitud_invalida(request, exc):
         if request.url.path.startswith("/pedidos/"):
+            if request.url.path.endswith("/cancelar"):
+                return error_cliente(mensaje_cancelacion_invalida(exc.errors()), 422)
             return error_cliente(mensaje_confirmacion_invalida(exc.errors()), 422)
         if request.url.path.startswith("/cotizaciones/"):
             return error_cliente(mensaje_solicitud_invalida(
