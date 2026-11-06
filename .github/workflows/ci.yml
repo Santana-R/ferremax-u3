@@ -32,6 +32,8 @@ jobs:
 
       - name: Revisar Docker y la configuracion
         run: |
+          # Crear estas carpetas con el usuario del runner antes del bind mount.
+          mkdir -p reports/docker reports/ci
           docker version
           docker compose version
           docker compose --profile tests config --quiet

@@ -9,7 +9,8 @@ en la rama predeterminada del repositorio.
 
 El job `Docker, API y pruebas` utiliza un runner Ubuntu 24.04 de GitHub:
 
-1. Obtiene el código del commit y valida la configuración de Compose.
+1. Obtiene el código del commit, prepara las carpetas de reportes con el usuario
+   del runner y valida la configuración de Compose.
 2. Construye las imágenes de App y Tests con el mismo Dockerfile utilizado
    en la Mac. Levanta App y PostgreSQL y espera sus comprobaciones de salud.
 3. Carga los datos ficticios en la base nueva de CI y ejecuta
