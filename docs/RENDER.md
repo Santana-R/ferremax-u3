@@ -94,9 +94,20 @@ termine en `live` y se verifican Swagger y las operaciones contra la base real.
 
 El Blueprint tiene auto-sync habilitado. El servicio informa auto-deploy
 habilitado y `autoDeployTrigger: checksPass` para la rama `pia-render`. Render
-espera los checks del commit antes de desplegar actualizaciones del servicio.
-El historial de Actions y Deploys permite revisar el commit, el origen del
-despliegue y su estado real, además de comprobar la aplicación por HTTP.
+debe recibir la conexión de GitHub para detectar cambios y esperar sus checks.
+La publicación inicial y las operaciones públicas están verificadas; la
+actualización automática todavía requiere comprobar esa conexión.
+
+La actualización documental `bd36c6f` aprobó
+[CI](https://github.com/Santana-R/ferremax-u3/actions/runs/42252357106), pero el
+historial de Render siguió mostrando únicamente el despliegue inicial `d977e53`.
+Esto no se presenta como una actualización automática verificada. El siguiente
+paso es revisar **Account Settings → Account Security → Git Deployment
+Credentials** y autorizar GitHub para el repositorio `Santana-R/ferremax-u3`.
+Si ya existe la conexión, se revisan sus permisos y las Git Credentials del
+servicio antes de probar otro cambio. La documentación oficial de
+[conexión del proveedor Git](https://render.com/docs/git-provider) describe ese
+paso. No se exponen credenciales ni se abre PostgreSQL al público para resolverlo.
 
 La base de la nube inicia con datos ficticios propios. El identificador del
 pedido de la Mac no existe allí automáticamente. En Swagger se utiliza

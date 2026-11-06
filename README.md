@@ -351,4 +351,6 @@ operaciones desde [Swagger público](https://ferremax-api-w5kd.onrender.com/docs
 incluyendo reserva y liberación sin duplicaciones. La verificación de nube
 conserva un pedido Cancelado de 240.00 MXN y 10 unidades disponibles en S1.
 Ver [plan aplicado, arranque y resultados](docs/RENDER.md).
+La publicación pública y CI están comprobados. La actualización automática de
+Render requiere revisar la conexión de GitHub, como se indica en la guía.
 
