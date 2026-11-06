@@ -10,6 +10,7 @@
 !scripts/
 !scripts/cargar_inventario_demo.py
 !scripts/cargar_cotizacion_demo.py
+!scripts/iniciar_api.py
 !tests/
 !tests/**
 !examples/

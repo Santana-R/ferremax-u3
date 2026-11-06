@@ -336,3 +336,15 @@ al código. No utiliza las credenciales ni los datos de la Mac.
 Ver [funcionamiento, evidencia y revisión en GitHub](docs/CI.md).
 Este bloque verifica la integración; el despliegue se prepara por separado.
 
+## PIA: preparación de Render
+
+`render.yaml` propone una API Docker y PostgreSQL 16 en Free, con conexión
+interna y despliegues después de aprobar los checks de CI cuando GitHub esté
+conectado. La imagen admite `PORT` y la inicialización explícita del esquema y
+los datos ficticios, sin sobrescribir el historial en un reinicio.
+
+Ver [plan, arranque, variables y estado de verificación](docs/RENDER.md).
+Los archivos preparados y las pruebas no acreditan por sí solos un despliegue
+público: falta confirmar el workspace, revisar/aplicar el plan y verificar el
+servicio en Render. La URL real se registrará después de esa comprobación.
+

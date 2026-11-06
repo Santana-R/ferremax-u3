@@ -24,6 +24,8 @@ jobs:
       POSTGRES_PASSWORD: clave_ficticia_ci_ferremax
       POSTGRES_PORT: "5433"
       APP_PORT: "8000"
+      FERREMAX_INIT_DB: "true"
+      FERREMAX_SEED_DEMO: "true"
     steps:
       - name: Obtener el codigo
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

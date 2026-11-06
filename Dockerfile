@@ -12,6 +12,9 @@ RUN python -m pip install --no-cache-dir -r requirements.txt \
 
 COPY --chown=ferremax:ferremax src/ ./src/
 COPY --chown=ferremax:ferremax scripts/cargar_inventario_demo.py scripts/cargar_cotizacion_demo.py ./scripts/
+COPY --chown=ferremax:ferremax scripts/iniciar_api.py ./scripts/
+# Mismo DDL que Compose y la suite; una sola definicion de las seis tablas.
+COPY --chown=ferremax:ferremax tests/sql/ferremax_pruebas.sql ./tests/sql/
 
 FROM base AS tests
 COPY requirements-dev.txt ./
@@ -26,4 +29,4 @@ CMD ["python", "docker/run_tests.py"]
 FROM base AS app
 USER ferremax
 EXPOSE 8000
-CMD ["python", "-m", "uvicorn", "ferremax.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "scripts/iniciar_api.py"]

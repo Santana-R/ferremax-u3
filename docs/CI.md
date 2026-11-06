@@ -13,6 +13,8 @@ El job `Docker, API y pruebas` utiliza un runner Ubuntu 24.04 de GitHub:
    del runner y valida la configuración de Compose.
 2. Construye las imágenes de App y Tests con el mismo Dockerfile utilizado
    en la Mac. Levanta App y PostgreSQL y espera sus comprobaciones de salud.
+   En CI se habilitan la inicialización y la carga inicial del nuevo arranque;
+   la carga repetida de datos ficticios conserva los registros existentes.
 3. Carga los datos ficticios en la base nueva de CI y ejecuta
    `scripts/comprobar_api_ci.py` por HTTP real, desde el runner hacia App.
    Comprueba las seis operaciones, la versión vencida, la aceptación, el pago
