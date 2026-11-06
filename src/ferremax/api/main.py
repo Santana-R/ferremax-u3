@@ -13,6 +13,7 @@ from ferremax.application.services import Actor
 from ferremax.infrastructure.postgres import PostgresReader
 from .schemas import InventarioRespuesta, MensajeError
 from .settings import ConfiguracionBaseNoDisponible, conexion_desde_entorno
+from .cliente import router as cliente_router
 from .cotizaciones import router as cotizaciones_router, mensaje_solicitud_invalida
 from .responses import error_cliente
 from .pedidos import router as pedidos_router, mensaje_cancelacion_invalida, mensaje_confirmacion_invalida
@@ -35,10 +36,13 @@ def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], 
     api.state.reloj = reloj or (lambda: datetime.now(timezone.utc))
     api.include_router(cotizaciones_router)
     api.include_router(pedidos_router)
+    api.include_router(cliente_router)
 
     @api.exception_handler(ErrorPostgres)
     @api.exception_handler(ConfiguracionBaseNoDisponible)
     async def base_no_disponible(request, exc):
+        if request.url.path.startswith("/cliente/"):
+            return error_cliente("No pudimos cargar las cotizaciones. Inténtalo de nuevo en unos momentos.", 503)
         if request.url.path.startswith("/pedidos/"):
             if request.method == "GET":
                 return error_cliente("Por el momento no podemos consultar el pedido. Inténtalo de nuevo más tarde.", 503)

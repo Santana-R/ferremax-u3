@@ -22,11 +22,11 @@ from scripts.cargar_inventario_demo import cargar_demo
 COTIZACION_DEMO_ID = "11111111-1111-4111-8111-111111111111"
 
 
-def cargar_cotizacion(conexion, ahora=None):
+def cargar_cotizacion(conexion, ahora=None, cotizacion_id=COTIZACION_DEMO_ID, folio="COT-API-DEMO"):
     cargar_demo(conexion)
     ahora = ahora or datetime.now(timezone.utc)
     original = Cotizacion(
-        COTIZACION_DEMO_ID, "COT-API-DEMO", 1, "CLIENTE-API-DEMO",
+        cotizacion_id, folio, 1, "CLIENTE-API-DEMO",
         Vigencia(ahora-timedelta(days=8), ahora-timedelta(days=1)),
         [Partida(1, SKU("FER-API-DEMO"), Decimal(2), Dinero(Decimal("100.00")))],
         "Condiciones de la version original",
