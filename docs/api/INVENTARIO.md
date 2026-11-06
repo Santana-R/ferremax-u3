@@ -15,7 +15,8 @@ responde 200; no se confunde con un código sin registros, que responde 404.
 Esta consulta corresponde a US01/US02 y al recorrido de disponibilidad de U3.
 
 La API se ejecuta en Python en el equipo; PostgreSQL se ejecuta en Docker.
-Su incorporación al contenedor App y el contenedor Tests quedan para otro bloque.
+La [guía de Docker](../DOCKER.md) describe App y Tests en Compose y las
+comprobaciones de construcción y arranque en Docker Desktop.
 La consulta usa un actor Vendedor simulado del lado del servidor, como el demo
 académico; este bloque no implementa autenticación de usuarios.
 

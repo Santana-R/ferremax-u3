@@ -16,3 +16,6 @@ assets/
 # Paquetes locales de transporte; las evidencias se versionan descomprimidas.
 /evidencias/*_para_U5.zip
 
+# Reportes locales regenerables de las pruebas del PIA; no reemplazan E9.
+/reports/
+

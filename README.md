@@ -108,16 +108,16 @@ PYTHONPATH=src python3 -m unittest tests.test_e9_inventario tests.test_e9_cotiza
 La prueba existente de PostgreSQL se omite mientras no se configure
 `TEST_DATABASE_URL`; una omisión no acredita persistencia ni concurrencia reales.
 
-## PIA: PostgreSQL con Docker Compose — primer bloque
+## PIA: PostgreSQL con Docker Compose
 
-Este bloque prepara únicamente la base de datos. La aplicación y el contenedor
-de pruebas se incorporarán después para completar DB + App + Tests del PIA.
-El arranque y la conservación de datos deben comprobarse en Docker Desktop;
-validar el archivo Compose no acredita esas verificaciones.
+Compose incluye DB, App y Tests. La [guía de Docker](docs/DOCKER.md) explica el
+arranque de la API en un contenedor, las pruebas en una base temporal separada
+y las comprobaciones pendientes en Docker Desktop. Los pasos siguientes
+permiten preparar o revisar únicamente PostgreSQL.
 
 Archivos:
 
-- `docker-compose.yml`: servicio `db`, PostgreSQL 16.15, comprobación de salud y volumen.
+- `docker-compose.yml`: servicios `db`, `app` y `tests`, con salud y volumen de PostgreSQL.
 - `.env.example`: plantilla de configuración. La copia `.env` queda excluida de Git.
 - `tests/sql/ferremax_pruebas.sql`: se reutiliza el esquema que ya verificó E9.
 
@@ -141,9 +141,9 @@ Con Docker Desktop abierto, desde la raíz del repositorio:
    ```
 
 El puerto `5433` de tu equipo se conecta al `5432` del contenedor; se publica
-solo en `127.0.0.1`. Dentro de Compose, los futuros servicios usarán `db:5432`.
-La plantilla separa la configuración de Compose; la conexión de la aplicación
-y de las pruebas se preparará en sus respectivos bloques.
+solo en `127.0.0.1`. Dentro de Compose, los servicios usan `db:5432`.
+La plantilla permite conexiones locales; App y Tests usan `db:5432` dentro
+de Compose, independientemente del puerto publicado en la Mac.
 
 `postgres_data` conserva los datos al detener o recrear el contenedor. Para parar
 la base sin borrar el volumen, usar `docker compose stop db`; para volver a
@@ -221,8 +221,8 @@ terminal; Ctrl+C la detiene. PostgreSQL permanece en Docker.
 Ver [contrato, ejemplos y pruebas](docs/api/INVENTARIO.md) y
 [OpenAPI versionado](docs/api/openapi.json). Este bloque usa un actor Vendedor
 simulado del lado del servidor. La autenticación y las operaciones de escritura
-no forman parte de esta primera consulta. App y Tests se añadirán a Compose
-en sus respectivos bloques.
+no forman parte de esta primera consulta. La [guía de Docker](docs/DOCKER.md)
+describe la ejecución actual de App y Tests en Compose.
 
 ## PIA: revalidación de cotizaciones desde Swagger
 
@@ -295,6 +295,32 @@ eventos, y permite consultar el pedido después de cancelarlo.
 Después de actualizar la rama y reiniciar Uvicorn, usar el identificador del
 pedido anterior en Swagger. Ver [respuestas y pruebas de consulta](docs/api/CONSULTA_PEDIDO.md).
 El actor Vendedor es simulado. Con esta consulta se completan las seis operaciones
-del recorrido principal de la API; Compose con App/Tests, CI/CD, despliegue y
-documentos finales se completarán en los siguientes bloques del PIA.
+del recorrido principal de la API. La configuración de Compose con App/Tests
+se describe a continuación; CI/CD, despliegue y documentos finales son bloques
+posteriores del PIA.
+
+## PIA: API y pruebas dentro de Docker
+
+`Dockerfile` construye los destinos `app` y `tests` con Python 3.12 y las
+dependencias fijadas. App reutiliza las seis operaciones de la API. Tests crea
+una base PostgreSQL temporal por ejecución, inicializa el esquema y exige suite
+sin omisiones y cobertura >=80 %. Elimina su base al terminar y conserva los
+reportes en `reports/docker/`, fuera de Git.
+
+Con Docker Desktop abierto y la API de VS Code detenida, desde la raíz:
+
+```bash
+docker compose up -d --build --wait app
+```
+
+Después de verificar Swagger y el pedido guardado, ejecutar las pruebas:
+
+```bash
+docker compose run --build --rm tests
+```
+
+Ver [recorrido, reportes y estado de validación](docs/DOCKER.md). La configuración
+de Compose y el ejecutor con PostgreSQL real se comprobaron localmente; la
+construcción y ejecución de los contenedores requieren la comprobación de Docker
+Desktop indicada en la guía. El volumen y la base de demostración se conservan.
 

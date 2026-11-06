@@ -1,0 +1,20 @@
+# El contexto de construccion contiene solo lo necesario para App y Tests.
+**
+!Dockerfile
+!requirements.txt
+!requirements-dev.txt
+!pytest.ini
+!.coveragerc
+!src/
+!src/**
+!scripts/
+!scripts/cargar_inventario_demo.py
+!scripts/cargar_cotizacion_demo.py
+!tests/
+!tests/**
+!examples/
+!examples/**
+!docker/
+!docker/run_tests.py
+**/__pycache__/
+**/*.pyc
