@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="1640" viewBox="0 0 730 1640">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#435363"/></marker></defs>
+<rect width="730" height="1640" fill="#fff"/>
+<text x="40" y="34" text-anchor="start" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#24648b">FerreMax PIA · P01</text>
+<text x="40" y="65" text-anchor="start" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#172c40">Cotización y creación de pedido</text>
+<text x="40" y="92" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#526374">[I] implementado   [S] simulado   [P] parcial   [D] diseñado</text>
+<rect x="55" y="115" width="635" height="1495" fill="white" stroke="#526374" stroke-width="1.5"/>
+<text x="365.0" y="139" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">FERREMAX · proceso descriptivo, sin motor BPMN</text>
+<rect x="100" y="155" width="280" height="1455" fill="#f8fafc" stroke="#cbd3dc"/>
+<rect x="100" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="240" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Vendedor</text>
+<rect x="380" y="155" width="280" height="1455" fill="#fff" stroke="#cbd3dc"/>
+<rect x="380" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="520" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Sistema</text>
+<polyline points="240.0,261 240.0,344 520.0,344 520.0,350" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,350 524.0,341.0 516.0,341.0" fill="#435363"/>
+<polyline points="520.0,432 520.0,490" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,490 524.0,481.0 516.0,481.0" fill="#435363"/>
+<polyline points="520.0,546 520.0,617 240.0,617 240.0,645" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,645 244.0,636.0 236.0,636.0" fill="#435363"/>
+<polyline points="520.0,546 520.0,630" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,630 524.0,621.0 516.0,621.0" fill="#435363"/>
+<polyline points="520.0,712 520.0,770" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,770 524.0,761.0 516.0,761.0" fill="#435363"/>
+<polyline points="520.0,826 520.0,904 240.0,904 240.0,910" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,910 244.0,901.0 236.0,901.0" fill="#435363"/>
+<polyline points="128,951.0 108,951.0 108,798.0 492,798.0" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="492,798.0 483.0,794.0 483.0,802.0" fill="#435363"/>
+<polyline points="520.0,826 520.0,1050" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,1050 524.0,1041.0 516.0,1041.0" fill="#435363"/>
+<polyline points="520.0,1132 520.0,1190" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,1190 524.0,1181.0 516.0,1181.0" fill="#435363"/>
+<polyline points="520.0,1246 520.0,1317 240.0,1317 240.0,1345" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,1345 244.0,1336.0 236.0,1336.0" fill="#435363"/>
+<polyline points="520.0,1246 520.0,1330" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,1330 524.0,1321.0 516.0,1321.0" fill="#435363"/>
+<polyline points="520.0,1412 520.0,1485" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,1485 524.0,1476.0 516.0,1476.0" fill="#435363"/>
+<rect x="364.0" y="594.0" width="32" height="19" rx="3" fill="white"/>
+<text x="380.0" y="607.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No</text>
+<rect x="634.0" y="565.0" width="32" height="19" rx="3" fill="white"/>
+<text x="650.0" y="578.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<rect x="364.0" y="881.0" width="32" height="19" rx="3" fill="white"/>
+<text x="380.0" y="894.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No</text>
+<rect x="248.5" y="775.0" width="103" height="19" rx="3" fill="white"/>
+<text x="300.0" y="788.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Nueva versión</text>
+<rect x="504.0" y="915.0" width="32" height="19" rx="3" fill="white"/>
+<text x="520.0" y="928.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<rect x="364.0" y="1294.0" width="32" height="19" rx="3" fill="white"/>
+<text x="380.0" y="1307.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No</text>
+<rect x="634.0" y="1265.0" width="32" height="19" rx="3" fill="white"/>
+<text x="650.0" y="1278.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<circle cx="240.0" cy="243.0" r="18.0" fill="white" stroke="#697480" stroke-width="1.6"/>
+<rect x="163.64999999999998" y="269" width="152.70000000000002" height="35" fill="white"/>
+<text x="240.0" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Solicitud del cliente</text>
+<text x="240.0" y="299" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P01_S01</text>
+<rect x="408" y="350" width="224" height="82" rx="10" fill="#eaf4fc" stroke="#24648b" stroke-width="1.6"/>
+<text x="520.0" y="367" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#24648b">P01_T01 [I]</text>
+<text x="520.0" y="386" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Consultar disponibilidad por</text>
+<text x="520.0" y="402" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">SKU</text>
+<polygon points="520.0,490 548,518.0 520.0,546 492,518.0" fill="#eaf4fc" stroke="#24648b" stroke-width="1.8"/>
+<text x="520.0" y="524.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#24648b">×</text>
+<rect x="460.4" y="551" width="119.2" height="35" fill="white"/>
+<text x="520.0" y="566" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿SKU encontrado?</text>
+<text x="520.0" y="581" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P01_G03</text>
+<circle cx="240.0" cy="663.0" r="18.0" fill="white" stroke="#24648b" stroke-width="3.2"/>
+<rect x="167.0" y="689" width="146.0" height="50" fill="white"/>
+<text x="240.0" y="704" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Informar producto no</text>
+<text x="240.0" y="719" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">encontrado</text>
+<text x="240.0" y="734" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P01_E01</text>
+<rect x="408" y="630" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="520.0" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P01_T02 [D]</text>
+<text x="520.0" y="666" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Emitir cotización inicial sin</text>
+<text x="520.0" y="682" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">reserva</text>
+<polygon points="520.0,770 548,798.0 520.0,826 492,798.0" fill="#eaf4fc" stroke="#24648b" stroke-width="1.8"/>
+<text x="520.0" y="804.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#24648b">×</text>
+<rect x="457.05" y="831" width="125.9" height="35" fill="white"/>
+<text x="520.0" y="846" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Versión vigente?</text>
+<text x="520.0" y="861" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P01_G01</text>
+<rect x="128" y="910" width="224" height="82" rx="10" fill="#eaf4fc" stroke="#24648b" stroke-width="1.6"/>
+<text x="240.0" y="927" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#24648b">P01_T03 [I]</text>
+<text x="240.0" y="946" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Revalidar y conservar versión</text>
+<text x="240.0" y="962" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">anterior</text>
+<rect x="408" y="1050" width="224" height="82" rx="10" fill="#fff3d8" stroke="#986600" stroke-width="1.6"/>
+<text x="520.0" y="1067" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#986600">P01_T04 [S]</text>
+<text x="520.0" y="1086" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Registrar aceptación del</text>
+<text x="520.0" y="1102" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">cliente</text>
+<polygon points="520.0,1190 548,1218.0 520.0,1246 492,1218.0" fill="#eaf4fc" stroke="#24648b" stroke-width="1.8"/>
+<text x="520.0" y="1224.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#24648b">×</text>
+<rect x="453.7" y="1251" width="132.60000000000002" height="35" fill="white"/>
+<text x="520.0" y="1266" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Versión aceptada?</text>
+<text x="520.0" y="1281" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P01_G02</text>
+<circle cx="240.0" cy="1363.0" r="18.0" fill="white" stroke="#24648b" stroke-width="3.2"/>
+<rect x="163.64999999999998" y="1389" width="152.70000000000002" height="35" fill="white"/>
+<text x="240.0" y="1404" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sin pedido ni reserva</text>
+<text x="240.0" y="1419" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P01_E02</text>
+<rect x="408" y="1330" width="224" height="82" rx="10" fill="#eaf4fc" stroke="#24648b" stroke-width="1.6"/>
+<text x="520.0" y="1347" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#24648b">P01_T05 [I]</text>
+<text x="520.0" y="1366" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Crear pedido Pendiente y</text>
+<text x="520.0" y="1382" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">consultar S1</text>
+<circle cx="520.0" cy="1503.0" r="18.0" fill="white" stroke="#24648b" stroke-width="3.2"/>
+<rect x="420.2" y="1529" width="199.6" height="35" fill="white"/>
+<text x="520.0" y="1544" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Pedido Pendiente sin reserva</text>
+<text x="520.0" y="1559" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P01_E03</text>
+<text x="55" y="1628" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#697480">6 nov 2026 · Equipo 17 · Las actividades diseñadas conservan requisitos pendientes.</text>
+</svg>

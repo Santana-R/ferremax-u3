@@ -21,7 +21,7 @@ La etiqueta fija una referencia consultable al commit de U3. Crear una etiqueta 
 
 - Se verificaron los heads remotos de main y pia-render mediante consulta de GitHub antes de preparar el cierre: coinciden con los commits de esta tabla.
 - `main...pia-render` devolvió 0 commits exclusivos de main y 25 exclusivos del avance PIA. La historia U3 es ancestro de la rama PIA.
-- La comparación de `reference/`, `diagrams/` y los PDF históricos de `docs/` entre main y pia-render no mostró cambios. Este bloque solo añade `docs/pia/`.
+- La comparación de `reference/`, `diagrams/` y los PDF históricos de `docs/` entre main y pia-render no mostró cambios. El primer bloque solo añadió `docs/pia/`; el bloque de análisis incorpora `docs/BRD.md` y `docs/analysis/` y actualiza la matriz.
 - Las ramas locales de avance son ancestros de la base de pia-entrega; no necesitan fusiones individuales. No se borraron ramas.
 - Render conserva su seguimiento a `pia-render`; cambiarlo a main corresponde al bloque de integración posterior.
 
@@ -45,3 +45,7 @@ En el clon habitual de Roberto: **Fetch origin**, abrir **Current Branch**, sele
 El clon de trabajo de este bloque está en `/Users/robertosantana/Documents/ChatGPT/CLNEG/ferremax-u3`; el clon habitual de Desktop está en `/Users/robertosantana/Documents/GitHub/ferremax-u3`. Ambos apuntan al mismo repositorio remoto. No se copian archivos ni se modifican manualmente los datos del clon habitual.
 
 La integración final se realizará conservando el historial y la referencia a U3; no se ha realizado en este bloque.
+
+## Bloque de análisis integrado
+
+El siguiente Release autorizó BRD, historias/Gherkin, BPMN y glosario PIA. Se incorporan [BRD](../BRD.md), [historias](../analysis/USER_STORIES.md), [escenarios Gherkin](../analysis/aceptacion.feature), [BPMN y fuente editable](../analysis/BPMN.md), [glosario](../analysis/GLOSARIO.md) y [trazabilidad por criterio](../analysis/trazabilidad_analisis.csv). La matriz se actualiza conservando pendientes funcionales. No se cambian código, esquema, datos de demo, Render ni documentos históricos.

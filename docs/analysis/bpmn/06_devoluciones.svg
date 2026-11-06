@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="1360" viewBox="0 0 730 1360">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#435363"/></marker></defs>
+<rect width="730" height="1360" fill="#fff"/>
+<text x="40" y="34" text-anchor="start" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#24648b">FerreMax PIA · P06</text>
+<text x="40" y="65" text-anchor="start" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#172c40">Devoluciones según política</text>
+<text x="40" y="92" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#526374">[I] implementado   [S] simulado   [P] parcial   [D] diseñado</text>
+<rect x="55" y="115" width="635" height="1215" fill="white" stroke="#526374" stroke-width="1.5"/>
+<text x="365.0" y="139" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">FERREMAX · proceso descriptivo, sin motor BPMN</text>
+<rect x="100" y="155" width="280" height="1175" fill="#f8fafc" stroke="#cbd3dc"/>
+<rect x="100" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="240" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Vendedor / responsable</text>
+<rect x="380" y="155" width="280" height="1175" fill="#fff" stroke="#cbd3dc"/>
+<rect x="380" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="520" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Sistema</text>
+<polyline points="240.0,261 240.0,350" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,350 244.0,341.0 236.0,341.0" fill="#435363"/>
+<polyline points="240.0,432 240.0,484 520.0,484 520.0,490" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,490 524.0,481.0 516.0,481.0" fill="#435363"/>
+<polyline points="520.0,546 520.0,617 240.0,617 240.0,770" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,770 244.0,761.0 236.0,761.0" fill="#435363"/>
+<polyline points="240.0,852 240.0,925" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,925 244.0,916.0 236.0,916.0" fill="#435363"/>
+<polyline points="520.0,546 520.0,630" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,630 524.0,621.0 516.0,621.0" fill="#435363"/>
+<polyline points="520.0,712 520.0,770" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,770 524.0,761.0 516.0,761.0" fill="#435363"/>
+<polyline points="492,798.0 474,798.0 474,811.0 352,811.0" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="352,811.0 361.0,815.0 361.0,807.0" fill="#435363"/>
+<polyline points="520.0,826 520.0,910" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,910 524.0,901.0 516.0,901.0" fill="#435363"/>
+<polyline points="520.0,992 520.0,1050" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,1050 524.0,1041.0 516.0,1041.0" fill="#435363"/>
+<polyline points="520.0,1132 520.0,1205" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,1205 524.0,1196.0 516.0,1196.0" fill="#435363"/>
+<rect x="364.0" y="594.0" width="32" height="19" rx="3" fill="white"/>
+<text x="380.0" y="607.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No</text>
+<rect x="634.0" y="565.0" width="32" height="19" rx="3" fill="white"/>
+<text x="650.0" y="578.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<rect x="359.0" y="788.0" width="32" height="19" rx="3" fill="white"/>
+<text x="375.0" y="801.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No</text>
+<rect x="634.0" y="845.0" width="32" height="19" rx="3" fill="white"/>
+<text x="650.0" y="858.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<circle cx="240.0" cy="243.0" r="18.0" fill="white" stroke="#697480" stroke-width="1.6"/>
+<rect x="156.95" y="269" width="166.1" height="35" fill="white"/>
+<text x="240.0" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Solicitud de devolución</text>
+<text x="240.0" y="299" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P06_S01</text>
+<rect x="128" y="350" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="240.0" y="367" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P06_T01 [D]</text>
+<text x="240.0" y="386" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Validar comprobante,</text>
+<text x="240.0" y="402" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">categoría y condición</text>
+<polygon points="520.0,490 548,518.0 520.0,546 492,518.0" fill="#f1f3f5" stroke="#697480" stroke-width="1.8"/>
+<text x="520.0" y="524.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#697480">×</text>
+<rect x="423.55" y="551" width="192.9" height="35" fill="white"/>
+<text x="520.0" y="566" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Datos válidos y completos?</text>
+<text x="520.0" y="581" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P06_G01</text>
+<rect x="128" y="770" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="240.0" y="787" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P06_T05 [D]</text>
+<text x="240.0" y="806" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Registrar rechazo con motivo</text>
+<circle cx="240.0" cy="943.0" r="18.0" fill="white" stroke="#697480" stroke-width="3.2"/>
+<rect x="167.0" y="969" width="146.0" height="35" fill="white"/>
+<text x="240.0" y="984" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Devolución rechazada</text>
+<text x="240.0" y="999" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P06_E01</text>
+<rect x="408" y="630" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="520.0" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P06_T02 [D]</text>
+<text x="520.0" y="666" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Evaluar política configurada</text>
+<polygon points="520.0,770 548,798.0 520.0,826 492,798.0" fill="#f1f3f5" stroke="#697480" stroke-width="1.8"/>
+<text x="520.0" y="804.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#697480">×</text>
+<rect x="447.0" y="831" width="146.0" height="35" fill="white"/>
+<text x="520.0" y="846" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Cumple la política?</text>
+<text x="520.0" y="861" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P06_G02</text>
+<rect x="408" y="910" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="520.0" y="927" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P06_T03 [D]</text>
+<text x="520.0" y="946" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Autorizar devolución</text>
+<rect x="408" y="1050" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="520.0" y="1067" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P06_T04 [D]</text>
+<text x="520.0" y="1086" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Registrar resultado</text>
+<text x="520.0" y="1102" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">financiero, inventario y</text>
+<text x="520.0" y="1118" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">auditoría</text>
+<circle cx="520.0" cy="1223.0" r="18.0" fill="white" stroke="#697480" stroke-width="3.2"/>
+<rect x="443.65" y="1249" width="152.70000000000002" height="50" fill="white"/>
+<text x="520.0" y="1264" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Devolución resuelta y</text>
+<text x="520.0" y="1279" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">trazable</text>
+<text x="520.0" y="1294" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P06_E02</text>
+<text x="55" y="1348" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#697480">6 nov 2026 · Equipo 17 · Las actividades diseñadas conservan requisitos pendientes.</text>
+</svg>
