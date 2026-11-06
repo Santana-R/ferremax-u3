@@ -111,9 +111,26 @@ Para comprobar una actualización automática se sigue este recorrido:
    total 240.00 MXN. Consultar también S1: debe conservar 10 disponibles y
    0 comprometidas. Estas consultas no crean otro pedido ni cambian la base.
 
-La publicación inicial, CI y las operaciones públicas están verificados. La
-comprobación de actualización automática posterior a la autorización está en
-curso; se requiere el historial del despliegue, además de la configuración.
+La actualización automática quedó verificada el 6 de noviembre de 2026:
+
+| Evidencia | Resultado |
+| --- | --- |
+| Commit subido después de conectar GitHub | `947aeae9469a8758b224a599a614224ce9c16e40`. |
+| [CI de ese commit](https://github.com/Santana-R/ferremax-u3/actions/runs/42259879768) | `success`; 242 pruebas aprobadas, 0 omitidas y 97.24 % de cobertura. |
+| Fin de CI | 17:15:58 UTC. |
+| Inicio del despliegue | 17:16:02 UTC, después de CI. |
+| Despliegue automático | `dep-dbn0mkm8bjmc73e8nt20`, origen `new_commit`, sin ejecución manual. |
+| Estado final | `live` a las 17:16:42 UTC, con el mismo commit. |
+| Consultas posteriores | Swagger y OpenAPI: 200; pedido Cancelado, versión 2, 240.00 MXN; S1 conserva 10 disponibles y 0 comprometidas. |
+
+Las consultas y los identificadores de CI y Render se conservan en
+[render_cd_verificacion.json](../evidencias/pia/render_cd_verificacion.json).
+Los logs de CI incluyen dos advertencias de bibliotecas durante las pruebas;
+la suite y la comprobación HTTP terminaron correctamente.
+
+Para cambios exclusivamente documentales que no necesitan publicar otra imagen
+se puede incluir `[skip render]` en el mensaje del commit. GitHub Actions sigue
+comprobando ese cambio; Render registra que se omitió su despliegue.
 
 La base de la nube inicia con datos ficticios propios. El identificador del
 pedido de la Mac no existe allí automáticamente. En Swagger se utiliza

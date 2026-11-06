@@ -351,7 +351,8 @@ operaciones desde [Swagger público](https://ferremax-api-w5kd.onrender.com/docs
 incluyendo reserva y liberación sin duplicaciones. La verificación de nube
 conserva un pedido Cancelado de 240.00 MXN y 10 unidades disponibles en S1.
 Ver [plan aplicado, arranque y resultados](docs/RENDER.md).
-La publicación pública y CI están comprobados. GitHub ya se añadió a la cuenta
-de Render; la guía incluye cómo verificar la actualización automática y la
-conservación del pedido después del despliegue.
+CI/CD quedó verificado: el cambio `947aeae` aprobó 242 pruebas y 97.24 % de
+cobertura en [GitHub Actions](https://github.com/Santana-R/ferremax-u3/actions/runs/42259879768).
+Render lo desplegó automáticamente después de CI y conservó el pedido y el
+inventario. La guía enlaza la evidencia de esa actualización.
 

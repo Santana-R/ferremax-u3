@@ -1,0 +1,97 @@
+{
+  "verificado_en": "2026-11-06T17:18:04.111176+00:00",
+  "url": "https://ferremax-api-w5kd.onrender.com",
+  "commit_desplegado": "947aeae9469a8758b224a599a614224ce9c16e40",
+  "ci": {
+    "run_id": 42259879768,
+    "url": "https://github.com/Santana-R/ferremax-u3/actions/runs/42259879768",
+    "resultado": "success",
+    "fin": "2026-11-06T17:15:58Z",
+    "pruebas_aprobadas": 242,
+    "pruebas_omitidas": 0,
+    "cobertura_porcentaje": 97.24,
+    "advertencias": 2,
+    "advertencias_detalle": [
+      "DeprecationWarning de Starlette/AnyIO en TestClient",
+      "UnsupportedFieldAttributeWarning de Pydantic durante una prueba concurrente; las solicitudes y validaciones aprobaron"
+    ]
+  },
+  "deploy": {
+    "id": "dep-dbn0mkm8bjmc73e8nt20",
+    "servicio_id": "srv-dbmvse5g1s2s73c2dao0",
+    "estado": "live",
+    "trigger": "new_commit",
+    "inicio": "2026-11-06T17:16:02.424143Z",
+    "fin": "2026-11-06T17:16:42.489773Z",
+    "manual": false,
+    "auto_deploy_trigger": "checksPass"
+  },
+  "resultado": "Actualizacion automatica despues de CI y conservacion de datos verificadas",
+  "pedido_demostracion": "4d7b5b3e-926e-4856-9a1e-d1a433ef5cfd",
+  "peticiones": [
+    {
+      "metodo": "GET",
+      "ruta": "/docs",
+      "estado_http": 200,
+      "respuesta": {
+        "swagger_ui": true
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/openapi.json",
+      "estado_http": 200,
+      "respuesta": {
+        "version_api": "0.6.0",
+        "rutas": [
+          "/cotizaciones/{cotizacion_id}/versiones/{version}/revalidar",
+          "/cotizaciones/{cotizacion_id}/versiones/{version}/convertir",
+          "/pedidos/{pedido_id}",
+          "/pedidos/{pedido_id}/confirmar",
+          "/pedidos/{pedido_id}/cancelar",
+          "/inventario/{sku}"
+        ]
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/pedidos/4d7b5b3e-926e-4856-9a1e-d1a433ef5cfd",
+      "estado_http": 200,
+      "respuesta": {
+        "mensaje": "Pedido consultado.",
+        "pedido_id": "4d7b5b3e-926e-4856-9a1e-d1a433ef5cfd",
+        "estado": "Cancelado",
+        "cotizacion_folio": "COT-API-DEMO",
+        "cotizacion_version": 2,
+        "total": "240.00",
+        "moneda": "MXN"
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/inventario/FER-API-DEMO",
+      "estado_http": 200,
+      "respuesta": {
+        "mensaje": "Disponibilidad del producto consultada.",
+        "sku": "FER-API-DEMO",
+        "encontrado": true,
+        "ubicaciones": [
+          {
+            "ubicacion_id": "S1",
+            "existencia_fisica": "10",
+            "comprometida": "0",
+            "en_transito": "5",
+            "disponible": "10"
+          },
+          {
+            "ubicacion_id": "S2",
+            "existencia_fisica": "0",
+            "comprometida": "0",
+            "en_transito": "0",
+            "disponible": "0"
+          }
+        ]
+      }
+    }
+  ]
+}
