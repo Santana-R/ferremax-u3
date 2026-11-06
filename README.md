@@ -2,6 +2,9 @@
 
 Propuesta académica de arquitectura de Componentes de lógica de negocio. Equipo 17: Roberto Santana Trujillo e Isaías Leonardo Salazar Torres. Profesor Miguel Ángel Gómez Marroquín.
 
+**Demostración del PIA:** [Swagger público](https://ferremax-api-w5kd.onrender.com/docs).
+Ver [despliegue y evidencia de funcionamiento](docs/RENDER.md).
+
 ## Empresa: FerreMax
 La empresa FerreMax opera tres sucursales y un almacén central dedicados a la venta de herramientas y materiales de construcción. El análisis previo evidenció serias inconsistencias, como el riesgo de confirmar ventas contra mercancía ya comprometida, el uso de cotizaciones vencidas (gestionadas en hojas de cálculo) y una visibilidad limitada de inventario, lo que derivaba en promesas de mercancía sin sustento.
 FerreMax requiere coordinar cotizaciones, pedidos e inventario sin comprometer mercancía inexistente. La arquitectura propuesta organiza las reglas del negocio con Domain Model, una Service Layer y adaptadores de persistencia. El recorrido detallado cubre la consulta de disponibilidad, la revalidación de cotizaciones, la conversión a pedido, la confirmación con reserva y la cancelación antes del surtido.
@@ -334,17 +337,18 @@ reportes HTML/JUnit/JSON y logs como un artefacto de la ejecución, sin agregarl
 al código. No utiliza las credenciales ni los datos de la Mac.
 
 Ver [funcionamiento, evidencia y revisión en GitHub](docs/CI.md).
-Este bloque verifica la integración; el despliegue se prepara por separado.
+El [despliegue en Render](docs/RENDER.md) utiliza los checks de esta integración.
 
-## PIA: preparación de Render
+## PIA: despliegue en Render
 
-`render.yaml` propone una API Docker y PostgreSQL 16 en Free, con conexión
-interna y despliegues después de aprobar los checks de CI cuando GitHub esté
-conectado. La imagen admite `PORT` y la inicialización explícita del esquema y
-los datos ficticios, sin sobrescribir el historial en un reinicio.
+`render.yaml` configura una API Docker y PostgreSQL 16 en Free, con conexión
+interna y despliegues después de aprobar los checks de CI. La imagen admite
+`PORT` y la inicialización explícita del esquema y los datos ficticios, sin
+sobrescribir el historial en un reinicio.
 
-Ver [plan, arranque, variables y estado de verificación](docs/RENDER.md).
-Los archivos preparados y las pruebas no acreditan por sí solos un despliegue
-público: falta confirmar el workspace, revisar/aplicar el plan y verificar el
-servicio en Render. La URL real se registrará después de esa comprobación.
+El 6 de noviembre de 2026 el servicio quedó `live` y se comprobaron las seis
+operaciones desde [Swagger público](https://ferremax-api-w5kd.onrender.com/docs),
+incluyendo reserva y liberación sin duplicaciones. La verificación de nube
+conserva un pedido Cancelado de 240.00 MXN y 10 unidades disponibles en S1.
+Ver [plan aplicado, arranque y resultados](docs/RENDER.md).
 

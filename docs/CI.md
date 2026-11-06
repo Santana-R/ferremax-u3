@@ -62,8 +62,9 @@ construcción antes de producir cobertura, los logs ayudan a revisar el motivo;
 la ausencia de un reporte no acredita que las pruebas hayan pasado.
 
 El resultado válido es la ejecución de Actions asociada al commit, no solo la
-presencia del archivo YAML. El despliegue y su URL pública corresponden al
-siguiente bloque; este workflow no publica ni modifica un sistema externo.
+presencia del archivo YAML. Render está configurado para esperar estos checks
+antes de desplegar la rama `pia-render`; el workflow de CI no contiene tokens
+ni credenciales de Render. Ver [servicio público y despliegue](RENDER.md).
 
 ## Referencias
 
