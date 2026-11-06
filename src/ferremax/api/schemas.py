@@ -115,3 +115,13 @@ class PedidoCanceladoRespuesta(BaseModel):
     mensaje: str = "Pedido cancelado y su inventario reservado liberado."
     pedido_id: UUID
     estado: Literal["Cancelado"]
+
+
+class PedidoConsultaRespuesta(BaseModel):
+    mensaje: str = "Pedido consultado."
+    pedido_id: UUID
+    estado: Literal["Pendiente", "Confirmado", "Cancelado"]
+    cotizacion_folio: str = Field(description="Folio de la cotizacion utilizada para crear el pedido")
+    cotizacion_version: int = Field(gt=0, description="Version utilizada; se conserva aunque se revalide la cotizacion")
+    total: Decimal = Field(ge=0, allow_inf_nan=False, description="Total calculado con las partidas guardadas del pedido")
+    moneda: str

@@ -86,5 +86,5 @@ Estas pruebas de PostgreSQL requieren `TEST_DATABASE_URL` y el esquema en una
 base de pruebas separada. Una omisión no acredita persistencia. La verificación
 de este bloque usa una base temporal distinta de la demostración.
 
-El [OpenAPI versionado](openapi.json) contiene cinco operaciones. La consulta
-del pedido se incorporará en el siguiente bloque.
+El [OpenAPI versionado](openapi.json) contiene las operaciones del recorrido.
+La [consulta del pedido](CONSULTA_PEDIDO.md) permite comprobar su estado guardado.

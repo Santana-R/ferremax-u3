@@ -285,3 +285,16 @@ la rama y reiniciar Uvicorn. Ver [cuerpo, respuestas y pruebas de liberación](d
 El esquema y las dependencias se conservan. Las pruebas incluyen PostgreSQL,
 cancelaciones concurrentes y rollback ante una falla durante la liberación.
 
+## PIA: consultar el pedido guardado
+
+`GET /pedidos/{pedido_id}` reutiliza la consulta CQRS y el lector PostgreSQL
+existentes. Devuelve el estado actual, el folio y la versión de origen, el total
+del pedido y la moneda. Usa solo lectura; no cambia inventario, auditoría ni
+eventos, y permite consultar el pedido después de cancelarlo.
+
+Después de actualizar la rama y reiniciar Uvicorn, usar el identificador del
+pedido anterior en Swagger. Ver [respuestas y pruebas de consulta](docs/api/CONSULTA_PEDIDO.md).
+El actor Vendedor es simulado. Con esta consulta se completan las seis operaciones
+del recorrido principal de la API; Compose con App/Tests, CI/CD, despliegue y
+documentos finales se completarán en los siguientes bloques del PIA.
+

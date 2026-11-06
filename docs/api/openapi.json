@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "FerreMax - API",
-    "description": "Inventario, cotizaciones, confirmacion y cancelacion de pedidos con sus reservas.",
-    "version": "0.5.0"
+    "description": "Inventario, cotizaciones y pedidos: consulta, confirmacion y cancelacion con reservas.",
+    "version": "0.6.0"
   },
   "paths": {
     "/cotizaciones/{cotizacion_id}/versiones/{version}/revalidar": {
@@ -193,6 +193,72 @@
           },
           "503": {
             "description": "Creacion del pedido temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pedidos/{pedido_id}": {
+      "get": {
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Consultar estado, cotizacion de origen y total de un pedido",
+        "operationId": "consultar_pedido_pedidos__pedido_id__get",
+        "parameters": [
+          {
+            "name": "pedido_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "examples": [
+                "22222222-2222-4222-8222-222222222222"
+              ],
+              "title": "Pedido Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoConsultaRespuesta"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pedido no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar identificador del pedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Consulta de pedido temporalmente no disponible",
             "content": {
               "application/json": {
                 "schema": {
@@ -830,6 +896,60 @@
           "ubicacion_id"
         ],
         "title": "PedidoConfirmadoRespuesta"
+      },
+      "PedidoConsultaRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Pedido consultado."
+          },
+          "pedido_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Pedido Id"
+          },
+          "estado": {
+            "type": "string",
+            "enum": [
+              "Pendiente",
+              "Confirmado",
+              "Cancelado"
+            ],
+            "title": "Estado"
+          },
+          "cotizacion_folio": {
+            "type": "string",
+            "title": "Cotizacion Folio",
+            "description": "Folio de la cotizacion utilizada para crear el pedido"
+          },
+          "cotizacion_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Cotizacion Version",
+            "description": "Version utilizada; se conserva aunque se revalide la cotizacion"
+          },
+          "total": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Total",
+            "description": "Total calculado con las partidas guardadas del pedido"
+          },
+          "moneda": {
+            "type": "string",
+            "title": "Moneda"
+          }
+        },
+        "type": "object",
+        "required": [
+          "pedido_id",
+          "estado",
+          "cotizacion_folio",
+          "cotizacion_version",
+          "total",
+          "moneda"
+        ],
+        "title": "PedidoConsultaRespuesta"
       },
       "PedidoCreadoRespuesta": {
         "properties": {

@@ -96,4 +96,4 @@ separada de la demostración.
 
 El [OpenAPI versionado](openapi.json) documenta las operaciones actuales.
 La [cancelación](CANCELACION.md) permite liberar la reserva antes del surtido.
-La consulta del pedido se incorporará en su siguiente bloque.
+La [consulta del pedido](CONSULTA_PEDIDO.md) permite comprobar su estado guardado.

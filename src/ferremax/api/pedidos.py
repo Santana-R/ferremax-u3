@@ -1,4 +1,4 @@
-"""Adaptador HTTP para confirmar y cancelar pedidos con sus reservas."""
+"""Consultas y comandos HTTP de pedidos con sus reservas."""
 
 from uuid import UUID
 
@@ -6,19 +6,26 @@ from fastapi import APIRouter, Depends, Path, Request
 
 from ferremax.application.cqrs import (
     CancelarPedido, CancelarPedidoHandler, ConfirmarPedido, ConfirmarPedidoHandler,
+    ConsultarPedido, ConsultarPedidoHandler,
 )
+from ferremax.application.ports import PedidoReader
 from ferremax.application.services import Actor, PedidoService
 from ferremax.domain.model import DisponibilidadInsuficiente, ErrorNegocio
-from ferremax.infrastructure.postgres import PostgresUnitOfWork
+from ferremax.infrastructure.postgres import PostgresReader, PostgresUnitOfWork
 from .responses import error_cliente
 from .schemas import (
     CancelacionSolicitud, ConfirmacionSolicitud, MensajeError,
-    PedidoCanceladoRespuesta, PedidoConfirmadoRespuesta,
+    PedidoCanceladoRespuesta, PedidoConfirmadoRespuesta, PedidoConsultaRespuesta,
 )
 from .settings import conexion_desde_entorno
 
 
 router = APIRouter(prefix="/pedidos", tags=["Pedidos"])
+
+
+def obtener_lector_pedidos(request: Request) -> PedidoReader:
+    conexion = request.app.state.database_url
+    return PostgresReader(conexion if conexion is not None else conexion_desde_entorno())
 
 
 def obtener_servicio_pedidos(request: Request) -> PedidoService:
@@ -53,6 +60,31 @@ def mensaje_cancelacion_invalida(errores):
     if "motivo" in ubicacion:
         return "Indica el motivo de la cancelación."
     return "Revisa los datos de la cancelación del pedido."
+
+
+@router.get(
+    "/{pedido_id}",
+    response_model=PedidoConsultaRespuesta,
+    summary="Consultar estado, cotizacion de origen y total de un pedido",
+    responses={
+        404: {"model": MensajeError, "description": "Pedido no encontrado"},
+        422: {"model": MensajeError, "description": "Revisar identificador del pedido"},
+        503: {"model": MensajeError, "description": "Consulta de pedido temporalmente no disponible"},
+    },
+)
+def consultar_pedido(
+    pedido_id: UUID = Path(..., examples=["22222222-2222-4222-8222-222222222222"]),
+    lector: PedidoReader = Depends(obtener_lector_pedidos),
+):
+    try:
+        resultado = ConsultarPedidoHandler(lector).handle(
+            ConsultarPedido(str(pedido_id)), Actor("consulta-pedido-api-demo", "Vendedor"),
+        )
+    except ErrorNegocio as exc:
+        if str(exc) == "Pedido inexistente":
+            return error_cliente("Pedido no encontrado.", 404, pedido_id=pedido_id)
+        return error_cliente("No se pudo consultar el pedido. Revisa su identificador.", 422, pedido_id=pedido_id)
+    return PedidoConsultaRespuesta(**resultado)
 
 
 @router.post(

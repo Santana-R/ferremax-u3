@@ -1,4 +1,4 @@
-"""API REST de FerreMax: inventario y operaciones de cotizaciones."""
+"""API REST de FerreMax: inventario, cotizaciones y pedidos."""
 
 from datetime import datetime, timezone
 from typing import Callable, Optional
@@ -26,8 +26,8 @@ def obtener_lector(request: Request) -> DisponibilidadReader:
 def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], datetime]] = None) -> FastAPI:
     api = FastAPI(
         title="FerreMax - API",
-        version="0.5.0",
-        description="Inventario, cotizaciones, confirmacion y cancelacion de pedidos con sus reservas.",
+        version="0.6.0",
+        description="Inventario, cotizaciones y pedidos: consulta, confirmacion y cancelacion con reservas.",
         redoc_url=None,
     )
     # La configuracion se resuelve al consultar, no al abrir Swagger.
@@ -40,6 +40,8 @@ def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], 
     @api.exception_handler(ConfiguracionBaseNoDisponible)
     async def base_no_disponible(request, exc):
         if request.url.path.startswith("/pedidos/"):
+            if request.method == "GET":
+                return error_cliente("Por el momento no podemos consultar el pedido. Inténtalo de nuevo más tarde.", 503)
             if request.url.path.endswith("/cancelar"):
                 return error_cliente("Por el momento no podemos cancelar el pedido. Inténtalo de nuevo más tarde.", 503)
             return error_cliente("Por el momento no podemos confirmar el pedido. Inténtalo de nuevo más tarde.", 503)
@@ -54,6 +56,8 @@ def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], 
     @api.exception_handler(RequestValidationError)
     async def solicitud_invalida(request, exc):
         if request.url.path.startswith("/pedidos/"):
+            if request.method == "GET":
+                return error_cliente("Indica un identificador válido de pedido.", 422)
             if request.url.path.endswith("/cancelar"):
                 return error_cliente(mensaje_cancelacion_invalida(exc.errors()), 422)
             return error_cliente(mensaje_confirmacion_invalida(exc.errors()), 422)
