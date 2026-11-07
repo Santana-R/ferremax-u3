@@ -1,0 +1,4 @@
+# Los entregables se conservan como archivos completos, sin conversión de líneas.
+*.pdf binary
+*.docx binary
+*.pptx binary
