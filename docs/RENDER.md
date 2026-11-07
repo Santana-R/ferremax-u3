@@ -162,3 +162,7 @@ verificación pública es una comprobación adicional a la suite de CI.
 - [Variables de entorno](https://render.com/docs/environment-variables).
 - [Despliegues después del CI](https://render.com/docs/deploys#integrating-with-ci).
 - [Límites del plan Free](https://render.com/docs/free).
+
+## Integración final a main
+
+El PR #1 integra la entrega PIA. Blueprint y servicio siguen `main` con checksPass. Se verificó el deploy `dep-dbn8lgi7k9oc739a6va0` en live (commit `000616af`), HTTP 200 en Swagger/OpenAPI/consultas y conservación exacta del pedido e inventario previos. No se crearon ni borraron recursos. Ver [registro de cierre](pia/CIERRE.md) y [evidencia](../evidencias/pia/cierre_main_verificacion.json). Este registro identifica ese deploy; los siguientes commits documentales se verifican mediante CI y los eventos de Render.

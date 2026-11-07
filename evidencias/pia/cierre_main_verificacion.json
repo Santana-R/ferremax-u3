@@ -1,0 +1,92 @@
+{
+  "fecha_verificacion_utc": "2026-11-07T02:22:31.854424+00:00",
+  "rama_entrega": "main",
+  "commit_integracion": "000616af6331b2af46665a9215b856ca85121551",
+  "pull_request": "https://github.com/Santana-R/ferremax-u3/pull/1",
+  "ci": {
+    "url": "https://github.com/Santana-R/ferremax-u3/actions/runs/42328579928",
+    "conclusion": "success",
+    "junit": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "249",
+      "time": "7.261",
+      "timestamp": "2026-11-07T02:19:31.213041+00:00",
+      "hostname": "e82e98a993fc"
+    },
+    "cobertura": {
+      "covered_lines": 818,
+      "num_statements": 840,
+      "percent_covered": 97.38095238095238,
+      "percent_covered_display": "97.38",
+      "missing_lines": 22,
+      "excluded_lines": 16
+    }
+  },
+  "render": {
+    "workspace": "tea-dbmns83bc2fs73ag5rc0",
+    "blueprint": "exs-dbmvqjrncjis73alfgq0",
+    "rama_blueprint": "main",
+    "rama_servicio": "main",
+    "servicio": "srv-dbmvse5g1s2s73c2dao0",
+    "base_conservada": "dpg-dbmvrtdg1s2s73c2brlg-a",
+    "deploy_verificado": "dep-dbn8lgi7k9oc739a6va0",
+    "estado": "live",
+    "commit": "000616af6331b2af46665a9215b856ca85121551",
+    "cambio_infraestructura": "UpdateBranch: pia-render -> main; sin altas, bajas ni cambios de plan"
+  },
+  "comprobaciones_publicas": {
+    "swagger_http": 200,
+    "inicio_redirige_a_docs": true,
+    "openapi_http": 200,
+    "openapi_coincide_con_versionado": true,
+    "operaciones": 6,
+    "inventario": {
+      "http": 200,
+      "url_final": "https://ferremax-api-w5kd.onrender.com/inventario/FER-API-DEMO",
+      "cuerpo": {
+        "mensaje": "Disponibilidad del producto consultada.",
+        "sku": "FER-API-DEMO",
+        "encontrado": true,
+        "ubicaciones": [
+          {
+            "ubicacion_id": "S1",
+            "existencia_fisica": "10",
+            "comprometida": "0",
+            "en_transito": "5",
+            "disponible": "10"
+          },
+          {
+            "ubicacion_id": "S2",
+            "existencia_fisica": "0",
+            "comprometida": "0",
+            "en_transito": "0",
+            "disponible": "0"
+          }
+        ]
+      }
+    },
+    "pedido": {
+      "http": 200,
+      "url_final": "https://ferremax-api-w5kd.onrender.com/pedidos/4d7b5b3e-926e-4856-9a1e-d1a433ef5cfd",
+      "cuerpo": {
+        "mensaje": "Pedido consultado.",
+        "pedido_id": "4d7b5b3e-926e-4856-9a1e-d1a433ef5cfd",
+        "estado": "Cancelado",
+        "cotizacion_folio": "COT-API-DEMO",
+        "cotizacion_version": 2,
+        "total": "240.00",
+        "moneda": "MXN"
+      }
+    },
+    "datos_iguales_antes_despues": true
+  },
+  "conservacion_u3": {
+    "etiqueta": "u3-entrega",
+    "commit": "eb71b6625c957b9dbfe7e4ed54f7c9f8ad08f365",
+    "originales_historicos_sin_cambios": true
+  },
+  "alcance": "Cierre documental y de integración. El código funcional coincide con c4876ef; R16 permanece Parcial. No acredita entrega en NetAcad ni defensa."
+}
