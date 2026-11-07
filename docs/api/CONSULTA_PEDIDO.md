@@ -18,8 +18,7 @@ no es una consulta de todas las partidas, pagos o entradas de auditoría.
 
 ## Prueba en Swagger
 
-Con PostgreSQL encendido, detener la API con Ctrl+C, actualizar a la rama
-`pia-api-consulta-pedido` desde GitHub Desktop y reiniciar desde la raíz del repo:
+Con PostgreSQL encendido y la versión de entrega actual seleccionada, detener la API anterior con Ctrl+C y reiniciar desde la raíz del repo:
 
 ```bash
 .venv/bin/python -m uvicorn ferremax.api.main:app --app-dir src --env-file .env --host 127.0.0.1 --port 8000
@@ -74,4 +73,4 @@ no acreditan persistencia real.
 El [OpenAPI versionado](openapi.json) contiene las seis operaciones del recorrido
 principal. Esto completa ese bloque de la API. La [guía de Docker](../DOCKER.md)
 describe App y Tests en Compose y la validación realizada en Docker Desktop;
-CI/CD, despliegue y documentos finales del PIA son bloques posteriores.
+[CI/CD](../CI.md) y el [despliegue](../RENDER.md) ya tienen evidencia. El reporte final, presentación e integración a main conservan su estado en la [matriz de cumplimiento](../pia/MATRIZ_CUMPLIMIENTO.md).

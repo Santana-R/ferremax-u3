@@ -108,6 +108,6 @@ auditoría/eventos, rechazos, concurrencia y conservación del historial al repe
 la carga ficticia. Requiere `TEST_DATABASE_URL` hacia una base de pruebas
 separada y el esquema del proyecto. Sin conexión, se omite visiblemente.
 
-El [OpenAPI versionado](openapi.json) contiene el contrato de ambas operaciones
+El [OpenAPI versionado](openapi.json) contiene el contrato de las seis operaciones actuales
 y los ejemplos. Las entregas originales de E9 conservan su commit medido;
 las nuevas pruebas verifican la versión actual de la API.

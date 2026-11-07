@@ -6,7 +6,7 @@ La máquina actual usa el enum `EstadoPedido` y las guardas de
 [`Pedido.confirmar()` y `Pedido.cancelar()`](../../src/ferremax/domain/model.py).
 Los métodos verifican el estado de origen y sus condiciones antes de cambiarlo.
 Esta implementación corresponde al flujo de contado y una ubicación por pedido
-del prototipo U3. La conversión de una cotización aceptada crea el pedido en
+del núcleo ejecutable PIA. La conversión de una cotización aceptada crea el pedido en
 `Pendiente`; no reserva inventario.
 
 [`PedidoService`](../../src/ferremax/application/services.py) verifica el rol y
@@ -78,5 +78,4 @@ python -m pytest tests/test_state_machine.py tests/test_e9_inventario.py tests/t
 ```
 
 Este comando verifica el bloque con Memory. Para verificar también PostgreSQL,
-la suite completa requiere `TEST_DATABASE_URL` y el esquema del proyecto en una
-base de pruebas separada. Una prueba omitida no acredita integración.
+la suite completa usa una base de pruebas separada. La opción reproducible es `docker compose run --build --rm tests`, que la prepara automáticamente. Una prueba omitida no acredita integración. Ver [arquitectura PIA](README.md) y [CI](../CI.md).

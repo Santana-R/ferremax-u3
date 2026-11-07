@@ -1,0 +1,15 @@
+Requisito,Historia o criterio,Componente,Vista,Decisión,Prueba,Alcance
+R06; R19,US04; US05,src/ferremax/domain/model.py,A02,ADR-P01; ADR-P02,tests/test_e9_cotizaciones.py,Cotización versionada y pedido ligado a la versión aceptada
+R06; R19,US01; US02; US09,src/ferremax/domain/model.py,A02; A05,ADR-P01; ADR-P03,tests/test_e9_inventario.py,Disponible igual a física menos comprometida sin sumar tránsito
+R07; R13,US01; US04; US05; US09; US10,src/ferremax/application/ports.py,A01,ADR-P01; ADR-P04,tests/test_architecture.py,Capas y contratos de persistencia
+R08; R09,US04; US05,src/ferremax/application/services.py,A01,ADR-P01; ADR-P03,tests/test_api_revalidacion_postgres.py,Servicio coordina dominio y transacción
+R08; R09,US01; US09; US10,src/ferremax/application/cqrs.py,A01,ADR-P04,tests/test_api_consulta_pedido_postgres.py,CQRS básico con una sola base
+R20,US05,src/ferremax/domain/specifications.py,A02,ADR-P06,tests/test_specifications.py,Regla pura de vigencia y aceptación con AND; OR y NOT probados como operadores
+R21,US09; US10,src/ferremax/domain/model.py,A02; A03; A04,ADR-P06,tests/test_state_machine.py,Pendiente a Confirmado a Cancelado mediante enum y guardas
+R23,US09,src/ferremax/infrastructure/postgres.py,A03; A04; A05,ADR-P02; ADR-P03,tests/test_api_confirmacion_postgres.py,Reserva atómica; rechazo y rollback sin éxito parcial
+R23,US10,src/ferremax/infrastructure/postgres.py,A05,ADR-P03; ADR-P05,tests/test_api_cancelacion_postgres.py,Cancelación libera solo la reserva propia con rollback
+R16,US20,src/ferremax/application/services.py,A05,ADR-P05,tests/test_e9_persistencia.py,Parcial: registra auditoría y outbox; no implementa consulta protegida ni consumidor externo
+R22; R29,US01; US04; US05; US09; US10,src/ferremax/api/main.py,A01,ADR-P01; ADR-P07,tests/test_swagger_claro.py,Seis operaciones REST y presentación clara sin cambiar el contrato HTTP
+R24; R27,RNF08,docker-compose.yml,A01,ADR-P07,tests/test_container_runner.py,DB App y Tests; base temporal de pruebas separada
+R25; R26; R28; R29,RNF08,.github/workflows/ci.yml; render.yaml,A01,ADR-P07,tests/test_arranque_render.py,CI y despliegue con variables; verificar la ejecución y el deploy concretos en evidencias/pia
+R16,US03; US07; US08; US11; US12; US13; US14; US15; US16; US17; US18; US19,docs/BRD.md,Mapa de negocio U2; BPMN PIA,Alcance conservado en análisis,Sin prueba del flujo integral,Requisitos diseñados o parciales; no se atribuye implementación integral

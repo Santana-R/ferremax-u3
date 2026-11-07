@@ -7,7 +7,7 @@ agregó el sufijo `w5kd` a sus nombres al crearlos como recursos nuevos:
 
 | Recurso | Configuración |
 | --- | --- |
-| `ferremax-api-w5kd` | Web Service, Docker, plan Free, región Oregon, rama `pia-render`. |
+| `ferremax-api-w5kd` | Web Service, Docker, plan Free, región Oregon, rama final `main`. |
 | `ferremax-db-w5kd` | PostgreSQL 16, plan Free, región Oregon, base y usuario `ferremax`. |
 
 La API recibe `DATABASE_URL` mediante `fromDatabase.connectionString`, utilizando

@@ -22,7 +22,7 @@ de inventario en S1 provoca rechazo, como en el servicio U3 existente.
 ## Preparación local
 
 Usar la versión 2 que ya se creó en la práctica de revalidación. Detener la API
-anterior con Ctrl+C, cambiar a esta rama y volver a arrancar:
+anterior con Ctrl+C y arrancar desde la raíz de la versión de entrega actual:
 
 ```bash
 .venv/bin/python -m uvicorn ferremax.api.main:app --app-dir src --env-file .env --host 127.0.0.1 --port 8000
@@ -78,7 +78,7 @@ debe conservar las mismas cantidades de antes.
 Cada solicitud válida crea un pedido nuevo, como en el servicio existente.
 Este endpoint no implementa idempotencia: repetir el POST puede crear otro
 pedido Pendiente. Para inspeccionar el pedido creado se usará su identificador;
-la consulta de pedidos se incorporará en otro bloque.
+la [consulta de pedidos](CONSULTA_PEDIDO.md) recupera el resumen persistido.
 
 ## Respuestas y verificación
 
@@ -99,6 +99,6 @@ conexión, auditoría/evento de creación, rechazos sin pedidos parciales y un
 pedido Pendiente sin stock ni reserva. Requiere `TEST_DATABASE_URL` hacia una
 base de pruebas separada; sin conexión se omite visiblemente.
 
-El [OpenAPI versionado](openapi.json) documenta las tres operaciones actuales.
+El [OpenAPI versionado](openapi.json) documenta las seis operaciones actuales.
 Los resultados de las nuevas pruebas corresponden a esta versión del código;
 las evidencias históricas de E9 conservan su propio commit medido.

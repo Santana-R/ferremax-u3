@@ -63,7 +63,7 @@ la ausencia de un reporte no acredita que las pruebas hayan pasado.
 
 El resultado válido es la ejecución de Actions asociada al commit, no solo la
 presencia del archivo YAML. Render está configurado para esperar estos checks
-antes de desplegar la rama `pia-render`; el workflow de CI no contiene tokens
+antes de desplegar la rama final `main`; el workflow de CI no contiene tokens
 ni credenciales de Render. Ver [servicio público y despliegue](RENDER.md).
 
 ## Referencias

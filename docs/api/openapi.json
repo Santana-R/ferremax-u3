@@ -11,7 +11,7 @@
         "tags": [
           "Cotizaciones"
         ],
-        "summary": "Revalidar una cotizacion vencida conservando su historial",
+        "summary": "Renovar cotización vencida",
         "operationId": "revalidar_cotizacion_cotizaciones__cotizacion_id__versiones__version__revalidar_post",
         "parameters": [
           {
@@ -58,6 +58,14 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CotizacionRevalidadaRespuesta"
+                },
+                "example": {
+                  "mensaje": "Se renovó la cotización y se conservó la anterior en el historial.",
+                  "cotizacion_id": "11111111-1111-4111-8111-111111111111",
+                  "version_anterior": 1,
+                  "folio": "COT-API-DEMO",
+                  "version": 2,
+                  "estado": "Vigente"
                 }
               }
             }
@@ -68,6 +76,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
                 }
               }
             }
@@ -78,6 +89,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No se puede realizar esta operación en el estado actual. Revisa la cotización o el pedido."
                 }
               }
             }
@@ -88,6 +102,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
                 }
               }
             }
@@ -98,6 +115,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
                 }
               }
             }
@@ -110,7 +130,7 @@
         "tags": [
           "Cotizaciones"
         ],
-        "summary": "Crear un pedido desde una version vigente y aceptada",
+        "summary": "Crear pedido",
         "operationId": "convertir_cotizacion_cotizaciones__cotizacion_id__versiones__version__convertir_post",
         "parameters": [
           {
@@ -157,6 +177,23 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PedidoCreadoRespuesta"
+                },
+                "example": {
+                  "mensaje": "Pedido creado. Sigue pendiente de confirmación; todavía no se han reservado productos.",
+                  "pedido_id": "22222222-2222-4222-8222-222222222222",
+                  "estado": "Pendiente",
+                  "cotizacion_id": "11111111-1111-4111-8111-111111111111",
+                  "cotizacion_folio": "COT-API-DEMO",
+                  "cotizacion_version": 2,
+                  "total": "240.00",
+                  "moneda": "MXN",
+                  "disponibilidad_consultada": [
+                    {
+                      "sku": "FER-API-DEMO",
+                      "solicitada": "2",
+                      "disponible": "10"
+                    }
+                  ]
                 }
               }
             }
@@ -167,6 +204,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
                 }
               }
             }
@@ -177,6 +217,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No se puede realizar esta operación en el estado actual. Revisa la cotización o el pedido."
                 }
               }
             }
@@ -187,6 +230,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
                 }
               }
             }
@@ -197,6 +243,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
                 }
               }
             }
@@ -209,7 +258,7 @@
         "tags": [
           "Pedidos"
         ],
-        "summary": "Consultar estado, cotizacion de origen y total de un pedido",
+        "summary": "Consultar pedido",
         "operationId": "consultar_pedido_pedidos__pedido_id__get",
         "parameters": [
           {
@@ -233,6 +282,15 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PedidoConsultaRespuesta"
+                },
+                "example": {
+                  "mensaje": "Pedido consultado.",
+                  "pedido_id": "22222222-2222-4222-8222-222222222222",
+                  "estado": "Pendiente",
+                  "cotizacion_folio": "COT-API-DEMO",
+                  "cotizacion_version": 2,
+                  "total": "240.00",
+                  "moneda": "MXN"
                 }
               }
             }
@@ -243,6 +301,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
                 }
               }
             }
@@ -253,6 +314,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
                 }
               }
             }
@@ -263,6 +327,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
                 }
               }
             }
@@ -275,7 +342,7 @@
         "tags": [
           "Pedidos"
         ],
-        "summary": "Confirmar un pedido pendiente y reservar inventario",
+        "summary": "Confirmar pedido",
         "operationId": "confirmar_pedido_pedidos__pedido_id__confirmar_post",
         "parameters": [
           {
@@ -309,6 +376,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PedidoConfirmadoRespuesta"
+                },
+                "example": {
+                  "mensaje": "El pedido se confirmó y sus productos quedaron reservados.",
+                  "pedido_id": "22222222-2222-4222-8222-222222222222",
+                  "estado": "Confirmado",
+                  "referencia_pago": "PAGO-DEMO-001",
+                  "ubicacion_id": "S1"
                 }
               }
             }
@@ -319,6 +393,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
                 }
               }
             }
@@ -329,6 +406,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No se puede realizar esta operación en el estado actual. Revisa la cotización o el pedido."
                 }
               }
             }
@@ -339,6 +419,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
                 }
               }
             }
@@ -349,6 +432,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
                 }
               }
             }
@@ -361,7 +447,7 @@
         "tags": [
           "Pedidos"
         ],
-        "summary": "Cancelar un pedido confirmado antes del surtido y liberar su reserva",
+        "summary": "Cancelar pedido",
         "operationId": "cancelar_pedido_pedidos__pedido_id__cancelar_post",
         "parameters": [
           {
@@ -395,6 +481,11 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PedidoCanceladoRespuesta"
+                },
+                "example": {
+                  "mensaje": "El pedido se canceló y sus productos reservados volvieron a estar disponibles.",
+                  "pedido_id": "22222222-2222-4222-8222-222222222222",
+                  "estado": "Cancelado"
                 }
               }
             }
@@ -405,6 +496,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
                 }
               }
             }
@@ -415,6 +509,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No se puede realizar esta operación en el estado actual. Revisa la cotización o el pedido."
                 }
               }
             }
@@ -425,6 +522,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
                 }
               }
             }
@@ -435,6 +535,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
                 }
               }
             }
@@ -447,7 +550,7 @@
         "tags": [
           "Inventario"
         ],
-        "summary": "Consultar disponibilidad de un producto",
+        "summary": "Consultar disponibilidad",
         "operationId": "consultar_inventario_inventario__sku__get",
         "parameters": [
           {
@@ -472,6 +575,20 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InventarioRespuesta"
+                },
+                "example": {
+                  "mensaje": "Disponibilidad del producto consultada.",
+                  "sku": "FER-API-DEMO",
+                  "encontrado": true,
+                  "ubicaciones": [
+                    {
+                      "ubicacion_id": "S1",
+                      "existencia_fisica": "10",
+                      "comprometida": "7",
+                      "en_transito": "5",
+                      "disponible": "3"
+                    }
+                  ]
                 }
               }
             }
@@ -482,6 +599,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Escribe el código del producto."
                 }
               }
             }
@@ -492,6 +612,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
                 }
               }
             }
@@ -502,6 +625,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
                 }
               }
             }
@@ -512,6 +638,9 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
                 }
               }
             }

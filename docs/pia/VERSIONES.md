@@ -1,4 +1,19 @@
-# Versiones conservadas para el cierre de FerreMax
+# Versiones de FerreMax: U3 y PIA
+
+## Organización de la entrega final
+
+La rama final del PIA es `main`; `pia-entrega` conserva la preparación del cierre. `render.yaml` declara seguimiento a `main`. La [verificación de cierre](CIERRE.md) registra los resultados efectivos de integración y despliegue, por separado de esta configuración.
+
+U3 sigue accesible mediante la etiqueta `u3-entrega`, cuyo destino inmutable es `eb71b6625c957b9dbfe7e4ed54f7c9f8ad08f365`. Los originales de `reference/`, `diagrams/`, `docs/adr/`, los PDF U3 y la bitácora histórica se contrastan contra esa etiqueta antes de integrar. Actualizar main no elimina esos archivos ni el historial.
+
+Las ramas `e9-ferremax`, `pia-api-*`, `pia-docker`, `pia-compose-app-tests`, `pia-ci`, `pia-specification`, `pia-state-machine` y las ramas de presentación son registros de etapas. No se fusionan individualmente al cierre. La interfaz independiente de la rama histórica `pia-cliente-cotizaciones` fue retirada de la entrega; conservar esa rama no la publica en main.
+
+En GitHub Desktop: **Fetch origin → Current Branch → main → Pull origin**. La consulta de U3 puede hacerse en [GitHub](https://github.com/Santana-R/ferremax-u3/tree/u3-entrega). No se borran ramas ni se reescribe la historia.
+
+## Registro histórico del inicio del cierre
+
+El texto siguiente identifica el estado de las ramas al iniciar la integración; sus referencias a main como U3 y pia-render como rama seguida corresponden a ese momento.
+
 
 Registro del 6 de noviembre de 2026. Este documento acompaña el primer bloque de cierre; no reemplaza la entrega histórica U3 ni declara integrado el PIA a main.
 

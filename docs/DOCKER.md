@@ -23,7 +23,7 @@ Compose entrega las credenciales por variables al arrancar los contenedores.
 
 ## Paso 1: arrancar App con la base existente
 
-Desde GitHub Desktop, actualizar y seleccionar la rama `pia-compose-app-tests`.
+Desde GitHub Desktop, actualizar y seleccionar la rama de entrega final, `main`, según el [registro de versiones](pia/VERSIONES.md).
 Mantener Docker Desktop abierto. Detener la API de la terminal con Ctrl+C y,
 desde la raíz del repositorio, ejecutar:
 
@@ -127,7 +127,7 @@ La carga incluye el inventario ficticio y la versión 1 vencida sin sobrescribir
 registros existentes. En la Mac que ya tiene los datos no es necesario repetirla;
 tampoco restaura el estado de un pedido ni reinicia una cotización revalidada.
 
-## Estado de verificación de este bloque
+## Evidencia de la etapa Docker y validación posterior
 
 La configuración de los tres servicios se validó con Docker Compose. El ejecutor
 se probó en el entorno local Python 3.9 con PostgreSQL real: 235 pruebas
@@ -147,6 +147,8 @@ eliminación de la base temporal y la conservación de la base de demostración.
 Los reportes de esa ejecución quedaron en
 `reports/docker/20261106T065125Z_6fc7da6d/`. Las capturas compartidas durante la
 verificación acreditan esos resultados; no se duplican en el repositorio.
+
+La suite posterior de CI/CD registró 242 pruebas, 0 omitidas y cobertura 97.24 % en `947aeae`; ver [evidencia por commit](../evidencias/pia/render_cd_verificacion.json). Las 235 pruebas anteriores corresponden al bloque Docker identificado arriba.
 
 La [integración continua](CI.md) reproduce el recorrido en un runner de GitHub,
 con su propia base ficticia y sin acceder al Docker ni a los datos de la Mac.

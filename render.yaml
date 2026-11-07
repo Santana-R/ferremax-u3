@@ -4,7 +4,7 @@ services:
     runtime: docker
     plan: free
     region: oregon
-    branch: pia-render
+    branch: main
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /openapi.json

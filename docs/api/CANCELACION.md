@@ -26,8 +26,7 @@ no ejecuta un reembolso. La referencia del pago simulado se conserva como histor
 ## Prueba guiada en Swagger
 
 Usar el identificador del pedido ya confirmado en el paso anterior. Con
-PostgreSQL encendido, detener la API con Ctrl+C, actualizar a la rama
-`pia-api-cancelacion` desde GitHub Desktop y reiniciar desde la raíz del repo:
+PostgreSQL encendido y la versión de entrega actual seleccionada, detener la API anterior con Ctrl+C y reiniciar desde la raíz del repo:
 
 ```bash
 .venv/bin/python -m uvicorn ferremax.api.main:app --app-dir src --env-file .env --host 127.0.0.1 --port 8000

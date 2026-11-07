@@ -1,0 +1,24 @@
+{
+  "tipo": "Verificacion registrada previa al cierre documental",
+  "commit": "c4876efe91a3d3b2a801017e54017718a593db61",
+  "ejecucion": "https://github.com/Santana-R/ferremax-u3/actions/runs/42322301835",
+  "junit": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "249",
+    "time": "9.937",
+    "timestamp": "2026-11-07T01:08:45.469927+00:00",
+    "hostname": "3608a1c70ced"
+  },
+  "cobertura": {
+    "covered_lines": 818,
+    "num_statements": 840,
+    "percent_covered": 97.38095238095238,
+    "percent_covered_display": "97.38",
+    "missing_lines": 22,
+    "excluded_lines": 16
+  },
+  "alcance": "Docker App/DB/Tests, seis operaciones HTTP y presentacion real de Swagger en navegador. No equivale a implementar todas las historias de negocio."
+}
