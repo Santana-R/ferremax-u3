@@ -60,6 +60,7 @@ body:not(.detalles-tecnicos) .opblock-summary-path,body:not(.detalles-tecnicos) 
 body:not(.detalles-tecnicos) .curl-command,body:not(.detalles-tecnicos) .request-url,
 body:not(.detalles-tecnicos) .live-responses-table .response-col_description>div:has(.headerline){display:none!important}
 .swagger-ui .opblock .opblock-summary-description{font-size:16px;font-weight:600;flex:1}
+body:not(.detalles-tecnicos) .swagger-ui .highlight-code pre,body:not(.detalles-tecnicos) .swagger-ui .highlight-code code{white-space:pre-wrap!important;overflow-wrap:anywhere}
 .fm-opciones{padding-top:18px!important;padding-bottom:8px!important}.fm-opciones label{display:flex;gap:8px;align-items:center}.fm-opciones p{font-size:13px;color:#555}
 </style>'''
         opciones='''<div class="swagger-ui"><div class="wrapper fm-opciones"><label><input id="detalles" type="checkbox">Mostrar detalles técnicos</label><p>Vista sencilla: se presenta el mensaje de cada respuesta. Activa los detalles para consultar las rutas y los datos completos de la API.</p></div></div>'''
