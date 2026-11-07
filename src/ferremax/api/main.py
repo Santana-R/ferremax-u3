@@ -13,9 +13,9 @@ from ferremax.application.services import Actor
 from ferremax.infrastructure.postgres import PostgresReader
 from .schemas import InventarioRespuesta, MensajeError
 from .settings import ConfiguracionBaseNoDisponible, conexion_desde_entorno
-from .cliente import router as cliente_router
 from .cotizaciones import router as cotizaciones_router, mensaje_solicitud_invalida
 from .responses import error_cliente
+from .swagger_claro import configurar_swagger
 from .pedidos import router as pedidos_router, mensaje_cancelacion_invalida, mensaje_confirmacion_invalida
 
 
@@ -30,20 +30,17 @@ def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], 
         version="0.6.0",
         description="Inventario, cotizaciones y pedidos: consulta, confirmacion y cancelacion con reservas.",
         redoc_url=None,
+        docs_url=None,
     )
     # La configuracion se resuelve al consultar, no al abrir Swagger.
     api.state.database_url = database_url
     api.state.reloj = reloj or (lambda: datetime.now(timezone.utc))
     api.include_router(cotizaciones_router)
     api.include_router(pedidos_router)
-    api.include_router(cliente_router)
 
     @api.exception_handler(ErrorPostgres)
     @api.exception_handler(ConfiguracionBaseNoDisponible)
     async def base_no_disponible(request, exc):
-        if request.url.path.startswith("/cliente/"):
-            recurso = "los pedidos" if request.url.path.endswith("/pedidos") else "los productos" if request.url.path.endswith("/catalogo") else "las cotizaciones"
-            return error_cliente(f"No pudimos cargar {recurso}. Inténtalo de nuevo en unos momentos.", 503)
         if request.url.path.startswith("/pedidos/"):
             if request.method == "GET":
                 return error_cliente("Por el momento no podemos consultar el pedido. Inténtalo de nuevo más tarde.", 503)
@@ -75,7 +72,7 @@ def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], 
     @api.get(
         "/inventario/{sku}",
         response_model=InventarioRespuesta,
-        summary="Consultar disponibilidad de un producto",
+        summary="Consultar disponibilidad",
         tags=["Inventario"],
         responses={
             400: {"model": MensajeError, "description": "Codigo de producto vacio"},
@@ -99,6 +96,7 @@ def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], 
             return error_cliente("Producto no encontrado en el inventario.", 404, codigo)
         return InventarioRespuesta(**resultado)
 
+    configurar_swagger(api)
     return api
 
 

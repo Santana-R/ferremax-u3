@@ -65,7 +65,7 @@ def mensaje_cancelacion_invalida(errores):
 @router.get(
     "/{pedido_id}",
     response_model=PedidoConsultaRespuesta,
-    summary="Consultar estado, cotizacion de origen y total de un pedido",
+    summary="Consultar pedido",
     responses={
         404: {"model": MensajeError, "description": "Pedido no encontrado"},
         422: {"model": MensajeError, "description": "Revisar identificador del pedido"},
@@ -90,7 +90,7 @@ def consultar_pedido(
 @router.post(
     "/{pedido_id}/confirmar",
     response_model=PedidoConfirmadoRespuesta,
-    summary="Confirmar un pedido pendiente y reservar inventario",
+    summary="Confirmar pedido",
     responses={
         404: {"model": MensajeError, "description": "Pedido no encontrado"},
         409: {"model": MensajeError, "description": "Estado, pago o disponibilidad impiden confirmar"},
@@ -129,7 +129,7 @@ def confirmar_pedido(
 @router.post(
     "/{pedido_id}/cancelar",
     response_model=PedidoCanceladoRespuesta,
-    summary="Cancelar un pedido confirmado antes del surtido y liberar su reserva",
+    summary="Cancelar pedido",
     responses={
         404: {"model": MensajeError, "description": "Pedido no encontrado"},
         409: {"model": MensajeError, "description": "Estado, surtido o reserva impiden cancelar"},

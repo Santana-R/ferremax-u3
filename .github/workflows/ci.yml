@@ -51,13 +51,11 @@ jobs:
           docker compose exec -T app python scripts/cargar_cotizacion_demo.py
           python3 scripts/comprobar_api_ci.py
 
-      - name: Comprobar la vista de cliente en navegador
+      - name: Comprobar presentacion de Swagger en navegador
         run: |
-          docker compose exec -T app python scripts/cargar_cotizacion_cliente_demo.py
           npm install --prefix "$RUNNER_TEMP/ferremax-browser" --no-audit --no-fund playwright@1.65.0
           node "$RUNNER_TEMP/ferremax-browser/node_modules/playwright/cli.js" install --with-deps chromium
-          FERREMAX_PLAYWRIGHT="$RUNNER_TEMP/ferremax-browser/node_modules/playwright" node scripts/comprobar_cliente_ci.cjs
-          FERREMAX_PLAYWRIGHT="$RUNNER_TEMP/ferremax-browser/node_modules/playwright" node scripts/comprobar_atencion_ci.cjs
+          FERREMAX_PLAYWRIGHT="$RUNNER_TEMP/ferremax-browser/node_modules/playwright" node scripts/comprobar_swagger_ci.cjs
 
       - name: Ejecutar suite con PostgreSQL y cobertura minima del 80 por ciento
         run: docker compose run --rm --no-deps tests

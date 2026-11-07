@@ -13,7 +13,6 @@ import pytest
 from ferremax.api.main import create_app
 from scripts import iniciar_api
 from scripts.cargar_cotizacion_demo import COTIZACION_DEMO_ID
-from scripts.cargar_cotizacion_cliente_demo import CLIENTE_DEMO_ID
 from tests.test_api_consulta_pedido_postgres import snapshot
 
 
@@ -52,7 +51,6 @@ def test_base_nueva_recibe_seis_tablas_y_datos_ficticios(base_vacia):
         assert tablas == [(n,) for n in ("auditoria", "cotizacion_version", "inventario", "outbox", "pedido", "reserva")]
         assert conn.execute("SELECT ubicacion_id,existencia_fisica,comprometida FROM ferremax_u3.inventario WHERE sku='FER-API-DEMO' ORDER BY ubicacion_id").fetchall() == [("S1", 10, 0), ("S2", 0, 0)]
         assert conn.execute("SELECT version FROM ferremax_u3.cotizacion_version WHERE id=%s::uuid", (COTIZACION_DEMO_ID,)).fetchall() == [(1,)]
-        assert conn.execute("SELECT version FROM ferremax_u3.cotizacion_version WHERE id=%s::uuid", (CLIENTE_DEMO_ID,)).fetchall() == [(1,)]
 
 
 def test_reiniciar_conserva_cotizaciones_pedido_confirmado_reserva_y_auditoria(base_vacia):
@@ -79,7 +77,7 @@ def test_dos_arranques_simultaneos_crean_un_solo_esquema_y_demo(base_vacia):
         for futuro in futuros:
             futuro.result()
     with psycopg.connect(base_vacia) as conn:
-        assert conn.execute("SELECT count(*) FROM ferremax_u3.cotizacion_version").fetchone() == (2,)
+        assert conn.execute("SELECT count(*) FROM ferremax_u3.cotizacion_version").fetchone() == (1,)
         assert conn.execute("SELECT count(*) FROM ferremax_u3.inventario").fetchone() == (2,)
 
 

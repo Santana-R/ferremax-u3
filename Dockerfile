@@ -11,7 +11,7 @@ RUN python -m pip install --no-cache-dir -r requirements.txt \
     && chown ferremax:ferremax /app
 
 COPY --chown=ferremax:ferremax src/ ./src/
-COPY --chown=ferremax:ferremax scripts/cargar_inventario_demo.py scripts/cargar_cotizacion_demo.py scripts/cargar_cotizacion_cliente_demo.py ./scripts/
+COPY --chown=ferremax:ferremax scripts/cargar_inventario_demo.py scripts/cargar_cotizacion_demo.py ./scripts/
 COPY --chown=ferremax:ferremax scripts/iniciar_api.py ./scripts/
 # Mismo DDL que Compose y la suite; una sola definicion de las seis tablas.
 COPY --chown=ferremax:ferremax tests/sql/ferremax_pruebas.sql ./tests/sql/

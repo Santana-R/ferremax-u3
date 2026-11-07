@@ -68,7 +68,7 @@ RECHAZOS = {
     "/{cotizacion_id}/versiones/{version}/revalidar",
     status_code=201,
     response_model=CotizacionRevalidadaRespuesta,
-    summary="Revalidar una cotizacion vencida conservando su historial",
+    summary="Renovar cotización vencida",
     responses={
         404: {"model": MensajeError, "description": "Cotizacion o version no encontrada"},
         409: {"model": MensajeError, "description": "La version no admite esta revalidacion"},
@@ -103,7 +103,7 @@ def revalidar_cotizacion(
     "/{cotizacion_id}/versiones/{version}/convertir",
     status_code=201,
     response_model=PedidoCreadoRespuesta,
-    summary="Crear un pedido desde una version vigente y aceptada",
+    summary="Crear pedido",
     responses={
         404: {"model": MensajeError, "description": "Cotizacion o version no encontrada"},
         409: {"model": MensajeError, "description": "Cotizacion no vigente o sin aceptacion"},
