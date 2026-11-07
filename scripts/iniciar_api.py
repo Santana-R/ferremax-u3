@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from ferremax.api.settings import ConfiguracionBaseNoDisponible, conexion_desde_entorno
 from scripts.cargar_cotizacion_demo import cargar_cotizacion
+from scripts.cargar_cotizacion_cliente_demo import cargar_cliente_demo
 
 
 def booleano(nombre):
@@ -32,6 +33,7 @@ def preparar_base(conexion, inicializar=False, demo=False):
         print("Esquema de FerreMax preparado; se conservan las tablas y datos existentes.", flush=True)
     if demo:
         cargar_cotizacion(conexion)
+        cargar_cliente_demo(conexion)
         print("Datos ficticios preparados sin sobrescribir registros existentes.", flush=True)
 
 

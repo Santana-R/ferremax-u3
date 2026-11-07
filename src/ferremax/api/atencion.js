@@ -23,7 +23,10 @@ async function api(path, body) {
       'Se interrumpió la conexión y no podemos confirmar si se guardó. Actualiza y consulta el estado antes de volver a intentarlo.');
     error.uncertain=body!==undefined; throw error;
   }
-  if (!response.ok) throw new Error(friendly[data.mensaje] || data.mensaje || 'No pudimos completar la operación. Revisa la información y vuelve a intentarlo.');
+  if (!response.ok) {
+    const error=new Error(friendly[data.mensaje] || data.mensaje || 'No pudimos completar la operación. Revisa la información y vuelve a intentarlo.');
+    error.status=response.status; throw error;
+  }
   return data;
 }
 function optionList(select, items, title) {
@@ -78,6 +81,7 @@ function showOrder(row) {
       const p=document.createElement('p'),strong=document.createElement('strong');strong.textContent=label+': ';p.append(strong,document.createTextNode(value));el('order-detail').append(p);
     }
     const note=document.createElement('p');note.className='notice';note.textContent=row.estado==='Pendiente' ? 'El pedido sigue pendiente. Confirma el pago y la disponibilidad para reservar sus productos.' : row.estado==='Cancelado' ? 'El pedido está cancelado. No puede confirmarse ni cancelarse otra vez.' : row.surtido ? 'El pedido ya fue surtido y no admite cancelación.' : 'El pedido está confirmado y tiene productos reservados. Puedes cancelarlo mientras no se haya surtido.';el('order-detail').append(note);
+    const products=document.createElement('p');products.textContent='Productos: '+row.partidas.map(p=>p.cantidad+' unidades de '+p.sku).join('; ')+'.';el('order-detail').append(products);
   }
   lockOrders();
 }
@@ -150,6 +154,7 @@ async function mutateOrder(action, body, title, text) {
     receipt('order-result',title,text+(loaded ? '' : ' Actualiza los pedidos para consultar su estado.'));
   }catch(error){
     if(error.uncertain)ordersFresh=false;
+    if(error.status===409 || error.status===404)await loadOrders(id);
     receipt('order-result','No se pudo completar la operación',error.message,true);
   }finally{mutationBusy=false;el('orders-status').textContent='';lockOrders();}
 }
