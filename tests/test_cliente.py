@@ -18,6 +18,7 @@ from tests.test_api_revalidacion_postgres import preparar, versiones
 
 def test_pantalla_y_javascript_disponibles_sin_base_y_openapi_conservado():
     with TestClient(create_app()) as client:
+        assert client.get('/').url.path == '/cliente'
         page = client.get('/cliente')
         assert page.status_code == 200 and 'text/html' in page.headers['content-type']
         assert 'Renovar una cotización vencida' in page.text

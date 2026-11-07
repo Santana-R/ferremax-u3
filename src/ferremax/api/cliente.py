@@ -2,13 +2,18 @@
 
 from pathlib import Path
 from fastapi import APIRouter, Depends, Request
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.encoders import jsonable_encoder
 from ferremax.infrastructure.cotizaciones_reader import PostgresCotizacionesReader
 from ferremax.infrastructure.atencion_reader import PostgresAtencionReader
 from .settings import conexion_desde_entorno
 
 router = APIRouter(include_in_schema=False)
+
+
+@router.get("/")
+def inicio_cliente():
+    return RedirectResponse("/cliente")
 
 
 def obtener_cotizaciones_reader(request: Request):
