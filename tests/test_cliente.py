@@ -102,3 +102,58 @@ def test_demo_de_cliente_no_reinicia_cotizacion_renovada(conexion):
     antes = versiones(conexion, CLIENTE_DEMO_ID)
     cargar_cliente_demo(conexion, AHORA+timedelta(days=10))
     assert versiones(conexion, CLIENTE_DEMO_ID) == antes
+
+@pytest.mark.parametrize('ruta,palabra', [('/cliente/catalogo','productos'),('/cliente/pedidos','pedidos')])
+def test_catalogos_no_exponen_error_tecnico_sin_configuracion(monkeypatch, ruta, palabra):
+    for name in ('DATABASE_URL', 'POSTGRES_DB', 'POSTGRES_USER', 'POSTGRES_PASSWORD'):
+        monkeypatch.delenv(name, raising=False)
+    with TestClient(create_app()) as client:
+        response=client.get(ruta)
+        assert response.status_code == 503
+        assert palabra in response.json()['mensaje']
+        assert client.get('/cliente/atencion.js').status_code == 200
+
+
+def test_catalogos_reales_y_estados_de_pedidos(conexion):
+    c, entrada, ruta = preparar(conexion)
+    with TestClient(create_app(conexion, reloj=lambda: AHORA)) as client:
+        catalogo=client.get('/cliente/catalogo')
+        assert catalogo.headers['cache-control']=='no-store'
+        assert c.partidas[0].sku.valor in catalogo.json()['productos']
+        assert 'S1' in catalogo.json()['ubicaciones']
+        assert client.post(ruta,json=entrada).status_code==201
+        pedido=client.post(ruta.replace('/1/revalidar','/2/convertir'),json={'aceptada':True}).json()
+        pid=pedido['pedido_id']
+        def leer():
+            response=client.get('/cliente/pedidos')
+            assert response.headers['cache-control']=='no-store'
+            return next(p for p in response.json()['pedidos'] if p['id']==pid)
+        assert leer()['estado']=='Pendiente'
+        assert leer()['referencia'].startswith('PED-')
+        assert leer()['total']=='240.00'
+        pago={'referencia_pago':'PAGO-UI','pago_autorizado':False,'ubicacion_id':'S1'}
+        assert client.post(f'/pedidos/{pid}/confirmar',json=pago).status_code==409
+        assert leer()['estado']=='Pendiente'
+        assert client.post(f'/pedidos/{pid}/confirmar',json={**pago,'pago_autorizado':True}).status_code==200
+        assert leer()['estado']=='Confirmado'
+        assert client.post(f'/pedidos/{pid}/cancelar',json={'motivo':'Solicitud del cliente'}).status_code==200
+        assert leer()['estado']=='Cancelado'
+        assert client.get(f'/pedidos/{pid}').json()['estado']=='Cancelado'
+
+
+def test_referencias_de_pantalla_distinguen_prefijos_coincidentes(monkeypatch):
+    from ferremax.infrastructure.atencion_reader import PostgresAtencionReader
+    c=Cotizacion(str(uuid4()),'COT-REFERENCIAS',1,'FICTICIO',
+        Vigencia(AHORA-timedelta(days=1),AHORA+timedelta(days=1)),
+        [Partida(1,SKU('DEMO'),1,Dinero('10.00'))],'Contado')
+    filas=[]
+    for pid in ('aaaaaaaa-1111-4111-8111-111111111111','aaaaaaaa-2222-4222-8222-222222222222'):
+        p=c.convertir(AHORA,True);p.id=pid;filas.append((datos(p),))
+    reader=PostgresAtencionReader('no-se-conecta')
+    monkeypatch.setattr(reader,'_leer',lambda sql, params:filas)
+    pedidos=reader.pedidos()
+    assert len({p['referencia'] for p in pedidos})==2
+    assert all(len(p['referencia'])==16 for p in pedidos)
+    monkeypatch.setattr(reader,'_leer',lambda sql, params:[])
+    assert reader.pedidos()==[]
+    assert reader.catalogo()=={'productos':[],'ubicaciones':[]}

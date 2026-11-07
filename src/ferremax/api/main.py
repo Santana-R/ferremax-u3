@@ -42,7 +42,8 @@ def create_app(database_url: Optional[str] = None, reloj: Optional[Callable[[], 
     @api.exception_handler(ConfiguracionBaseNoDisponible)
     async def base_no_disponible(request, exc):
         if request.url.path.startswith("/cliente/"):
-            return error_cliente("No pudimos cargar las cotizaciones. Inténtalo de nuevo en unos momentos.", 503)
+            recurso = "los pedidos" if request.url.path.endswith("/pedidos") else "los productos" if request.url.path.endswith("/catalogo") else "las cotizaciones"
+            return error_cliente(f"No pudimos cargar {recurso}. Inténtalo de nuevo en unos momentos.", 503)
         if request.url.path.startswith("/pedidos/"):
             if request.method == "GET":
                 return error_cliente("Por el momento no podemos consultar el pedido. Inténtalo de nuevo más tarde.", 503)

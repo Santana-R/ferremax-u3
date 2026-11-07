@@ -1,8 +1,8 @@
-# Renovación de cotizaciones: primera vista de atención
+# Vista de atención: inventario, cotizaciones y pedidos
 
 La pantalla `/cliente` permite seleccionar una cotización por folio, revisar cantidades y precios, indicar vigencia, condiciones y motivo, y renovar sin escribir JSON, identificadores ni versiones. La confirmación presenta el folio, la fecha guardada de vencimiento (hora de Monterrey) y la conservación del historial.
 
-Es la primera operación de la vista de atención; las otras operaciones siguen en Swagger. La aplicación continúa siendo una demostración con datos ficticios y actores simulados. No introduce autenticación ni pagos reales.
+La navegación también permite consultar inventario, crear pedidos desde cotizaciones aceptadas y vigentes, consultar pedidos, confirmarlos y cancelarlos. Las seis operaciones conservan su API y su documentación en Swagger. La aplicación continúa siendo una demostración con datos ficticios y actores simulados. No introduce autenticación ni pagos reales.
 
 ## Ejecutar desde GitHub Desktop y Docker
 
@@ -29,7 +29,7 @@ El cargador agrega una cotización ficticia separada de COT-API-DEMO. Es idempot
 - El total es una estimación visual. Los importes persistidos se siguen validando con Decimal en el servidor.
 - Se deshabilitan los controles mientras se guarda. Si se interrumpe la comunicación durante el envío, se solicita recargar antes de reintentar: no se afirma que hubo rollback ni se repite el POST automáticamente.
 - El comprobante usa la fecha leída de la cotización persistida después de renovar. Si falla esa lectura, conserva la confirmación del guardado y solicita actualizar para conocer la nueva vigencia.
-- Las tres rutas de presentación (`/cliente`, `/cliente/acciones.js`, `/cliente/cotizaciones`) se excluyen de Swagger; las seis operaciones de negocio mantienen su documentación y contratos.
+- Las rutas de presentación y selección bajo `/cliente` se excluyen de Swagger; las seis operaciones de negocio mantienen su documentación y contratos.
 
 ## Validación
 
@@ -37,4 +37,15 @@ El cargador agrega una cotización ficticia separada de COT-API-DEMO. Es idempot
 
 CI prueba además la pantalla con Chromium contra App y PostgreSQL desechables. Recorre selección por folio, bloqueo de una cotización vigente, renovación real, comprobante, fallo recuperable de consulta, cotización sin emitir, comunicación incierta al guardar, lista vacía y distribución móvil. Los PNG de comprobación quedan en `reports/ci` dentro del artefacto de la ejecución, sin versionar capturas generadas en Git.
 
-Esta rama todavía debe revisarse e integrarse en la entrega antes de cambiar la versión publicada en Render.
+## Recorrido completo de atención
+
+1. **Consultar inventario:** seleccionar el código del producto y consultar sus unidades físicas, reservadas, disponibles y en traslado por ubicación.
+2. **Renovar cotizaciones:** elegir el folio vencido, revisar el formulario y guardar. La vista evita renovar cotizaciones vigentes o aún no emitidas.
+3. **Crear pedido:** seleccionar una cotización vigente, revisar sus productos, precios y condiciones, y registrar su aceptación. Se crea Pendiente y todavía no reserva unidades.
+4. **Consultar y atender pedidos:** elegir una referencia de pantalla (PED-...), consultar su estado e importe y realizar la operación permitida. Las referencias son abreviaturas de presentación, no un nuevo folio comercial; los identificadores completos permanecen internos. Si dos prefijos coinciden se amplía la abreviatura para distinguirlos.
+5. **Confirmar:** introducir la referencia del pago simulado, indicar si está autorizado y elegir la sucursal. Un pago no autorizado o inventario insuficiente conserva el pedido pendiente. Un pago autorizado y existencias suficientes permiten confirmar y reservar.
+6. **Cancelar:** escribir el motivo y confirmar la liberación de los productos. Un pedido cancelado ya no muestra controles de confirmación ni cancelación. Un pedido surtido no admite cancelación.
+
+`scripts/comprobar_atencion_ci.cjs` recorre estas operaciones en navegador y verifica inventario 10 → 8 → 10, pago rechazado sin cambio de estado, confirmación, cancelación y consulta. También verifica el diseño móvil y que los UUID internos no aparezcan como texto para el usuario.
+
+Las mutaciones no se reintentan automáticamente tras un corte de comunicación. La vista pide consultar el estado o los pedidos antes de volver a intentarlo. Una cotización puede dar origen a varios pedidos según el comportamiento existente; la pantalla no impone una regla de unicidad nueva.

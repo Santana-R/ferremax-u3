@@ -57,6 +57,7 @@ jobs:
           npm install --prefix "$RUNNER_TEMP/ferremax-browser" --no-audit --no-fund playwright@1.65.0
           node "$RUNNER_TEMP/ferremax-browser/node_modules/playwright/cli.js" install --with-deps chromium
           FERREMAX_PLAYWRIGHT="$RUNNER_TEMP/ferremax-browser/node_modules/playwright" node scripts/comprobar_cliente_ci.cjs
+          FERREMAX_PLAYWRIGHT="$RUNNER_TEMP/ferremax-browser/node_modules/playwright" node scripts/comprobar_atencion_ci.cjs
 
       - name: Ejecutar suite con PostgreSQL y cobertura minima del 80 por ciento
         run: docker compose run --rm --no-deps tests

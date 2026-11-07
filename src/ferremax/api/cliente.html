@@ -2,15 +2,24 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Renovar cotización · FerreMax</title>
+<title>Atención de clientes · FerreMax</title>
 <style>
 :root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#202a2b;background:#f4f4f0;font-size:16px;--accent:#aa3b17;--muted:#596363;--line:#d5d9d3}*{box-sizing:border-box}body{margin:0}header{background:#173c35;color:white;padding:20px max(24px,calc((100vw - 1120px)/2));display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-size:26px;font-weight:850;letter-spacing:-1px}.brand span{color:#ffbd78}.context{font-size:13px;color:#dae7dc}main{max-width:1170px;margin:auto;padding:38px 24px 60px}.eyebrow{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);font-weight:750}h1{font-size:clamp(28px,4vw,40px);letter-spacing:-1.3px;line-height:1.15;margin:12px 0}h2{font-size:21px;margin:0 0 12px}p{line-height:1.6}.lead{color:var(--muted);max-width:720px;margin-bottom:28px}.layout{display:grid;grid-template-columns:310px 1fr;gap:24px;align-items:start}.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:24px}.step{display:inline-flex;background:#e9eee7;border-radius:50%;width:27px;height:27px;align-items:center;justify-content:center;font-size:14px;margin-right:8px;color:#173c35}.hint{color:var(--muted);font-size:14px;margin:6px 0 20px}label{display:block;font-size:14px;font-weight:650;margin:18px 0 7px}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:11px 12px;border:1px solid #9ba6a0;border-radius:7px;background:#fff;color:#202a2b}textarea{resize:vertical;min-height:84px}button{cursor:pointer;border:0;border-radius:7px;padding:12px 18px;font-weight:700;background:var(--accent);color:white}button:disabled{opacity:.52;cursor:not-allowed}button.link{background:transparent;color:#173c35;padding:10px 0;text-decoration:underline;font-size:14px}.row{display:flex;justify-content:space-between;gap:14px;align-items:center}.badge{font-size:12px;font-weight:700;border-radius:20px;padding:5px 10px;background:#fff0dc;color:#7d430d}.badge.current{background:#e2f1e8;color:#245c3c}.details{padding-top:20px;border-top:1px solid var(--line);margin-top:20px}.small{font-size:13px;color:var(--muted)}.date{font-size:15px;font-weight:650}#empty{color:var(--muted);padding:30px 0}fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-weight:700;font-size:17px;margin:24px 0 4px}.product{background:#f6f7f2;border:1px solid #dce0d7;border-radius:9px;padding:16px;margin:14px 0}.product-title{font-weight:700;overflow-wrap:anywhere}.product-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}.total{margin:24px 0;padding:18px;background:#eef2eb;border-radius:8px}.total strong{font-size:23px}.actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.notice{padding:14px 16px;border-radius:8px;margin:18px 0;background:#f8f0dd;color:#6a460f;line-height:1.6}.result{border-radius:12px;padding:22px;background:#e6f2e7;border:1px solid #a3c9ad;margin:20px 0;scroll-margin-top:25px}.result.error{background:#fff0e9;border-color:#d99e83}.result h2{font-size:20px}.result p{margin:8px 0 0}.result:focus{outline:2px solid #316c52}footer{max-width:1170px;margin:auto;padding:0 24px 30px;color:var(--muted);font-size:13px}a{color:inherit}:focus-visible{outline:3px solid #268f74;outline-offset:3px}[hidden]{display:none!important}.busy{color:var(--muted);font-size:14px}noscript{display:block;background:#ffe9d6;padding:20px}@media(max-width:780px){main{padding-top:24px}.layout{grid-template-columns:1fr}.panel{padding:20px}.product-fields,.two{grid-template-columns:1fr}.context{text-align:right}.row{align-items:flex-start}}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 30px}.tab{background:#e2e9e1;color:#173c35;font-size:14px}.tab[aria-current="page"]{background:#173c35;color:white}.check{display:flex;align-items:flex-start;gap:12px;line-height:1.5;margin:22px 0}.check input{width:20px;height:20px;flex-shrink:0;margin-top:2px}#view-inventory button,#view-convert button,#view-orders form button{margin-top:18px}.stock-card{border-top:1px solid var(--line);padding:20px 0}.stock-card strong{font-size:22px}#order-detail{margin-bottom:24px}#order-detail p{margin:8px 0}#view-orders select{max-width:100%}#view-orders form{border-top:1px solid var(--line);padding-top:22px;margin-top:22px}.ref{overflow-wrap:anywhere}
 </style>
 <script src="/cliente/acciones.js" defer></script>
+<script src="/cliente/atencion.js" defer></script>
 </head>
 <body>
 <header><div class="brand">Ferre<span>Max</span></div><div class="context">Atención de cotizaciones<br>Demostración con datos ficticios</div></header>
 <main>
+<nav class="tabs" aria-label="Operaciones de atención">
+<button class="tab secondary" type="button" data-view="inventory">Consultar inventario</button>
+<button class="tab secondary" type="button" data-view="renew">Renovar cotizaciones</button>
+<button class="tab secondary" type="button" data-view="convert">Crear pedido</button>
+<button class="tab secondary" type="button" data-view="orders">Consultar y atender pedidos</button>
+</nav>
+<section id="view-renew" class="view">
 <div class="eyebrow">Cotizaciones / Renovación</div>
 <h1>Renovar una cotización vencida</h1>
 <p class="lead">Elige una cotización, revisa los precios y establece su nueva vigencia. La cotización anterior se conservará en el historial.</p>
@@ -47,7 +56,37 @@
 </form>
 </section>
 </div>
+</section>
+<section id="view-inventory" class="view" hidden aria-labelledby="inventory-title">
+<div class="eyebrow">Productos / Disponibilidad</div><h1 id="inventory-title">Consulta las unidades disponibles</h1>
+<p class="lead">Selecciona el código del producto para revisar sus existencias en cada sucursal. Los productos en traslado todavía no están disponibles.</p>
+<section class="panel"><form id="inventory-form"><label for="product-select">Código del producto</label><select id="product-select" required disabled><option value="">Cargando productos…</option></select><button type="submit" id="inventory-submit" disabled>Consultar disponibilidad</button></form>
+<p id="inventory-status" role="status"></p><div id="inventory-result" aria-live="polite"></div></section>
+</section>
+<section id="view-convert" class="view" hidden aria-labelledby="convert-title">
+<div class="eyebrow">Cotizaciones / Pedido</div><h1 id="convert-title">Crear un pedido</h1>
+<p class="lead">Usa una cotización vigente y aceptada por el cliente. El pedido se creará pendiente; los productos se reservan al confirmarlo.</p>
+<section class="panel"><form id="convert-form"><label for="convert-select">Folio de cotización</label><select id="convert-select" required disabled><option value="">Cargando cotizaciones…</option></select>
+<p id="convert-detail" class="notice"></p>
+<label class="check"><input id="accepted" type="checkbox" required>El cliente acepta los productos, precios y condiciones de esta cotización.</label>
+<button id="convert-submit" type="submit" disabled>Crear pedido pendiente</button></form><p id="convert-status" role="status"></p>
+<section id="convert-result" class="result" role="status" tabindex="-1" hidden></section></section>
+</section>
+<section id="view-orders" class="view" hidden aria-labelledby="orders-title">
+<div class="eyebrow">Pedidos / Atención</div><h1 id="orders-title">Consulta y atiende tus pedidos</h1>
+<p class="lead">Consulta el estado del pedido y realiza la acción disponible. Un pedido confirmado reserva sus productos; al cancelarlo antes del surtido, se liberan.</p>
+<section class="panel"><label for="order-select">Pedido</label><select id="order-select" disabled><option value="">Cargando pedidos…</option></select><button id="orders-refresh" type="button" class="link">Actualizar pedidos</button>
+<p id="orders-status" role="status"></p><button id="order-consult" type="button" disabled>Consultar pedido</button>
+<div id="order-detail" class="details" aria-live="polite"></div>
+<form id="confirm-form" hidden><h2>Confirmar el pedido</h2><p class="hint">Primero registra el pago autorizado y selecciona la sucursal que reservará los productos. Esta demostración no realiza cobros reales.</p>
+<label for="payment-ref">Referencia del pago</label><input id="payment-ref" placeholder="Ej. PAGO-001" required>
+<label for="payment-ok">¿El pago fue autorizado?</label><select id="payment-ok"><option value="false">No, sigue pendiente</option><option value="true">Sí, fue autorizado</option></select>
+<label for="order-location">Sucursal de reserva</label><select id="order-location" required></select><button id="confirm-submit" type="submit">Confirmar y reservar productos</button></form>
+<form id="cancel-form" hidden><h2>Cancelar el pedido</h2><label for="cancel-reason">Motivo de cancelación</label><textarea id="cancel-reason" required placeholder="Ej. El cliente ya no necesita los productos"></textarea>
+<label class="check"><input id="cancel-ack" type="checkbox" required>Confirmo la cancelación y la liberación de los productos reservados.</label><button id="cancel-submit" type="submit">Cancelar y liberar productos</button></form>
+<section id="order-result" class="result" role="status" tabindex="-1" hidden></section></section>
+</section>
 </main>
-<footer>FerreMax · Primera vista de atención: renovación de cotizaciones. <a href="/docs">Documentación técnica</a></footer>
+<footer>FerreMax · Atención de inventario, cotizaciones y pedidos. <a href="/docs">Documentación técnica</a></footer>
 </body>
 </html>
