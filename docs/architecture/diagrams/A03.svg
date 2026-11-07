@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1524" viewBox="0 0 1280 1524">
+<rect width="1280" height="1524" fill="white"/>
+<text x="35" y="34" text-anchor="start" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#23658f">FerreMax PIA · A03</text>
+<text x="35" y="68" text-anchor="start" font-family="Arial, sans-serif" font-size="25" font-weight="bold" fill="#162f45">Secuencia de confirmación válida</text>
+<line x1="150.0" y1="195" x2="150.0" y2="1384" stroke="#9aaaba" stroke-dasharray="5 5"/>
+<line x1="395.0" y1="195" x2="395.0" y2="1384" stroke="#9aaaba" stroke-dasharray="5 5"/>
+<line x1="640.0" y1="195" x2="640.0" y2="1384" stroke="#9aaaba" stroke-dasharray="5 5"/>
+<line x1="885.0" y1="195" x2="885.0" y2="1384" stroke="#9aaaba" stroke-dasharray="5 5"/>
+<line x1="1130.0" y1="195" x2="1130.0" y2="1384" stroke="#9aaaba" stroke-dasharray="5 5"/>
+<rect x="370.0" y="807" width="795.0" height="218" fill="none" stroke="#7992a7" stroke-dasharray="5 4"/>
+<text x="380.0" y="824" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#52687a">loop por cada SKU</text>
+<polyline points="150.0,250 395.0,250" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="385.0,246.0 395.0,250 385.0,254.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="272.5" y="239" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">1. ConfirmarPedidoHandler.handle → confirmar</text>
+<polyline points="395.0,324 470.0,324 470.0,349 395.0,349" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="405.0,353.0 395.0,349 405.0,345.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="490.0" y="313" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">2. Actor.exigir(&quot;Caja&quot;)</text>
+<polyline points="395.0,398 885.0,398" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="875.0,394.0 885.0,398 875.0,402.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="640.0" y="387" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">3. Entrar al UoW y preparar repositorios</text>
+<polyline points="885.0,472 1130.0,472" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="1120.0,468.0 1130.0,472 1120.0,476.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="1007.5" y="461" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">4. SELECT pedido FOR UPDATE</text>
+<polyline points="395.0,546 885.0,546" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="875.0,542.0 885.0,546 875.0,550.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="640.0" y="535" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">5. Obtener inventarios por SKU ordenado</text>
+<polyline points="885.0,620 1130.0,620" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="1120.0,616.0 1130.0,620 1120.0,624.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="1007.5" y="609" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">6. SELECT inventario FOR UPDATE</text>
+<polyline points="885.0,694 395.0,694" fill="none" stroke="#43596b" stroke-width="1.6" stroke-dasharray="6 4"/><polyline points="405.0,698.0 395.0,694 405.0,690.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="640.0" y="683" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">7. Pedido e inventarios recuperados</text>
+<polyline points="395.0,768 640.0,768" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="630.0,764.0 640.0,768 630.0,772.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="517.5" y="757" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">8. Pedido.confirmar(pago)</text>
+<polyline points="395.0,842 640.0,842" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="630.0,838.0 640.0,842 630.0,846.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="517.5" y="831" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">9. Inventario.reservar(pedido, cantidad)</text>
+<polyline points="395.0,916 885.0,916" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="875.0,912.0 885.0,916 875.0,920.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="640.0" y="905" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">10. inventarios.guardar(inventario)</text>
+<polyline points="885.0,990 1130.0,990" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="1120.0,986.0 1130.0,990 1120.0,994.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="1007.5" y="979" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">11. UPDATE inventario y guardar reserva</text>
+<polyline points="395.0,1064 885.0,1064" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="875.0,1060.0 885.0,1064 875.0,1068.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="640.0" y="1053" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">12. Guardar pedido y registrar auditoría/evento</text>
+<polyline points="885.0,1138 1130.0,1138" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="1120.0,1134.0 1130.0,1138 1120.0,1142.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="1007.5" y="1127" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">13. INSERT/UPDATE pedido, auditoría y outbox</text>
+<polyline points="395.0,1212 885.0,1212" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="875.0,1208.0 885.0,1212 875.0,1216.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="640.0" y="1201" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">14. commit()</text>
+<polyline points="885.0,1286 1130.0,1286" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="1120.0,1282.0 1130.0,1286 1120.0,1290.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="1007.5" y="1275" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">15. COMMIT</text>
+<polyline points="395.0,1360 150.0,1360" fill="none" stroke="#43596b" stroke-width="1.6" stroke-dasharray="6 4"/><polyline points="160.0,1364.0 150.0,1360 160.0,1356.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<text x="272.5" y="1349" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">16. DTO Confirmado; HTTP 200</text>
+<rect x="45" y="130" width="210" height="65" rx="4" fill="#edf5fc" stroke="#2c648b" stroke-width="1.6"/>
+<line x1="45" y1="168" x2="255" y2="168" stroke="#2c648b"/>
+<text x="150.0" y="154" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c648b">API / handler</text>
+<text x="57" y="191" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">api/pedidos.py</text>
+<rect x="290" y="130" width="210" height="65" rx="4" fill="#edf5fc" stroke="#2c648b" stroke-width="1.6"/>
+<line x1="290" y1="168" x2="500" y2="168" stroke="#2c648b"/>
+<text x="395.0" y="154" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c648b">PedidoService</text>
+<text x="302" y="191" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">application/services.py</text>
+<rect x="535" y="130" width="210" height="65" rx="4" fill="#edf5fc" stroke="#2c648b" stroke-width="1.6"/>
+<line x1="535" y1="168" x2="745" y2="168" stroke="#2c648b"/>
+<text x="640.0" y="154" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c648b">Dominio</text>
+<text x="547" y="191" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">Pedido / InventarioUbicacion</text>
+<rect x="780" y="130" width="210" height="65" rx="4" fill="#edf5fc" stroke="#2c648b" stroke-width="1.6"/>
+<line x1="780" y1="168" x2="990" y2="168" stroke="#2c648b"/>
+<text x="885.0" y="154" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c648b">UoW y repositorios Pg</text>
+<text x="792" y="191" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">infrastructure/postgres.py</text>
+<rect x="1025" y="130" width="210" height="65" rx="4" fill="#edf5fc" stroke="#2c648b" stroke-width="1.6"/>
+<line x1="1025" y1="168" x2="1235" y2="168" stroke="#2c648b"/>
+<text x="1130.0" y="154" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c648b">PostgreSQL</text>
+<text x="1037" y="191" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">transacción local</text>
+<text x="35" y="1454" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#52687a">Los pasos 9-11 se repiten juntos por cada SKU, después de obtener los inventarios bloqueados.</text>
+<text x="35" y="1472" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#52687a">El DTO se devuelve después del commit. Pago y actor del endpoint son simulados.</text>
+</svg>

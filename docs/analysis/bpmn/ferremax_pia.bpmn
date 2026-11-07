@@ -1,0 +1,2122 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_FerreMax_PIA" targetNamespace="https://github.com/Santana-R/ferremax-u3" exporter="FerreMax PIA" exporterVersion="2026-11-06">
+  <bpmn:error id="ErrorReserva" name="Fallo de disponibilidad o transacción" errorCode="ReservaRechazada" />
+  <bpmn:process id="P01" name="Cotización y creación de pedido" isExecutable="false">
+    <bpmn:laneSet id="P01_Lanes">
+      <bpmn:lane id="P01_Lane0" name="Vendedor">
+        <bpmn:flowNodeRef>P01_S01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P01_E01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P01_T03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P01_E02</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P01_Lane1" name="Sistema">
+        <bpmn:flowNodeRef>P01_T01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P01_G03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P01_T02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P01_G01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P01_T04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P01_G02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P01_T05</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P01_E03</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="P01_S01" name="Solicitud del cliente">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P01_F01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="P01_T01" name="Consultar disponibilidad por SKU">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P01_F01</bpmn:incoming>
+      <bpmn:outgoing>P01_F02</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="P01_G03" name="¿SKU encontrado?">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P01_F02</bpmn:incoming>
+      <bpmn:outgoing>P01_F03</bpmn:outgoing>
+      <bpmn:outgoing>P01_F04</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="P01_E01" name="Informar producto no encontrado">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P01_F03</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="P01_T02" name="Emitir cotización inicial sin reserva">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P01_F04</bpmn:incoming>
+      <bpmn:outgoing>P01_F05</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="P01_G01" name="¿Versión vigente?">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P01_F05</bpmn:incoming>
+      <bpmn:outgoing>P01_F06</bpmn:outgoing>
+      <bpmn:incoming>P01_F07</bpmn:incoming>
+      <bpmn:outgoing>P01_F08</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="P01_T03" name="Revalidar y conservar versión anterior">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P01_F06</bpmn:incoming>
+      <bpmn:outgoing>P01_F07</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="P01_T04" name="Registrar aceptación del cliente">
+      <bpmn:documentation>Estado de implementación: S. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P01_F08</bpmn:incoming>
+      <bpmn:outgoing>P01_F09</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P01_G02" name="¿Versión aceptada?">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P01_F09</bpmn:incoming>
+      <bpmn:outgoing>P01_F10</bpmn:outgoing>
+      <bpmn:outgoing>P01_F11</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="P01_E02" name="Sin pedido ni reserva">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P01_F10</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="P01_T05" name="Crear pedido Pendiente y consultar S1">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P01_F11</bpmn:incoming>
+      <bpmn:outgoing>P01_F12</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P01_E03" name="Pedido Pendiente sin reserva">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P01_F12</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="P01_F01" sourceRef="P01_S01" targetRef="P01_T01" />
+    <bpmn:sequenceFlow id="P01_F02" sourceRef="P01_T01" targetRef="P01_G03" />
+    <bpmn:sequenceFlow id="P01_F03" sourceRef="P01_G03" targetRef="P01_E01" name="No" />
+    <bpmn:sequenceFlow id="P01_F04" sourceRef="P01_G03" targetRef="P01_T02" name="Sí" />
+    <bpmn:sequenceFlow id="P01_F05" sourceRef="P01_T02" targetRef="P01_G01" />
+    <bpmn:sequenceFlow id="P01_F06" sourceRef="P01_G01" targetRef="P01_T03" name="No" />
+    <bpmn:sequenceFlow id="P01_F07" sourceRef="P01_T03" targetRef="P01_G01" name="Nueva versión" />
+    <bpmn:sequenceFlow id="P01_F08" sourceRef="P01_G01" targetRef="P01_T04" name="Sí" />
+    <bpmn:sequenceFlow id="P01_F09" sourceRef="P01_T04" targetRef="P01_G02" />
+    <bpmn:sequenceFlow id="P01_F10" sourceRef="P01_G02" targetRef="P01_E02" name="No" />
+    <bpmn:sequenceFlow id="P01_F11" sourceRef="P01_G02" targetRef="P01_T05" name="Sí" />
+    <bpmn:sequenceFlow id="P01_F12" sourceRef="P01_T05" targetRef="P01_E03" />
+  </bpmn:process>
+  <bpmn:collaboration id="P01_Collab">
+    <bpmn:participant id="P01_Pool" name="FerreMax" processRef="P01" />
+  </bpmn:collaboration>
+  <bpmn:process id="P02" name="Confirmación, cancelación y reducción" isExecutable="false">
+    <bpmn:laneSet id="P02_Lanes">
+      <bpmn:lane id="P02_Lane0" name="Vendedor / consulta">
+        <bpmn:flowNodeRef>P02_E01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_E02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_T04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_S02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_T05</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_T08</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_E06</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_E05</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P02_Lane1" name="Sistema">
+        <bpmn:flowNodeRef>P02_T01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_G01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_T03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_B01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_E03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_G04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_G05</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_T06</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_B02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_E04</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P02_Lane2" name="Caja">
+        <bpmn:flowNodeRef>P02_S01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_T02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_G02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P02_T07</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="P02_S01" name="Intento de confirmación">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P02_F01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="P02_T01" name="Consultar pedido persistido">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F01</bpmn:incoming>
+      <bpmn:outgoing>P02_F02</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="P02_G01" name="¿Pedido Pendiente?">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F02</bpmn:incoming>
+      <bpmn:outgoing>P02_F03</bpmn:outgoing>
+      <bpmn:outgoing>P02_F04</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="P02_E01" name="Rechazo sin efectos nuevos">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F03</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="P02_T02" name="Registrar autorización de pago ficticia">
+      <bpmn:documentation>Estado de implementación: S. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F04</bpmn:incoming>
+      <bpmn:outgoing>P02_F05</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P02_G02" name="¿Pago autorizado con referencia?">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F05</bpmn:incoming>
+      <bpmn:outgoing>P02_F06</bpmn:outgoing>
+      <bpmn:outgoing>P02_F07</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="P02_E02" name="Permanece Pendiente sin reserva">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F06</bpmn:incoming>
+      <bpmn:incoming>P02_F10</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="P02_T03" name="Confirmar y reservar en una transacción">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F07</bpmn:incoming>
+      <bpmn:outgoing>P02_F08</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="P02_B01" name="Stock insuficiente o fallo" attachedToRef="P02_T03" cancelActivity="true">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P02_F09</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="P02_B01_Error" errorRef="ErrorReserva" />
+    </bpmn:boundaryEvent>
+    <bpmn:serviceTask id="P02_T04" name="Revertir e informar; conserva Pendiente">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F09</bpmn:incoming>
+      <bpmn:outgoing>P02_F10</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P02_E03" name="Confirmado con reserva propia">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F08</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="P02_S02" name="Solicitud de cancelación o reducción">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P02_F11</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="P02_T05" name="Registrar solicitud de cambio con motivo y rol">
+      <bpmn:documentation>Estado de implementación: S. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F11</bpmn:incoming>
+      <bpmn:outgoing>P02_F12</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P02_G04" name="¿Confirmado y aún no surtido?">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F12</bpmn:incoming>
+      <bpmn:outgoing>P02_F13</bpmn:outgoing>
+      <bpmn:outgoing>P02_F14</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="P02_G05" name="¿Cancelar o reducir?">
+      <bpmn:documentation>Estado de implementación: P. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F14</bpmn:incoming>
+      <bpmn:outgoing>P02_F15</bpmn:outgoing>
+      <bpmn:outgoing>P02_F16</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="P02_T06" name="Cancelar y liberar reserva propia en transacción">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F15</bpmn:incoming>
+      <bpmn:outgoing>P02_F17</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="P02_B02" name="Fallo de liberación" attachedToRef="P02_T06" cancelActivity="true">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P02_F18</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="P02_B02_Error" errorRef="ErrorReserva" />
+    </bpmn:boundaryEvent>
+    <bpmn:serviceTask id="P02_T07" name="Revertir cancelación e informar">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F18</bpmn:incoming>
+      <bpmn:outgoing>P02_F19</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="P02_T08" name="Reducir cantidad y liberar solo la diferencia">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F16</bpmn:incoming>
+      <bpmn:outgoing>P02_F20</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P02_E06" name="Confirmado con reserva reducida">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F20</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="P02_E04" name="Cancelado sin su reserva">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F17</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="P02_E05" name="Rechazo de cancelación; conserva datos">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P02_F13</bpmn:incoming>
+      <bpmn:incoming>P02_F19</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="P02_F01" sourceRef="P02_S01" targetRef="P02_T01" />
+    <bpmn:sequenceFlow id="P02_F02" sourceRef="P02_T01" targetRef="P02_G01" />
+    <bpmn:sequenceFlow id="P02_F03" sourceRef="P02_G01" targetRef="P02_E01" name="No" />
+    <bpmn:sequenceFlow id="P02_F04" sourceRef="P02_G01" targetRef="P02_T02" name="Sí" />
+    <bpmn:sequenceFlow id="P02_F05" sourceRef="P02_T02" targetRef="P02_G02" />
+    <bpmn:sequenceFlow id="P02_F06" sourceRef="P02_G02" targetRef="P02_E02" name="No" />
+    <bpmn:sequenceFlow id="P02_F07" sourceRef="P02_G02" targetRef="P02_T03" name="Sí" />
+    <bpmn:sequenceFlow id="P02_F08" sourceRef="P02_T03" targetRef="P02_E03" name="Commit" />
+    <bpmn:sequenceFlow id="P02_F09" sourceRef="P02_B01" targetRef="P02_T04" name="Rollback" />
+    <bpmn:sequenceFlow id="P02_F10" sourceRef="P02_T04" targetRef="P02_E02" />
+    <bpmn:sequenceFlow id="P02_F11" sourceRef="P02_S02" targetRef="P02_T05" />
+    <bpmn:sequenceFlow id="P02_F12" sourceRef="P02_T05" targetRef="P02_G04" />
+    <bpmn:sequenceFlow id="P02_F13" sourceRef="P02_G04" targetRef="P02_E05" name="No" />
+    <bpmn:sequenceFlow id="P02_F14" sourceRef="P02_G04" targetRef="P02_G05" name="Sí" />
+    <bpmn:sequenceFlow id="P02_F15" sourceRef="P02_G05" targetRef="P02_T06" name="Cancelar" />
+    <bpmn:sequenceFlow id="P02_F16" sourceRef="P02_G05" targetRef="P02_T08" name="Reducir" />
+    <bpmn:sequenceFlow id="P02_F17" sourceRef="P02_T06" targetRef="P02_E04" name="Commit" />
+    <bpmn:sequenceFlow id="P02_F18" sourceRef="P02_B02" targetRef="P02_T07" name="Rollback" />
+    <bpmn:sequenceFlow id="P02_F19" sourceRef="P02_T07" targetRef="P02_E05" />
+    <bpmn:sequenceFlow id="P02_F20" sourceRef="P02_T08" targetRef="P02_E06" />
+  </bpmn:process>
+  <bpmn:collaboration id="P02_Collab">
+    <bpmn:participant id="P02_Pool" name="FerreMax" processRef="P02" />
+  </bpmn:collaboration>
+  <bpmn:process id="P03" name="Crédito normal y excepcional" isExecutable="false">
+    <bpmn:laneSet id="P03_Lanes">
+      <bpmn:lane id="P03_Lane0" name="Vendedor">
+        <bpmn:flowNodeRef>P03_S01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P03_T01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P03_E01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P03_T03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P03_E02</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P03_Lane1" name="Sistema">
+        <bpmn:flowNodeRef>P03_G01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P03_T02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P03_G02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P03_T06</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P03_E04</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P03_Lane2" name="Caja / Crédito">
+        <bpmn:flowNodeRef>P03_T04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P03_G03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P03_T05</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P03_E03</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="P03_S01" name="Solicitud de compra a crédito">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P03_F01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="P03_T01" name="Identificar cliente empresarial activo">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F01</bpmn:incoming>
+      <bpmn:outgoing>P03_F02</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P03_G01" name="¿Cliente activo y elegible?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F02</bpmn:incoming>
+      <bpmn:outgoing>P03_F03</bpmn:outgoing>
+      <bpmn:outgoing>P03_F04</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="P03_E01" name="Solicitud no elegible; no confirma">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F03</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:businessRuleTask id="P03_T02" name="Evaluar bloqueo, saldo, límite y moneda">
+      <bpmn:documentation>Estado de implementación: P. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F04</bpmn:incoming>
+      <bpmn:outgoing>P03_F05</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:exclusiveGateway id="P03_G02" name="¿Cumple condición normal?">
+      <bpmn:documentation>Estado de implementación: P. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F05</bpmn:incoming>
+      <bpmn:outgoing>P03_F06</bpmn:outgoing>
+      <bpmn:outgoing>P03_F08</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="P03_T03" name="Registrar evaluación normal autorizada">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F06</bpmn:incoming>
+      <bpmn:outgoing>P03_F07</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P03_E02" name="Autorización normal registrada">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F07</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="P03_T04" name="Revisar excepción y decidir con motivo">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F08</bpmn:incoming>
+      <bpmn:outgoing>P03_F09</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P03_G03" name="¿Excepción autorizada?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F09</bpmn:incoming>
+      <bpmn:outgoing>P03_F10</bpmn:outgoing>
+      <bpmn:outgoing>P03_F12</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="P03_T05" name="Registrar responsable, condición, fecha y motivo">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F10</bpmn:incoming>
+      <bpmn:outgoing>P03_F11</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P03_E03" name="Excepción autorizada registrada">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F11</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="P03_T06" name="Comunicar rechazo con motivo">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F12</bpmn:incoming>
+      <bpmn:outgoing>P03_F13</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="P03_E04" name="No confirma el pedido">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P03_F13</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="P03_F01" sourceRef="P03_S01" targetRef="P03_T01" />
+    <bpmn:sequenceFlow id="P03_F02" sourceRef="P03_T01" targetRef="P03_G01" />
+    <bpmn:sequenceFlow id="P03_F03" sourceRef="P03_G01" targetRef="P03_E01" name="No" />
+    <bpmn:sequenceFlow id="P03_F04" sourceRef="P03_G01" targetRef="P03_T02" name="Sí" />
+    <bpmn:sequenceFlow id="P03_F05" sourceRef="P03_T02" targetRef="P03_G02" />
+    <bpmn:sequenceFlow id="P03_F06" sourceRef="P03_G02" targetRef="P03_T03" name="Sí" />
+    <bpmn:sequenceFlow id="P03_F07" sourceRef="P03_T03" targetRef="P03_E02" />
+    <bpmn:sequenceFlow id="P03_F08" sourceRef="P03_G02" targetRef="P03_T04" name="No: revisión" />
+    <bpmn:sequenceFlow id="P03_F09" sourceRef="P03_T04" targetRef="P03_G03" />
+    <bpmn:sequenceFlow id="P03_F10" sourceRef="P03_G03" targetRef="P03_T05" name="Sí" />
+    <bpmn:sequenceFlow id="P03_F11" sourceRef="P03_T05" targetRef="P03_E03" />
+    <bpmn:sequenceFlow id="P03_F12" sourceRef="P03_G03" targetRef="P03_T06" name="No" />
+    <bpmn:sequenceFlow id="P03_F13" sourceRef="P03_T06" targetRef="P03_E04" />
+  </bpmn:process>
+  <bpmn:collaboration id="P03_Collab">
+    <bpmn:participant id="P03_Pool" name="FerreMax" processRef="P03" />
+  </bpmn:collaboration>
+  <bpmn:process id="P04" name="Transferencias y decisión de parciales" isExecutable="false">
+    <bpmn:laneSet id="P04_Lanes">
+      <bpmn:lane id="P04_Lane0" name="Vendedor">
+        <bpmn:flowNodeRef>P04_S01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_T02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_G02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_T09</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_G05</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_T10</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_E04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_T11</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_E05</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P04_Lane1" name="Sistema">
+        <bpmn:flowNodeRef>P04_T01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_G01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_T03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_T12</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_E01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_T08</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_E03</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P04_Lane2" name="Almacén origen / destino">
+        <bpmn:flowNodeRef>P04_T04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_G03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_T05</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_T06</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_G04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_T07</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P04_E02</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="P04_S01" name="Faltante local identificado">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P04_F01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="P04_T01" name="Consultar almacén central">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F01</bpmn:incoming>
+      <bpmn:outgoing>P04_F02</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="P04_G01" name="¿Disponible en almacén?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F02</bpmn:incoming>
+      <bpmn:outgoing>P04_F03</bpmn:outgoing>
+      <bpmn:outgoing>P04_F04</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="P04_T02" name="Consultar otras sucursales">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F04</bpmn:incoming>
+      <bpmn:outgoing>P04_F05</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="P04_G02" name="¿Disponible en otra sucursal?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F05</bpmn:incoming>
+      <bpmn:outgoing>P04_F06</bpmn:outgoing>
+      <bpmn:outgoing>P04_F07</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="P04_T03" name="Solicitar transferencia con folio y partidas">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F03</bpmn:incoming>
+      <bpmn:incoming>P04_F06</bpmn:incoming>
+      <bpmn:outgoing>P04_F08</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="P04_T04" name="Revisar y autorizar origen y cantidades">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F08</bpmn:incoming>
+      <bpmn:outgoing>P04_F09</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P04_G03" name="¿Origen autoriza y tiene unidades?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F09</bpmn:incoming>
+      <bpmn:outgoing>P04_F10</bpmn:outgoing>
+      <bpmn:outgoing>P04_F12</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="P04_T12" name="Registrar rechazo y volver a evaluación">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F10</bpmn:incoming>
+      <bpmn:outgoing>P04_F11</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P04_E01" name="Pedido por reevaluar">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F11</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="P04_T05" name="Despachar y registrar tránsito">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F12</bpmn:incoming>
+      <bpmn:outgoing>P04_F13</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="P04_T06" name="Recibir y verificar cantidades">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F13</bpmn:incoming>
+      <bpmn:outgoing>P04_F14</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P04_G04" name="¿Recepción completa?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F14</bpmn:incoming>
+      <bpmn:outgoing>P04_F15</bpmn:outgoing>
+      <bpmn:outgoing>P04_F17</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="P04_T07" name="Conciliar tránsito e inventario destino">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F15</bpmn:incoming>
+      <bpmn:outgoing>P04_F16</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P04_E02" name="Transferencia Recibida">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F16</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="P04_T08" name="Registrar diferencia como incidencia">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F17</bpmn:incoming>
+      <bpmn:outgoing>P04_F18</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="P04_E03" name="Incidencia conservada">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F18</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="P04_T09" name="Proponer cantidades de surtido parcial">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F07</bpmn:incoming>
+      <bpmn:outgoing>P04_F19</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P04_G05" name="¿Cliente acepta parcial?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F19</bpmn:incoming>
+      <bpmn:outgoing>P04_F20</bpmn:outgoing>
+      <bpmn:outgoing>P04_F22</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="P04_T10" name="Guardar aceptación y cantidades pendientes">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F20</bpmn:incoming>
+      <bpmn:outgoing>P04_F21</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P04_E04" name="Plan parcial registrado; confirmar después">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F21</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="P04_T11" name="Registrar espera o cancelación autorizada">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F22</bpmn:incoming>
+      <bpmn:outgoing>P04_F23</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="P04_E05" name="Decisión del cliente conservada">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P04_F23</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="P04_F01" sourceRef="P04_S01" targetRef="P04_T01" />
+    <bpmn:sequenceFlow id="P04_F02" sourceRef="P04_T01" targetRef="P04_G01" />
+    <bpmn:sequenceFlow id="P04_F03" sourceRef="P04_G01" targetRef="P04_T03" name="Sí" />
+    <bpmn:sequenceFlow id="P04_F04" sourceRef="P04_G01" targetRef="P04_T02" name="No" />
+    <bpmn:sequenceFlow id="P04_F05" sourceRef="P04_T02" targetRef="P04_G02" />
+    <bpmn:sequenceFlow id="P04_F06" sourceRef="P04_G02" targetRef="P04_T03" name="Sí" />
+    <bpmn:sequenceFlow id="P04_F07" sourceRef="P04_G02" targetRef="P04_T09" name="No" />
+    <bpmn:sequenceFlow id="P04_F08" sourceRef="P04_T03" targetRef="P04_T04" />
+    <bpmn:sequenceFlow id="P04_F09" sourceRef="P04_T04" targetRef="P04_G03" />
+    <bpmn:sequenceFlow id="P04_F10" sourceRef="P04_G03" targetRef="P04_T12" name="No" />
+    <bpmn:sequenceFlow id="P04_F11" sourceRef="P04_T12" targetRef="P04_E01" />
+    <bpmn:sequenceFlow id="P04_F12" sourceRef="P04_G03" targetRef="P04_T05" name="Sí" />
+    <bpmn:sequenceFlow id="P04_F13" sourceRef="P04_T05" targetRef="P04_T06" />
+    <bpmn:sequenceFlow id="P04_F14" sourceRef="P04_T06" targetRef="P04_G04" />
+    <bpmn:sequenceFlow id="P04_F15" sourceRef="P04_G04" targetRef="P04_T07" name="Sí" />
+    <bpmn:sequenceFlow id="P04_F16" sourceRef="P04_T07" targetRef="P04_E02" />
+    <bpmn:sequenceFlow id="P04_F17" sourceRef="P04_G04" targetRef="P04_T08" name="No" />
+    <bpmn:sequenceFlow id="P04_F18" sourceRef="P04_T08" targetRef="P04_E03" />
+    <bpmn:sequenceFlow id="P04_F19" sourceRef="P04_T09" targetRef="P04_G05" />
+    <bpmn:sequenceFlow id="P04_F20" sourceRef="P04_G05" targetRef="P04_T10" name="Sí" />
+    <bpmn:sequenceFlow id="P04_F21" sourceRef="P04_T10" targetRef="P04_E04" />
+    <bpmn:sequenceFlow id="P04_F22" sourceRef="P04_G05" targetRef="P04_T11" name="No" />
+    <bpmn:sequenceFlow id="P04_F23" sourceRef="P04_T11" targetRef="P04_E05" />
+  </bpmn:process>
+  <bpmn:collaboration id="P04_Collab">
+    <bpmn:participant id="P04_Pool" name="FerreMax" processRef="P04" />
+  </bpmn:collaboration>
+  <bpmn:process id="P05" name="Surtido y entrega" isExecutable="false">
+    <bpmn:laneSet id="P05_Lanes">
+      <bpmn:lane id="P05_Lane0" name="Almacén">
+        <bpmn:flowNodeRef>P05_S01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_T01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_G01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_T08</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_E01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_T02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_E02</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P05_Lane1" name="Sistema / coordinación">
+        <bpmn:flowNodeRef>P05_G02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_T03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_G03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_T04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_T07</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_E05</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P05_Lane2" name="Operador">
+        <bpmn:flowNodeRef>P05_E03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_T05</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_G04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_T06</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P05_E04</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="P05_S01" name="Pedido confirmado con reserva">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P05_F01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="P05_T01" name="Preparar y verificar lo reservado">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F01</bpmn:incoming>
+      <bpmn:outgoing>P05_F02</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P05_G01" name="¿Surtido completo?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F02</bpmn:incoming>
+      <bpmn:outgoing>P05_F03</bpmn:outgoing>
+      <bpmn:outgoing>P05_F05</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="P05_T08" name="Registrar faltante y decisión de parcial P04">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F03</bpmn:incoming>
+      <bpmn:outgoing>P05_F04</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="P05_E01" name="Surtido pendiente o parcial acordado">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F04</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="P05_G02" name="¿Entrega a domicilio?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F05</bpmn:incoming>
+      <bpmn:outgoing>P05_F06</bpmn:outgoing>
+      <bpmn:outgoing>P05_F08</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="P05_T02" name="Entregar en sucursal y registrar recepción">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F06</bpmn:incoming>
+      <bpmn:outgoing>P05_F07</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="P05_E02" name="Entrega en sucursal registrada">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F07</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="P05_T03" name="Verificar dirección y contacto">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F08</bpmn:incoming>
+      <bpmn:outgoing>P05_F09</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P05_G03" name="¿Datos de entrega completos?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F09</bpmn:incoming>
+      <bpmn:outgoing>P05_F10</bpmn:outgoing>
+      <bpmn:outgoing>P05_F11</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="P05_E03" name="Salida bloqueada por datos faltantes">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F10</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="P05_T04" name="Programar unidad, operador y ventana">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F11</bpmn:incoming>
+      <bpmn:outgoing>P05_F12</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="P05_T05" name="Trasladar pedido al destinatario">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F12</bpmn:incoming>
+      <bpmn:outgoing>P05_F13</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P05_G04" name="¿Se pudo entregar?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F13</bpmn:incoming>
+      <bpmn:outgoing>P05_F14</bpmn:outgoing>
+      <bpmn:outgoing>P05_F16</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="P05_T06" name="Capturar receptor, fecha y evidencia">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F14</bpmn:incoming>
+      <bpmn:outgoing>P05_F15</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="P05_E04" name="Pedido Entregado con evidencia">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F15</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="P05_T07" name="Registrar motivo y evidencia de incidencia">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F16</bpmn:incoming>
+      <bpmn:outgoing>P05_F17</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="P05_E05" name="Incidencia; no cierra como Entregado">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P05_F17</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="P05_F01" sourceRef="P05_S01" targetRef="P05_T01" />
+    <bpmn:sequenceFlow id="P05_F02" sourceRef="P05_T01" targetRef="P05_G01" />
+    <bpmn:sequenceFlow id="P05_F03" sourceRef="P05_G01" targetRef="P05_T08" name="No" />
+    <bpmn:sequenceFlow id="P05_F04" sourceRef="P05_T08" targetRef="P05_E01" />
+    <bpmn:sequenceFlow id="P05_F05" sourceRef="P05_G01" targetRef="P05_G02" name="Sí" />
+    <bpmn:sequenceFlow id="P05_F06" sourceRef="P05_G02" targetRef="P05_T02" name="No" />
+    <bpmn:sequenceFlow id="P05_F07" sourceRef="P05_T02" targetRef="P05_E02" />
+    <bpmn:sequenceFlow id="P05_F08" sourceRef="P05_G02" targetRef="P05_T03" name="Sí" />
+    <bpmn:sequenceFlow id="P05_F09" sourceRef="P05_T03" targetRef="P05_G03" />
+    <bpmn:sequenceFlow id="P05_F10" sourceRef="P05_G03" targetRef="P05_E03" name="No" />
+    <bpmn:sequenceFlow id="P05_F11" sourceRef="P05_G03" targetRef="P05_T04" name="Sí" />
+    <bpmn:sequenceFlow id="P05_F12" sourceRef="P05_T04" targetRef="P05_T05" />
+    <bpmn:sequenceFlow id="P05_F13" sourceRef="P05_T05" targetRef="P05_G04" />
+    <bpmn:sequenceFlow id="P05_F14" sourceRef="P05_G04" targetRef="P05_T06" name="Sí" />
+    <bpmn:sequenceFlow id="P05_F15" sourceRef="P05_T06" targetRef="P05_E04" />
+    <bpmn:sequenceFlow id="P05_F16" sourceRef="P05_G04" targetRef="P05_T07" name="No" />
+    <bpmn:sequenceFlow id="P05_F17" sourceRef="P05_T07" targetRef="P05_E05" />
+  </bpmn:process>
+  <bpmn:collaboration id="P05_Collab">
+    <bpmn:participant id="P05_Pool" name="FerreMax" processRef="P05" />
+  </bpmn:collaboration>
+  <bpmn:process id="P06" name="Devoluciones según política" isExecutable="false">
+    <bpmn:laneSet id="P06_Lanes">
+      <bpmn:lane id="P06_Lane0" name="Vendedor / responsable">
+        <bpmn:flowNodeRef>P06_S01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P06_T01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P06_T05</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P06_E01</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P06_Lane1" name="Sistema">
+        <bpmn:flowNodeRef>P06_G01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P06_T02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P06_G02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P06_T03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P06_T04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P06_E02</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="P06_S01" name="Solicitud de devolución">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P06_F01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="P06_T01" name="Validar comprobante, categoría y condición">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P06_F01</bpmn:incoming>
+      <bpmn:outgoing>P06_F02</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P06_G01" name="¿Datos válidos y completos?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P06_F02</bpmn:incoming>
+      <bpmn:outgoing>P06_F03</bpmn:outgoing>
+      <bpmn:outgoing>P06_F05</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="P06_T05" name="Registrar rechazo con motivo">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P06_F03</bpmn:incoming>
+      <bpmn:outgoing>P06_F04</bpmn:outgoing>
+      <bpmn:incoming>P06_F07</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:endEvent id="P06_E01" name="Devolución rechazada">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P06_F04</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:businessRuleTask id="P06_T02" name="Evaluar política configurada">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P06_F05</bpmn:incoming>
+      <bpmn:outgoing>P06_F06</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:exclusiveGateway id="P06_G02" name="¿Cumple la política?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P06_F06</bpmn:incoming>
+      <bpmn:outgoing>P06_F07</bpmn:outgoing>
+      <bpmn:outgoing>P06_F08</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="P06_T03" name="Autorizar devolución">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P06_F08</bpmn:incoming>
+      <bpmn:outgoing>P06_F09</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="P06_T04" name="Registrar resultado financiero, inventario y auditoría">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P06_F09</bpmn:incoming>
+      <bpmn:outgoing>P06_F10</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P06_E02" name="Devolución resuelta y trazable">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P06_F10</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="P06_F01" sourceRef="P06_S01" targetRef="P06_T01" />
+    <bpmn:sequenceFlow id="P06_F02" sourceRef="P06_T01" targetRef="P06_G01" />
+    <bpmn:sequenceFlow id="P06_F03" sourceRef="P06_G01" targetRef="P06_T05" name="No" />
+    <bpmn:sequenceFlow id="P06_F04" sourceRef="P06_T05" targetRef="P06_E01" />
+    <bpmn:sequenceFlow id="P06_F05" sourceRef="P06_G01" targetRef="P06_T02" name="Sí" />
+    <bpmn:sequenceFlow id="P06_F06" sourceRef="P06_T02" targetRef="P06_G02" />
+    <bpmn:sequenceFlow id="P06_F07" sourceRef="P06_G02" targetRef="P06_T05" name="No" />
+    <bpmn:sequenceFlow id="P06_F08" sourceRef="P06_G02" targetRef="P06_T03" name="Sí" />
+    <bpmn:sequenceFlow id="P06_F09" sourceRef="P06_T03" targetRef="P06_T04" />
+    <bpmn:sequenceFlow id="P06_F10" sourceRef="P06_T04" targetRef="P06_E02" />
+  </bpmn:process>
+  <bpmn:collaboration id="P06_Collab">
+    <bpmn:participant id="P06_Pool" name="FerreMax" processRef="P06" />
+  </bpmn:collaboration>
+  <bpmn:process id="P07" name="Auditoría y reportes operativos" isExecutable="false">
+    <bpmn:laneSet id="P07_Lanes">
+      <bpmn:lane id="P07_Lane0" name="Operación / sistema">
+        <bpmn:flowNodeRef>P07_S01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P07_T01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P07_E01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P07_E03</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P07_Lane1" name="Auditor / administrador">
+        <bpmn:flowNodeRef>P07_S02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P07_T02</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P07_G01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P07_T03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P07_E02</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P07_Lane2" name="Gerente">
+        <bpmn:flowNodeRef>P07_S03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P07_T04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P07_E04</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="P07_S01" name="Cambio sensible válido">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P07_F01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="P07_T01" name="Guardar auditoría y evento en la transacción">
+      <bpmn:documentation>Estado de implementación: P. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P07_F01</bpmn:incoming>
+      <bpmn:outgoing>P07_F02</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P07_E01" name="Cambio y registro persistidos">
+      <bpmn:documentation>Estado de implementación: I. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P07_F02</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="P07_S02" name="Solicitud de bitácora">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P07_F03</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="P07_T02" name="Identificar usuario y autorización">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P07_F03</bpmn:incoming>
+      <bpmn:outgoing>P07_F04</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P07_G01" name="¿Puede consultar bitácora?">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P07_F04</bpmn:incoming>
+      <bpmn:outgoing>P07_F05</bpmn:outgoing>
+      <bpmn:outgoing>P07_F07</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="P07_T03" name="Consultar folio y mostrar historial protegido">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P07_F05</bpmn:incoming>
+      <bpmn:outgoing>P07_F06</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P07_E02" name="Historial consultado sin edición operativa">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P07_F06</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="P07_E03" name="Consulta denegada">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P07_F07</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="P07_S03" name="Solicitud de indicadores">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:outgoing>P07_F08</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="P07_T04" name="Consultar alertas con filtros de fecha y ubicación">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P07_F08</bpmn:incoming>
+      <bpmn:outgoing>P07_F09</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P07_E04" name="Panel operativo consultado">
+      <bpmn:documentation>Estado de implementación: D. Ver docs/analysis/BPMN.md y trazabilidad_analisis.csv.</bpmn:documentation>
+      <bpmn:incoming>P07_F09</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="P07_F01" sourceRef="P07_S01" targetRef="P07_T01" />
+    <bpmn:sequenceFlow id="P07_F02" sourceRef="P07_T01" targetRef="P07_E01" />
+    <bpmn:sequenceFlow id="P07_F03" sourceRef="P07_S02" targetRef="P07_T02" />
+    <bpmn:sequenceFlow id="P07_F04" sourceRef="P07_T02" targetRef="P07_G01" />
+    <bpmn:sequenceFlow id="P07_F05" sourceRef="P07_G01" targetRef="P07_T03" name="Sí" />
+    <bpmn:sequenceFlow id="P07_F06" sourceRef="P07_T03" targetRef="P07_E02" />
+    <bpmn:sequenceFlow id="P07_F07" sourceRef="P07_G01" targetRef="P07_E03" name="No" />
+    <bpmn:sequenceFlow id="P07_F08" sourceRef="P07_S03" targetRef="P07_T04" />
+    <bpmn:sequenceFlow id="P07_F09" sourceRef="P07_T04" targetRef="P07_E04" />
+  </bpmn:process>
+  <bpmn:collaboration id="P07_Collab">
+    <bpmn:participant id="P07_Pool" name="FerreMax" processRef="P07" />
+  </bpmn:collaboration>
+  <bpmndi:BPMNDiagram id="P01_Diagram" name="Cotización y creación de pedido">
+    <bpmndi:BPMNPlane id="P01_Plane" bpmnElement="P01_Collab">
+      <bpmndi:BPMNShape id="P01_Pool_di" bpmnElement="P01_Pool" isHorizontal="false">
+        <dc:Bounds x="55" y="115" width="635" height="1495" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_Lane0_di" bpmnElement="P01_Lane0" isHorizontal="false">
+        <dc:Bounds x="100" y="155" width="280" height="1455" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_Lane1_di" bpmnElement="P01_Lane1" isHorizontal="false">
+        <dc:Bounds x="380" y="155" width="280" height="1455" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_S01_di" bpmnElement="P01_S01">
+        <dc:Bounds x="222" y="225" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="270" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_T01_di" bpmnElement="P01_T01">
+        <dc:Bounds x="408" y="350" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_G03_di" bpmnElement="P01_G03">
+        <dc:Bounds x="492" y="490" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="552" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_E01_di" bpmnElement="P01_E01">
+        <dc:Bounds x="222" y="645" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="690" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_T02_di" bpmnElement="P01_T02">
+        <dc:Bounds x="408" y="630" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_G01_di" bpmnElement="P01_G01">
+        <dc:Bounds x="492" y="770" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="832" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_T03_di" bpmnElement="P01_T03">
+        <dc:Bounds x="128" y="910" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_T04_di" bpmnElement="P01_T04">
+        <dc:Bounds x="408" y="1050" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_G02_di" bpmnElement="P01_G02">
+        <dc:Bounds x="492" y="1190" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="1252" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_E02_di" bpmnElement="P01_E02">
+        <dc:Bounds x="222" y="1345" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="1390" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_T05_di" bpmnElement="P01_T05">
+        <dc:Bounds x="408" y="1330" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P01_E03_di" bpmnElement="P01_E03">
+        <dc:Bounds x="502" y="1485" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="410" y="1530" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="P01_F01_di" bpmnElement="P01_F01">
+        <di:waypoint x="240.0" y="261" />
+        <di:waypoint x="240.0" y="344" />
+        <di:waypoint x="520.0" y="344" />
+        <di:waypoint x="520.0" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P01_F02_di" bpmnElement="P01_F02">
+        <di:waypoint x="520.0" y="432" />
+        <di:waypoint x="520.0" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P01_F03_di" bpmnElement="P01_F03">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="617" />
+        <di:waypoint x="240.0" y="617" />
+        <di:waypoint x="240.0" y="645" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="594.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P01_F04_di" bpmnElement="P01_F04">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="630" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="605.0" y="565.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P01_F05_di" bpmnElement="P01_F05">
+        <di:waypoint x="520.0" y="712" />
+        <di:waypoint x="520.0" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P01_F06_di" bpmnElement="P01_F06">
+        <di:waypoint x="520.0" y="826" />
+        <di:waypoint x="520.0" y="904" />
+        <di:waypoint x="240.0" y="904" />
+        <di:waypoint x="240.0" y="910" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="881.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P01_F07_di" bpmnElement="P01_F07">
+        <di:waypoint x="128" y="951.0" />
+        <di:waypoint x="108" y="951.0" />
+        <di:waypoint x="108" y="798.0" />
+        <di:waypoint x="492" y="798.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="255.0" y="775.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P01_F08_di" bpmnElement="P01_F08">
+        <di:waypoint x="520.0" y="826" />
+        <di:waypoint x="520.0" y="1050" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475.0" y="915.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P01_F09_di" bpmnElement="P01_F09">
+        <di:waypoint x="520.0" y="1132" />
+        <di:waypoint x="520.0" y="1190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P01_F10_di" bpmnElement="P01_F10">
+        <di:waypoint x="520.0" y="1246" />
+        <di:waypoint x="520.0" y="1317" />
+        <di:waypoint x="240.0" y="1317" />
+        <di:waypoint x="240.0" y="1345" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="1294.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P01_F11_di" bpmnElement="P01_F11">
+        <di:waypoint x="520.0" y="1246" />
+        <di:waypoint x="520.0" y="1330" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="605.0" y="1265.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P01_F12_di" bpmnElement="P01_F12">
+        <di:waypoint x="520.0" y="1412" />
+        <di:waypoint x="520.0" y="1485" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="P02_Diagram" name="Confirmación, cancelación y reducción">
+    <bpmndi:BPMNPlane id="P02_Plane" bpmnElement="P02_Collab">
+      <bpmndi:BPMNShape id="P02_Pool_di" bpmnElement="P02_Pool" isHorizontal="false">
+        <dc:Bounds x="55" y="115" width="915" height="2195" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_Lane0_di" bpmnElement="P02_Lane0" isHorizontal="false">
+        <dc:Bounds x="100" y="155" width="280" height="2155" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_Lane1_di" bpmnElement="P02_Lane1" isHorizontal="false">
+        <dc:Bounds x="380" y="155" width="280" height="2155" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_Lane2_di" bpmnElement="P02_Lane2" isHorizontal="false">
+        <dc:Bounds x="660" y="155" width="280" height="2155" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_S01_di" bpmnElement="P02_S01">
+        <dc:Bounds x="782" y="225" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="690" y="270" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_T01_di" bpmnElement="P02_T01">
+        <dc:Bounds x="408" y="350" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_G01_di" bpmnElement="P02_G01">
+        <dc:Bounds x="492" y="490" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="552" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_E01_di" bpmnElement="P02_E01">
+        <dc:Bounds x="222" y="645" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="690" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_T02_di" bpmnElement="P02_T02">
+        <dc:Bounds x="688" y="630" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_G02_di" bpmnElement="P02_G02">
+        <dc:Bounds x="772" y="770" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="695" y="832" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_E02_di" bpmnElement="P02_E02">
+        <dc:Bounds x="222" y="925" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="970" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_T03_di" bpmnElement="P02_T03">
+        <dc:Bounds x="408" y="910" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_B01_di" bpmnElement="P02_B01">
+        <dc:Bounds x="605" y="977" width="30" height="30" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="645" y="980" width="160" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_T04_di" bpmnElement="P02_T04">
+        <dc:Bounds x="128" y="1050" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_E03_di" bpmnElement="P02_E03">
+        <dc:Bounds x="502" y="1205" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="410" y="1250" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_S02_di" bpmnElement="P02_S02">
+        <dc:Bounds x="222" y="1485" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="1530" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_T05_di" bpmnElement="P02_T05">
+        <dc:Bounds x="128" y="1610" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_G04_di" bpmnElement="P02_G04">
+        <dc:Bounds x="492" y="1750" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="1812" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_G05_di" bpmnElement="P02_G05">
+        <dc:Bounds x="492" y="1890" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="1952" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_T06_di" bpmnElement="P02_T06">
+        <dc:Bounds x="408" y="2030" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_B02_di" bpmnElement="P02_B02">
+        <dc:Bounds x="605" y="2097" width="30" height="30" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="645" y="2100" width="160" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_T07_di" bpmnElement="P02_T07">
+        <dc:Bounds x="688" y="2170" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_T08_di" bpmnElement="P02_T08">
+        <dc:Bounds x="128" y="2030" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_E06_di" bpmnElement="P02_E06">
+        <dc:Bounds x="222" y="2185" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="2230" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_E04_di" bpmnElement="P02_E04">
+        <dc:Bounds x="502" y="2185" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="410" y="2230" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P02_E05_di" bpmnElement="P02_E05">
+        <dc:Bounds x="222" y="1905" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="1950" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="P02_F01_di" bpmnElement="P02_F01">
+        <di:waypoint x="800.0" y="261" />
+        <di:waypoint x="800.0" y="344" />
+        <di:waypoint x="520.0" y="344" />
+        <di:waypoint x="520.0" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F02_di" bpmnElement="P02_F02">
+        <di:waypoint x="520.0" y="432" />
+        <di:waypoint x="520.0" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F03_di" bpmnElement="P02_F03">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="639" />
+        <di:waypoint x="240.0" y="639" />
+        <di:waypoint x="240.0" y="645" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="616.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F04_di" bpmnElement="P02_F04">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="624" />
+        <di:waypoint x="800.0" y="624" />
+        <di:waypoint x="800.0" y="630" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="615.0" y="601.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F05_di" bpmnElement="P02_F05">
+        <di:waypoint x="800.0" y="712" />
+        <di:waypoint x="800.0" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F06_di" bpmnElement="P02_F06">
+        <di:waypoint x="800.0" y="826" />
+        <di:waypoint x="800.0" y="897" />
+        <di:waypoint x="240.0" y="897" />
+        <di:waypoint x="240.0" y="925" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475.0" y="874.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F07_di" bpmnElement="P02_F07">
+        <di:waypoint x="800.0" y="826" />
+        <di:waypoint x="800.0" y="904" />
+        <di:waypoint x="520.0" y="904" />
+        <di:waypoint x="520.0" y="910" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="615.0" y="881.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F08_di" bpmnElement="P02_F08">
+        <di:waypoint x="520.0" y="992" />
+        <di:waypoint x="520.0" y="1205" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475.0" y="1075.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F09_di" bpmnElement="P02_F09">
+        <di:waypoint x="620.0" y="1007" />
+        <di:waypoint x="620.0" y="1044" />
+        <di:waypoint x="240.0" y="1044" />
+        <di:waypoint x="240.0" y="1050" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="385.0" y="1021.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F10_di" bpmnElement="P02_F10">
+        <di:waypoint x="128" y="1091.0" />
+        <di:waypoint x="108" y="1091.0" />
+        <di:waypoint x="108" y="943.0" />
+        <di:waypoint x="222" y="943.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F11_di" bpmnElement="P02_F11">
+        <di:waypoint x="240.0" y="1521" />
+        <di:waypoint x="240.0" y="1610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F12_di" bpmnElement="P02_F12">
+        <di:waypoint x="240.0" y="1692" />
+        <di:waypoint x="240.0" y="1744" />
+        <di:waypoint x="520.0" y="1744" />
+        <di:waypoint x="520.0" y="1750" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F13_di" bpmnElement="P02_F13">
+        <di:waypoint x="520.0" y="1806" />
+        <di:waypoint x="520.0" y="1877" />
+        <di:waypoint x="240.0" y="1877" />
+        <di:waypoint x="240.0" y="1905" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="1854.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F14_di" bpmnElement="P02_F14">
+        <di:waypoint x="520.0" y="1806" />
+        <di:waypoint x="520.0" y="1890" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="605.0" y="1825.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F15_di" bpmnElement="P02_F15">
+        <di:waypoint x="520.0" y="1946" />
+        <di:waypoint x="520.0" y="2030" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="525.0" y="2001" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F16_di" bpmnElement="P02_F16">
+        <di:waypoint x="520.0" y="1946" />
+        <di:waypoint x="520.0" y="2017" />
+        <di:waypoint x="240.0" y="2017" />
+        <di:waypoint x="240.0" y="2030" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="2001" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F17_di" bpmnElement="P02_F17">
+        <di:waypoint x="520.0" y="2112" />
+        <di:waypoint x="520.0" y="2185" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475.0" y="2125.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F18_di" bpmnElement="P02_F18">
+        <di:waypoint x="620.0" y="2127" />
+        <di:waypoint x="620.0" y="2164" />
+        <di:waypoint x="800.0" y="2164" />
+        <di:waypoint x="800.0" y="2170" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="845.0" y="2141.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F19_di" bpmnElement="P02_F19">
+        <di:waypoint x="688" y="2211.0" />
+        <di:waypoint x="668" y="2211.0" />
+        <di:waypoint x="668" y="2132" />
+        <di:waypoint x="370" y="2132" />
+        <di:waypoint x="370" y="1923.0" />
+        <di:waypoint x="222" y="1923.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P02_F20_di" bpmnElement="P02_F20">
+        <di:waypoint x="240.0" y="2112" />
+        <di:waypoint x="240.0" y="2185" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="P03_Diagram" name="Crédito normal y excepcional">
+    <bpmndi:BPMNPlane id="P03_Plane" bpmnElement="P03_Collab">
+      <bpmndi:BPMNShape id="P03_Pool_di" bpmnElement="P03_Pool" isHorizontal="false">
+        <dc:Bounds x="55" y="115" width="915" height="1355" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_Lane0_di" bpmnElement="P03_Lane0" isHorizontal="false">
+        <dc:Bounds x="100" y="155" width="280" height="1315" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_Lane1_di" bpmnElement="P03_Lane1" isHorizontal="false">
+        <dc:Bounds x="380" y="155" width="280" height="1315" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_Lane2_di" bpmnElement="P03_Lane2" isHorizontal="false">
+        <dc:Bounds x="660" y="155" width="280" height="1315" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_S01_di" bpmnElement="P03_S01">
+        <dc:Bounds x="222" y="225" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="270" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_T01_di" bpmnElement="P03_T01">
+        <dc:Bounds x="128" y="350" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_G01_di" bpmnElement="P03_G01">
+        <dc:Bounds x="492" y="490" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="552" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_E01_di" bpmnElement="P03_E01">
+        <dc:Bounds x="222" y="645" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="690" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_T02_di" bpmnElement="P03_T02">
+        <dc:Bounds x="408" y="630" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_G02_di" bpmnElement="P03_G02">
+        <dc:Bounds x="492" y="770" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="832" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_T03_di" bpmnElement="P03_T03">
+        <dc:Bounds x="128" y="910" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_E02_di" bpmnElement="P03_E02">
+        <dc:Bounds x="222" y="1065" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="1110" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_T04_di" bpmnElement="P03_T04">
+        <dc:Bounds x="688" y="910" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_G03_di" bpmnElement="P03_G03">
+        <dc:Bounds x="772" y="1050" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="695" y="1112" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_T05_di" bpmnElement="P03_T05">
+        <dc:Bounds x="688" y="1190" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_E03_di" bpmnElement="P03_E03">
+        <dc:Bounds x="782" y="1345" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="690" y="1390" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_T06_di" bpmnElement="P03_T06">
+        <dc:Bounds x="408" y="1190" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P03_E04_di" bpmnElement="P03_E04">
+        <dc:Bounds x="502" y="1345" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="410" y="1390" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="P03_F01_di" bpmnElement="P03_F01">
+        <di:waypoint x="240.0" y="261" />
+        <di:waypoint x="240.0" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F02_di" bpmnElement="P03_F02">
+        <di:waypoint x="240.0" y="432" />
+        <di:waypoint x="240.0" y="484" />
+        <di:waypoint x="520.0" y="484" />
+        <di:waypoint x="520.0" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F03_di" bpmnElement="P03_F03">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="617" />
+        <di:waypoint x="240.0" y="617" />
+        <di:waypoint x="240.0" y="645" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="594.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F04_di" bpmnElement="P03_F04">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="630" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="605.0" y="565.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F05_di" bpmnElement="P03_F05">
+        <di:waypoint x="520.0" y="712" />
+        <di:waypoint x="520.0" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F06_di" bpmnElement="P03_F06">
+        <di:waypoint x="520.0" y="826" />
+        <di:waypoint x="520.0" y="904" />
+        <di:waypoint x="240.0" y="904" />
+        <di:waypoint x="240.0" y="910" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="881.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F07_di" bpmnElement="P03_F07">
+        <di:waypoint x="240.0" y="992" />
+        <di:waypoint x="240.0" y="1065" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F08_di" bpmnElement="P03_F08">
+        <di:waypoint x="520.0" y="826" />
+        <di:waypoint x="520.0" y="904" />
+        <di:waypoint x="800.0" y="904" />
+        <di:waypoint x="800.0" y="910" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="653.0" y="881.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F09_di" bpmnElement="P03_F09">
+        <di:waypoint x="800.0" y="992" />
+        <di:waypoint x="800.0" y="1050" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F10_di" bpmnElement="P03_F10">
+        <di:waypoint x="800.0" y="1106" />
+        <di:waypoint x="800.0" y="1190" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="885.0" y="1125.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F11_di" bpmnElement="P03_F11">
+        <di:waypoint x="800.0" y="1272" />
+        <di:waypoint x="800.0" y="1345" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F12_di" bpmnElement="P03_F12">
+        <di:waypoint x="800.0" y="1106" />
+        <di:waypoint x="800.0" y="1177" />
+        <di:waypoint x="520.0" y="1177" />
+        <di:waypoint x="520.0" y="1190" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="615.0" y="1154.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P03_F13_di" bpmnElement="P03_F13">
+        <di:waypoint x="520.0" y="1272" />
+        <di:waypoint x="520.0" y="1345" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="P04_Diagram" name="Transferencias y decisión de parciales">
+    <bpmndi:BPMNPlane id="P04_Plane" bpmnElement="P04_Collab">
+      <bpmndi:BPMNShape id="P04_Pool_di" bpmnElement="P04_Pool" isHorizontal="false">
+        <dc:Bounds x="55" y="115" width="915" height="1915" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_Lane0_di" bpmnElement="P04_Lane0" isHorizontal="false">
+        <dc:Bounds x="100" y="155" width="280" height="1875" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_Lane1_di" bpmnElement="P04_Lane1" isHorizontal="false">
+        <dc:Bounds x="380" y="155" width="280" height="1875" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_Lane2_di" bpmnElement="P04_Lane2" isHorizontal="false">
+        <dc:Bounds x="660" y="155" width="280" height="1875" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_S01_di" bpmnElement="P04_S01">
+        <dc:Bounds x="222" y="225" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="270" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T01_di" bpmnElement="P04_T01">
+        <dc:Bounds x="408" y="350" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_G01_di" bpmnElement="P04_G01">
+        <dc:Bounds x="492" y="490" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="552" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T02_di" bpmnElement="P04_T02">
+        <dc:Bounds x="128" y="630" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_G02_di" bpmnElement="P04_G02">
+        <dc:Bounds x="212" y="770" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="135" y="832" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T03_di" bpmnElement="P04_T03">
+        <dc:Bounds x="408" y="910" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T04_di" bpmnElement="P04_T04">
+        <dc:Bounds x="688" y="1050" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_G03_di" bpmnElement="P04_G03">
+        <dc:Bounds x="772" y="1190" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="695" y="1252" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T12_di" bpmnElement="P04_T12">
+        <dc:Bounds x="408" y="1330" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_E01_di" bpmnElement="P04_E01">
+        <dc:Bounds x="502" y="1485" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="410" y="1530" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T05_di" bpmnElement="P04_T05">
+        <dc:Bounds x="688" y="1330" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T06_di" bpmnElement="P04_T06">
+        <dc:Bounds x="688" y="1470" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_G04_di" bpmnElement="P04_G04">
+        <dc:Bounds x="772" y="1610" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="695" y="1672" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T07_di" bpmnElement="P04_T07">
+        <dc:Bounds x="688" y="1750" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_E02_di" bpmnElement="P04_E02">
+        <dc:Bounds x="782" y="1905" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="690" y="1950" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T08_di" bpmnElement="P04_T08">
+        <dc:Bounds x="408" y="1750" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_E03_di" bpmnElement="P04_E03">
+        <dc:Bounds x="502" y="1905" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="410" y="1950" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T09_di" bpmnElement="P04_T09">
+        <dc:Bounds x="128" y="1050" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_G05_di" bpmnElement="P04_G05">
+        <dc:Bounds x="212" y="1190" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="135" y="1252" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T10_di" bpmnElement="P04_T10">
+        <dc:Bounds x="128" y="1330" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_E04_di" bpmnElement="P04_E04">
+        <dc:Bounds x="222" y="1485" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="1530" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_T11_di" bpmnElement="P04_T11">
+        <dc:Bounds x="128" y="1750" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P04_E05_di" bpmnElement="P04_E05">
+        <dc:Bounds x="222" y="1905" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="1950" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="P04_F01_di" bpmnElement="P04_F01">
+        <di:waypoint x="240.0" y="261" />
+        <di:waypoint x="240.0" y="344" />
+        <di:waypoint x="520.0" y="344" />
+        <di:waypoint x="520.0" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F02_di" bpmnElement="P04_F02">
+        <di:waypoint x="520.0" y="432" />
+        <di:waypoint x="520.0" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F03_di" bpmnElement="P04_F03">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="910" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475.0" y="705.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F04_di" bpmnElement="P04_F04">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="624" />
+        <di:waypoint x="240.0" y="624" />
+        <di:waypoint x="240.0" y="630" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="601.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F05_di" bpmnElement="P04_F05">
+        <di:waypoint x="240.0" y="712" />
+        <di:waypoint x="240.0" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F06_di" bpmnElement="P04_F06">
+        <di:waypoint x="240.0" y="826" />
+        <di:waypoint x="240.0" y="904" />
+        <di:waypoint x="520.0" y="904" />
+        <di:waypoint x="520.0" y="910" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="881.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F07_di" bpmnElement="P04_F07">
+        <di:waypoint x="240.0" y="826" />
+        <di:waypoint x="240.0" y="1050" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="195.0" y="915.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F08_di" bpmnElement="P04_F08">
+        <di:waypoint x="520.0" y="992" />
+        <di:waypoint x="520.0" y="1044" />
+        <di:waypoint x="800.0" y="1044" />
+        <di:waypoint x="800.0" y="1050" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F09_di" bpmnElement="P04_F09">
+        <di:waypoint x="800.0" y="1132" />
+        <di:waypoint x="800.0" y="1190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F10_di" bpmnElement="P04_F10">
+        <di:waypoint x="800.0" y="1246" />
+        <di:waypoint x="800.0" y="1317" />
+        <di:waypoint x="520.0" y="1317" />
+        <di:waypoint x="520.0" y="1330" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="615.0" y="1294.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F11_di" bpmnElement="P04_F11">
+        <di:waypoint x="520.0" y="1412" />
+        <di:waypoint x="520.0" y="1485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F12_di" bpmnElement="P04_F12">
+        <di:waypoint x="800.0" y="1246" />
+        <di:waypoint x="800.0" y="1330" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="885.0" y="1265.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F13_di" bpmnElement="P04_F13">
+        <di:waypoint x="800.0" y="1412" />
+        <di:waypoint x="800.0" y="1470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F14_di" bpmnElement="P04_F14">
+        <di:waypoint x="800.0" y="1552" />
+        <di:waypoint x="800.0" y="1610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F15_di" bpmnElement="P04_F15">
+        <di:waypoint x="800.0" y="1666" />
+        <di:waypoint x="800.0" y="1750" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="885.0" y="1685.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F16_di" bpmnElement="P04_F16">
+        <di:waypoint x="800.0" y="1832" />
+        <di:waypoint x="800.0" y="1905" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F17_di" bpmnElement="P04_F17">
+        <di:waypoint x="800.0" y="1666" />
+        <di:waypoint x="800.0" y="1737" />
+        <di:waypoint x="520.0" y="1737" />
+        <di:waypoint x="520.0" y="1750" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="615.0" y="1714.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F18_di" bpmnElement="P04_F18">
+        <di:waypoint x="520.0" y="1832" />
+        <di:waypoint x="520.0" y="1905" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F19_di" bpmnElement="P04_F19">
+        <di:waypoint x="240.0" y="1132" />
+        <di:waypoint x="240.0" y="1190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F20_di" bpmnElement="P04_F20">
+        <di:waypoint x="240.0" y="1246" />
+        <di:waypoint x="240.0" y="1330" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="325.0" y="1265.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F21_di" bpmnElement="P04_F21">
+        <di:waypoint x="240.0" y="1412" />
+        <di:waypoint x="240.0" y="1485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F22_di" bpmnElement="P04_F22">
+        <di:waypoint x="240.0" y="1246" />
+        <di:waypoint x="240.0" y="1317" />
+        <di:waypoint x="115" y="1317" />
+        <di:waypoint x="115" y="1744" />
+        <di:waypoint x="240.0" y="1744" />
+        <di:waypoint x="240.0" y="1750" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="32.0" y="1507.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P04_F23_di" bpmnElement="P04_F23">
+        <di:waypoint x="240.0" y="1832" />
+        <di:waypoint x="240.0" y="1905" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="P05_Diagram" name="Surtido y entrega">
+    <bpmndi:BPMNPlane id="P05_Plane" bpmnElement="P05_Collab">
+      <bpmndi:BPMNShape id="P05_Pool_di" bpmnElement="P05_Pool" isHorizontal="false">
+        <dc:Bounds x="55" y="115" width="915" height="1775" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_Lane0_di" bpmnElement="P05_Lane0" isHorizontal="false">
+        <dc:Bounds x="100" y="155" width="280" height="1735" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_Lane1_di" bpmnElement="P05_Lane1" isHorizontal="false">
+        <dc:Bounds x="380" y="155" width="280" height="1735" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_Lane2_di" bpmnElement="P05_Lane2" isHorizontal="false">
+        <dc:Bounds x="660" y="155" width="280" height="1735" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_S01_di" bpmnElement="P05_S01">
+        <dc:Bounds x="222" y="225" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="270" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_T01_di" bpmnElement="P05_T01">
+        <dc:Bounds x="128" y="350" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_G01_di" bpmnElement="P05_G01">
+        <dc:Bounds x="212" y="490" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="135" y="552" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_T08_di" bpmnElement="P05_T08">
+        <dc:Bounds x="128" y="630" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_E01_di" bpmnElement="P05_E01">
+        <dc:Bounds x="222" y="785" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="830" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_G02_di" bpmnElement="P05_G02">
+        <dc:Bounds x="492" y="630" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="692" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_T02_di" bpmnElement="P05_T02">
+        <dc:Bounds x="128" y="910" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_E02_di" bpmnElement="P05_E02">
+        <dc:Bounds x="222" y="1065" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="1110" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_T03_di" bpmnElement="P05_T03">
+        <dc:Bounds x="408" y="770" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_G03_di" bpmnElement="P05_G03">
+        <dc:Bounds x="492" y="910" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="972" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_E03_di" bpmnElement="P05_E03">
+        <dc:Bounds x="782" y="1065" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="690" y="1110" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_T04_di" bpmnElement="P05_T04">
+        <dc:Bounds x="408" y="1190" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_T05_di" bpmnElement="P05_T05">
+        <dc:Bounds x="688" y="1330" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_G04_di" bpmnElement="P05_G04">
+        <dc:Bounds x="772" y="1470" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="695" y="1532" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_T06_di" bpmnElement="P05_T06">
+        <dc:Bounds x="688" y="1610" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_E04_di" bpmnElement="P05_E04">
+        <dc:Bounds x="782" y="1765" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="690" y="1810" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_T07_di" bpmnElement="P05_T07">
+        <dc:Bounds x="408" y="1610" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P05_E05_di" bpmnElement="P05_E05">
+        <dc:Bounds x="502" y="1765" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="410" y="1810" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="P05_F01_di" bpmnElement="P05_F01">
+        <di:waypoint x="240.0" y="261" />
+        <di:waypoint x="240.0" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F02_di" bpmnElement="P05_F02">
+        <di:waypoint x="240.0" y="432" />
+        <di:waypoint x="240.0" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F03_di" bpmnElement="P05_F03">
+        <di:waypoint x="240.0" y="546" />
+        <di:waypoint x="240.0" y="630" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="325.0" y="565.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F04_di" bpmnElement="P05_F04">
+        <di:waypoint x="240.0" y="712" />
+        <di:waypoint x="240.0" y="785" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F05_di" bpmnElement="P05_F05">
+        <di:waypoint x="240.0" y="546" />
+        <di:waypoint x="240.0" y="617" />
+        <di:waypoint x="520.0" y="617" />
+        <di:waypoint x="520.0" y="630" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="594.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F06_di" bpmnElement="P05_F06">
+        <di:waypoint x="520.0" y="686" />
+        <di:waypoint x="520.0" y="757" />
+        <di:waypoint x="365" y="757" />
+        <di:waypoint x="365" y="904" />
+        <di:waypoint x="240.0" y="904" />
+        <di:waypoint x="240.0" y="910" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="312.5" y="734.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F07_di" bpmnElement="P05_F07">
+        <di:waypoint x="240.0" y="992" />
+        <di:waypoint x="240.0" y="1065" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F08_di" bpmnElement="P05_F08">
+        <di:waypoint x="520.0" y="686" />
+        <di:waypoint x="520.0" y="770" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="605.0" y="705.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F09_di" bpmnElement="P05_F09">
+        <di:waypoint x="520.0" y="852" />
+        <di:waypoint x="520.0" y="910" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F10_di" bpmnElement="P05_F10">
+        <di:waypoint x="520.0" y="966" />
+        <di:waypoint x="520.0" y="1059" />
+        <di:waypoint x="800.0" y="1059" />
+        <di:waypoint x="800.0" y="1065" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="615.0" y="1036.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F11_di" bpmnElement="P05_F11">
+        <di:waypoint x="520.0" y="966" />
+        <di:waypoint x="520.0" y="1190" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475.0" y="1055.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F12_di" bpmnElement="P05_F12">
+        <di:waypoint x="520.0" y="1272" />
+        <di:waypoint x="520.0" y="1324" />
+        <di:waypoint x="800.0" y="1324" />
+        <di:waypoint x="800.0" y="1330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F13_di" bpmnElement="P05_F13">
+        <di:waypoint x="800.0" y="1412" />
+        <di:waypoint x="800.0" y="1470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F14_di" bpmnElement="P05_F14">
+        <di:waypoint x="800.0" y="1526" />
+        <di:waypoint x="800.0" y="1610" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="885.0" y="1545.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F15_di" bpmnElement="P05_F15">
+        <di:waypoint x="800.0" y="1692" />
+        <di:waypoint x="800.0" y="1765" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F16_di" bpmnElement="P05_F16">
+        <di:waypoint x="800.0" y="1526" />
+        <di:waypoint x="800.0" y="1597" />
+        <di:waypoint x="520.0" y="1597" />
+        <di:waypoint x="520.0" y="1610" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="615.0" y="1574.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P05_F17_di" bpmnElement="P05_F17">
+        <di:waypoint x="520.0" y="1692" />
+        <di:waypoint x="520.0" y="1765" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="P06_Diagram" name="Devoluciones según política">
+    <bpmndi:BPMNPlane id="P06_Plane" bpmnElement="P06_Collab">
+      <bpmndi:BPMNShape id="P06_Pool_di" bpmnElement="P06_Pool" isHorizontal="false">
+        <dc:Bounds x="55" y="115" width="635" height="1215" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_Lane0_di" bpmnElement="P06_Lane0" isHorizontal="false">
+        <dc:Bounds x="100" y="155" width="280" height="1175" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_Lane1_di" bpmnElement="P06_Lane1" isHorizontal="false">
+        <dc:Bounds x="380" y="155" width="280" height="1175" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_S01_di" bpmnElement="P06_S01">
+        <dc:Bounds x="222" y="225" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="270" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_T01_di" bpmnElement="P06_T01">
+        <dc:Bounds x="128" y="350" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_G01_di" bpmnElement="P06_G01">
+        <dc:Bounds x="492" y="490" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="552" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_T05_di" bpmnElement="P06_T05">
+        <dc:Bounds x="128" y="770" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_E01_di" bpmnElement="P06_E01">
+        <dc:Bounds x="222" y="925" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="970" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_T02_di" bpmnElement="P06_T02">
+        <dc:Bounds x="408" y="630" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_G02_di" bpmnElement="P06_G02">
+        <dc:Bounds x="492" y="770" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="832" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_T03_di" bpmnElement="P06_T03">
+        <dc:Bounds x="408" y="910" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_T04_di" bpmnElement="P06_T04">
+        <dc:Bounds x="408" y="1050" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P06_E02_di" bpmnElement="P06_E02">
+        <dc:Bounds x="502" y="1205" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="410" y="1250" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="P06_F01_di" bpmnElement="P06_F01">
+        <di:waypoint x="240.0" y="261" />
+        <di:waypoint x="240.0" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P06_F02_di" bpmnElement="P06_F02">
+        <di:waypoint x="240.0" y="432" />
+        <di:waypoint x="240.0" y="484" />
+        <di:waypoint x="520.0" y="484" />
+        <di:waypoint x="520.0" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P06_F03_di" bpmnElement="P06_F03">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="617" />
+        <di:waypoint x="240.0" y="617" />
+        <di:waypoint x="240.0" y="770" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="594.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P06_F04_di" bpmnElement="P06_F04">
+        <di:waypoint x="240.0" y="852" />
+        <di:waypoint x="240.0" y="925" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P06_F05_di" bpmnElement="P06_F05">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="630" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="605.0" y="565.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P06_F06_di" bpmnElement="P06_F06">
+        <di:waypoint x="520.0" y="712" />
+        <di:waypoint x="520.0" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P06_F07_di" bpmnElement="P06_F07">
+        <di:waypoint x="492" y="798.0" />
+        <di:waypoint x="474" y="798.0" />
+        <di:waypoint x="474" y="811.0" />
+        <di:waypoint x="352" y="811.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="330.0" y="788.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P06_F08_di" bpmnElement="P06_F08">
+        <di:waypoint x="520.0" y="826" />
+        <di:waypoint x="520.0" y="910" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="605.0" y="845.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P06_F09_di" bpmnElement="P06_F09">
+        <di:waypoint x="520.0" y="992" />
+        <di:waypoint x="520.0" y="1050" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P06_F10_di" bpmnElement="P06_F10">
+        <di:waypoint x="520.0" y="1132" />
+        <di:waypoint x="520.0" y="1205" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="P07_Diagram" name="Auditoría y reportes operativos">
+    <bpmndi:BPMNPlane id="P07_Plane" bpmnElement="P07_Collab">
+      <bpmndi:BPMNShape id="P07_Pool_di" bpmnElement="P07_Pool" isHorizontal="false">
+        <dc:Bounds x="55" y="115" width="915" height="795" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_Lane0_di" bpmnElement="P07_Lane0" isHorizontal="false">
+        <dc:Bounds x="100" y="155" width="280" height="755" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_Lane1_di" bpmnElement="P07_Lane1" isHorizontal="false">
+        <dc:Bounds x="380" y="155" width="280" height="755" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_Lane2_di" bpmnElement="P07_Lane2" isHorizontal="false">
+        <dc:Bounds x="660" y="155" width="280" height="755" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_S01_di" bpmnElement="P07_S01">
+        <dc:Bounds x="222" y="225" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="270" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_T01_di" bpmnElement="P07_T01">
+        <dc:Bounds x="128" y="350" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_E01_di" bpmnElement="P07_E01">
+        <dc:Bounds x="222" y="505" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="550" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_S02_di" bpmnElement="P07_S02">
+        <dc:Bounds x="502" y="225" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="410" y="270" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_T02_di" bpmnElement="P07_T02">
+        <dc:Bounds x="408" y="350" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_G01_di" bpmnElement="P07_G01">
+        <dc:Bounds x="492" y="490" width="56" height="56" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="415" y="552" width="210" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_T03_di" bpmnElement="P07_T03">
+        <dc:Bounds x="408" y="630" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_E02_di" bpmnElement="P07_E02">
+        <dc:Bounds x="502" y="785" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="410" y="830" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_E03_di" bpmnElement="P07_E03">
+        <dc:Bounds x="222" y="645" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="130" y="690" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_S03_di" bpmnElement="P07_S03">
+        <dc:Bounds x="782" y="225" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="690" y="270" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_T04_di" bpmnElement="P07_T04">
+        <dc:Bounds x="688" y="490" width="224" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P07_E04_di" bpmnElement="P07_E04">
+        <dc:Bounds x="782" y="785" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="690" y="830" width="220" height="56" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="P07_F01_di" bpmnElement="P07_F01">
+        <di:waypoint x="240.0" y="261" />
+        <di:waypoint x="240.0" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P07_F02_di" bpmnElement="P07_F02">
+        <di:waypoint x="240.0" y="432" />
+        <di:waypoint x="240.0" y="505" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P07_F03_di" bpmnElement="P07_F03">
+        <di:waypoint x="520.0" y="261" />
+        <di:waypoint x="520.0" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P07_F04_di" bpmnElement="P07_F04">
+        <di:waypoint x="520.0" y="432" />
+        <di:waypoint x="520.0" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P07_F05_di" bpmnElement="P07_F05">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="630" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="605.0" y="565.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P07_F06_di" bpmnElement="P07_F06">
+        <di:waypoint x="520.0" y="712" />
+        <di:waypoint x="520.0" y="785" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P07_F07_di" bpmnElement="P07_F07">
+        <di:waypoint x="520.0" y="546" />
+        <di:waypoint x="520.0" y="617" />
+        <di:waypoint x="240.0" y="617" />
+        <di:waypoint x="240.0" y="645" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="335.0" y="594.0" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P07_F08_di" bpmnElement="P07_F08">
+        <di:waypoint x="800.0" y="261" />
+        <di:waypoint x="800.0" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="P07_F09_di" bpmnElement="P07_F09">
+        <di:waypoint x="800.0" y="572" />
+        <di:waypoint x="800.0" y="785" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

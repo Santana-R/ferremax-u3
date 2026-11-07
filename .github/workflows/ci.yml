@@ -1,0 +1,85 @@
+name: FerreMax - CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    name: Docker, API y pruebas
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      # Credenciales ficticias exclusivas del PostgreSQL efimero de este runner.
+      POSTGRES_DB: ferremax_ci
+      POSTGRES_USER: ferremax_ci
+      POSTGRES_PASSWORD: clave_ficticia_ci_ferremax
+      POSTGRES_PORT: "5433"
+      APP_PORT: "8000"
+      FERREMAX_INIT_DB: "true"
+      FERREMAX_SEED_DEMO: "true"
+    steps:
+      - name: Obtener el codigo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Revisar Docker y la configuracion
+        run: |
+          # Crear estas carpetas con el usuario del runner antes del bind mount.
+          mkdir -p reports/docker reports/ci
+          docker version
+          docker compose version
+          docker compose --profile tests config --quiet
+
+      - name: Construir App y Tests
+        run: docker compose --profile tests build app tests
+
+      - name: Arrancar App y PostgreSQL
+        run: docker compose up -d --wait app
+
+      - name: Preparar datos ficticios y comprobar las seis operaciones por HTTP
+        run: |
+          docker compose exec -T app python scripts/cargar_cotizacion_demo.py
+          python3 scripts/comprobar_api_ci.py
+
+      - name: Comprobar presentacion de Swagger en navegador
+        run: |
+          npm install --prefix "$RUNNER_TEMP/ferremax-browser" --no-audit --no-fund playwright@1.65.0
+          node "$RUNNER_TEMP/ferremax-browser/node_modules/playwright/cli.js" install --with-deps chromium
+          FERREMAX_PLAYWRIGHT="$RUNNER_TEMP/ferremax-browser/node_modules/playwright" node scripts/comprobar_swagger_ci.cjs
+
+      - name: Ejecutar suite con PostgreSQL y cobertura minima del 80 por ciento
+        run: docker compose run --rm --no-deps tests
+
+      - name: Conservar el estado y los logs de los servicios
+        if: always()
+        run: |
+          mkdir -p reports/ci
+          docker compose ps -a > reports/ci/compose.txt
+          docker compose logs --no-color > reports/ci/compose.log
+
+      - name: Guardar reportes de esta ejecucion
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ferremax-ci-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            reports/docker/**/junit.xml
+            reports/docker/**/coverage.json
+            reports/docker/**/htmlcov/
+            reports/ci/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Retirar solo los contenedores y el volumen del runner de CI
+        if: always()
+        run: docker compose --profile tests down --volumes

@@ -1,0 +1,622 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device" version="26.0.0">
+  <diagram id="A01" name="A01 Componentes y dependencias">
+    <mxGraphModel dx="1260" dy="1280" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1260" pageHeight="1280">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="A01_Title" value="Componentes y dependencias" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=24;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="35" y="20" width="1190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_G0" value="API / composición" style="swimlane;html=0;startSize=35;fillColor=#f8fafc;strokeColor=#c5d0db;horizontal=1;" parent="1" vertex="1">
+          <mxGeometry x="35" y="130" width="1190" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_G1" value="Aplicación" style="swimlane;html=0;startSize=35;fillColor=#f8fafc;strokeColor=#c5d0db;horizontal=1;" parent="1" vertex="1">
+          <mxGeometry x="35" y="355" width="1190" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_G2" value="Dominio" style="swimlane;html=0;startSize=35;fillColor=#f8fafc;strokeColor=#c5d0db;horizontal=1;" parent="1" vertex="1">
+          <mxGeometry x="35" y="645" width="1190" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_G3" value="Infraestructura" style="swimlane;html=0;startSize=35;fillColor=#f8fafc;strokeColor=#c5d0db;horizontal=1;" parent="1" vertex="1">
+          <mxGeometry x="35" y="925" width="1190" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_E1" value="comandos / consultas" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A01_API" target="A01_CQRS">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="315.0" y="397" />
+              <mxPoint x="235.0" y="397" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A01_E2" value="revalidar / convertir" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A01_API" target="A01_Services">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="315.0" y="397" />
+              <mxPoint x="630.0" y="397" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A01_E3" value="construye dependencias" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=1;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A01_Composition" target="A01_Pg">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="945.0" y="308" />
+              <mxPoint x="819" y="308" />
+              <mxPoint x="819" y="683" />
+              <mxPoint x="574" y="683" />
+              <mxPoint x="574" y="977" />
+              <mxPoint x="245.0" y="977" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A01_E4" value="comandos" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A01_CQRS" target="A01_Services">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A01_E5" value="lectores" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=1;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A01_CQRS" target="A01_Ports">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="418" y="487.5" />
+              <mxPoint x="418" y="388" />
+              <mxPoint x="842" y="388" />
+              <mxPoint x="842" y="487.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A01_E6" value="UoW / Repository" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=1;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A01_Services" target="A01_Ports">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A01_E7" value="invoca reglas" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A01_Services" target="A01_Model">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="630.0" y="692" />
+              <mxPoint x="320.0" y="692" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A01_E8" value="evalúa conversión" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=1;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A01_Model" target="A01_Spec">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A01_E9" value="contrato estructural" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=1;exitX=0.0;exitY=0.5;entryX=0.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A01_Pg" target="A01_Ports">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="52" y="1060.0" />
+              <mxPoint x="52" y="587" />
+              <mxPoint x="842" y="587" />
+              <mxPoint x="842" y="487.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A01_E10" value="contrato estructural" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=1;exitX=0.0;exitY=0.5;entryX=0.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A01_Memory" target="A01_Ports">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="696" y="1060.0" />
+              <mxPoint x="696" y="587" />
+              <mxPoint x="842" y="587" />
+              <mxPoint x="842" y="487.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A01_E11" value="SQL" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A01_Pg" target="A01_DB">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="438" y="1060.0" />
+              <mxPoint x="438" y="968" />
+              <mxPoint x="882" y="968" />
+              <mxPoint x="882" y="1060.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A01_API" value="FastAPI / endpoints&#10;&#10;main.py; cotizaciones.py; pedidos.py&#10;schemas.py valida solicitudes&#10;responses.py expresa errores HTTP" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="80" y="180" width="470" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_Composition" value="Proveedores Depends y configuración&#10;&#10;get_servicio / get_lector&#10;fábrica PostgresUnitOfWork y reloj&#10;settings.py resuelve conexión" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="720" y="180" width="450" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_CQRS" value="CQRS básico&#10;&#10;ConfirmarPedido / CancelarPedido&#10;ConsultarDisponibilidad / ConsultarPedido&#10;cuatro handlers; DTO de lectura" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="70" y="415" width="330" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_Services" value="Service Layer&#10;&#10;CotizacionService: revalidar / convertir&#10;PedidoService: confirmar / cancelar&#10;Actor.exigir, snapshots y eventos" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="465" y="415" width="330" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_Ports" value="Puertos de aplicación&#10;&#10;UnitOfWork; tres Repository&#10;DisponibilidadReader; PedidoReader&#10;contratos Protocol pequeños" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="860" y="415" width="330" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_Model" value="Modelo de dominio&#10;&#10;Cotizacion; Pedido; InventarioUbicacion&#10;SKU; Dinero; Vigencia; Partida&#10;EstadoPedido; EventoDominio" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="85" y="710" width="470" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_Spec" value="Specification pura&#10;&#10;ContextoConversion&#10;CotizacionVigente AND AceptacionDelCliente&#10;AND / OR / NOT combinables" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="720" y="710" width="460" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_Pg" value="Adaptadores PostgreSQL&#10;&#10;PostgresUnitOfWork; PgCotizaciones&#10;PgPedidos; PgInventarios; PostgresReader&#10;psycopg, SQL y snapshots JSONB" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="70" y="995" width="350" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_Memory" value="Adaptadores Memory para pruebas&#10;&#10;MemoryUnitOfWork; MemoryReader&#10;repositorios en copia del MemoryStore&#10;RLock; commit publica la copia" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="460" y="995" width="350" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_DB" value="PostgreSQL 16&#10;&#10;seis tablas del esquema ferremax_u3&#10;Compose local o Render&#10;misma base para lectura y escritura" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="900" y="995" width="280" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_Note0" value="API elige adaptadores; servicios coordinan y dominio decide reglas." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="35" y="1198" width="1190" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="A01_Note1" value="Memory se inyecta en pruebas. Las líneas discontinuas indican uso/contrato, no herencia Python." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="35" y="1216" width="1190" height="18" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="A02" name="A02 Clases y límites del dominio">
+    <mxGraphModel dx="1310" dy="1550" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1310" pageHeight="1550">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="A02_Title" value="Clases y límites del dominio" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=24;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="35" y="20" width="1240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_E1" value="vigencia: 1" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Cotizacion" target="A02_Vigencia">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230.0" y="512" />
+              <mxPoint x="195.0" y="512" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_E2" value="partidas: 1..*" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Cotizacion" target="A02_Partida">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230.0" y="512" />
+              <mxPoint x="655.0" y="512" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_E3" value="snapshot: 1..*" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Pedido" target="A02_Partida">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_E4" value="origen por ID + versión" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=1;exitX=0.0;exitY=0.5;entryX=1.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Pedido" target="A02_Cotizacion">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_E5" value="sku: 1" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Inventory" target="A02_SKU">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080.0" y="512" />
+              <mxPoint x="1105.0" y="512" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_E6" value="reservas por ID: 0..*" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=1;exitX=0.0;exitY=0.5;entryX=1.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Inventory" target="A02_Pedido">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_E7" value="sku: 1" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Partida" target="A02_SKU">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_E8" value="precio: 1" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Partida" target="A02_Dinero">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_E9" value="estado: 1" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Pedido" target="A02_Estado">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="655.0" y="418" />
+              <mxPoint x="364" y="418" />
+              <mxPoint x="364" y="847" />
+              <mxPoint x="205.0" y="847" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_E10" value="parámetro" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=1;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Pedido" target="A02_Pago">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="655.0" y="418" />
+              <mxPoint x="936" y="418" />
+              <mxPoint x="936" y="847" />
+              <mxPoint x="1095.0" y="847" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_E11" value="límite y saldo" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.0;exitY=0.5;entryX=0.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Cuenta" target="A02_Dinero">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="462" y="1300.0" />
+              <mxPoint x="462" y="947.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_E12" value="evalúa" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=1;exitX=0.0;exitY=0.5;entryX=1.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A02_Politica" target="A02_Cuenta">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A02_Cotizacion" value="Cotizacion · raíz versionada&#10;&#10;id; folio; version; cliente_id&#10;vigencia: Vigencia&#10;partidas: List[Partida]; condiciones&#10;--&#10;estado_en(ahora)&#10;revalidar(...) -&gt; Cotizacion&#10;convertir(ahora, aceptada) -&gt; Pedido" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="50" y="165" width="360" height="235" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Pedido" value="Pedido · raíz&#10;&#10;id; cliente_id; cotizacion_id&#10;cotizacion_folio; cotizacion_version&#10;partidas; estado; surtido; referencia_pago&#10;--&#10;confirmar(pago); cancelar(motivo)&#10;cantidades_por_sku(); total derivado" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="475" y="165" width="360" height="235" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Inventory" value="InventarioUbicacion · raíz&#10;&#10;sku; ubicacion_id&#10;existencia_fisica; en_transito&#10;reservas: Dict[pedido_id, Decimal]&#10;--&#10;disponible; comprometida; validar()&#10;reservar(pedido, cantidad); liberar(id)" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="900" y="165" width="360" height="235" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Vigencia" value="Vigencia · Value Object&#10;&#10;emision; vencimiento con zona&#10;--&#10;esta_vigente(ahora)&#10;emision &lt;= ahora &lt; vencimiento" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="50" y="530" width="290" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Partida" value="Partida · Value Object&#10;&#10;numero; sku; cantidad; precio&#10;cantidad positiva y finita&#10;número positivo&#10;conjunto: números únicos / moneda común" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="480" y="530" width="350" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_SKU" value="SKU · Value Object&#10;&#10;valor: str&#10;--&#10;valor no vacío" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="960" y="530" width="290" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Estado" value="EstadoPedido · enum&#10;&#10;PENDIENTE = Pendiente&#10;CONFIRMADO = Confirmado&#10;CANCELADO = Cancelado&#10;guardas en los métodos de Pedido" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="50" y="865" width="310" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Dinero" value="Dinero · Value Object&#10;&#10;importe: Decimal; moneda: str&#10;--&#10;importe finito &gt;=0; moneda presente" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="490" y="865" width="330" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Pago" value="AutorizacionPago · dato de demo&#10;&#10;referencia: str; autorizada: bool&#10;--&#10;parámetro de Pedido.confirmar&#10;sin conexión a pasarela" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#fff3df;strokeColor=#a26a14;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="930" y="865" width="330" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Evento" value="EventoDominio · hecho registrado&#10;&#10;id; tipo; agregado_id; datos; ocurrido&#10;construido por servicios de aplicación&#10;registrado por UoW junto al cambio&#10;sin lista de eventos dentro del agregado" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="50" y="1210" width="360" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Cuenta" value="CuentaCredito · dato aislado&#10;&#10;cliente_id; activo; bloqueado&#10;limite: Dinero; saldo: Dinero&#10;--&#10;evaluar(importe) -&gt; bool" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#fff3df;strokeColor=#a26a14;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="480" y="1210" width="360" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Politica" value="PoliticaCredito · política aislada&#10;&#10;evaluar_normal(cuenta, importe)&#10;--&#10;AutorizadoNormal / EnRevision&#10;sin solicitud/persistencia/endpoint" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#fff3df;strokeColor=#a26a14;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="900" y="1210" width="360" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Note0" value="Los vínculos por ID son referencias; no un único agregado. Las listas/diccionarios de agregados son públicos." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="35" y="1468" width="1240" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Note1" value="Partida/SKU/Dinero/Vigencia son valores congelados; payload de evento no es profundamente inmutable." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="35" y="1486" width="1240" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="A02_Note2" value="Crédito: política aislada, sin flujo ni repositorio. La vista selecciona clases; Specification se detalla en la documentación." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="35" y="1504" width="1240" height="18" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="A03" name="A03 Secuencia de confirmación válida">
+    <mxGraphModel dx="1280" dy="1524" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1280" pageHeight="1524">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="A03_Title" value="Secuencia de confirmación válida" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=24;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="35" y="20" width="1210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_Life0" value="" style="line;strokeColor=#9aaaba;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="150.0" y="195" width="1" height="1189" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_Life1" value="" style="line;strokeColor=#9aaaba;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="395.0" y="195" width="1" height="1189" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_Life2" value="" style="line;strokeColor=#9aaaba;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="640.0" y="195" width="1" height="1189" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_Life3" value="" style="line;strokeColor=#9aaaba;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="885.0" y="195" width="1" height="1189" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_Life4" value="" style="line;strokeColor=#9aaaba;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="1130.0" y="195" width="1" height="1189" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_Loop" value="loop por cada SKU" style="rounded=0;html=0;fillColor=none;strokeColor=#7992a7;dashed=1;align=left;verticalAlign=top;spacing=6;" parent="1" vertex="1">
+          <mxGeometry x="370.0" y="807" width="795.0" height="218" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_M0" value="1. ConfirmarPedidoHandler.handle → confirmar" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150.0" y="250" as="sourcePoint" />
+            <mxPoint x="395.0" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M1" value="2. Actor.exigir(&quot;Caja&quot;)" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="324" as="sourcePoint" />
+            <mxPoint x="395.0" y="349" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="470.0" y="324" />
+              <mxPoint x="470.0" y="349" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M2" value="3. Entrar al UoW y preparar repositorios" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="398" as="sourcePoint" />
+            <mxPoint x="885.0" y="398" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M3" value="4. SELECT pedido FOR UPDATE" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885.0" y="472" as="sourcePoint" />
+            <mxPoint x="1130.0" y="472" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M4" value="5. Obtener inventarios por SKU ordenado" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="546" as="sourcePoint" />
+            <mxPoint x="885.0" y="546" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M5" value="6. SELECT inventario FOR UPDATE" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885.0" y="620" as="sourcePoint" />
+            <mxPoint x="1130.0" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M6" value="7. Pedido e inventarios recuperados" style="html=0;endArrow=open;dashed=1;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885.0" y="694" as="sourcePoint" />
+            <mxPoint x="395.0" y="694" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M7" value="8. Pedido.confirmar(pago)" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="768" as="sourcePoint" />
+            <mxPoint x="640.0" y="768" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M8" value="9. Inventario.reservar(pedido, cantidad)" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="842" as="sourcePoint" />
+            <mxPoint x="640.0" y="842" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M9" value="10. inventarios.guardar(inventario)" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="916" as="sourcePoint" />
+            <mxPoint x="885.0" y="916" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M10" value="11. UPDATE inventario y guardar reserva" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885.0" y="990" as="sourcePoint" />
+            <mxPoint x="1130.0" y="990" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M11" value="12. Guardar pedido y registrar auditoría/evento" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="1064" as="sourcePoint" />
+            <mxPoint x="885.0" y="1064" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M12" value="13. INSERT/UPDATE pedido, auditoría y outbox" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885.0" y="1138" as="sourcePoint" />
+            <mxPoint x="1130.0" y="1138" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M13" value="14. commit()" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="1212" as="sourcePoint" />
+            <mxPoint x="885.0" y="1212" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M14" value="15. COMMIT" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885.0" y="1286" as="sourcePoint" />
+            <mxPoint x="1130.0" y="1286" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_M15" value="16. DTO Confirmado; HTTP 200" style="html=0;endArrow=open;dashed=1;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="1360" as="sourcePoint" />
+            <mxPoint x="150.0" y="1360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A03_P0" value="API / handler&#10;&#10;api/pedidos.py" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="45" y="130" width="210" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_P1" value="PedidoService&#10;&#10;application/services.py" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="290" y="130" width="210" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_P2" value="Dominio&#10;&#10;Pedido / InventarioUbicacion" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="535" y="130" width="210" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_P3" value="UoW y repositorios Pg&#10;&#10;infrastructure/postgres.py" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="780" y="130" width="210" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_P4" value="PostgreSQL&#10;&#10;transacción local" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="1025" y="130" width="210" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_Note0" value="Los pasos 9-11 se repiten juntos por cada SKU, después de obtener los inventarios bloqueados." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="35" y="1442" width="1210" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="A03_Note1" value="El DTO se devuelve después del commit. Pago y actor del endpoint son simulados." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="35" y="1460" width="1210" height="18" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="A04" name="A04 Secuencia de rechazo y rollback">
+    <mxGraphModel dx="1280" dy="1302" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1280" pageHeight="1302">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="A04_Title" value="Secuencia de rechazo y rollback" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=24;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="35" y="20" width="1210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_Life0" value="" style="line;strokeColor=#9aaaba;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="150.0" y="195" width="1" height="967" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_Life1" value="" style="line;strokeColor=#9aaaba;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="395.0" y="195" width="1" height="967" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_Life2" value="" style="line;strokeColor=#9aaaba;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="640.0" y="195" width="1" height="967" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_Life3" value="" style="line;strokeColor=#9aaaba;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="885.0" y="195" width="1" height="967" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_Life4" value="" style="line;strokeColor=#9aaaba;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="1130.0" y="195" width="1" height="967" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_M0" value="1. Confirmar pedido con dos productos" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150.0" y="250" as="sourcePoint" />
+            <mxPoint x="395.0" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M1" value="2. Abrir UoW y obtener pedido/inventarios" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="324" as="sourcePoint" />
+            <mxPoint x="885.0" y="324" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M2" value="3. SELECT con bloqueos; SKU ordenados" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885.0" y="398" as="sourcePoint" />
+            <mxPoint x="1130.0" y="398" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M3" value="4. Objetos recuperados" style="html=0;endArrow=open;dashed=1;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885.0" y="472" as="sourcePoint" />
+            <mxPoint x="395.0" y="472" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M4" value="5. Pedido.confirmar: Confirmado provisional" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="546" as="sourcePoint" />
+            <mxPoint x="640.0" y="546" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M5" value="6. Reservar primer producto" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="620" as="sourcePoint" />
+            <mxPoint x="640.0" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M6" value="7. Guardar primer inventario/reserva" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="694" as="sourcePoint" />
+            <mxPoint x="885.0" y="694" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M7" value="8. Escritura provisional del primer producto" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885.0" y="768" as="sourcePoint" />
+            <mxPoint x="1130.0" y="768" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M8" value="9. Reservar segundo producto sin disponible" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="842" as="sourcePoint" />
+            <mxPoint x="640.0" y="842" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M9" value="10. DisponibilidadInsuficiente" style="html=0;endArrow=open;dashed=1;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="640.0" y="916" as="sourcePoint" />
+            <mxPoint x="395.0" y="916" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M10" value="11. __exit__ recibe la excepción" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="990" as="sourcePoint" />
+            <mxPoint x="885.0" y="990" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M11" value="12. ROLLBACK de toda la transacción" style="html=0;endArrow=open;dashed=0;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885.0" y="1064" as="sourcePoint" />
+            <mxPoint x="1130.0" y="1064" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_M12" value="13. Propagar rechazo; respuesta HTTP 409" style="html=0;endArrow=open;dashed=1;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395.0" y="1138" as="sourcePoint" />
+            <mxPoint x="150.0" y="1138" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A04_P0" value="API / handler&#10;&#10;api/pedidos.py" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="45" y="130" width="210" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_P1" value="PedidoService&#10;&#10;application/services.py" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="290" y="130" width="210" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_P2" value="Dominio&#10;&#10;Pedido / InventarioUbicacion" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="535" y="130" width="210" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_P3" value="UoW y repositorios Pg&#10;&#10;infrastructure/postgres.py" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="780" y="130" width="210" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_P4" value="PostgreSQL&#10;&#10;transacción local" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="1025" y="130" width="210" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_Note0" value="Resultado persistido: Pendiente, sin primera reserva, sin referencia nueva ni evento de confirmación nuevo." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="35" y="1220" width="1210" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="A04_Note1" value="Rollback afecta la transacción; no constituye una transición comercial Confirmado → Pendiente ni revierte un pago externo." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="35" y="1238" width="1210" height="18" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="A05" name="A05 Persistencia: seis tablas PostgreSQL">
+    <mxGraphModel dx="1260" dy="1470" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1260" pageHeight="1470">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="A05_Title" value="Persistencia: seis tablas PostgreSQL" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=24;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="35" y="20" width="1190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A05_E1" value="1 versión → 0..* pedidos" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.0;exitY=0.5;entryX=1.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A05_Pedido" target="A05_Cot">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="692" y="285.0" />
+              <mxPoint x="692" y="275.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A05_E2" value="1 pedido → 0..* reservas" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.0;exitY=0.5;entryX=0.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A05_Res" target="A05_Pedido">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="692" y="735.0" />
+              <mxPoint x="692" y="285.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A05_E3" value="1 inventario → 0..* reservas" style="edgeStyle=orthogonalEdgeStyle;html=0;endArrow=open;dashed=0;exitX=0.0;exitY=0.5;entryX=1.0;entryY=0.5;fontSize=12;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="A05_Res" target="A05_Inv">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A05_Cot" value="cotizacion_version&#10;&#10;PK (id uuid, version integer &gt;0)&#10;folio text&#10;datos jsonb" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="60" y="180" width="470" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="A05_Pedido" value="pedido&#10;&#10;PK id uuid&#10;FK (cotizacion_id, cotizacion_version)&#10;estado: Pendiente / Confirmado / Cancelado&#10;datos jsonb" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="710" y="180" width="490" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="A05_Inv" value="inventario&#10;&#10;PK (sku, ubicacion_id)&#10;existencia_fisica numeric &gt;=0&#10;comprometida numeric &gt;=0&#10;en_transito numeric &gt;=0&#10;CHECK comprometida &lt;= existencia_fisica" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="60" y="620" width="470" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="A05_Res" value="reserva&#10;&#10;PK (pedido_id, sku, ubicacion_id)&#10;FK pedido_id → pedido.id&#10;FK (sku, ubicacion_id) → inventario&#10;cantidad numeric &gt;0" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="710" y="620" width="490" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="A05_Aud" value="auditoria&#10;&#10;PK id uuid; actor_id; accion; agregado_id&#10;antes jsonb; despues jsonb&#10;motivo text; fecha timestamptz&#10;sin FK de agregado ni permisos por rol acreditados" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="60" y="1100" width="500" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="A05_Out" value="outbox&#10;&#10;PK id uuid; tipo; agregado_id&#10;datos jsonb; ocurrido timestamptz&#10;sin publicador/consumidor externo" style="rounded=0;html=0;whiteSpace=wrap;fillColor=#edf5fc;strokeColor=#2c648b;fontSize=13;align=left;verticalAlign=top;spacing=10;" parent="1" vertex="1">
+          <mxGeometry x="710" y="1100" width="490" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="A05_Note0" value="PK/FK corresponden al DDL real. Las multiplicidades describen filas posibles, no una implementación de todos los procesos U2." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="35" y="1388" width="1190" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="A05_Note1" value="Auditoría y outbox referencian agregados lógicamente por ID, sin FK física a una tabla de negocio." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="35" y="1406" width="1190" height="18" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

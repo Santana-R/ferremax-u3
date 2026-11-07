@@ -1,0 +1,624 @@
+[
+  {
+    "id": "E9-INV-01",
+    "estado": "PASSED",
+    "prueba": "tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_01_exito_reservar_dos_deja_una_disponible",
+    "observado": {
+      "rechazo": null,
+      "reloj_utc": "2026-11-04T18:00:00+00:00",
+      "pedido_objetivo": "E9-PEDIDO-NUEVO",
+      "inventarios": [
+        {
+          "sku": "FER-P001",
+          "ubicacion": "S1",
+          "fisica": "10",
+          "comprometida": "9",
+          "disponible": "1",
+          "transito": "5",
+          "reservas": {
+            "E9-PEDIDO-ANTERIOR": "7",
+            "E9-PEDIDO-NUEVO": "2"
+          }
+        }
+      ],
+      "pedidos": [
+        {
+          "id": "E9-PEDIDO-ANTERIOR",
+          "estado": "Confirmado",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "E9-COT-001",
+          "version": 1,
+          "total": "700.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "7",
+              "precio": "100.00"
+            }
+          ]
+        },
+        {
+          "id": "E9-PEDIDO-NUEVO",
+          "estado": "Confirmado",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "E9-COT-001",
+          "version": 1,
+          "total": "200.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "2",
+              "precio": "100.00"
+            }
+          ]
+        }
+      ],
+      "cotizaciones": [],
+      "eventos": [
+        "PedidoConfirmado"
+      ],
+      "auditoria": [
+        {
+          "accion": "ConfirmarPedido",
+          "actor": "E9-CAJA",
+          "motivo": "Pago autorizado registrado por Caja",
+          "estado_anterior": "Pendiente",
+          "estado_nuevo": "Confirmado"
+        }
+      ]
+    },
+    "detalle_fallo": ""
+  },
+  {
+    "id": "E9-INV-02",
+    "estado": "PASSED",
+    "prueba": "tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_02_error_pedir_cuatro_conserva_pedido_e_inventario",
+    "observado": {
+      "rechazo": {
+        "tipo": "DisponibilidadInsuficiente",
+        "mensaje": "Disponibilidad insuficiente para FER-P001"
+      },
+      "reloj_utc": "2026-11-04T18:00:00+00:00",
+      "pedido_objetivo": "E9-PEDIDO-NUEVO",
+      "inventarios": [
+        {
+          "sku": "FER-P001",
+          "ubicacion": "S1",
+          "fisica": "10",
+          "comprometida": "7",
+          "disponible": "3",
+          "transito": "5",
+          "reservas": {
+            "E9-PEDIDO-ANTERIOR": "7"
+          }
+        }
+      ],
+      "pedidos": [
+        {
+          "id": "E9-PEDIDO-ANTERIOR",
+          "estado": "Confirmado",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "E9-COT-001",
+          "version": 1,
+          "total": "700.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "7",
+              "precio": "100.00"
+            }
+          ]
+        },
+        {
+          "id": "E9-PEDIDO-NUEVO",
+          "estado": "Pendiente",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "E9-COT-001",
+          "version": 1,
+          "total": "400.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "4",
+              "precio": "100.00"
+            }
+          ]
+        }
+      ],
+      "cotizaciones": [],
+      "eventos": [],
+      "auditoria": []
+    },
+    "detalle_fallo": ""
+  },
+  {
+    "id": "E9-INV-03",
+    "estado": "PASSED",
+    "prueba": "tests/test_e9_inventario.py::InventarioE9Test::test_e9_inv_03_limite_reservar_tres_agota_el_disponible",
+    "observado": {
+      "rechazo": null,
+      "reloj_utc": "2026-11-04T18:00:00+00:00",
+      "pedido_objetivo": "E9-PEDIDO-NUEVO",
+      "inventarios": [
+        {
+          "sku": "FER-P001",
+          "ubicacion": "S1",
+          "fisica": "10",
+          "comprometida": "10",
+          "disponible": "0",
+          "transito": "5",
+          "reservas": {
+            "E9-PEDIDO-ANTERIOR": "7",
+            "E9-PEDIDO-NUEVO": "3"
+          }
+        }
+      ],
+      "pedidos": [
+        {
+          "id": "E9-PEDIDO-ANTERIOR",
+          "estado": "Confirmado",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "E9-COT-001",
+          "version": 1,
+          "total": "700.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "7",
+              "precio": "100.00"
+            }
+          ]
+        },
+        {
+          "id": "E9-PEDIDO-NUEVO",
+          "estado": "Confirmado",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "E9-COT-001",
+          "version": 1,
+          "total": "300.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "3",
+              "precio": "100.00"
+            }
+          ]
+        }
+      ],
+      "cotizaciones": [],
+      "eventos": [
+        "PedidoConfirmado"
+      ],
+      "auditoria": [
+        {
+          "accion": "ConfirmarPedido",
+          "actor": "E9-CAJA",
+          "motivo": "Pago autorizado registrado por Caja",
+          "estado_anterior": "Pendiente",
+          "estado_nuevo": "Confirmado"
+        }
+      ]
+    },
+    "detalle_fallo": ""
+  },
+  {
+    "id": "E9-COT-01",
+    "estado": "PASSED",
+    "prueba": "tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_01_exito_revalidar_conserva_historial_y_pedido_usa_version_nueva",
+    "observado": {
+      "rechazo": null,
+      "reloj_utc": "2026-11-04T12:01:00+00:00",
+      "pedido_objetivo": null,
+      "inventarios": [
+        {
+          "sku": "FER-P001",
+          "ubicacion": "S1",
+          "fisica": "10",
+          "comprometida": "0",
+          "disponible": "10",
+          "transito": "0",
+          "reservas": {}
+        }
+      ],
+      "pedidos": [
+        {
+          "id": "c0c0463f-68a7-4b4f-8021-c2b819ad2758",
+          "estado": "Pendiente",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "COT-001",
+          "version": 2,
+          "total": "240.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "2",
+              "precio": "120.00"
+            }
+          ]
+        }
+      ],
+      "cotizaciones": [
+        {
+          "id": "E9-COTIZACION",
+          "folio": "COT-001",
+          "version": 1,
+          "emision": "2026-10-28T12:00:00+00:00",
+          "vencimiento": "2026-11-04T12:00:00+00:00",
+          "condiciones": "Condiciones de la version original",
+          "precios": [
+            "100.00"
+          ],
+          "cantidades": [
+            "2"
+          ]
+        },
+        {
+          "id": "E9-COTIZACION",
+          "folio": "COT-001",
+          "version": 2,
+          "emision": "2026-11-04T12:01:00+00:00",
+          "vencimiento": "2026-11-11T12:01:00+00:00",
+          "condiciones": "Precios y condiciones revalidados",
+          "precios": [
+            "120.00"
+          ],
+          "cantidades": [
+            "2"
+          ]
+        }
+      ],
+      "eventos": [
+        "CotizacionRevalidada",
+        "PedidoCreado"
+      ],
+      "auditoria": [
+        {
+          "accion": "RevalidarCotizacion",
+          "actor": "E9-VENDEDOR",
+          "motivo": "Cliente solicita revalidacion de la cotizacion vencida",
+          "estado_anterior": "Vencida",
+          "estado_nuevo": "Vigente"
+        },
+        {
+          "accion": "CrearPedidoDesdeCotizacion",
+          "actor": "E9-VENDEDOR",
+          "motivo": "Cotizacion aceptada por cliente",
+          "estado_anterior": null,
+          "estado_nuevo": "Pendiente"
+        }
+      ]
+    },
+    "detalle_fallo": ""
+  },
+  {
+    "id": "E9-COT-02",
+    "estado": "PASSED",
+    "prueba": "tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_02_error_version_vencida_no_crea_pedido_ni_modifica_datos",
+    "observado": {
+      "rechazo": {
+        "tipo": "CotizacionVencida",
+        "mensaje": "Revalide precio, disponibilidad y condiciones"
+      },
+      "reloj_utc": "2026-11-04T12:01:00+00:00",
+      "pedido_objetivo": null,
+      "inventarios": [
+        {
+          "sku": "FER-P001",
+          "ubicacion": "S1",
+          "fisica": "10",
+          "comprometida": "0",
+          "disponible": "10",
+          "transito": "0",
+          "reservas": {}
+        }
+      ],
+      "pedidos": [],
+      "cotizaciones": [
+        {
+          "id": "E9-COTIZACION",
+          "folio": "COT-001",
+          "version": 1,
+          "emision": "2026-10-28T12:00:00+00:00",
+          "vencimiento": "2026-11-04T12:00:00+00:00",
+          "condiciones": "Condiciones de la version original",
+          "precios": [
+            "100.00"
+          ],
+          "cantidades": [
+            "2"
+          ]
+        }
+      ],
+      "eventos": [],
+      "auditoria": []
+    },
+    "detalle_fallo": ""
+  },
+  {
+    "id": "E9-COT-03",
+    "estado": "PASSED",
+    "prueba": "tests/test_e9_cotizaciones.py::CotizacionesE9Test::test_e9_cot_03_limite_instante_del_vencimiento_no_permite_conversion",
+    "observado": {
+      "rechazo": {
+        "tipo": "CotizacionVencida",
+        "mensaje": "Revalide precio, disponibilidad y condiciones"
+      },
+      "reloj_utc": "2026-11-04T12:00:00+00:00",
+      "pedido_objetivo": null,
+      "inventarios": [
+        {
+          "sku": "FER-P001",
+          "ubicacion": "S1",
+          "fisica": "10",
+          "comprometida": "0",
+          "disponible": "10",
+          "transito": "0",
+          "reservas": {}
+        }
+      ],
+      "pedidos": [],
+      "cotizaciones": [
+        {
+          "id": "E9-COTIZACION",
+          "folio": "COT-001",
+          "version": 1,
+          "emision": "2026-10-28T12:00:00+00:00",
+          "vencimiento": "2026-11-04T12:00:00+00:00",
+          "condiciones": "Condiciones de la version original",
+          "precios": [
+            "100.00"
+          ],
+          "cantidades": [
+            "2"
+          ]
+        }
+      ],
+      "eventos": [],
+      "auditoria": []
+    },
+    "detalle_fallo": ""
+  },
+  {
+    "id": "E9-CAN-01",
+    "estado": "PASSED",
+    "prueba": "tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_01_exito_libera_dos_y_conserva_las_siete_de_otro_pedido",
+    "observado": {
+      "rechazo": null,
+      "reloj_utc": "2026-11-04T18:00:00+00:00",
+      "pedido_objetivo": "E9-PEDIDO-CANCELAR",
+      "inventarios": [
+        {
+          "sku": "FER-P001",
+          "ubicacion": "S1",
+          "fisica": "10",
+          "comprometida": "7",
+          "disponible": "3",
+          "transito": "5",
+          "reservas": {
+            "E9-OTRO-PEDIDO": "7"
+          }
+        }
+      ],
+      "pedidos": [
+        {
+          "id": "E9-OTRO-PEDIDO",
+          "estado": "Confirmado",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "COT-001",
+          "version": 1,
+          "total": "700.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "7",
+              "precio": "100.00"
+            }
+          ]
+        },
+        {
+          "id": "E9-PEDIDO-CANCELAR",
+          "estado": "Cancelado",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "COT-001",
+          "version": 1,
+          "total": "200.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "2",
+              "precio": "100.00"
+            }
+          ]
+        }
+      ],
+      "cotizaciones": [],
+      "eventos": [
+        "PedidoConfirmado",
+        "PedidoCancelado"
+      ],
+      "auditoria": [
+        {
+          "accion": "ConfirmarPedido",
+          "actor": "E9-CAJA",
+          "motivo": "Pago autorizado registrado por Caja",
+          "estado_anterior": "Pendiente",
+          "estado_nuevo": "Confirmado"
+        },
+        {
+          "accion": "CancelarPedido",
+          "actor": "E9-VENDEDOR",
+          "motivo": "Cliente cancela antes del surtido",
+          "estado_anterior": "Confirmado",
+          "estado_nuevo": "Cancelado"
+        }
+      ]
+    },
+    "detalle_fallo": ""
+  },
+  {
+    "id": "E9-CAN-02",
+    "estado": "PASSED",
+    "prueba": "tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_02_error_pedido_surtido_conserva_estado_reservas_y_eventos",
+    "observado": {
+      "rechazo": {
+        "tipo": "ErrorNegocio",
+        "mensaje": "Solo puede cancelarse un pedido confirmado aun no surtido"
+      },
+      "reloj_utc": "2026-11-04T18:00:00+00:00",
+      "pedido_objetivo": "E9-PEDIDO-CANCELAR",
+      "inventarios": [
+        {
+          "sku": "FER-P001",
+          "ubicacion": "S1",
+          "fisica": "10",
+          "comprometida": "9",
+          "disponible": "1",
+          "transito": "5",
+          "reservas": {
+            "E9-OTRO-PEDIDO": "7",
+            "E9-PEDIDO-CANCELAR": "2"
+          }
+        }
+      ],
+      "pedidos": [
+        {
+          "id": "E9-OTRO-PEDIDO",
+          "estado": "Confirmado",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "COT-001",
+          "version": 1,
+          "total": "700.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "7",
+              "precio": "100.00"
+            }
+          ]
+        },
+        {
+          "id": "E9-PEDIDO-CANCELAR",
+          "estado": "Confirmado",
+          "surtido": true,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "COT-001",
+          "version": 1,
+          "total": "200.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "2",
+              "precio": "100.00"
+            }
+          ]
+        }
+      ],
+      "cotizaciones": [],
+      "eventos": [
+        "PedidoConfirmado"
+      ],
+      "auditoria": [
+        {
+          "accion": "ConfirmarPedido",
+          "actor": "E9-CAJA",
+          "motivo": "Pago autorizado registrado por Caja",
+          "estado_anterior": "Pendiente",
+          "estado_nuevo": "Confirmado"
+        }
+      ]
+    },
+    "detalle_fallo": ""
+  },
+  {
+    "id": "E9-CAN-03",
+    "estado": "PASSED",
+    "prueba": "tests/test_e9_cancelacion.py::CancelacionE9Test::test_e9_can_03_limite_segunda_cancelacion_no_libera_ni_registra_otro_evento",
+    "observado": {
+      "rechazo": {
+        "tipo": "ErrorNegocio",
+        "mensaje": "Solo puede cancelarse un pedido confirmado aun no surtido"
+      },
+      "reloj_utc": "2026-11-04T18:00:00+00:00",
+      "pedido_objetivo": "E9-PEDIDO-CANCELAR",
+      "inventarios": [
+        {
+          "sku": "FER-P001",
+          "ubicacion": "S1",
+          "fisica": "10",
+          "comprometida": "7",
+          "disponible": "3",
+          "transito": "5",
+          "reservas": {
+            "E9-OTRO-PEDIDO": "7"
+          }
+        }
+      ],
+      "pedidos": [
+        {
+          "id": "E9-OTRO-PEDIDO",
+          "estado": "Confirmado",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "COT-001",
+          "version": 1,
+          "total": "700.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "7",
+              "precio": "100.00"
+            }
+          ]
+        },
+        {
+          "id": "E9-PEDIDO-CANCELAR",
+          "estado": "Cancelado",
+          "surtido": false,
+          "cotizacion_id": "E9-COTIZACION",
+          "folio": "COT-001",
+          "version": 1,
+          "total": "200.00",
+          "partidas": [
+            {
+              "sku": "FER-P001",
+              "cantidad": "2",
+              "precio": "100.00"
+            }
+          ]
+        }
+      ],
+      "cotizaciones": [],
+      "eventos": [
+        "PedidoConfirmado",
+        "PedidoCancelado"
+      ],
+      "auditoria": [
+        {
+          "accion": "ConfirmarPedido",
+          "actor": "E9-CAJA",
+          "motivo": "Pago autorizado registrado por Caja",
+          "estado_anterior": "Pendiente",
+          "estado_nuevo": "Confirmado"
+        },
+        {
+          "accion": "CancelarPedido",
+          "actor": "E9-VENDEDOR",
+          "motivo": "Cliente cancela antes del surtido",
+          "estado_anterior": "Confirmado",
+          "estado_nuevo": "Cancelado"
+        }
+      ]
+    },
+    "detalle_fallo": ""
+  }
+]

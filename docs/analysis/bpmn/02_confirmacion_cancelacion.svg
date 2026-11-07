@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1010" height="2340" viewBox="0 0 1010 2340">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#435363"/></marker></defs>
+<rect width="1010" height="2340" fill="#fff"/>
+<text x="40" y="34" text-anchor="start" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#24648b">FerreMax PIA · P02</text>
+<text x="40" y="65" text-anchor="start" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#172c40">Confirmación, cancelación y reducción</text>
+<text x="40" y="92" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#526374">[I] implementado   [S] simulado   [P] parcial   [D] diseñado</text>
+<rect x="55" y="115" width="915" height="2195" fill="white" stroke="#526374" stroke-width="1.5"/>
+<text x="505.0" y="139" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">FERREMAX · proceso descriptivo, sin motor BPMN</text>
+<rect x="100" y="155" width="280" height="2155" fill="#f8fafc" stroke="#cbd3dc"/>
+<rect x="100" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="240" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Vendedor / consulta</text>
+<rect x="380" y="155" width="280" height="2155" fill="#fff" stroke="#cbd3dc"/>
+<rect x="380" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="520" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Sistema</text>
+<rect x="660" y="155" width="280" height="2155" fill="#f8fafc" stroke="#cbd3dc"/>
+<rect x="660" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="800" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Caja</text>
+<polyline points="800.0,261 800.0,344 520.0,344 520.0,350" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,350 524.0,341.0 516.0,341.0" fill="#435363"/>
+<polyline points="520.0,432 520.0,490" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,490 524.0,481.0 516.0,481.0" fill="#435363"/>
+<polyline points="520.0,546 520.0,639 240.0,639 240.0,645" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,645 244.0,636.0 236.0,636.0" fill="#435363"/>
+<polyline points="520.0,546 520.0,624 800.0,624 800.0,630" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="800.0,630 804.0,621.0 796.0,621.0" fill="#435363"/>
+<polyline points="800.0,712 800.0,770" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="800.0,770 804.0,761.0 796.0,761.0" fill="#435363"/>
+<polyline points="800.0,826 800.0,897 240.0,897 240.0,925" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,925 244.0,916.0 236.0,916.0" fill="#435363"/>
+<polyline points="800.0,826 800.0,904 520.0,904 520.0,910" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,910 524.0,901.0 516.0,901.0" fill="#435363"/>
+<polyline points="520.0,992 520.0,1205" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,1205 524.0,1196.0 516.0,1196.0" fill="#435363"/>
+<polyline points="620.0,1007 620.0,1044 240.0,1044 240.0,1050" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,1050 244.0,1041.0 236.0,1041.0" fill="#435363"/>
+<polyline points="128,1091.0 108,1091.0 108,943.0 222,943.0" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="222,943.0 213.0,939.0 213.0,947.0" fill="#435363"/>
+<polyline points="240.0,1521 240.0,1610" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,1610 244.0,1601.0 236.0,1601.0" fill="#435363"/>
+<polyline points="240.0,1692 240.0,1744 520.0,1744 520.0,1750" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,1750 524.0,1741.0 516.0,1741.0" fill="#435363"/>
+<polyline points="520.0,1806 520.0,1877 240.0,1877 240.0,1905" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,1905 244.0,1896.0 236.0,1896.0" fill="#435363"/>
+<polyline points="520.0,1806 520.0,1890" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,1890 524.0,1881.0 516.0,1881.0" fill="#435363"/>
+<polyline points="520.0,1946 520.0,2030" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,2030 524.0,2021.0 516.0,2021.0" fill="#435363"/>
+<polyline points="520.0,1946 520.0,2017 240.0,2017 240.0,2030" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,2030 244.0,2021.0 236.0,2021.0" fill="#435363"/>
+<polyline points="520.0,2112 520.0,2185" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,2185 524.0,2176.0 516.0,2176.0" fill="#435363"/>
+<polyline points="620.0,2127 620.0,2164 800.0,2164 800.0,2170" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="800.0,2170 804.0,2161.0 796.0,2161.0" fill="#435363"/>
+<polyline points="688,2211.0 668,2211.0 668,2132 370,2132 370,1923.0 222,1923.0" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="222,1923.0 231.0,1927.0 231.0,1919.0" fill="#435363"/>
+<polyline points="240.0,2112 240.0,2185" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,2185 244.0,2176.0 236.0,2176.0" fill="#435363"/>
+<rect x="364.0" y="616.0" width="32" height="19" rx="3" fill="white"/>
+<text x="380.0" y="629.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No</text>
+<rect x="644.0" y="601.0" width="32" height="19" rx="3" fill="white"/>
+<text x="660.0" y="614.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<rect x="504.0" y="874.0" width="32" height="19" rx="3" fill="white"/>
+<text x="520.0" y="887.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No</text>
+<rect x="644.0" y="881.0" width="32" height="19" rx="3" fill="white"/>
+<text x="660.0" y="894.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<rect x="493.0" y="1075.5" width="54" height="19" rx="3" fill="white"/>
+<text x="520.0" y="1088.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Commit</text>
+<rect x="396.0" y="1021.0" width="68" height="19" rx="3" fill="white"/>
+<text x="430.0" y="1034.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Rollback</text>
+<rect x="364.0" y="1854.0" width="32" height="19" rx="3" fill="white"/>
+<text x="380.0" y="1867.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No</text>
+<rect x="634.0" y="1825.0" width="32" height="19" rx="3" fill="white"/>
+<text x="650.0" y="1838.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<rect x="536.0" y="2001" width="68" height="19" rx="3" fill="white"/>
+<text x="570.0" y="2014" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Cancelar</text>
+<rect x="349.5" y="2001" width="61" height="19" rx="3" fill="white"/>
+<text x="380.0" y="2014" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Reducir</text>
+<rect x="493.0" y="2125.5" width="54" height="19" rx="3" fill="white"/>
+<text x="520.0" y="2138.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Commit</text>
+<rect x="856.0" y="2141.0" width="68" height="19" rx="3" fill="white"/>
+<text x="890.0" y="2154.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Rollback</text>
+<circle cx="800.0" cy="243.0" r="18.0" fill="white" stroke="#697480" stroke-width="1.6"/>
+<rect x="716.95" y="269" width="166.1" height="35" fill="white"/>
+<text x="800.0" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Intento de confirmación</text>
+<text x="800.0" y="299" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_S01</text>
+<rect x="408" y="350" width="224" height="82" rx="10" fill="#eaf4fc" stroke="#24648b" stroke-width="1.6"/>
+<text x="520.0" y="367" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#24648b">P02_T01 [I]</text>
+<text x="520.0" y="386" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Consultar pedido persistido</text>
+<polygon points="520.0,490 548,518.0 520.0,546 492,518.0" fill="#eaf4fc" stroke="#24648b" stroke-width="1.8"/>
+<text x="520.0" y="524.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#24648b">×</text>
+<rect x="453.7" y="551" width="132.60000000000002" height="35" fill="white"/>
+<text x="520.0" y="566" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Pedido Pendiente?</text>
+<text x="520.0" y="581" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_G01</text>
+<circle cx="240.0" cy="663.0" r="18.0" fill="white" stroke="#24648b" stroke-width="3.2"/>
+<rect x="146.89999999999998" y="689" width="186.20000000000002" height="35" fill="white"/>
+<text x="240.0" y="704" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Rechazo sin efectos nuevos</text>
+<text x="240.0" y="719" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_E01</text>
+<rect x="688" y="630" width="224" height="82" rx="10" fill="#fff3d8" stroke="#986600" stroke-width="1.6"/>
+<text x="800.0" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#986600">P02_T02 [S]</text>
+<text x="800.0" y="666" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Registrar autorización de</text>
+<text x="800.0" y="682" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">pago ficticia</text>
+<polygon points="800.0,770 828,798.0 800.0,826 772,798.0" fill="#eaf4fc" stroke="#24648b" stroke-width="1.8"/>
+<text x="800.0" y="804.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#24648b">×</text>
+<rect x="727.0" y="831" width="146.0" height="50" fill="white"/>
+<text x="800.0" y="846" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Pago autorizado con</text>
+<text x="800.0" y="861" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">referencia?</text>
+<text x="800.0" y="876" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_G02</text>
+<circle cx="240.0" cy="943.0" r="18.0" fill="white" stroke="#24648b" stroke-width="3.2"/>
+<rect x="156.95" y="969" width="166.1" height="50" fill="white"/>
+<text x="240.0" y="984" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Permanece Pendiente sin</text>
+<text x="240.0" y="999" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">reserva</text>
+<text x="240.0" y="1014" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_E02</text>
+<rect x="408" y="910" width="224" height="82" rx="10" fill="#eaf4fc" stroke="#24648b" stroke-width="1.6"/>
+<text x="520.0" y="927" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#24648b">P02_T03 [I]</text>
+<text x="520.0" y="946" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Confirmar y reservar en una</text>
+<text x="520.0" y="962" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">transacción</text>
+<circle cx="620.0" cy="992.0" r="15.0" fill="white" stroke="#24648b" stroke-width="1.6"/>
+<circle cx="620.0" cy="992.0" r="11.0" fill="none" stroke="#24648b" stroke-width="1"/>
+<polyline points="624.0,984.0 616.0,992.0 623.0,992.0 616.0,1000.0" fill="none" stroke="#24648b" stroke-width="1.6"/>
+<rect x="645.0" y="979" width="160" height="35" fill="white"/>
+<text x="725.0" y="994" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Stock insuficiente o fallo</text>
+<text x="725.0" y="1009" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_B01</text>
+<rect x="128" y="1050" width="224" height="82" rx="10" fill="#eaf4fc" stroke="#24648b" stroke-width="1.6"/>
+<text x="240.0" y="1067" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#24648b">P02_T04 [I]</text>
+<text x="240.0" y="1086" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Revertir e informar; conserva</text>
+<text x="240.0" y="1102" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Pendiente</text>
+<circle cx="520.0" cy="1223.0" r="18.0" fill="white" stroke="#24648b" stroke-width="3.2"/>
+<rect x="416.85" y="1249" width="206.3" height="35" fill="white"/>
+<text x="520.0" y="1264" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Confirmado con reserva propia</text>
+<text x="520.0" y="1279" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_E03</text>
+<circle cx="240.0" cy="1503.0" r="18.0" fill="white" stroke="#697480" stroke-width="1.6"/>
+<rect x="146.89999999999998" y="1529" width="186.20000000000002" height="50" fill="white"/>
+<text x="240.0" y="1544" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Solicitud de cancelación o</text>
+<text x="240.0" y="1559" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">reducción</text>
+<text x="240.0" y="1574" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_S02</text>
+<rect x="128" y="1610" width="224" height="82" rx="10" fill="#fff3d8" stroke="#986600" stroke-width="1.6"/>
+<text x="240.0" y="1627" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#986600">P02_T05 [S]</text>
+<text x="240.0" y="1646" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Registrar solicitud de cambio</text>
+<text x="240.0" y="1662" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">con motivo y rol</text>
+<polygon points="520.0,1750 548,1778.0 520.0,1806 492,1778.0" fill="#eaf4fc" stroke="#24648b" stroke-width="1.8"/>
+<text x="520.0" y="1784.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#24648b">×</text>
+<rect x="447.0" y="1811" width="146.0" height="50" fill="white"/>
+<text x="520.0" y="1826" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Confirmado y aún no</text>
+<text x="520.0" y="1841" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">surtido?</text>
+<text x="520.0" y="1856" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_G04</text>
+<polygon points="520.0,1890 548,1918.0 520.0,1946 492,1918.0" fill="#fff0e5" stroke="#a45e21" stroke-width="1.8"/>
+<text x="520.0" y="1924.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#a45e21">×</text>
+<rect x="447.0" y="1951" width="146.0" height="35" fill="white"/>
+<text x="520.0" y="1966" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Cancelar o reducir?</text>
+<text x="520.0" y="1981" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_G05</text>
+<rect x="408" y="2030" width="224" height="82" rx="10" fill="#eaf4fc" stroke="#24648b" stroke-width="1.6"/>
+<text x="520.0" y="2047" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#24648b">P02_T06 [I]</text>
+<text x="520.0" y="2066" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Cancelar y liberar reserva</text>
+<text x="520.0" y="2082" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">propia en transacción</text>
+<circle cx="620.0" cy="2112.0" r="15.0" fill="white" stroke="#24648b" stroke-width="1.6"/>
+<circle cx="620.0" cy="2112.0" r="11.0" fill="none" stroke="#24648b" stroke-width="1"/>
+<polyline points="624.0,2104.0 616.0,2112.0 623.0,2112.0 616.0,2120.0" fill="none" stroke="#24648b" stroke-width="1.6"/>
+<rect x="655.35" y="2099" width="139.3" height="35" fill="white"/>
+<text x="725.0" y="2114" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Fallo de liberación</text>
+<text x="725.0" y="2129" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_B02</text>
+<rect x="688" y="2170" width="224" height="82" rx="10" fill="#eaf4fc" stroke="#24648b" stroke-width="1.6"/>
+<text x="800.0" y="2187" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#24648b">P02_T07 [I]</text>
+<text x="800.0" y="2206" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Revertir cancelación e</text>
+<text x="800.0" y="2222" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">informar</text>
+<rect x="128" y="2030" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="240.0" y="2047" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P02_T08 [D]</text>
+<text x="240.0" y="2066" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Reducir cantidad y liberar</text>
+<text x="240.0" y="2082" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">solo la diferencia</text>
+<circle cx="240.0" cy="2203.0" r="18.0" fill="white" stroke="#697480" stroke-width="3.2"/>
+<rect x="160.3" y="2229" width="159.4" height="50" fill="white"/>
+<text x="240.0" y="2244" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Confirmado con reserva</text>
+<text x="240.0" y="2259" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">reducida</text>
+<text x="240.0" y="2274" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_E06</text>
+<circle cx="520.0" cy="2203.0" r="18.0" fill="white" stroke="#24648b" stroke-width="3.2"/>
+<rect x="433.6" y="2229" width="172.8" height="35" fill="white"/>
+<text x="520.0" y="2244" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Cancelado sin su reserva</text>
+<text x="520.0" y="2259" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_E04</text>
+<circle cx="240.0" cy="1923.0" r="18.0" fill="white" stroke="#24648b" stroke-width="3.2"/>
+<rect x="156.95" y="1949" width="166.1" height="50" fill="white"/>
+<text x="240.0" y="1964" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Rechazo de cancelación;</text>
+<text x="240.0" y="1979" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">conserva datos</text>
+<text x="240.0" y="1994" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P02_E05</text>
+<text x="55" y="2328" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#697480">6 nov 2026 · Equipo 17 · Las actividades diseñadas conservan requisitos pendientes.</text>
+</svg>

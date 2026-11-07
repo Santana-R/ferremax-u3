@@ -46,8 +46,10 @@ class CotizacionService:
                 inv=uow.inventarios.obtener_para_actualizar(sku,'S1')
                 disponibilidad.append({'sku':sku,'solicitada':str(cantidad),'disponible':str(inv.disponible)})
             uow.pedidos.guardar(p)
+            total = p.total
             resultado={'pedido_id':p.id,'estado':p.estado.value,'cotizacion_folio':c.folio,
-                       'cotizacion_version':c.version,'disponibilidad_consultada':disponibilidad}
+                       'cotizacion_version':c.version,'total':str(total.importe),'moneda':total.moneda,
+                       'disponibilidad_consultada':disponibilidad}
             uow.registrar(actor.id,'CrearPedidoDesdeCotizacion',p.id,{},resultado,'Cotizacion aceptada por cliente',
                           EventoDominio('PedidoCreado',p.id,resultado,self.reloj()))
             uow.commit()
@@ -77,10 +79,11 @@ class PedidoService:
         actor.exigir('VendedorAutorizadoCancelacion')
         with self.uow_factory() as uow:
             p=uow.pedidos.obtener(pedido_id)
+            estado_anterior=p.estado.value
+            p.cancelar(motivo)
             ubicacion=uow.inventarios.ubicacion_reserva(pedido_id)
             inventarios=[uow.inventarios.obtener_para_actualizar(sku,ubicacion) for sku in sorted(p.cantidades_por_sku())]
-            antes={'estado':p.estado.value,'inventarios':[foto_inventario(i) for i in inventarios]}
-            p.cancelar(motivo)
+            antes={'estado':estado_anterior,'inventarios':[foto_inventario(i) for i in inventarios]}
             for inv in inventarios:
                 inv.liberar(p.id)
                 uow.inventarios.guardar(inv)

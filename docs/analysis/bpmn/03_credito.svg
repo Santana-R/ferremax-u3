@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1010" height="1500" viewBox="0 0 1010 1500">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#435363"/></marker></defs>
+<rect width="1010" height="1500" fill="#fff"/>
+<text x="40" y="34" text-anchor="start" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#24648b">FerreMax PIA · P03</text>
+<text x="40" y="65" text-anchor="start" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#172c40">Crédito normal y excepcional</text>
+<text x="40" y="92" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#526374">[I] implementado   [S] simulado   [P] parcial   [D] diseñado</text>
+<rect x="55" y="115" width="915" height="1355" fill="white" stroke="#526374" stroke-width="1.5"/>
+<text x="505.0" y="139" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">FERREMAX · proceso descriptivo, sin motor BPMN</text>
+<rect x="100" y="155" width="280" height="1315" fill="#f8fafc" stroke="#cbd3dc"/>
+<rect x="100" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="240" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Vendedor</text>
+<rect x="380" y="155" width="280" height="1315" fill="#fff" stroke="#cbd3dc"/>
+<rect x="380" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="520" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Sistema</text>
+<rect x="660" y="155" width="280" height="1315" fill="#f8fafc" stroke="#cbd3dc"/>
+<rect x="660" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="800" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Caja / Crédito</text>
+<polyline points="240.0,261 240.0,350" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,350 244.0,341.0 236.0,341.0" fill="#435363"/>
+<polyline points="240.0,432 240.0,484 520.0,484 520.0,490" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,490 524.0,481.0 516.0,481.0" fill="#435363"/>
+<polyline points="520.0,546 520.0,617 240.0,617 240.0,645" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,645 244.0,636.0 236.0,636.0" fill="#435363"/>
+<polyline points="520.0,546 520.0,630" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,630 524.0,621.0 516.0,621.0" fill="#435363"/>
+<polyline points="520.0,712 520.0,770" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,770 524.0,761.0 516.0,761.0" fill="#435363"/>
+<polyline points="520.0,826 520.0,904 240.0,904 240.0,910" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,910 244.0,901.0 236.0,901.0" fill="#435363"/>
+<polyline points="240.0,992 240.0,1065" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,1065 244.0,1056.0 236.0,1056.0" fill="#435363"/>
+<polyline points="520.0,826 520.0,904 800.0,904 800.0,910" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="800.0,910 804.0,901.0 796.0,901.0" fill="#435363"/>
+<polyline points="800.0,992 800.0,1050" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="800.0,1050 804.0,1041.0 796.0,1041.0" fill="#435363"/>
+<polyline points="800.0,1106 800.0,1190" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="800.0,1190 804.0,1181.0 796.0,1181.0" fill="#435363"/>
+<polyline points="800.0,1272 800.0,1345" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="800.0,1345 804.0,1336.0 796.0,1336.0" fill="#435363"/>
+<polyline points="800.0,1106 800.0,1177 520.0,1177 520.0,1190" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,1190 524.0,1181.0 516.0,1181.0" fill="#435363"/>
+<polyline points="520.0,1272 520.0,1345" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,1345 524.0,1336.0 516.0,1336.0" fill="#435363"/>
+<rect x="364.0" y="594.0" width="32" height="19" rx="3" fill="white"/>
+<text x="380.0" y="607.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No</text>
+<rect x="634.0" y="565.0" width="32" height="19" rx="3" fill="white"/>
+<text x="650.0" y="578.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<rect x="364.0" y="881.0" width="32" height="19" rx="3" fill="white"/>
+<text x="380.0" y="894.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<rect x="650.0" y="881.0" width="96" height="19" rx="3" fill="white"/>
+<text x="698.0" y="894.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No: revisión</text>
+<rect x="914.0" y="1125.0" width="32" height="19" rx="3" fill="white"/>
+<text x="930.0" y="1138.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<rect x="644.0" y="1154.0" width="32" height="19" rx="3" fill="white"/>
+<text x="660.0" y="1167.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No</text>
+<circle cx="240.0" cy="243.0" r="18.0" fill="white" stroke="#697480" stroke-width="1.6"/>
+<rect x="136.85" y="269" width="206.3" height="35" fill="white"/>
+<text x="240.0" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Solicitud de compra a crédito</text>
+<text x="240.0" y="299" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P03_S01</text>
+<rect x="128" y="350" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="240.0" y="367" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P03_T01 [D]</text>
+<text x="240.0" y="386" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Identificar cliente</text>
+<text x="240.0" y="402" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">empresarial activo</text>
+<polygon points="520.0,490 548,518.0 520.0,546 492,518.0" fill="#f1f3f5" stroke="#697480" stroke-width="1.8"/>
+<text x="520.0" y="524.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#697480">×</text>
+<rect x="423.55" y="551" width="192.9" height="35" fill="white"/>
+<text x="520.0" y="566" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Cliente activo y elegible?</text>
+<text x="520.0" y="581" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P03_G01</text>
+<circle cx="240.0" cy="663.0" r="18.0" fill="white" stroke="#697480" stroke-width="3.2"/>
+<rect x="150.25" y="689" width="179.5" height="50" fill="white"/>
+<text x="240.0" y="704" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Solicitud no elegible; no</text>
+<text x="240.0" y="719" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">confirma</text>
+<text x="240.0" y="734" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P03_E01</text>
+<rect x="408" y="630" width="224" height="82" rx="10" fill="#fff0e5" stroke="#a45e21" stroke-width="1.6"/>
+<text x="520.0" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#a45e21">P03_T02 [P]</text>
+<text x="520.0" y="666" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Evaluar bloqueo, saldo,</text>
+<text x="520.0" y="682" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">límite y moneda</text>
+<polygon points="520.0,770 548,798.0 520.0,826 492,798.0" fill="#fff0e5" stroke="#a45e21" stroke-width="1.8"/>
+<text x="520.0" y="804.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#a45e21">×</text>
+<rect x="430.25" y="831" width="179.5" height="35" fill="white"/>
+<text x="520.0" y="846" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Cumple condición normal?</text>
+<text x="520.0" y="861" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P03_G02</text>
+<rect x="128" y="910" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="240.0" y="927" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P03_T03 [D]</text>
+<text x="240.0" y="946" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Registrar evaluación normal</text>
+<text x="240.0" y="962" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">autorizada</text>
+<circle cx="240.0" cy="1083.0" r="18.0" fill="white" stroke="#697480" stroke-width="3.2"/>
+<rect x="170.35" y="1109" width="139.3" height="50" fill="white"/>
+<text x="240.0" y="1124" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Autorización normal</text>
+<text x="240.0" y="1139" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">registrada</text>
+<text x="240.0" y="1154" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P03_E02</text>
+<rect x="688" y="910" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="800.0" y="927" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P03_T04 [D]</text>
+<text x="800.0" y="946" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Revisar excepción y decidir</text>
+<text x="800.0" y="962" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">con motivo</text>
+<polygon points="800.0,1050 828,1078.0 800.0,1106 772,1078.0" fill="#f1f3f5" stroke="#697480" stroke-width="1.8"/>
+<text x="800.0" y="1084.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#697480">×</text>
+<rect x="720.3" y="1111" width="159.4" height="35" fill="white"/>
+<text x="800.0" y="1126" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Excepción autorizada?</text>
+<text x="800.0" y="1141" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P03_G03</text>
+<rect x="688" y="1190" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="800.0" y="1207" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P03_T05 [D]</text>
+<text x="800.0" y="1226" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Registrar responsable,</text>
+<text x="800.0" y="1242" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">condición, fecha y motivo</text>
+<circle cx="800.0" cy="1363.0" r="18.0" fill="white" stroke="#697480" stroke-width="3.2"/>
+<rect x="727.0" y="1389" width="146.0" height="50" fill="white"/>
+<text x="800.0" y="1404" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Excepción autorizada</text>
+<text x="800.0" y="1419" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">registrada</text>
+<text x="800.0" y="1434" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P03_E03</text>
+<rect x="408" y="1190" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="520.0" y="1207" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P03_T06 [D]</text>
+<text x="520.0" y="1226" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Comunicar rechazo con motivo</text>
+<circle cx="520.0" cy="1363.0" r="18.0" fill="white" stroke="#697480" stroke-width="3.2"/>
+<rect x="443.65" y="1389" width="152.70000000000002" height="35" fill="white"/>
+<text x="520.0" y="1404" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No confirma el pedido</text>
+<text x="520.0" y="1419" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P03_E04</text>
+<text x="55" y="1488" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#697480">6 nov 2026 · Equipo 17 · Las actividades diseñadas conservan requisitos pendientes.</text>
+</svg>

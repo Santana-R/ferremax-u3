@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1260" height="1470" viewBox="0 0 1260 1470">
+<rect width="1260" height="1470" fill="white"/>
+<text x="35" y="34" text-anchor="start" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#23658f">FerreMax PIA · A05</text>
+<text x="35" y="68" text-anchor="start" font-family="Arial, sans-serif" font-size="25" font-weight="bold" fill="#162f45">Persistencia: seis tablas PostgreSQL</text>
+<polyline points="710,285.0 692,285.0 692,275.0 530,275.0" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="540.0,279.0 530,275.0 540.0,271.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<polyline points="710,735.0 692,735.0 692,285.0 710,285.0" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="700.0,281.0 710,285.0 700.0,289.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<polyline points="710,735.0 530,735.0" fill="none" stroke="#43596b" stroke-width="1.6"/><polyline points="540.0,739.0 530,735.0 540.0,731.0" fill="none" stroke="#43596b" stroke-width="1.6"/>
+<rect x="541.1" y="252.0" width="158.8" height="21" rx="3" fill="white"/>
+<text x="620.5" y="265.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">1 versión → 0..* pedidos</text>
+<rect x="612.6" y="487.0" width="158.8" height="21" rx="3" fill="white"/>
+<text x="692.0" y="500.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">1 pedido → 0..* reservas</text>
+<rect x="528.2" y="712.0" width="183.6" height="21" rx="3" fill="white"/>
+<text x="620.0" y="725.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">1 inventario → 0..* reservas</text>
+<rect x="60" y="180" width="470" height="190" rx="4" fill="#edf5fc" stroke="#2c648b" stroke-width="1.6"/>
+<line x1="60" y1="218" x2="530" y2="218" stroke="#2c648b"/>
+<text x="295.0" y="204" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c648b">cotizacion_version</text>
+<text x="72" y="241" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">PK (id uuid, version integer &gt;0)</text>
+<text x="72" y="258" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">folio text</text>
+<text x="72" y="275" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">datos jsonb</text>
+<rect x="710" y="180" width="490" height="210" rx="4" fill="#edf5fc" stroke="#2c648b" stroke-width="1.6"/>
+<line x1="710" y1="218" x2="1200" y2="218" stroke="#2c648b"/>
+<text x="955.0" y="204" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c648b">pedido</text>
+<text x="722" y="241" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">PK id uuid</text>
+<text x="722" y="258" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">FK (cotizacion_id, cotizacion_version)</text>
+<text x="722" y="275" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">estado: Pendiente / Confirmado / Cancelado</text>
+<text x="722" y="292" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">datos jsonb</text>
+<rect x="60" y="620" width="470" height="230" rx="4" fill="#edf5fc" stroke="#2c648b" stroke-width="1.6"/>
+<line x1="60" y1="658" x2="530" y2="658" stroke="#2c648b"/>
+<text x="295.0" y="644" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c648b">inventario</text>
+<text x="72" y="681" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">PK (sku, ubicacion_id)</text>
+<text x="72" y="698" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">existencia_fisica numeric &gt;=0</text>
+<text x="72" y="715" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">comprometida numeric &gt;=0</text>
+<text x="72" y="732" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">en_transito numeric &gt;=0</text>
+<text x="72" y="749" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">CHECK comprometida &lt;= existencia_fisica</text>
+<rect x="710" y="620" width="490" height="230" rx="4" fill="#edf5fc" stroke="#2c648b" stroke-width="1.6"/>
+<line x1="710" y1="658" x2="1200" y2="658" stroke="#2c648b"/>
+<text x="955.0" y="644" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c648b">reserva</text>
+<text x="722" y="681" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">PK (pedido_id, sku, ubicacion_id)</text>
+<text x="722" y="698" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">FK pedido_id → pedido.id</text>
+<text x="722" y="715" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">FK (sku, ubicacion_id) → inventario</text>
+<text x="722" y="732" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">cantidad numeric &gt;0</text>
+<rect x="60" y="1100" width="500" height="220" rx="4" fill="#edf5fc" stroke="#2c648b" stroke-width="1.6"/>
+<line x1="60" y1="1138" x2="560" y2="1138" stroke="#2c648b"/>
+<text x="310.0" y="1124" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c648b">auditoria</text>
+<text x="72" y="1161" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">PK id uuid; actor_id; accion; agregado_id</text>
+<text x="72" y="1178" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">antes jsonb; despues jsonb</text>
+<text x="72" y="1195" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">motivo text; fecha timestamptz</text>
+<text x="72" y="1212" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">sin FK de agregado ni permisos por rol acreditados</text>
+<rect x="710" y="1100" width="490" height="220" rx="4" fill="#edf5fc" stroke="#2c648b" stroke-width="1.6"/>
+<line x1="710" y1="1138" x2="1200" y2="1138" stroke="#2c648b"/>
+<text x="955.0" y="1124" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c648b">outbox</text>
+<text x="722" y="1161" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">PK id uuid; tipo; agregado_id</text>
+<text x="722" y="1178" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">datos jsonb; ocurrido timestamptz</text>
+<text x="722" y="1195" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#20374b">sin publicador/consumidor externo</text>
+<text x="35" y="1400" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#52687a">PK/FK corresponden al DDL real. Las multiplicidades describen filas posibles, no una implementación de todos los procesos U2.</text>
+<text x="35" y="1418" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#52687a">Auditoría y outbox referencian agregados lógicamente por ID, sin FK física a una tabla de negocio.</text>
+</svg>

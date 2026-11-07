@@ -1,4 +1,9 @@
 __pycache__/
+.pytest_cache/
+.coverage
+.coverage.*
+.coverage_*
+/htmlcov/
 *.pyc
 .venv/
 .env
@@ -7,4 +12,10 @@ __pycache__/
 build/
 *.log
 assets/
+
+# Paquetes locales de transporte; las evidencias se versionan descomprimidas.
+/evidencias/*_para_U5.zip
+
+# Reportes locales regenerables de las pruebas del PIA; no reemplazan E9.
+/reports/
 

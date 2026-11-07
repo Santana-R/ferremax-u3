@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1010" height="940" viewBox="0 0 1010 940">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#435363"/></marker></defs>
+<rect width="1010" height="940" fill="#fff"/>
+<text x="40" y="34" text-anchor="start" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#24648b">FerreMax PIA · P07</text>
+<text x="40" y="65" text-anchor="start" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#172c40">Auditoría y reportes operativos</text>
+<text x="40" y="92" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#526374">[I] implementado   [S] simulado   [P] parcial   [D] diseñado</text>
+<rect x="55" y="115" width="915" height="795" fill="white" stroke="#526374" stroke-width="1.5"/>
+<text x="505.0" y="139" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">FERREMAX · proceso descriptivo, sin motor BPMN</text>
+<rect x="100" y="155" width="280" height="755" fill="#f8fafc" stroke="#cbd3dc"/>
+<rect x="100" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="240" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Operación / sistema</text>
+<rect x="380" y="155" width="280" height="755" fill="#fff" stroke="#cbd3dc"/>
+<rect x="380" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="520" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Auditor / administrador</text>
+<rect x="660" y="155" width="280" height="755" fill="#f8fafc" stroke="#cbd3dc"/>
+<rect x="660" y="155" width="280" height="36" fill="#e8edf2" stroke="#cbd3dc"/>
+<text x="800" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#243347">Gerente</text>
+<polyline points="240.0,261 240.0,350" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,350 244.0,341.0 236.0,341.0" fill="#435363"/>
+<polyline points="240.0,432 240.0,505" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,505 244.0,496.0 236.0,496.0" fill="#435363"/>
+<polyline points="520.0,261 520.0,350" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,350 524.0,341.0 516.0,341.0" fill="#435363"/>
+<polyline points="520.0,432 520.0,490" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,490 524.0,481.0 516.0,481.0" fill="#435363"/>
+<polyline points="520.0,546 520.0,630" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,630 524.0,621.0 516.0,621.0" fill="#435363"/>
+<polyline points="520.0,712 520.0,785" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="520.0,785 524.0,776.0 516.0,776.0" fill="#435363"/>
+<polyline points="520.0,546 520.0,617 240.0,617 240.0,645" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="240.0,645 244.0,636.0 236.0,636.0" fill="#435363"/>
+<polyline points="800.0,261 800.0,490" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="800.0,490 804.0,481.0 796.0,481.0" fill="#435363"/>
+<polyline points="800.0,572 800.0,785" fill="none" stroke="#435363" stroke-width="1.5"/>
+<polygon points="800.0,785 804.0,776.0 796.0,776.0" fill="#435363"/>
+<rect x="634.0" y="565.0" width="32" height="19" rx="3" fill="white"/>
+<text x="650.0" y="578.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Sí</text>
+<rect x="364.0" y="594.0" width="32" height="19" rx="3" fill="white"/>
+<text x="380.0" y="607.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">No</text>
+<circle cx="240.0" cy="243.0" r="18.0" fill="white" stroke="#24648b" stroke-width="1.6"/>
+<rect x="160.3" y="269" width="159.4" height="35" fill="white"/>
+<text x="240.0" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Cambio sensible válido</text>
+<text x="240.0" y="299" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P07_S01</text>
+<rect x="128" y="350" width="224" height="82" rx="10" fill="#fff0e5" stroke="#a45e21" stroke-width="1.6"/>
+<text x="240.0" y="367" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#a45e21">P07_T01 [P]</text>
+<text x="240.0" y="386" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Guardar auditoría y evento en</text>
+<text x="240.0" y="402" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">la transacción</text>
+<circle cx="240.0" cy="523.0" r="18.0" fill="white" stroke="#24648b" stroke-width="3.2"/>
+<rect x="136.85" y="549" width="206.3" height="35" fill="white"/>
+<text x="240.0" y="564" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Cambio y registro persistidos</text>
+<text x="240.0" y="579" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P07_E01</text>
+<circle cx="520.0" cy="243.0" r="18.0" fill="white" stroke="#697480" stroke-width="1.6"/>
+<rect x="443.65" y="269" width="152.70000000000002" height="35" fill="white"/>
+<text x="520.0" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Solicitud de bitácora</text>
+<text x="520.0" y="299" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P07_S02</text>
+<rect x="408" y="350" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="520.0" y="367" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P07_T02 [D]</text>
+<text x="520.0" y="386" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Identificar usuario y</text>
+<text x="520.0" y="402" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">autorización</text>
+<polygon points="520.0,490 548,518.0 520.0,546 492,518.0" fill="#f1f3f5" stroke="#697480" stroke-width="1.8"/>
+<text x="520.0" y="524.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="normal" fill="#697480">×</text>
+<rect x="426.9" y="551" width="186.20000000000002" height="35" fill="white"/>
+<text x="520.0" y="566" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">¿Puede consultar bitácora?</text>
+<text x="520.0" y="581" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P07_G01</text>
+<rect x="408" y="630" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="520.0" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P07_T03 [D]</text>
+<text x="520.0" y="666" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Consultar folio y mostrar</text>
+<text x="520.0" y="682" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">historial protegido</text>
+<circle cx="520.0" cy="803.0" r="18.0" fill="white" stroke="#697480" stroke-width="3.2"/>
+<rect x="433.6" y="829" width="172.8" height="50" fill="white"/>
+<text x="520.0" y="844" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Historial consultado sin</text>
+<text x="520.0" y="859" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">edición operativa</text>
+<text x="520.0" y="874" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P07_E02</text>
+<circle cx="240.0" cy="663.0" r="18.0" fill="white" stroke="#697480" stroke-width="3.2"/>
+<rect x="177.05" y="689" width="125.9" height="35" fill="white"/>
+<text x="240.0" y="704" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Consulta denegada</text>
+<text x="240.0" y="719" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P07_E03</text>
+<circle cx="800.0" cy="243.0" r="18.0" fill="white" stroke="#697480" stroke-width="1.6"/>
+<rect x="713.6" y="269" width="172.8" height="35" fill="white"/>
+<text x="800.0" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Solicitud de indicadores</text>
+<text x="800.0" y="299" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P07_S03</text>
+<rect x="688" y="490" width="224" height="82" rx="10" fill="#f1f3f5" stroke="#697480" stroke-width="1.6"/>
+<text x="800.0" y="507" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#697480">P07_T04 [D]</text>
+<text x="800.0" y="526" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">Consultar alertas con filtros</text>
+<text x="800.0" y="542" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="normal" fill="#243347">de fecha y ubicación</text>
+<circle cx="800.0" cy="803.0" r="18.0" fill="white" stroke="#697480" stroke-width="3.2"/>
+<rect x="706.9" y="829" width="186.20000000000002" height="35" fill="white"/>
+<text x="800.0" y="844" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#243347">Panel operativo consultado</text>
+<text x="800.0" y="859" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="normal" fill="#697480">P07_E04</text>
+<text x="55" y="928" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#697480">6 nov 2026 · Equipo 17 · Las actividades diseñadas conservan requisitos pendientes.</text>
+</svg>

@@ -1,0 +1,1199 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FerreMax - API",
+    "description": "Inventario, cotizaciones y pedidos: consulta, confirmacion y cancelacion con reservas.",
+    "version": "0.6.0"
+  },
+  "paths": {
+    "/cotizaciones/{cotizacion_id}/versiones/{version}/revalidar": {
+      "post": {
+        "tags": [
+          "Cotizaciones"
+        ],
+        "summary": "Renovar cotización vencida",
+        "operationId": "revalidar_cotizacion_cotizaciones__cotizacion_id__versiones__version__revalidar_post",
+        "parameters": [
+          {
+            "name": "cotizacion_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "examples": [
+                "11111111-1111-4111-8111-111111111111"
+              ],
+              "title": "Cotizacion Id"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "examples": [
+                1
+              ],
+              "title": "Version"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevalidacionSolicitud"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CotizacionRevalidadaRespuesta"
+                },
+                "example": {
+                  "mensaje": "Se renovó la cotización y se conservó la anterior en el historial.",
+                  "cotizacion_id": "11111111-1111-4111-8111-111111111111",
+                  "version_anterior": 1,
+                  "folio": "COT-API-DEMO",
+                  "version": 2,
+                  "estado": "Vigente"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cotizacion o version no encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "La version no admite esta revalidacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No se puede realizar esta operación en el estado actual. Revisa la cotización o el pedido."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar los datos de la revalidacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Revalidacion temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cotizaciones/{cotizacion_id}/versiones/{version}/convertir": {
+      "post": {
+        "tags": [
+          "Cotizaciones"
+        ],
+        "summary": "Crear pedido",
+        "operationId": "convertir_cotizacion_cotizaciones__cotizacion_id__versiones__version__convertir_post",
+        "parameters": [
+          {
+            "name": "cotizacion_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "examples": [
+                "11111111-1111-4111-8111-111111111111"
+              ],
+              "title": "Cotizacion Id"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "examples": [
+                2
+              ],
+              "title": "Version"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConversionSolicitud"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoCreadoRespuesta"
+                },
+                "example": {
+                  "mensaje": "Pedido creado. Sigue pendiente de confirmación; todavía no se han reservado productos.",
+                  "pedido_id": "22222222-2222-4222-8222-222222222222",
+                  "estado": "Pendiente",
+                  "cotizacion_id": "11111111-1111-4111-8111-111111111111",
+                  "cotizacion_folio": "COT-API-DEMO",
+                  "cotizacion_version": 2,
+                  "total": "240.00",
+                  "moneda": "MXN",
+                  "disponibilidad_consultada": [
+                    {
+                      "sku": "FER-API-DEMO",
+                      "solicitada": "2",
+                      "disponible": "10"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cotizacion o version no encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Cotizacion no vigente o sin aceptacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No se puede realizar esta operación en el estado actual. Revisa la cotización o el pedido."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar la solicitud o los productos de la cotizacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Creacion del pedido temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pedidos/{pedido_id}": {
+      "get": {
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Consultar pedido",
+        "operationId": "consultar_pedido_pedidos__pedido_id__get",
+        "parameters": [
+          {
+            "name": "pedido_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "examples": [
+                "22222222-2222-4222-8222-222222222222"
+              ],
+              "title": "Pedido Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoConsultaRespuesta"
+                },
+                "example": {
+                  "mensaje": "Pedido consultado.",
+                  "pedido_id": "22222222-2222-4222-8222-222222222222",
+                  "estado": "Pendiente",
+                  "cotizacion_folio": "COT-API-DEMO",
+                  "cotizacion_version": 2,
+                  "total": "240.00",
+                  "moneda": "MXN"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pedido no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar identificador del pedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Consulta de pedido temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pedidos/{pedido_id}/confirmar": {
+      "post": {
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Confirmar pedido",
+        "operationId": "confirmar_pedido_pedidos__pedido_id__confirmar_post",
+        "parameters": [
+          {
+            "name": "pedido_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "examples": [
+                "22222222-2222-4222-8222-222222222222"
+              ],
+              "title": "Pedido Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmacionSolicitud"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoConfirmadoRespuesta"
+                },
+                "example": {
+                  "mensaje": "El pedido se confirmó y sus productos quedaron reservados.",
+                  "pedido_id": "22222222-2222-4222-8222-222222222222",
+                  "estado": "Confirmado",
+                  "referencia_pago": "PAGO-DEMO-001",
+                  "ubicacion_id": "S1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pedido no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Estado, pago o disponibilidad impiden confirmar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No se puede realizar esta operación en el estado actual. Revisa la cotización o el pedido."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar los datos o la ubicacion de inventario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Confirmacion temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pedidos/{pedido_id}/cancelar": {
+      "post": {
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Cancelar pedido",
+        "operationId": "cancelar_pedido_pedidos__pedido_id__cancelar_post",
+        "parameters": [
+          {
+            "name": "pedido_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "examples": [
+                "22222222-2222-4222-8222-222222222222"
+              ],
+              "title": "Pedido Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelacionSolicitud"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoCanceladoRespuesta"
+                },
+                "example": {
+                  "mensaje": "El pedido se canceló y sus productos reservados volvieron a estar disponibles.",
+                  "pedido_id": "22222222-2222-4222-8222-222222222222",
+                  "estado": "Cancelado"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pedido no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Estado, surtido o reserva impiden cancelar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No se puede realizar esta operación en el estado actual. Revisa la cotización o el pedido."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar identificador y motivo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Cancelacion temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inventario/{sku}": {
+      "get": {
+        "tags": [
+          "Inventario"
+        ],
+        "summary": "Consultar disponibilidad",
+        "operationId": "consultar_inventario_inventario__sku__get",
+        "parameters": [
+          {
+            "name": "sku",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Codigo del producto",
+              "examples": [
+                "FER-API-DEMO"
+              ],
+              "title": "Sku"
+            },
+            "description": "Codigo del producto"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventarioRespuesta"
+                },
+                "example": {
+                  "mensaje": "Disponibilidad del producto consultada.",
+                  "sku": "FER-API-DEMO",
+                  "encontrado": true,
+                  "ubicaciones": [
+                    {
+                      "ubicacion_id": "S1",
+                      "existencia_fisica": "10",
+                      "comprometida": "7",
+                      "en_transito": "5",
+                      "disponible": "3"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Codigo de producto vacio",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Escribe el código del producto."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Producto no encontrado en el inventario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "No encontramos lo que buscas. Revisa los datos e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Revisar el codigo del producto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "Revisa los datos proporcionados e inténtalo de nuevo."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Consulta temporalmente no disponible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensajeError"
+                },
+                "example": {
+                  "mensaje": "El servicio no está disponible por el momento. Inténtalo más tarde."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CancelacionSolicitud": {
+        "properties": {
+          "motivo": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Motivo"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "motivo"
+        ],
+        "title": "CancelacionSolicitud",
+        "examples": [
+          {
+            "motivo": "El cliente solicita cancelar el pedido antes del surtido"
+          }
+        ]
+      },
+      "ConfirmacionSolicitud": {
+        "properties": {
+          "referencia_pago": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Referencia Pago"
+          },
+          "pago_autorizado": {
+            "type": "boolean",
+            "title": "Pago Autorizado",
+            "description": "Autorizacion de pago simulada del prototipo"
+          },
+          "ubicacion_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Ubicacion Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "referencia_pago",
+          "pago_autorizado",
+          "ubicacion_id"
+        ],
+        "title": "ConfirmacionSolicitud",
+        "examples": [
+          {
+            "pago_autorizado": true,
+            "referencia_pago": "PAGO-DEMO-001",
+            "ubicacion_id": "S1"
+          }
+        ]
+      },
+      "ConversionSolicitud": {
+        "properties": {
+          "aceptada": {
+            "type": "boolean",
+            "title": "Aceptada",
+            "description": "El cliente acepto esta version de la cotizacion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "aceptada"
+        ],
+        "title": "ConversionSolicitud",
+        "examples": [
+          {
+            "aceptada": true
+          }
+        ]
+      },
+      "CotizacionRevalidadaRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Se creó una nueva versión de la cotización y se conservó la anterior."
+          },
+          "cotizacion_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Cotizacion Id"
+          },
+          "version_anterior": {
+            "type": "integer",
+            "title": "Version Anterior"
+          },
+          "folio": {
+            "type": "string",
+            "title": "Folio"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "estado": {
+            "type": "string",
+            "title": "Estado"
+          }
+        },
+        "type": "object",
+        "required": [
+          "cotizacion_id",
+          "version_anterior",
+          "folio",
+          "version",
+          "estado"
+        ],
+        "title": "CotizacionRevalidadaRespuesta"
+      },
+      "DisponibilidadConsultadaRespuesta": {
+        "properties": {
+          "sku": {
+            "type": "string",
+            "title": "Sku"
+          },
+          "solicitada": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Solicitada"
+          },
+          "disponible": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Disponible"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sku",
+          "solicitada",
+          "disponible"
+        ],
+        "title": "DisponibilidadConsultadaRespuesta"
+      },
+      "InventarioRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Disponibilidad del producto consultada."
+          },
+          "sku": {
+            "type": "string",
+            "title": "Sku"
+          },
+          "encontrado": {
+            "type": "boolean",
+            "title": "Encontrado"
+          },
+          "ubicaciones": {
+            "items": {
+              "$ref": "#/components/schemas/InventarioUbicacionRespuesta"
+            },
+            "type": "array",
+            "title": "Ubicaciones"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sku",
+          "encontrado",
+          "ubicaciones"
+        ],
+        "title": "InventarioRespuesta"
+      },
+      "InventarioUbicacionRespuesta": {
+        "properties": {
+          "ubicacion_id": {
+            "type": "string",
+            "title": "Ubicacion Id",
+            "description": "Codigo de la sucursal o almacen"
+          },
+          "existencia_fisica": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Existencia Fisica",
+            "description": "Unidades fisicas"
+          },
+          "comprometida": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Comprometida",
+            "description": "Unidades reservadas"
+          },
+          "en_transito": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "En Transito",
+            "description": "Unidades en traslado; no son disponibles"
+          },
+          "disponible": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Disponible",
+            "description": "Existencia fisica menos comprometida"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ubicacion_id",
+          "existencia_fisica",
+          "comprometida",
+          "en_transito",
+          "disponible"
+        ],
+        "title": "InventarioUbicacionRespuesta"
+      },
+      "MensajeError": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje"
+          },
+          "sku": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sku"
+          },
+          "cotizacion_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cotizacion Id"
+          },
+          "pedido_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pedido Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mensaje"
+        ],
+        "title": "MensajeError"
+      },
+      "PartidaRevalidacion": {
+        "properties": {
+          "numero": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Numero",
+            "description": "Numero de renglon de la cotizacion"
+          },
+          "sku": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Sku"
+          },
+          "cantidad": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+              }
+            ],
+            "title": "Cantidad"
+          },
+          "precio_unitario": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+              }
+            ],
+            "title": "Precio Unitario"
+          },
+          "moneda": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Moneda",
+            "default": "MXN"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "numero",
+          "sku",
+          "cantidad",
+          "precio_unitario"
+        ],
+        "title": "PartidaRevalidacion"
+      },
+      "PedidoCanceladoRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Pedido cancelado y su inventario reservado liberado."
+          },
+          "pedido_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Pedido Id"
+          },
+          "estado": {
+            "type": "string",
+            "const": "Cancelado",
+            "title": "Estado"
+          }
+        },
+        "type": "object",
+        "required": [
+          "pedido_id",
+          "estado"
+        ],
+        "title": "PedidoCanceladoRespuesta"
+      },
+      "PedidoConfirmadoRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Pedido confirmado e inventario reservado."
+          },
+          "pedido_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Pedido Id"
+          },
+          "estado": {
+            "type": "string",
+            "const": "Confirmado",
+            "title": "Estado"
+          },
+          "referencia_pago": {
+            "type": "string",
+            "title": "Referencia Pago"
+          },
+          "ubicacion_id": {
+            "type": "string",
+            "title": "Ubicacion Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "pedido_id",
+          "estado",
+          "referencia_pago",
+          "ubicacion_id"
+        ],
+        "title": "PedidoConfirmadoRespuesta"
+      },
+      "PedidoConsultaRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Pedido consultado."
+          },
+          "pedido_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Pedido Id"
+          },
+          "estado": {
+            "type": "string",
+            "enum": [
+              "Pendiente",
+              "Confirmado",
+              "Cancelado"
+            ],
+            "title": "Estado"
+          },
+          "cotizacion_folio": {
+            "type": "string",
+            "title": "Cotizacion Folio",
+            "description": "Folio de la cotizacion utilizada para crear el pedido"
+          },
+          "cotizacion_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Cotizacion Version",
+            "description": "Version utilizada; se conserva aunque se revalide la cotizacion"
+          },
+          "total": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Total",
+            "description": "Total calculado con las partidas guardadas del pedido"
+          },
+          "moneda": {
+            "type": "string",
+            "title": "Moneda"
+          }
+        },
+        "type": "object",
+        "required": [
+          "pedido_id",
+          "estado",
+          "cotizacion_folio",
+          "cotizacion_version",
+          "total",
+          "moneda"
+        ],
+        "title": "PedidoConsultaRespuesta"
+      },
+      "PedidoCreadoRespuesta": {
+        "properties": {
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje",
+            "default": "Pedido creado y pendiente de confirmación."
+          },
+          "pedido_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Pedido Id"
+          },
+          "estado": {
+            "type": "string",
+            "const": "Pendiente",
+            "title": "Estado"
+          },
+          "cotizacion_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Cotizacion Id"
+          },
+          "cotizacion_folio": {
+            "type": "string",
+            "title": "Cotizacion Folio"
+          },
+          "cotizacion_version": {
+            "type": "integer",
+            "title": "Cotizacion Version"
+          },
+          "total": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Total"
+          },
+          "moneda": {
+            "type": "string",
+            "title": "Moneda"
+          },
+          "disponibilidad_consultada": {
+            "items": {
+              "$ref": "#/components/schemas/DisponibilidadConsultadaRespuesta"
+            },
+            "type": "array",
+            "title": "Disponibilidad Consultada",
+            "description": "Disponibilidad consultada en S1; no representa una reserva"
+          }
+        },
+        "type": "object",
+        "required": [
+          "pedido_id",
+          "estado",
+          "cotizacion_id",
+          "cotizacion_folio",
+          "cotizacion_version",
+          "total",
+          "moneda",
+          "disponibilidad_consultada"
+        ],
+        "title": "PedidoCreadoRespuesta"
+      },
+      "RevalidacionSolicitud": {
+        "properties": {
+          "dias_vigencia": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Dias Vigencia",
+            "description": "Dias de vigencia de la nueva version"
+          },
+          "partidas": {
+            "items": {
+              "$ref": "#/components/schemas/PartidaRevalidacion"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Partidas"
+          },
+          "condiciones": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Condiciones"
+          },
+          "motivo": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Motivo"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dias_vigencia",
+          "partidas",
+          "condiciones",
+          "motivo"
+        ],
+        "title": "RevalidacionSolicitud",
+        "examples": [
+          {
+            "condiciones": "Precios y condiciones revalidados con el cliente",
+            "dias_vigencia": 7,
+            "motivo": "Cliente solicita revalidar la cotizacion vencida",
+            "partidas": [
+              {
+                "cantidad": "2",
+                "moneda": "MXN",
+                "numero": 1,
+                "precio_unitario": "120.00",
+                "sku": "FER-API-DEMO"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
