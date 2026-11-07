@@ -154,7 +154,13 @@ async function mutateOrder(action, body, title, text) {
     receipt('order-result',title,text+(loaded ? '' : ' Actualiza los pedidos para consultar su estado.'));
   }catch(error){
     if(error.uncertain)ordersFresh=false;
-    if(error.status===409 || error.status===404)await loadOrders(id);
+    if(error.status===409 || error.status===404){
+      const paymentReference=el('payment-ref').value, paymentStatus=el('payment-ok').value;
+      await loadOrders(id);
+      if(activeOrder && activeOrder.id===id && activeOrder.estado==='Pendiente'){
+        el('payment-ref').value=paymentReference;el('payment-ok').value=paymentStatus;
+      }
+    }
     receipt('order-result','No se pudo completar la operación',error.message,true);
   }finally{mutationBusy=false;el('orders-status').textContent='';lockOrders();}
 }
